@@ -6,29 +6,20 @@ const slides = [
   {
     id: 1,
     backgroundImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: ["Müziğin", "Gücünü", "Keşfet"],
-    titleColors: ["text-white", "text-spotify-green", "text-white"],
-    description: "Türkiye'nin en büyük müzik ve etkinlik platformunda binlerce konsere erişim",
-    buttonText: "Hemen Keşfet",
-    buttonGradient: "from-spotify-green to-accent-purple"
+    title: "ETKİNİUM",
+    description: "Çok Yakında",
   },
   {
     id: 2,
     backgroundImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: ["Premium", "Deneyim"],
-    titleColors: ["text-accent-purple", "text-white"],
-    description: "HD kalitede canlı yayınlar, özel içerikler ve sınırsız erişim",
-    buttonText: "Premium'a Geç",
-    buttonGradient: "from-accent-purple to-accent-blue"
+    title: "ETKİNİUM",
+    description: "Çok Yakında",
   },
   {
     id: 3,
     backgroundImage: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: ["Biletini", "Al", "Eğlenceye Katıl"],
-    titleColors: ["text-white", "text-accent-amber", "text-white"],
-    description: "Güvenli ödeme, anında bilet teslimatı ve en iyi yerler",
-    buttonText: "Bilet Al",
-    buttonGradient: "from-accent-amber to-red-500"
+    title: "ETKİNİUM",
+    description: "Çok Yakında",
   }
 ];
 
@@ -71,21 +62,12 @@ export default function HeroCarousel() {
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center space-y-6 px-4 max-w-4xl animate-slide-in">
-                <h1 className="text-5xl md:text-7xl font-black leading-tight">
-                  {slide.title.map((word, wordIndex) => (
-                    <span key={wordIndex} className={`${slide.titleColors[wordIndex]} mr-4`}>
-                      {word}
-                    </span>
-                  ))}
+                <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
+                  {slide.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+                <p className="text-2xl md:text-3xl text-accent-amber font-semibold">
                   {slide.description}
                 </p>
-                <Button 
-                  className={`bg-gradient-to-r ${slide.buttonGradient} text-white px-8 py-4 text-lg font-semibold hover:scale-105 transition-transform shadow-2xl h-auto`}
-                >
-                  {slide.buttonText}
-                </Button>
               </div>
             </div>
           </div>

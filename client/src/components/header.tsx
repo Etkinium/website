@@ -13,8 +13,8 @@ export default function Header() {
         </div>
         
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className="hover:text-spotify-green transition-colors">Hakkımızda</a>
-          <a href="#" className="hover:text-spotify-green transition-colors">Bizimle İletişime Geçin</a>
+          <a href="#" className="hover:text-accent-amber transition-colors">Hakkımızda</a>
+          <a href="#" className="hover:text-accent-amber transition-colors">Bizimle İletişime Geçin</a>
         </div>
         
         <div className="flex items-center space-x-4">
