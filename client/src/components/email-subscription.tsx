@@ -100,10 +100,10 @@ export default function EmailSubscription() {
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-white">Özel Fırsatları</span>
-              <span className="text-spotify-green ml-4">Kaçırma</span>
+              <span className="text-accent-amber ml-4">Kaçırma</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              İlk öğrenen sen ol! Yeni etkinlikler, indirimli biletler ve özel içerikler için e-posta listimize katıl.
+              Lansman öncesi büyük indirimler için hemen ücretsiz abone ol! Özel fırsatlar ve erken erişim imkanları için e-posta listimize katıl.
             </p>
           </div>
           

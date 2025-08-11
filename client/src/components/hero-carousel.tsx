@@ -6,19 +6,19 @@ const slides = [
   {
     id: 1,
     backgroundImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "ETKİNİUM",
+    title: "Hayalinizdeki Deneyim",
     description: "Çok Yakında",
   },
   {
     id: 2,
     backgroundImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "ETKİNİUM",
+    title: "Benzersiz Bir Platform",
     description: "Çok Yakında",
   },
   {
     id: 3,
     backgroundImage: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "ETKİNİUM",
+    title: "Eğlencenin Yeni Adresi",
     description: "Çok Yakında",
   }
 ];
