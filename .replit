@@ -9,7 +9,7 @@ packages = ["imagemagick"]
 [deployment]
 deploymentTarget = "static"
 build = ["npm", "run", "build"]
-publicDir = "dist"
+publicDir = "dist/public"
 
 [[ports]]
 localPort = 5000
