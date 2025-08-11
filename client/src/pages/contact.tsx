@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Mail, Phone, MapPin, CheckCircle, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, CheckCircle, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -16,9 +16,49 @@ import type { z } from "zod";
 
 type ContactFormData = z.infer<typeof insertContactMessageSchema>;
 
+const contactSlides = [
+  {
+    id: 1,
+    backgroundImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    title: "İletişime Geçin",
+    description: "Bizimle bağlantı kurun",
+  },
+  {
+    id: 2,
+    backgroundImage: "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    title: "Destek Alın",
+    description: "Size yardımcı olmaya hazırız",
+  },
+  {
+    id: 3,
+    backgroundImage: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    title: "Birlikte Büyüyelim",
+    description: "Geri bildirimleriniz değerli",
+  }
+];
+
 export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const { toast } = useToast();
+  const totalSlides = contactSlides.length;
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(insertContactMessageSchema),
@@ -94,28 +134,70 @@ export default function Contact() {
     <div className="min-h-screen bg-spotify-black text-white">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 mt-16 bg-gradient-to-br from-spotify-black via-gray-900 to-spotify-black">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black mb-6">
-              <span className="text-white">Bizimle</span>
-              <span className="text-accent-amber ml-4">İletişime Geçin!</span>
-            </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Sorularınız, önerileriniz veya iş birliği teklifleriniz için bize ulaşın.
-            </p>
-          </div>
+      {/* Hero Carousel Section */}
+      <section className="relative h-screen overflow-hidden mt-16">
+        <div className="relative w-full h-full">
+          {contactSlides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+              style={{
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(25,20,20,0.8)), url('${slide.backgroundImage}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center space-y-6 px-4 max-w-4xl animate-slide-in">
+                  <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
+                    {slide.title}
+                  </h1>
+                  <p className="text-2xl md:text-3xl text-accent-amber font-semibold">
+                    {slide.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+        
+        {/* Carousel Navigation Dots */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+          {contactSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-opacity ${
+                index === currentSlide ? "bg-white opacity-100" : "bg-white opacity-50"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Carousel Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
       </section>
 
-      {/* Contact Form & Info Section */}
+      {/* Contact Form Section */}
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             {/* Contact Form */}
             <div className="bg-gray-800 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
+              <h2 className="text-2xl font-bold mb-6 text-center">Lütfen Mesajınızı Yazınız</h2>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -233,25 +315,18 @@ export default function Contact() {
                 </form>
               </Form>
             </div>
-
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold mb-6">İletişim Bilgileri</h2>
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-accent-amber/20 rounded-lg flex items-center justify-center">
-                      <Mail className="text-accent-amber w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">E-posta</h3>
-                      <p className="text-gray-400">iletisim@etkinium.com</p>
-                    </div>
-                  </div>
+            
+            {/* Contact Email Info */}
+            <div className="text-center mt-8">
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-12 h-12 bg-accent-amber/20 rounded-lg flex items-center justify-center">
+                  <Mail className="text-accent-amber w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">E-posta</h3>
+                  <p className="text-gray-400">iletisim@etkinium.com</p>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
