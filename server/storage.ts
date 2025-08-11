@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription } from "@shared/schema";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -10,15 +10,21 @@ export interface IStorage {
   getEmailSubscription(email: string): Promise<EmailSubscription | undefined>;
   createEmailSubscription(subscription: InsertEmailSubscription): Promise<EmailSubscription>;
   getAllEmailSubscriptions(): Promise<EmailSubscription[]>;
+  
+  // Contact message methods
+  createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
+  getAllContactMessages(): Promise<ContactMessage[]>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private emailSubscriptions: Map<string, EmailSubscription>;
+  private contactMessages: Map<string, ContactMessage>;
 
   constructor() {
     this.users = new Map();
     this.emailSubscriptions = new Map();
+    this.contactMessages = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -52,12 +58,27 @@ export class MemStorage implements IStorage {
       subscribedAt: new Date(),
       isActive: "true",
     };
-    this.emailSubscriptions.set(email, subscription);
+    this.emailSubscriptions.set(subscription.email, subscription);
     return subscription;
   }
 
   async getAllEmailSubscriptions(): Promise<EmailSubscription[]> {
     return Array.from(this.emailSubscriptions.values());
+  }
+
+  async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
+    const id = randomUUID();
+    const message: ContactMessage = {
+      ...insertMessage,
+      id,
+      createdAt: new Date(),
+    };
+    this.contactMessages.set(id, message);
+    return message;
+  }
+
+  async getAllContactMessages(): Promise<ContactMessage[]> {
+    return Array.from(this.contactMessages.values());
   }
 }
 

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmailSubscriptionSchema } from "@shared/schema";
+import { insertEmailSubscriptionSchema, insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -49,6 +49,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(subscriptions);
     } catch (error) {
       console.error("Get subscriptions error:", error);
+      res.status(500).json({ message: "Bir hata oluştu" });
+    }
+  });
+
+  // Contact form endpoint
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const validatedData = insertContactMessageSchema.parse(req.body);
+      
+      const contactMessage = await storage.createContactMessage(validatedData);
+      
+      res.status(201).json({ 
+        message: "Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.",
+        contact: {
+          id: contactMessage.id,
+          createdAt: contactMessage.createdAt
+        }
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Contact form error:", error);
+      res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
+    }
+  });
+
+  // Get all contact messages (for admin purposes)
+  app.get("/api/contacts", async (req, res) => {
+    try {
+      const contacts = await storage.getAllContactMessages();
+      res.json(contacts);
+    } catch (error) {
+      console.error("Get contacts error:", error);
       res.status(500).json({ message: "Bir hata oluştu" });
     }
   });
