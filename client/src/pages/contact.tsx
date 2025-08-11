@@ -100,7 +100,7 @@ export default function Contact() {
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-black mb-6">
               <span className="text-white">Bizimle</span>
-              <span className="text-accent-amber ml-4">İletişime Geçin</span>
+              <span className="text-accent-amber ml-4">İletişime Geçin!</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Sorularınız, önerileriniz veya iş birliği teklifleriniz için bize ulaşın.
@@ -115,7 +115,7 @@ export default function Contact() {
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
             <div className="bg-gray-800 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6">Mesaj Gönderin</h2>
+              <h2 className="text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -186,7 +186,7 @@ export default function Contact() {
                         <FormLabel>Telefon</FormLabel>
                         <FormControl>
                           <Input 
-                            placeholder="0555 123 45 67" 
+                            placeholder="Telefon numaranız" 
                             {...field}
                             className="bg-gray-700 border-gray-600 text-white"
                             disabled={contactMutation.isPending}
@@ -251,16 +251,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="bg-gray-800 rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-4">
-                  <span className="text-white">Neden</span>
-                  <span className="text-accent-amber ml-2">ETKİNİUM</span>?
-                </h3>
-                <p className="text-gray-400 leading-relaxed">
-                  Size en iyi hizmeti sunmak için buradayız. Sorularınızı yanıtlamak, 
-                  önerilerinizi değerlendirmek ve sizinle birlikte büyümek istiyoruz.
-                </p>
-              </div>
+
             </div>
           </div>
         </div>
