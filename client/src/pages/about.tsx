@@ -36,9 +36,9 @@ export default function About() {
                 
                 <h3 className="text-3xl font-bold mb-6 text-accent-amber">Misyonumuz</h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  Kaliteden ödün vermeden, her detayda mükemmelliği hedefleyerek 
-                  kullanıcılarımızın beklentilerini aşmayı amaçlıyoruz. 
-                  Geleceğin trendsetterleri olmaya kararlıyız.
+                  İnsanların günlük yaşamlarına değer katabilecek çözümler 
+                  geliştirmeye odaklanıyoruz. Her projemizde özenle çalışarak, 
+                  kullanıcılarımızla uzun vadeli bir güven ilişkisi kurmayı hedefliyoruz.
                 </p>
               </div>
               
@@ -85,9 +85,9 @@ export default function About() {
               <div className="bg-gray-800 rounded-2xl p-8">
                 <h4 className="text-3xl font-bold mb-6 text-accent-amber">Geleceğe Bakış</h4>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
-                  Çok yakında sizlerle paylaşacağımız yenilikler, sektörde çığır açacak. 
-                  Hazır olun, çünkü ETKİNİUM ile tanışacağınız deneyim, 
-                  beklentilerinizi tamamen değiştirecek...
+                  Önümüzdeki dönemde hayata geçireceğimiz projeler hakkında 
+                  şimdilik sessizce çalışmaya devam ediyoruz. Zamanı geldiğinde, 
+                  sizlerle paylaşacağımız gelişmeler hepimizi heyecanlandıracak...
                 </p>
               </div>
             </div>
