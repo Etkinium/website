@@ -1,5 +1,5 @@
 import { Instagram, Twitter, Facebook, Youtube } from "lucide-react";
-import logoImage from "@/assets/logo-symbol.png";
+import logoImage from "@/assets/logo-final.png";
 
 export default function Footer() {
   return (
@@ -7,11 +7,11 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="text-center space-y-6">
           <div className="flex items-center justify-center space-x-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
               <img 
                 src={logoImage}
                 alt="ETKİNİUM Logo"
-                className="w-8 h-8 object-contain"
+                className="w-10 h-10 object-contain"
               />
             </div>
             <span className="text-2xl font-bold">ETKİNİUM</span>
