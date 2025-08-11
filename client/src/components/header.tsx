@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import logoPath from "@assets/Logo_1754937780593.png";
+import logoPath from "@assets/logo_1754937944762.jpg";
 
 export default function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-spotify-black/95 backdrop-blur-md border-b border-gray-800">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center space-x-2">
           <img 
             src={logoPath} 
             alt="ETKİNİUM Logo" 
-            className="h-10 w-auto"
+            className="h-8 w-8"
           />
+          <span className="text-2xl font-bold">ETKİNİUM</span>
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">
