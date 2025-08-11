@@ -36,9 +36,9 @@ export default function About() {
                 
                 <h3 className="text-3xl font-bold mb-6 text-accent-amber">Misyonumuz</h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  İnsanların günlük yaşamlarına değer katabilecek çözümler 
-                  geliştirmeye odaklanıyoruz. Titizlikle yürüttüğümüz çalışmalarımızla, 
-                  kullanıcılarımızla uzun vadeli bir güven ilişkisi kurmayı hedefliyoruz.
+                  İnsanların günlük yaşamlarına değer katabilecek çözümler geliştirmeye odaklanıyoruz. 
+                  Kullanıcı deneyimini ön planda tutarak kaliteli hizmet sunmayı amaçlıyoruz. 
+                  ETKİNİUM markası olarak güvene dayalı uzun vadeli ilişkiler kurmaya çalışıyoruz.
                 </p>
               </div>
               
@@ -81,16 +81,7 @@ export default function About() {
               </div>
             </div>
             
-            <div className="mt-16 text-center">
-              <div className="bg-gray-800 rounded-2xl p-8">
-                <h4 className="text-3xl font-bold mb-6 text-accent-amber">Geleceğe Bakış</h4>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
-                  ETKİNİUM olarak gelişim sürecimizi dikkatli bir şekilde planlamaktayız. 
-                  Önümüzdeki dönemde sunacağımız hizmetler ve ürünler hakkında 
-                  detaylı bilgileri yakında sizlerle paylaşacağız.
-                </p>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
