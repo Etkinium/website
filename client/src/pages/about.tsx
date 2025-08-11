@@ -29,16 +29,16 @@ export default function About() {
               <div>
                 <h3 className="text-3xl font-bold mb-6 text-accent-amber">Vizyonumuz</h3>
                 <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                  ETKİNİUM, dijital eğlence dünyasında yenilikçi bir platform olarak 
-                  kullanıcılarına benzersiz deneyimler sunmayı amaçlıyor. Teknolojinin 
-                  gücüyle sanatın büyüsünü birleştiriyoruz.
+                  Dijital dünyanın sınırlarını zorlayarak, insanların hayatına 
+                  değer katan deneyimler yaratıyoruz. Her kullanıcıya özel, 
+                  benzersiz ve unutulmaz anlar sunmak için var oluyoruz.
                 </p>
                 
                 <h3 className="text-3xl font-bold mb-6 text-accent-amber">Misyonumuz</h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  Her anın değerli olduğuna inanıyoruz. En kaliteli içerikleri 
-                  ve unutulmaz deneyimleri size ulaştırmak için durmaksızın 
-                  çalışıyor, dijital eğlence sektörünün öncüsü olmaya devam ediyoruz.
+                  Kaliteden ödün vermeden, her detayda mükemmelliği hedefleyerek 
+                  kullanıcılarımızın beklentilerini aşmayı amaçlıyoruz. 
+                  Geleceğin trendsetterleri olmaya kararlıyız.
                 </p>
               </div>
               
@@ -85,9 +85,9 @@ export default function About() {
               <div className="bg-gray-800 rounded-2xl p-8">
                 <h4 className="text-3xl font-bold mb-6 text-accent-amber">Geleceğe Bakış</h4>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
-                  ETKİNİUM olarak, dijital dünyanın sınırlarını keşfetmeye ve 
-                  kullanıcılarımıza her geçen gün daha iyi hizmet vermeye kararlıyız. 
-                  Birlikte, eğlencenin geleceğini inşa ediyoruz.
+                  Çok yakında sizlerle paylaşacağımız yenilikler, sektörde çığır açacak. 
+                  Hazır olun, çünkü ETKİNİUM ile tanışacağınız deneyim, 
+                  beklentilerinizi tamamen değiştirecek...
                 </p>
               </div>
             </div>
