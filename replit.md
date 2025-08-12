@@ -43,6 +43,12 @@ Preferred communication style: Simple, everyday language.
   - ESBuild for server-side bundling in production
   - PostCSS with Autoprefixer for CSS processing
 
+### Recent Changes
+- **Aug 12, 2025**: Fixed production deployment issues by migrating from MemStorage to DatabaseStorage
+- **Deployment Issue**: Site was configured as Static deployment but requires Autoscale for API endpoints
+- **Database Integration**: Successfully implemented PostgreSQL with email subscriptions and contact messages
+- **Forms Status**: Email subscription and contact forms working in development but need Autoscale deployment
+
 ### Key Design Decisions
 - **Monorepo Structure**: Client, server, and shared code in unified TypeScript project
 - **Type Safety**: End-to-end TypeScript with shared schema definitions
