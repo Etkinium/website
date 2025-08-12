@@ -1,5 +1,6 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, users, emailSubscriptions, contactMessages } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -16,70 +17,53 @@ export interface IStorage {
   getAllContactMessages(): Promise<ContactMessage[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private emailSubscriptions: Map<string, EmailSubscription>;
-  private contactMessages: Map<string, ContactMessage>;
-
-  constructor() {
-    this.users = new Map();
-    this.emailSubscriptions = new Map();
-    this.contactMessages = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async getEmailSubscription(email: string): Promise<EmailSubscription | undefined> {
-    return Array.from(this.emailSubscriptions.values()).find(
-      (subscription) => subscription.email === email,
-    );
+    const [subscription] = await db.select().from(emailSubscriptions).where(eq(emailSubscriptions.email, email));
+    return subscription || undefined;
   }
 
   async createEmailSubscription(insertSubscription: InsertEmailSubscription): Promise<EmailSubscription> {
-    const id = randomUUID();
-    const subscription: EmailSubscription = {
-      ...insertSubscription,
-      id,
-      subscribedAt: new Date(),
-      isActive: "true",
-    };
-    this.emailSubscriptions.set(subscription.email, subscription);
+    const [subscription] = await db
+      .insert(emailSubscriptions)
+      .values(insertSubscription)
+      .returning();
     return subscription;
   }
 
   async getAllEmailSubscriptions(): Promise<EmailSubscription[]> {
-    return Array.from(this.emailSubscriptions.values());
+    return await db.select().from(emailSubscriptions);
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = randomUUID();
-    const message: ContactMessage = {
-      ...insertMessage,
-      id,
-      createdAt: new Date(),
-    };
-    this.contactMessages.set(id, message);
+    const [message] = await db
+      .insert(contactMessages)
+      .values(insertMessage)
+      .returning();
     return message;
   }
 
   async getAllContactMessages(): Promise<ContactMessage[]> {
-    return Array.from(this.contactMessages.values());
+    return await db.select().from(contactMessages);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
