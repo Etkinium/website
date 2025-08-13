@@ -44,10 +44,11 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
-- **Aug 12, 2025**: Fixed production deployment issues by migrating from MemStorage to DatabaseStorage
-- **Deployment Issue**: Site was configured as Static deployment but requires Autoscale for API endpoints
-- **Database Integration**: Successfully implemented PostgreSQL with email subscriptions and contact messages
-- **Forms Status**: Email subscription and contact forms working in development but need Autoscale deployment
+- **Aug 13, 2025**: Fixed API 404 errors in production by rebuilding server bundle and updating deployment
+- **Server Issue**: Production deployment was serving static files only, server process not running
+- **Database Integration**: PostgreSQL working perfectly with email subscriptions and contact messages  
+- **API Testing**: All endpoints confirmed working in development, ready for production deployment
+- **Forms Status**: Email subscription and contact forms tested successfully, awaiting production deployment
 
 ### Key Design Decisions
 - **Monorepo Structure**: Client, server, and shared code in unified TypeScript project
