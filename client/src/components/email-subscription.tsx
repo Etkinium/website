@@ -41,9 +41,7 @@ export default function EmailSubscription() {
     }
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const submitEmail = () => {
     if (!email.trim()) {
       toast({
         title: "E-posta Gerekli",
@@ -107,7 +105,7 @@ export default function EmailSubscription() {
             </p>
           </div>
           
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+          <div className="max-w-md mx-auto space-y-4">
             <div className="relative">
               <Input
                 type="email"
@@ -117,27 +115,7 @@ export default function EmailSubscription() {
                   if (e.key === 'Enter') {
                     e.preventDefault();
                     e.stopPropagation();
-                    
-                    if (!email.trim()) {
-                      toast({
-                        title: "E-posta Gerekli",
-                        description: "Lütfen e-posta adresinizi girin.",
-                        variant: "destructive",
-                      });
-                      return;
-                    }
-
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                      toast({
-                        title: "Geçersiz E-posta",
-                        description: "Lütfen geçerli bir e-posta adresi girin.",
-                        variant: "destructive",
-                      });
-                      return;
-                    }
-
-                    subscriptionMutation.mutate(email);
+                    submitEmail();
                   }
                 }}
                 placeholder="E-posta adresinizi girin"
@@ -148,7 +126,12 @@ export default function EmailSubscription() {
             </div>
             
             <Button
-              type="submit"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                submitEmail();
+              }}
               disabled={subscriptionMutation.isPending}
               className="w-full bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-accent-amber hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-gray-600 hover:border-accent-amber"
               data-testid="button-subscribe"
@@ -162,7 +145,7 @@ export default function EmailSubscription() {
                 "Ücretsiz Abone Ol"
               )}
             </Button>
-          </form>
+          </div>
           
           <div className="mt-8 flex items-center justify-center space-x-8 text-sm text-gray-500">
             <div className="flex items-center space-x-2">

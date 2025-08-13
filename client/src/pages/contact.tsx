@@ -229,7 +229,12 @@ export default function Contact() {
                   />
 
                   <Button
-                    type="submit"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      form.handleSubmit(onSubmit)();
+                    }}
                     disabled={contactMutation.isPending}
                     className="w-full bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-accent-amber hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-gray-600 hover:border-accent-amber"
                     data-testid="button-contact-submit"
