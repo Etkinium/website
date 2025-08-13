@@ -118,14 +118,7 @@ export default function Contact() {
               <h2 className="text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
               
               <Form {...form}>
-                <form 
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    form.handleSubmit(onSubmit)(e);
-                  }} 
-                  className="space-y-6"
-                >
+                <div className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
@@ -233,7 +226,37 @@ export default function Contact() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      form.handleSubmit(onSubmit)();
+                      const formData = form.getValues();
+                      
+                      // Form validation
+                      if (!formData.firstName?.trim()) {
+                        toast({
+                          title: "Ad Gerekli",
+                          description: "Lütfen adınızı girin.",
+                          variant: "destructive",
+                        });
+                        return;
+                      }
+                      
+                      if (!formData.email?.trim()) {
+                        toast({
+                          title: "E-posta Gerekli", 
+                          description: "Lütfen e-posta adresinizi girin.",
+                          variant: "destructive",
+                        });
+                        return;
+                      }
+                      
+                      if (!formData.message?.trim()) {
+                        toast({
+                          title: "Mesaj Gerekli",
+                          description: "Lütfen mesajınızı yazın.",
+                          variant: "destructive"
+                        });
+                        return;
+                      }
+                      
+                      onSubmit(formData);
                     }}
                     disabled={contactMutation.isPending}
                     className="w-full bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-accent-amber hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-gray-600 hover:border-accent-amber"
@@ -248,7 +271,7 @@ export default function Contact() {
                       "Formu Gönder"
                     )}
                   </Button>
-                </form>
+                </div>
               </Form>
             </div>
           </div>

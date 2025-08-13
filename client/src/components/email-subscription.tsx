@@ -105,17 +105,25 @@ export default function EmailSubscription() {
             </p>
           </div>
           
-          <div className="max-w-md mx-auto space-y-4">
+          <div className="max-w-md mx-auto space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div className="relative">
               <Input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => {
+                onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
                     e.stopPropagation();
                     submitEmail();
+                    return false;
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
                   }
                 }}
                 placeholder="E-posta adresinizi girin"
