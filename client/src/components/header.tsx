@@ -1,34 +1,83 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import logoImage from "@assets/logo-final.png";
 
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header className="fixed top-0 w-full z-50 bg-spotify-black/95 backdrop-blur-md border-b border-gray-800">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-            <img 
-              src={logoImage}
-              alt="ETKİNİUM Logo"
-              className="w-10 h-10 object-contain"
-            />
+      <nav className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+              <img 
+                src={logoImage}
+                alt="ETKİNİUM Logo"
+                className="w-10 h-10 object-contain"
+              />
+            </div>
+            <span className="text-xl md:text-2xl font-bold">ETKİNİUM</span>
+          </Link>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/about" className="hover:text-accent-amber transition-colors" data-testid="link-about">
+              Hakkımızda
+            </Link>
+            <Link href="/contact" className="hover:text-accent-amber transition-colors" data-testid="link-contact">
+              Bizimle İletişime Geçin
+            </Link>
           </div>
-          <span className="text-2xl font-bold">ETKİNİUM</span>
-        </Link>
-        
-        <div className="hidden md:flex items-center space-x-8">
-          <Link href="/about" className="hover:text-accent-amber transition-colors">Hakkımızda</Link>
-          <Link href="/contact" className="hover:text-accent-amber transition-colors">Bizimle İletişime Geçin</Link>
+          
+          {/* Mobile Menu Button */}
+          <div className="flex items-center space-x-4">
+            <button 
+              className="md:hidden text-white hover:text-accent-amber transition-colors"
+              onClick={toggleMobileMenu}
+              data-testid="button-mobile-menu"
+              aria-label="Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-        
-        <div className="flex items-center space-x-4">
-          <button className="md:hidden text-white">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
+            <div className="flex flex-col space-y-4 pt-4">
+              <Link 
+                href="/about" 
+                className="text-white hover:text-accent-amber transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="link-mobile-about"
+              >
+                Hakkımızda
+              </Link>
+              <Link 
+                href="/contact" 
+                className="text-white hover:text-accent-amber transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="link-mobile-contact"
+              >
+                Bizimle İletişime Geçin
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );

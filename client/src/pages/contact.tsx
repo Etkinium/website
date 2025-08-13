@@ -132,6 +132,7 @@ export default function Contact() {
                               {...field}
                               className="bg-gray-700 border-gray-600 text-white"
                               disabled={contactMutation.isPending}
+                              data-testid="input-first-name"
                             />
                           </FormControl>
                           <FormMessage />
@@ -150,6 +151,7 @@ export default function Contact() {
                               {...field}
                               className="bg-gray-700 border-gray-600 text-white"
                               disabled={contactMutation.isPending}
+                              data-testid="input-last-name"
                             />
                           </FormControl>
                           <FormMessage />
@@ -171,6 +173,7 @@ export default function Contact() {
                             {...field}
                             className="bg-gray-700 border-gray-600 text-white"
                             disabled={contactMutation.isPending}
+                            data-testid="input-email"
                           />
                         </FormControl>
                         <FormMessage />
@@ -190,6 +193,7 @@ export default function Contact() {
                             {...field}
                             className="bg-gray-700 border-gray-600 text-white"
                             disabled={contactMutation.isPending}
+                            data-testid="input-phone"
                           />
                         </FormControl>
                         <FormMessage />
@@ -209,6 +213,7 @@ export default function Contact() {
                             className="bg-gray-700 border-gray-600 text-white resize-none min-h-[120px]"
                             {...field}
                             disabled={contactMutation.isPending}
+                            data-testid="input-message"
                           />
                         </FormControl>
                         <FormMessage />
@@ -220,6 +225,7 @@ export default function Contact() {
                     type="submit"
                     disabled={contactMutation.isPending}
                     className="w-full bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-accent-amber hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-gray-600 hover:border-accent-amber"
+                    data-testid="button-contact-submit"
                   >
                     {contactMutation.isPending ? (
                       <>
