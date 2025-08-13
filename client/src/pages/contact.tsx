@@ -118,7 +118,14 @@ export default function Contact() {
               <h2 className="text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
               
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    form.handleSubmit(onSubmit)(e);
+                  }} 
+                  className="space-y-6"
+                >
                   <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}

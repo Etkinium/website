@@ -116,7 +116,28 @@ export default function EmailSubscription() {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    handleSubmit(e);
+                    e.stopPropagation();
+                    
+                    if (!email.trim()) {
+                      toast({
+                        title: "E-posta Gerekli",
+                        description: "Lütfen e-posta adresinizi girin.",
+                        variant: "destructive",
+                      });
+                      return;
+                    }
+
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                      toast({
+                        title: "Geçersiz E-posta",
+                        description: "Lütfen geçerli bir e-posta adresi girin.",
+                        variant: "destructive",
+                      });
+                      return;
+                    }
+
+                    subscriptionMutation.mutate(email);
                   }
                 }}
                 placeholder="E-posta adresinizi girin"
