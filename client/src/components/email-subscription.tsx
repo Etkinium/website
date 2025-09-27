@@ -99,15 +99,11 @@ export default function EmailSubscription() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-white">Birlikte</span>
-              <span className="text-accent-amber ml-4">Büyüyelim!</span>
+              <span className="text-white">İş Birliği</span>
+              <span className="text-accent-amber ml-4">Fırsatları!</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Güçlü vizyonunuz var mı? Harika! Bizim de eğlence sektöründe büyük hedeflerimiz var. 
-              Beraber çıkacağımız yolculukta neler başarabileceğimizi keşfedelim.
-            </p>
-            <p className="text-lg text-accent-amber max-w-xl mx-auto mt-4 font-semibold">
-              "Tek başına hızlı gidersin, birlikte uzağa gidersin."
+              ETKİNİUM ile iş birliği yapmak ve büyümeye birlikte devam etmek için bizimle iletişime geçin. Stratejik ortaklıklar kuralım!
             </p>
           </div>
           
