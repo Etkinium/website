@@ -33,6 +33,19 @@ export default function Header() {
             <Link href="/contact" className="hover:text-accent-amber transition-colors" data-testid="link-contact">
               Bizimle İletişime Geçin
             </Link>
+            <Button 
+              variant="outline" 
+              className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all"
+              data-testid="button-login"
+            >
+              Giriş Yap
+            </Button>
+            <Button 
+              className="bg-accent-amber text-black hover:bg-yellow-300 transition-all"
+              data-testid="button-signup"
+            >
+              Üye Ol
+            </Button>
           </div>
           
           {/* Mobile Menu Button */}
@@ -75,6 +88,21 @@ export default function Header() {
               >
                 Bizimle İletişime Geçin
               </Link>
+              <Button 
+                variant="outline" 
+                className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all w-full"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="button-mobile-login"
+              >
+                Giriş Yap
+              </Button>
+              <Button 
+                className="bg-accent-amber text-black hover:bg-yellow-300 transition-all w-full"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="button-mobile-signup"
+              >
+                Üye Ol
+              </Button>
             </div>
           </div>
         )}

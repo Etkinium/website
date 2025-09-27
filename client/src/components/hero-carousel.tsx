@@ -1,25 +1,28 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
+import hotelImage from "@assets/stock_images/luxury_hotel_resort__b684dda1.jpg";
+import travelImage from "@assets/stock_images/travel_transportatio_b9f7bd23.jpg";
 
 const slides = [
   {
     id: 1,
-    backgroundImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "Hayalinizdeki Deneyim",
-    description: "Çok Yakında",
+    backgroundImage: eventImage,
+    title: "Özel Etkinlikler",
+    description: "Hayalinizdeki konserler ve etkinlikler burada",
   },
   {
     id: 2,
-    backgroundImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "Benzersiz Bir Platform",
-    description: "Çok Yakında",
+    backgroundImage: hotelImage,
+    title: "Lüks Konaklama",
+    description: "Deniz manzaralı eşsiz otel deneyimleri",
   },
   {
     id: 3,
-    backgroundImage: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
-    title: "Eğlencenin Yeni Adresi",
-    description: "Çok Yakında",
+    backgroundImage: travelImage,
+    title: "Seyahat Keşfi",
+    description: "Uçak ve kara yolculukları ile dünyayı keşfedin",
   }
 ];
 
@@ -72,6 +75,17 @@ export default function HeroCarousel() {
             </div>
           </div>
         ))}
+      </div>
+      
+      {/* Fixed Signup Button */}
+      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10">
+        <Button
+          size="lg"
+          className="bg-accent-amber text-black font-bold px-8 py-4 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 text-lg"
+          data-testid="button-hero-signup"
+        >
+          Üye Ol
+        </Button>
       </div>
       
       {/* Carousel Navigation Dots */}
