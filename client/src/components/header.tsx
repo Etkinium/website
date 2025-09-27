@@ -27,32 +27,40 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button 
-              variant="ghost"
-              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-              data-testid="button-about"
-            >
-              Hakkımızda
-            </Button>
-            <Button 
-              variant="ghost"
-              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-              data-testid="button-contact"
-            >
-              Bizimle İletişime Geçin
-            </Button>
-            <Button 
-              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-              data-testid="button-login"
-            >
-              Giriş Yap
-            </Button>
-            <Button 
-              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-              data-testid="button-signup"
-            >
-              Üye Ol
-            </Button>
+            <Link href="/about">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-about"
+              >
+                Hakkımızda
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-contact"
+              >
+                Bizimle İletişime Geçin
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button 
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-login"
+              >
+                Giriş Yap
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button 
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-signup"
+              >
+                Üye Ol
+              </Button>
+            </Link>
           </div>
           
           {/* Mobile Menu Button */}
@@ -79,36 +87,44 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              <Button 
-                variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="button-mobile-about"
-              >
-                Hakkımızda
-              </Button>
-              <Button 
-                variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="button-mobile-contact"
-              >
-                Bizimle İletişime Geçin
-              </Button>
-              <Button 
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="button-mobile-login"
-              >
-                Giriş Yap
-              </Button>
-              <Button 
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="button-mobile-signup"
-              >
-                Üye Ol
-              </Button>
+              <Link href="/about">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-about"
+                >
+                  Hakkımızda
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-contact"
+                >
+                  Bizimle İletişime Geçin
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button 
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-login"
+                >
+                  Giriş Yap
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button 
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-signup"
+                >
+                  Üye Ol
+                </Button>
+              </Link>
             </div>
           </div>
         )}

@@ -6,6 +6,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import Login from "@/pages/login";
+import Signup from "@/pages/signup";
+import KVKK from "@/pages/kvkk";
+import KullanimSartlari from "@/pages/kullanim-sartlari";
+import GizlilikPolitikasi from "@/pages/gizlilik-politikasi";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -14,6 +19,11 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/kvkk" component={KVKK} />
+      <Route path="/kullanim-sartlari" component={KullanimSartlari} />
+      <Route path="/gizlilik-politikasi" component={GizlilikPolitikasi} />
       <Route component={NotFound} />
     </Switch>
   );

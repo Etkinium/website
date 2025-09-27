@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
 import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
 import travelImage from "@assets/stock_images/passenger_airplane_f_92dad434.jpg";
@@ -82,13 +83,15 @@ export default function HeroCarousel() {
       
       {/* Fixed Signup Button */}
       <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10">
-        <Button
-          size="lg"
-          className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-8 py-4 rounded-full transition-all transform hover:scale-105 text-lg"
-          data-testid="button-hero-signup"
-        >
-          Üye Ol
-        </Button>
+        <Link href="/signup">
+          <Button
+            size="lg"
+            className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-12 py-6 rounded-full transition-all transform hover:scale-105 text-xl"
+            data-testid="button-hero-signup"
+          >
+            Üye Ol
+          </Button>
+        </Link>
       </div>
       
       {/* Carousel Navigation Dots */}

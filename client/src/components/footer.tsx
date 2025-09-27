@@ -1,11 +1,12 @@
 import { Mail, Users, Star, Shield, Headphones } from "lucide-react";
+import { Link } from "wouter";
 import logoImage from "@assets/logo-final.png";
 
 export default function Footer() {
   return (
     <footer className="bg-spotify-black py-16 border-t border-gray-800">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Logo ve İletişim */}
           <div className="md:col-span-2 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
@@ -33,44 +34,19 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Hukuki Belgeler</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/kvkk" className="text-gray-400 hover:text-accent-amber transition-colors">
+                <Link href="/kvkk" className="text-gray-400 hover:text-accent-amber transition-colors">
                   KVKK
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/kullanim-sartlari" className="text-gray-400 hover:text-accent-amber transition-colors">
+                <Link href="/kullanim-sartlari" className="text-gray-400 hover:text-accent-amber transition-colors">
                   Kullanım Şartları
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/gizlilik-politikasi" className="text-gray-400 hover:text-accent-amber transition-colors">
+                <Link href="/gizlilik-politikasi" className="text-gray-400 hover:text-accent-amber transition-colors">
                   Gizlilik Politikası
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Hizmetler */}
-          <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold text-white mb-4">Hizmetler</h3>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-gray-400 flex items-center justify-center md:justify-start space-x-2">
-                  <Headphones className="text-accent-amber w-4 h-4" />
-                  <span>Müzik Streaming</span>
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-400 flex items-center justify-center md:justify-start space-x-2">
-                  <Users className="text-accent-amber w-4 h-4" />
-                  <span>Etkinlik Organizasyonu</span>
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-400 flex items-center justify-center md:justify-start space-x-2">
-                  <Star className="text-accent-amber w-4 h-4" />
-                  <span>Premium İçerik</span>
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -80,19 +56,14 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">İletişim</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/contact" className="text-gray-400 hover:text-accent-amber transition-colors">
+                <Link href="/contact" className="text-gray-400 hover:text-accent-amber transition-colors">
                   Bizimle İletişime Geçin
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="text-gray-400 hover:text-accent-amber transition-colors">
+                <Link href="/about" className="text-gray-400 hover:text-accent-amber transition-colors">
                   Hakkımızda
-                </a>
-              </li>
-              <li>
-                <a href="/partnership" className="text-gray-400 hover:text-accent-amber transition-colors">
-                  İş Birliği
-                </a>
+                </Link>
               </li>
               <li>
                 <span className="text-gray-400 flex items-center justify-center md:justify-start space-x-2">
