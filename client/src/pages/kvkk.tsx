@@ -16,46 +16,62 @@ export default function KVKK() {
             
             <div className="prose prose-invert max-w-none">
               <div className="bg-gray-900/50 rounded-lg p-8 mb-8">
-                <h2 className="text-2xl font-semibold text-accent-amber mb-4">Kişisel Verilerin Korunması</h2>
-                <p className="text-gray-300 mb-6">
-                  ETKİNİUM olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında 
-                  kişisel verilerinizin güvenliği bizim için son derece önemlidir.
-                </p>
+                <h2 className="text-2xl font-semibold text-accent-amber mb-6">Kişisel Verilerin Korunması</h2>
                 
-                <h3 className="text-xl font-semibold text-white mb-3">Veri Sorumlusu</h3>
-                <p className="text-gray-300 mb-4">
-                  ETKİNİUM, kişisel verilerinizin işlenmesine ilişkin amaçları ve vasıtaları belirleyen 
-                  veri sorumlusu sıfatıyla faaliyet göstermektedir.
-                </p>
-
-                <h3 className="text-xl font-semibold text-white mb-3">Toplanan Veriler</h3>
-                <ul className="text-gray-300 mb-4 space-y-2">
-                  <li>• Ad, soyad ve iletişim bilgileri</li>
-                  <li>• E-posta adresi</li>
-                  <li>• Kullanım tercihleri ve davranış verileri</li>
-                  <li>• IP adresi ve çerez verileri</li>
-                </ul>
-
-                <h3 className="text-xl font-semibold text-white mb-3">İşleme Amaçları</h3>
-                <ul className="text-gray-300 mb-4 space-y-2">
-                  <li>• Hizmet sunumu ve geliştirme</li>
-                  <li>• Müşteri memnuniyeti ve destek</li>
-                  <li>• Pazarlama ve kampanya faaliyetleri</li>
-                  <li>• Yasal yükümlülüklerin yerine getirilmesi</li>
-                </ul>
-
-                <h3 className="text-xl font-semibold text-white mb-3">Haklarınız</h3>
-                <p className="text-gray-300 mb-4">
-                  KVKK kapsamında kişisel verilerinize ilişkin bilgi talep etme, düzeltme, silme ve 
-                  işlemeye itiraz etme haklarınız bulunmaktadır.
-                </p>
-
-                <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                  <p className="text-accent-amber font-semibold">
-                    📧 İletişim: iletisim@etkinium.com
+                <div className="text-gray-300 space-y-6 leading-relaxed">
+                  <p>
+                    ETKİNİUM olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında 
+                    kişisel verilerinizin güvenliğini önemsiyoruz. Bu kapsamda;
                   </p>
-                  <p className="text-gray-300 mt-2">
-                    Kişisel verilerinizle ilgili sorularınız için bizimle iletişime geçebilirsiniz.
+                  
+                  <p>
+                    Kişisel verileriniz (ad, soyad, e-posta, telefon numarası, ödeme bilgileri vb.), 
+                    yalnızca üyelik işlemleri, bilet alım-satım süreçleri, kampanya ve avantajlardan 
+                    yararlanmanız amacıyla işlenmektedir.
+                  </p>
+                  
+                  <p>
+                    Verileriniz, kanuni yükümlülüklerimiz ve hizmetin gereklilikleri dışında kesinlikle 
+                    üçüncü kişilerle paylaşılmamaktadır.
+                  </p>
+                  
+                  <div className="mt-8">
+                    <h3 className="text-xl font-semibold text-white mb-4">KVKK kapsamında veri sahibi olarak haklarınız:</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>İşlenmişse bilgi talep etme,</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>Yanlış veya eksik işlenmişse düzeltilmesini isteme,</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>Silinmesini veya anonim hale getirilmesini talep etme,</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>Yurt dışına aktarılıp aktarılmadığını öğrenme,</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                        <span>İşlenmesine itiraz etme haklarınız bulunmaktadır.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-6 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
+                  <p className="text-accent-amber font-semibold text-lg mb-2">
+                    📧 İletişim
+                  </p>
+                  <p className="text-gray-300">
+                    Talepleriniz için bizimle iletisim@etkinium.com üzerinden iletişime geçebilirsiniz.
                   </p>
                 </div>
               </div>

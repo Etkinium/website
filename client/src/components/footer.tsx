@@ -12,13 +12,11 @@ export default function Footer() {
           {/* Logo ve Email Bölümü */}
           <div className="lg:col-span-2 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start space-x-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-amber/20 to-accent-amber/5 border border-accent-amber/30 flex items-center justify-center">
-                <img 
-                  src={logoImage}
-                  alt="ETKİNİUM Logo"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
+              <img 
+                src={logoImage}
+                alt="ETKİNİUM Logo"
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-3xl font-bold text-white tracking-wide">ETKİNİUM</span>
             </div>
             
