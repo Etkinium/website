@@ -3,34 +3,36 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, Shield, Mail, X, Loader2 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { CheckCircle, Shield, Mail, X, Loader2, Building2, Handshake, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function EmailSubscription() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
-  const subscriptionMutation = useMutation({
-    mutationFn: async (email: string) => {
-      const response = await apiRequest("POST", "/api/subscribe", { email });
+  const partnershipMutation = useMutation({
+    mutationFn: async (formData: { name: string; email: string; company: string; message: string }) => {
+      const response = await apiRequest("POST", "/api/contact", formData);
       return response.json();
     },
-    onSuccess: (data) => {
-      if (data.alreadySubscribed) {
-        toast({
-          title: "Zaten Kayıtlısınız",
-          description: "Bu e-posta adresi zaten abone listesinde bulunuyor.",
-          variant: "destructive",
-        });
-      } else {
-        setIsSuccess(true);
-        setEmail("");
-        toast({
-          title: "Başarıyla Abone Oldunuz!",
-          description: "E-posta adresinizi doğrulamak için gelen kutunuzu kontrol edin.",
-        });
-      }
+    onSuccess: () => {
+      setIsSuccess(true);
+      setName("");
+      setEmail("");
+      setCompany("");
+      setMessage("");
+      setIsDialogOpen(false);
+      toast({
+        title: "Mesajınız Gönderildi!",
+        description: "İş birliği talebiniz alındı. En kısa sürede dönüş yapacağız.",
+      });
     },
     onError: (error: any) => {
       toast({
@@ -41,11 +43,11 @@ export default function EmailSubscription() {
     }
   });
 
-  const submitEmail = () => {
-    if (!email.trim()) {
+  const submitPartnership = () => {
+    if (!name.trim() || !email.trim() || !company.trim() || !message.trim()) {
       toast({
-        title: "E-posta Gerekli",
-        description: "Lütfen e-posta adresinizi girin.",
+        title: "Eksik Bilgi",
+        description: "Lütfen tüm alanları doldurun.",
         variant: "destructive",
       });
       return;
@@ -61,7 +63,7 @@ export default function EmailSubscription() {
       return;
     }
 
-    subscriptionMutation.mutate(email);
+    partnershipMutation.mutate({ name, email, company, message });
   };
 
   if (isSuccess) {
@@ -73,8 +75,8 @@ export default function EmailSubscription() {
               <div className="flex items-center justify-center space-x-3">
                 <CheckCircle className="text-accent-amber w-8 h-8" />
                 <div>
-                  <h3 className="text-lg font-semibold text-accent-amber">Başarıyla Abone Oldunuz!</h3>
-                  <p className="text-yellow-300">E-posta adresinizi doğrulamak için gelen kutunuzu kontrol edin.</p>
+                  <h3 className="text-lg font-semibold text-accent-amber">Mesajınız Gönderildi!</h3>
+                  <p className="text-yellow-300">İş birliği talebiniz alındı. En kısa sürede dönüş yapacağız.</p>
                 </div>
               </div>
               <Button 
@@ -82,7 +84,7 @@ export default function EmailSubscription() {
                 variant="outline"
                 className="mt-4 border-accent-amber/30 text-accent-amber hover:bg-accent-amber/10"
               >
-                Yeni Abonelik Ekle
+                Yeni İş Birliği Başvurusu
               </Button>
             </div>
           </div>
@@ -97,76 +99,91 @@ export default function EmailSubscription() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-white">Özel Fırsatları</span>
-              <span className="text-accent-amber ml-4">Kaçırma!</span>
+              <span className="text-white">İş Birliği</span>
+              <span className="text-accent-amber ml-4">Fırsatları!</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Lansman öncesi büyük indirimler için hemen ücretsiz abone ol! Özel fırsatlar ve erken erişim imkanları için e-posta listemize katıl.
+              ETKİNİUM ile iş birliği yapmak ve büyümeye birlikte devam etmek için bizimle iletişime geçin. Stratejik ortaklıklar kuralım!
             </p>
           </div>
           
-          <div className="max-w-md mx-auto space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="relative">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    submitEmail();
-                    return false;
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                  }
-                }}
-                placeholder="E-posta adresinizi girin"
-                className="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-full text-white placeholder-gray-400 focus:border-spotify-green focus:ring-2 focus:ring-spotify-green/20 h-auto"
-                disabled={subscriptionMutation.isPending}
-                data-testid="input-email-subscription"
-              />
-            </div>
-            
-            <Button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                submitEmail();
-              }}
-              disabled={subscriptionMutation.isPending}
-              className="w-full bg-accent-amber text-black font-bold py-4 px-8 rounded-full hover:bg-yellow-300 hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-accent-amber hover:border-yellow-300"
-              data-testid="button-subscribe"
-            >
-              {subscriptionMutation.isPending ? (
-                <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Kaydediliyor...
-                </>
-              ) : (
-                "Ücretsiz Abone Ol"
-              )}
-            </Button>
+          <div className="max-w-md mx-auto">
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  size="lg"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-8 py-4 rounded-full transition-all transform hover:scale-105"
+                  data-testid="button-partnership"
+                >
+                  İş Birliği Başvurusu
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-spotify-black text-white border-gray-600">
+                <DialogHeader>
+                  <DialogTitle className="text-accent-amber">İş Birliği İletişim Formu</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Ad Soyad"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-gray-800 border-gray-600 text-white"
+                    data-testid="input-name"
+                  />
+                  <Input
+                    placeholder="E-posta"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-gray-800 border-gray-600 text-white"
+                    data-testid="input-email"
+                  />
+                  <Input
+                    placeholder="Şirket/Kurum"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    className="bg-gray-800 border-gray-600 text-white"
+                    data-testid="input-company"
+                  />
+                  <Textarea
+                    placeholder="İş birliği önerinizi detaylandırın..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="bg-gray-800 border-gray-600 text-white min-h-[100px]"
+                    data-testid="input-message"
+                  />
+                  <Button
+                    onClick={submitPartnership}
+                    disabled={partnershipMutation.isPending}
+                    className="w-full text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-submit-partnership"
+                  >
+                    {partnershipMutation.isPending ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Gönderiliyor...
+                      </>
+                    ) : (
+                      "Gönder"
+                    )}
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
           
           <div className="mt-8 flex items-center justify-center space-x-8 text-sm text-gray-500">
             <div className="flex items-center space-x-2">
-              <Shield className="text-accent-amber w-4 h-4" />
-              <span>Güvenli</span>
+              <Building2 className="text-accent-amber w-4 h-4" />
+              <span>Kurumsal Çözümler</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Mail className="text-accent-amber w-4 h-4" />
-              <span>Spam Yok</span>
+              <Handshake className="text-accent-amber w-4 h-4" />
+              <span>Stratejik Ortaklık</span>
             </div>
             <div className="flex items-center space-x-2">
-              <X className="text-accent-amber w-4 h-4" />
-              <span>İstediğiniz Zaman Çıkın</span>
+              <Users className="text-accent-amber w-4 h-4" />
+              <span>Uzun Vadeli İş Birliği</span>
             </div>
           </div>
         </div>

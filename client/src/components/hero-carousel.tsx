@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
-import hotelImage from "@assets/stock_images/luxury_hotel_resort__b684dda1.jpg";
-import travelImage from "@assets/stock_images/travel_transportatio_b9f7bd23.jpg";
+import hotelImage from "@assets/stock_images/luxury_hotel_room_wi_00630a9d.jpg";
+import travelImage from "@assets/stock_images/airplane_flying_in_s_63829cc3.jpg";
 
 const slides = [
   {
@@ -77,11 +77,18 @@ export default function HeroCarousel() {
         ))}
       </div>
       
+      {/* Promotional Banner */}
+      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="bg-accent-amber text-black px-6 py-2 rounded-full font-bold text-sm md:text-base animate-pulse shadow-lg">
+          🎉 Lansman Öncesi Özel: %10 İndirim + 100 ETKİNİUM Puan! 🎉
+        </div>
+      </div>
+      
       {/* Fixed Signup Button */}
       <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10">
         <Button
           size="lg"
-          className="bg-accent-amber text-black font-bold px-8 py-4 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 text-lg"
+          className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-8 py-4 rounded-full transition-all transform hover:scale-105 text-lg"
           data-testid="button-hero-signup"
         >
           Üye Ol

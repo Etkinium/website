@@ -27,21 +27,28 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/about" className="hover:text-accent-amber transition-colors" data-testid="link-about">
-              Hakkımızda
-            </Link>
-            <Link href="/contact" className="hover:text-accent-amber transition-colors" data-testid="link-contact">
-              Bizimle İletişime Geçin
-            </Link>
             <Button 
-              variant="outline" 
-              className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all"
+              variant="ghost"
+              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+              data-testid="button-about"
+            >
+              Hakkımızda
+            </Button>
+            <Button 
+              variant="ghost"
+              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+              data-testid="button-contact"
+            >
+              Bizimle İletişime Geçin
+            </Button>
+            <Button 
+              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
               data-testid="button-login"
             >
               Giriş Yap
             </Button>
             <Button 
-              className="bg-accent-amber text-black hover:bg-yellow-300 transition-all"
+              className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
               data-testid="button-signup"
             >
               Üye Ol
@@ -72,32 +79,31 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              <Link 
-                href="/about" 
-                className="text-white hover:text-accent-amber transition-colors py-2"
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="link-mobile-about"
+                data-testid="button-mobile-about"
               >
                 Hakkımızda
-              </Link>
-              <Link 
-                href="/contact" 
-                className="text-white hover:text-accent-amber transition-colors py-2"
+              </Button>
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="link-mobile-contact"
+                data-testid="button-mobile-contact"
               >
                 Bizimle İletişime Geçin
-              </Link>
+              </Button>
               <Button 
-                variant="outline" 
-                className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all w-full"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="button-mobile-login"
               >
                 Giriş Yap
               </Button>
               <Button 
-                className="bg-accent-amber text-black hover:bg-yellow-300 transition-all w-full"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="button-mobile-signup"
               >
