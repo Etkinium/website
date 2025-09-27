@@ -32,8 +32,8 @@ export default function Footer() {
               </a>
             </div>
             
-            <p className="text-gray-400 max-w-md mx-auto lg:mx-0 text-center lg:text-left">
-              Dijital eğlence dünyasının öncü platformu. Müzik ve etkinliklerde yeni deneyimler yaşayın.
+            <p className="text-gray-400 max-w-md mx-auto lg:mx-0 text-center lg:text-left italic">
+              Tek Platform, Sonsuz Sanat.
             </p>
           </div>
 
