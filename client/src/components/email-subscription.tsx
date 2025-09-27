@@ -66,21 +66,21 @@ export default function EmailSubscription() {
 
   if (isSuccess) {
     return (
-      <section className="py-20 bg-gradient-to-br from-spotify-black via-gray-900 to-spotify-black">
+      <section className="py-20 bg-spotify-black">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mt-8 p-6 bg-green-900/30 border border-green-500/30 rounded-xl animate-slide-in">
+            <div className="mt-8 p-6 bg-yellow-900/30 border border-accent-amber/30 rounded-xl animate-slide-in">
               <div className="flex items-center justify-center space-x-3">
-                <CheckCircle className="text-green-400 w-8 h-8" />
+                <CheckCircle className="text-accent-amber w-8 h-8" />
                 <div>
-                  <h3 className="text-lg font-semibold text-green-400">Başarıyla Abone Oldunuz!</h3>
-                  <p className="text-green-300">E-posta adresinizi doğrulamak için gelen kutunuzu kontrol edin.</p>
+                  <h3 className="text-lg font-semibold text-accent-amber">Başarıyla Abone Oldunuz!</h3>
+                  <p className="text-yellow-300">E-posta adresinizi doğrulamak için gelen kutunuzu kontrol edin.</p>
                 </div>
               </div>
               <Button 
                 onClick={() => setIsSuccess(false)}
                 variant="outline"
-                className="mt-4 border-green-500/30 text-green-400 hover:bg-green-500/10"
+                className="mt-4 border-accent-amber/30 text-accent-amber hover:bg-accent-amber/10"
               >
                 Yeni Abonelik Ekle
               </Button>
@@ -92,7 +92,7 @@ export default function EmailSubscription() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-spotify-black via-gray-900 to-spotify-black">
+    <section className="py-20 bg-spotify-black">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
@@ -141,7 +141,7 @@ export default function EmailSubscription() {
                 submitEmail();
               }}
               disabled={subscriptionMutation.isPending}
-              className="w-full bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-accent-amber hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-gray-600 hover:border-accent-amber"
+              className="w-full bg-accent-amber text-black font-bold py-4 px-8 rounded-full hover:bg-yellow-300 hover:text-black transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-auto border-2 border-accent-amber hover:border-yellow-300"
               data-testid="button-subscribe"
             >
               {subscriptionMutation.isPending ? (
@@ -157,15 +157,15 @@ export default function EmailSubscription() {
           
           <div className="mt-8 flex items-center justify-center space-x-8 text-sm text-gray-500">
             <div className="flex items-center space-x-2">
-              <Shield className="text-spotify-green w-4 h-4" />
+              <Shield className="text-accent-amber w-4 h-4" />
               <span>Güvenli</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Mail className="text-accent-purple w-4 h-4" />
+              <Mail className="text-accent-amber w-4 h-4" />
               <span>Spam Yok</span>
             </div>
             <div className="flex items-center space-x-2">
-              <X className="text-red-400 w-4 h-4" />
+              <X className="text-accent-amber w-4 h-4" />
               <span>İstediğiniz Zaman Çıkın</span>
             </div>
           </div>
