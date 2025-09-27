@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
-import hotelImage from "@assets/stock_images/luxury_hotel_room_wi_00630a9d.jpg";
-import travelImage from "@assets/stock_images/airplane_flying_in_s_63829cc3.jpg";
+import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
+import travelImage from "@assets/stock_images/passenger_airplane_c_b64fe617.jpg";
 
 const slides = [
   {
@@ -65,6 +65,9 @@ export default function HeroCarousel() {
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center space-y-6 px-4 max-w-4xl animate-slide-in">
+                <div className="bg-accent-amber text-black px-6 py-2 rounded-full font-bold text-sm md:text-base mx-auto inline-block mb-4 animate-pulse">
+                  🎉 Lansman Öncesi Özel: %10 İndirim + 100 ETKİNİUM Puan! 🎉
+                </div>
                 <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
                   {slide.title}
                 </h1>
@@ -75,13 +78,6 @@ export default function HeroCarousel() {
             </div>
           </div>
         ))}
-      </div>
-      
-      {/* Promotional Banner */}
-      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-10">
-        <div className="bg-accent-amber text-black px-6 py-2 rounded-full font-bold text-sm md:text-base animate-pulse shadow-lg">
-          🎉 Lansman Öncesi Özel: %10 İndirim + 100 ETKİNİUM Puan! 🎉
-        </div>
       </div>
       
       {/* Fixed Signup Button */}

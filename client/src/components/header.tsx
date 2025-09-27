@@ -26,7 +26,7 @@ export default function Header() {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="ghost"
               className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
