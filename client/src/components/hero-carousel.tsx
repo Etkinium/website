@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
 import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
-import travelImage from "@assets/stock_images/passenger_airplane_c_b64fe617.jpg";
+import travelImage from "@assets/stock_images/passenger_airplane_f_92dad434.jpg";
 
 const slides = [
   {
