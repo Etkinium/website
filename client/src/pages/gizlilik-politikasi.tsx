@@ -16,55 +16,43 @@ export default function GizlilikPolitikasi() {
             
             <div className="prose prose-invert max-w-none">
               <div className="bg-gray-900/50 rounded-lg p-8 mb-8">
-                <h2 className="text-2xl font-semibold text-accent-amber mb-4">Gizlilik Taahhüdümüz</h2>
-                <p className="text-gray-300 mb-6">
-                  ETKİNİUM olarak gizliliğinize saygı duyuyor ve kişisel verilerinizi 
-                  en üst düzeyde koruma altına alıyoruz.
-                </p>
+                <h2 className="text-2xl font-semibold text-accent-amber mb-6">Gizlilik Politikası</h2>
                 
-                <h3 className="text-xl font-semibold text-white mb-3">Bilgi Toplama</h3>
-                <p className="text-gray-300 mb-4">
-                  Size daha iyi hizmet verebilmek için aşağıdaki bilgileri topluyoruz:
-                </p>
-                <ul className="text-gray-300 mb-4 space-y-2">
-                  <li>• Kayıt sırasında verdiğiniz kişisel bilgiler</li>
-                  <li>• Platform kullanım verileri ve tercihleri</li>
-                  <li>• Çerez ve benzeri teknolojilerle toplanan veriler</li>
-                  <li>• İletişim geçmişi ve destek talepleri</li>
-                </ul>
+                <div className="text-gray-300 space-y-6 leading-relaxed">
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                      <p>Etkinium, kullanıcıların kişisel bilgilerini gizli tutmayı taahhüt eder.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">Bilgi Kullanımı</h3>
-                <ul className="text-gray-300 mb-4 space-y-2">
-                  <li>• Hizmet kalitesini artırmak</li>
-                  <li>• Kişiselleştirilmiş deneyim sunmak</li>
-                  <li>• Güvenlik ve dolandırıcılık önlemi</li>
-                  <li>• Yasal gereklilikleri karşılamak</li>
-                </ul>
+                    <div className="flex items-start space-x-3">
+                      <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                      <p>Toplanan veriler yalnızca üyelik, kampanya, ödeme ve müşteri destek hizmetleri için kullanılmaktadır.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">Veri Paylaşımı</h3>
-                <p className="text-gray-300 mb-4">
-                  Kişisel verilerinizi üçüncü taraflarla paylaşmıyoruz. 
-                  Yalnızca yasal zorunluluklar doğrultusunda paylaşım yapılabilir.
-                </p>
+                    <div className="flex items-start space-x-3">
+                      <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                      <p>Çerezler (cookies), kullanıcı deneyimini iyileştirmek için kullanılmaktadır. Kullanıcı dilerse tarayıcı ayarlarından çerezleri kapatabilir.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">Çerezler</h3>
-                <p className="text-gray-300 mb-4">
-                  Web sitemizde kullanıcı deneyimini iyileştirmek için çerezler kullanıyoruz. 
-                  Çerez tercihlerinizi tarayıcı ayarlarından yönetebilirsiniz.
-                </p>
+                    <div className="flex items-start space-x-3">
+                      <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                      <p>Kullanıcı bilgileri, kanunen gerekmedikçe üçüncü kişilerle paylaşılmaz.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">Veri Güvenliği</h3>
-                <p className="text-gray-300 mb-4">
-                  Verilerinizi korumak için endüstri standardı güvenlik önlemleri 
-                  ve şifreleme teknolojileri kullanıyoruz.
-                </p>
+                    <div className="flex items-start space-x-3">
+                      <span className="w-2 h-2 bg-accent-amber rounded-full mt-3 flex-shrink-0"></span>
+                      <p>Veri güvenliği için gerekli teknik ve idari tedbirler alınmaktadır.</p>
+                    </div>
+                  </div>
+                </div>
 
-                <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                  <p className="text-accent-amber font-semibold">
-                    🔒 Güvenlik: Verileriniz bizim için değerlidir
+                <div className="mt-8 p-6 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
+                  <p className="text-accent-amber font-semibold text-lg mb-2">
+                    🔒 Güvenlik Taahhüdü
                   </p>
-                  <p className="text-gray-300 mt-2">
-                    Gizlilik ile ilgili sorularınız: iletisim@etkinium.com
+                  <p className="text-gray-300">
+                    Verileriniz bizim için değerlidir. Gizlilik ile ilgili sorularınız için: iletisim@etkinium.com
                   </p>
                 </div>
               </div>

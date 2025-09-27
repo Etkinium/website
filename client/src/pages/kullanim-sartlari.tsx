@@ -16,49 +16,66 @@ export default function KullanimSartlari() {
             
             <div className="prose prose-invert max-w-none">
               <div className="bg-gray-900/50 rounded-lg p-8 mb-8">
-                <h2 className="text-2xl font-semibold text-accent-amber mb-4">Genel Şartlar</h2>
-                <p className="text-gray-300 mb-6">
-                  ETKİNİUM platformunu kullanarak aşağıdaki şart ve koşulları kabul etmiş olursunuz.
-                </p>
+                <h2 className="text-2xl font-semibold text-accent-amber mb-6">Kullanım Şartları</h2>
                 
-                <h3 className="text-xl font-semibold text-white mb-3">1. Hesap Oluşturma</h3>
-                <p className="text-gray-300 mb-4">
-                  Platform üyeliği için doğru ve güncel bilgiler vermeniz gerekmektedir. 
-                  Hesap güvenliğinden siz sorumlusunuz.
-                </p>
+                <div className="text-gray-300 space-y-6 leading-relaxed">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>Üyelik</span>
+                      </h3>
+                      <p>Etkinium'a üye olan herkes, doğru ve güncel bilgiler vermekle yükümlüdür.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">2. Hizmet Kullanımı</h3>
-                <ul className="text-gray-300 mb-4 space-y-2">
-                  <li>• Platformu yasal amaçlar için kullanabilirsiniz</li>
-                  <li>• Telif haklarını ihlal eden içerik paylaşamazsınız</li>
-                  <li>• Diğer kullanıcılara saygılı davranmalısınız</li>
-                  <li>• Spam veya zararlı içerik üretemezsiniz</li>
-                </ul>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>Hizmetler</span>
+                      </h3>
+                      <p>Platform üzerinden bilet alımı, satışı, etkinlik görüntüleme, konaklama ve ulaşım hizmetlerine erişim sağlanmaktadır.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">3. Ödeme ve İptal</h3>
-                <p className="text-gray-300 mb-4">
-                  Premium üyelikler aylık veya yıllık olarak faturalandırılır. 
-                  İptal işlemleri hesap ayarlarından yapılabilir.
-                </p>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>Sorumluluk</span>
+                      </h3>
+                      <p>Kullanıcı, siteyi yalnızca yasal amaçlarla kullanacağını kabul eder. Etkinium, üçüncü taraf hizmet sağlayıcıların hatalarından sorumlu tutulamaz.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">4. Sorumluluk</h3>
-                <p className="text-gray-300 mb-4">
-                  ETKİNİUM, hizmet kesintileri veya kullanıcı kaynaklı sorunlardan 
-                  sorumlu tutulamaz.
-                </p>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>Ücretlendirme</span>
+                      </h3>
+                      <p>Satın alınan bilet ve hizmetlerin ücretleri, ödeme esnasında kullanıcıya açıkça gösterilmektedir.</p>
+                    </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3">5. Değişiklikler</h3>
-                <p className="text-gray-300 mb-4">
-                  Bu şartlar zaman zaman güncellenebilir. Önemli değişiklikler 
-                  kullanıcılara bildirilecektir.
-                </p>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>İptal/İade</span>
+                      </h3>
+                      <p>Kullanıcı, ilgili etkinlik veya hizmet sağlayıcının iade/iptal politikalarına tabidir. Etkinium bu noktada aracıdır.</p>
+                    </div>
 
-                <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                  <p className="text-accent-amber font-semibold">
-                    ⚖️ Son Güncelleme: 27 Eylül 2025
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-accent-amber rounded-full"></span>
+                        <span>Haklar</span>
+                      </h3>
+                      <p>Etkinium, içerikleri ve site işleyişini değiştirme hakkını saklı tutar.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-6 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
+                  <p className="text-accent-amber font-semibold text-lg mb-2">
+                    ⚖️ Son Güncelleme
                   </p>
-                  <p className="text-gray-300 mt-2">
-                    Sorularınız için: iletisim@etkinium.com
+                  <p className="text-gray-300">
+                    27 Eylül 2025 - Sorularınız için: iletisim@etkinium.com
                   </p>
                 </div>
               </div>
