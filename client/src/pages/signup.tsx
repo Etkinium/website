@@ -66,41 +66,45 @@ export default function Signup() {
                 <div className="mb-6">
                   <CheckCircle className="w-20 h-20 text-accent-amber mx-auto mb-4 animate-pulse" />
                   <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                    <span className="text-white">Başarıyla Üye Oldunuz!</span>
+                    <span className="text-white">Teşekkürler! 🎉</span>
                   </h1>
-                  <p className="text-accent-amber text-2xl font-bold mb-2">
-                    Teşekkürler! 🎉
-                  </p>
-                  <p className="text-gray-300 text-lg">
-                    Hoş geldiniz! Hesabınız başarıyla oluşturuldu.
+                  <p className="text-gray-300 text-lg mb-2">
+                    Hesabınız başarıyla oluşturuldu.
                   </p>
                 </div>
 
                 <div className="space-y-4 mb-8">
                   <div className="p-6 bg-gradient-to-br from-accent-amber/20 to-accent-amber/10 rounded-xl border border-accent-amber/40">
-                    <p className="text-accent-amber font-bold text-lg mb-3">
-                      🚀 Lansman Öncesi Hazırlıklar Devam Ediyor!
+                    <p className="text-accent-amber font-bold text-xl mb-4">
+                      🎊 Etkinlikler ve Çok Daha Fazlası Yakında!
                     </p>
-                    <p className="text-gray-200 leading-relaxed mb-4">
-                      Sizler için özel olarak tasarladığımız platform özellikleri ve anlaşmalarımız hızla tamamlanıyor. 
-                      En iyi deneyimi sunmak için çalışmalarımızı sürdürüyoruz.
+                    <p className="text-gray-200 leading-relaxed mb-4 text-left">
+                      ETKİNİUM ailesi olarak sizler için heyecan verici etkinlikler, konserler, seyahat fırsatları ve daha birçok özel içeriği hazırlıyoruz. Platformumuz çok yakında tüm özellikleriyle sizlerle olacak!
                     </p>
+                    <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700 mb-3">
+                      <p className="text-accent-amber font-semibold mb-2">
+                        ✨ Kullanıcı Girişi Yakında Aktif Olacak!
+                      </p>
+                      <p className="text-gray-300 text-sm text-left">
+                        Hesabınız güvenle kaydedildi. Güncellemeler sonrası giriş sistemi aktif olacak ve size özel e-posta bildirimi göndereceğiz. O zamana kadar bizimle kalın!
+                      </p>
+                    </div>
                     <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
                       <p className="text-accent-amber font-semibold mb-2">
-                        ✨ Giriş Özelliği Yakında Hazır!
+                        🎁 Özel Avantajlarınız Hazır!
                       </p>
-                      <p className="text-gray-300 text-sm">
-                        Hesabınız güvenle kaydedildi. Giriş sistemi çok yakında aktif olacak ve size özel bildirim göndereceğiz.
+                      <p className="text-gray-300 text-sm text-left">
+                        İlk üyelerimize özel %10 indirim kuponu ve 100 ETKİNİUM puan hesabınıza tanımlandı. Platform aktif olduğunda hemen kullanabileceksiniz!
                       </p>
                     </div>
                   </div>
                   
                   <div className="p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
                     <p className="text-accent-amber font-semibold">
-                      🎁 Özel Avantajlarınız
+                      📧 Bildirimlerimizi Takip Edin
                     </p>
-                    <p className="text-gray-300 mt-2">
-                      %10 indirim kuponu ve 100 ETKİNİUM puan hesabınıza yüklendi!
+                    <p className="text-gray-300 mt-2 text-sm">
+                      Kayıt olduğunuz e-posta adresine platform açılışı ve özel fırsatlar hakkında bildirim göndereceğiz.
                     </p>
                   </div>
                 </div>
