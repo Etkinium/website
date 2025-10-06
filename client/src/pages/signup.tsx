@@ -31,10 +31,7 @@ export default function Signup() {
         title: "Başarılı!",
         description: data.message,
       });
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      setTimeout(() => {
-        setLocation("/profile");
-      }, 2000);
+      // Do not auto-login or redirect - just show success message
     },
     onError: (error: any) => {
       toast({
