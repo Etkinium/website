@@ -1,10 +1,24 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import logoImage from "@assets/logo-final.png";
+import { User } from "lucide-react";
+
+interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  points: number;
+}
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { data: user } = useQuery<UserProfile>({
+    queryKey: ["/api/user"],
+    retry: false,
+  });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -45,22 +59,44 @@ export default function Header() {
                 Bizimle İletişime Geçin
               </Button>
             </Link>
-            <Link href="/login">
-              <Button 
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-login"
-              >
-                Giriş Yap
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button 
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-signup"
-              >
-                Üye Ol
-              </Button>
-            </Link>
+            
+            {user ? (
+              <Link href="/profile">
+                <Button 
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                  data-testid="button-profile"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">👤</span>
+                    <div className="flex flex-col items-start">
+                      <span className="text-xs leading-none">{user.name}</span>
+                      <span className="text-accent-amber text-xs font-bold leading-none" data-testid="text-header-points">
+                        {user.points} puan
+                      </span>
+                    </div>
+                  </div>
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-login"
+                  >
+                    Giriş Yap
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-signup"
+                  >
+                    Üye Ol
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
           
           {/* Mobile Menu Button */}
@@ -107,24 +143,47 @@ export default function Header() {
                   Bizimle İletişime Geçin
                 </Button>
               </Link>
-              <Link href="/login">
-                <Button 
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-login"
-                >
-                  Giriş Yap
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button 
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-signup"
-                >
-                  Üye Ol
-                </Button>
-              </Link>
+              
+              {user ? (
+                <Link href="/profile">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    data-testid="button-mobile-profile"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">👤</span>
+                      <div className="flex flex-col items-start">
+                        <span className="text-xs">{user.name}</span>
+                        <span className="text-accent-amber text-xs font-bold">
+                          {user.points} puan
+                        </span>
+                      </div>
+                    </div>
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button 
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-login"
+                    >
+                      Giriş Yap
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button 
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-signup"
+                    >
+                      Üye Ol
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
