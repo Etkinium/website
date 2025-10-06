@@ -4,8 +4,9 @@ import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUserPoints(userId: string, points: number): Promise<User>;
   
   // Email subscription methods
   getEmailSubscription(email: string): Promise<EmailSubscription | undefined>;
@@ -23,8 +24,8 @@ export class DatabaseStorage implements IStorage {
     return user || undefined;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
     return user || undefined;
   }
 
@@ -32,6 +33,15 @@ export class DatabaseStorage implements IStorage {
     const [user] = await db
       .insert(users)
       .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async updateUserPoints(userId: string, points: number): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ points })
+      .where(eq(users.id, userId))
       .returning();
     return user;
   }
