@@ -19,7 +19,7 @@ export default function EmailSubscription() {
 
   const partnershipMutation = useMutation({
     mutationFn: async (formData: { name: string; email: string; company: string; message: string }) => {
-      const response = await apiRequest("POST", "/api/contact", formData);
+      const response = await apiRequest("POST", "/api/partnership", formData);
       return response.json();
     },
     onSuccess: () => {
