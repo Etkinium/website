@@ -30,8 +30,8 @@ export default function EmailSubscription() {
       setMessage("");
       setIsDialogOpen(false);
       toast({
-        title: "Mesajınız Gönderildi!",
-        description: "İş birliği talebiniz alındı. En kısa sürede dönüş yapacağız.",
+        title: "Teşekkür Ederiz! 🎉",
+        description: "İş birliği başvurunuz alındı. Uzman ekibimiz en kısa sürede sizlerle iletişime geçecektir.",
       });
     },
     onError: (error: any) => {
@@ -71,18 +71,28 @@ export default function EmailSubscription() {
       <section className="py-20 bg-spotify-black">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mt-8 p-6 bg-yellow-900/30 border border-accent-amber/30 rounded-xl animate-slide-in">
-              <div className="flex items-center justify-center space-x-3">
-                <CheckCircle className="text-accent-amber w-8 h-8" />
+            <div className="mt-8 p-8 bg-gradient-to-br from-accent-amber/20 to-accent-amber/10 border-2 border-accent-amber/40 rounded-2xl animate-slide-in">
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <CheckCircle className="text-accent-amber w-16 h-16 animate-pulse" />
                 <div>
-                  <h3 className="text-lg font-semibold text-accent-amber">Mesajınız Gönderildi!</h3>
-                  <p className="text-yellow-300">İş birliği talebiniz alındı. En kısa sürede dönüş yapacağız.</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-3">
+                    Teşekkür Ederiz! 🎉
+                  </h3>
+                  <p className="text-white text-lg mb-2">
+                    İş birliği başvurunuz başarıyla alındı.
+                  </p>
+                  <p className="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+                    ETKİNİUM ekibi olarak iş birliği talebinizi değerlendiriyoruz. 
+                    Uzman ekibimiz en kısa sürede sizlerle iletişime geçecek ve 
+                    detayları paylaşacaktır. Bizimle birlikte büyümeye hazır olun!
+                  </p>
                 </div>
               </div>
               <Button 
                 onClick={() => setIsSuccess(false)}
                 variant="outline"
-                className="mt-4 border-accent-amber/30 text-accent-amber hover:bg-accent-amber/10"
+                className="mt-6 border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all font-semibold"
+                data-testid="button-new-partnership"
               >
                 Yeni İş Birliği Başvurusu
               </Button>
