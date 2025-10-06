@@ -1,10 +1,57 @@
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
 
 export default function Login() {
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      const response = await apiRequest("POST", "/api/login", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Başarılı!",
+        description: data.message,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      setLocation("/profile");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Hata",
+        description: error.message || "Giriş yapılırken bir hata oluştu.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    loginMutation.mutate(formData);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div className="min-h-screen bg-spotify-black text-white">
       <Header />
@@ -18,16 +65,21 @@ export default function Login() {
                 <span className="text-accent-amber ml-2">Yap</span>
               </h1>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     E-posta
                   </label>
                   <Input
+                    name="email"
                     type="email"
                     placeholder="E-posta adresinizi girin"
                     className="bg-gray-800 border-gray-600 text-white"
                     data-testid="input-email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    disabled={loginMutation.isPending}
                   />
                 </div>
                 
@@ -36,10 +88,15 @@ export default function Login() {
                     Şifre
                   </label>
                   <Input
+                    name="password"
                     type="password"
                     placeholder="Şifrenizi girin"
                     className="bg-gray-800 border-gray-600 text-white"
                     data-testid="input-password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    disabled={loginMutation.isPending}
                   />
                 </div>
                 
@@ -47,8 +104,16 @@ export default function Login() {
                   type="submit"
                   className="w-full text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
                   data-testid="button-submit-login"
+                  disabled={loginMutation.isPending}
                 >
-                  Giriş Yap
+                  {loginMutation.isPending ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Giriş Yapılıyor...
+                    </>
+                  ) : (
+                    "Giriş Yap"
+                  )}
                 </Button>
                 
                 <div className="text-center pt-4">
@@ -60,15 +125,6 @@ export default function Login() {
                   </p>
                 </div>
               </form>
-              
-              <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                <p className="text-accent-amber font-semibold text-center">
-                  🚀 Yakında Aktif!
-                </p>
-                <p className="text-gray-300 text-center mt-2">
-                  Giriş sistemi henüz aktif değil. Lansman için takipte kalın!
-                </p>
-              </div>
             </div>
           </div>
         </div>

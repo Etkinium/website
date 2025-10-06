@@ -8,6 +8,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Login from "@/pages/login";
 import Signup from "@/pages/signup";
+import Profile from "@/pages/profile";
 import KVKK from "@/pages/kvkk";
 import KullanimSartlari from "@/pages/kullanim-sartlari";
 import GizlilikPolitikasi from "@/pages/gizlilik-politikasi";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/profile" component={Profile} />
       <Route path="/kvkk" component={KVKK} />
       <Route path="/kullanim-sartlari" component={KullanimSartlari} />
       <Route path="/gizlilik-politikasi" component={GizlilikPolitikasi} />
