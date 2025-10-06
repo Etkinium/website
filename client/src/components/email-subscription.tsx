@@ -78,20 +78,14 @@ export default function EmailSubscription() {
                   <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-3">
                     Teşekkür Ederiz! 🎉
                   </h3>
-                  <p className="text-white text-lg mb-2">
-                    İş birliği başvurunuz başarıyla alındı.
-                  </p>
                   <p className="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
-                    ETKİNİUM ekibi olarak iş birliği talebinizi değerlendiriyoruz. 
-                    Uzman ekibimiz en kısa sürede sizlerle iletişime geçecek ve 
-                    detayları paylaşacaktır. Bizimle birlikte büyümeye hazır olun!
+                    Başvurunuz için teşekkür ederiz. Talebinizi değerlendirip en kısa sürede dönüş sağlayacağız.
                   </p>
                 </div>
               </div>
               <Button 
                 onClick={() => setIsSuccess(false)}
-                variant="outline"
-                className="mt-6 border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black transition-all font-semibold"
+                className="mt-6 bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black transition-all font-semibold"
                 data-testid="button-new-partnership"
               >
                 Yeni İş Birliği Başvurusu
