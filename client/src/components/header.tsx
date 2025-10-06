@@ -139,24 +139,14 @@ export default function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <>
-                <Link href="/login">
-                  <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                    data-testid="button-login"
-                  >
-                    Giriş Yap
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                    data-testid="button-signup"
-                  >
-                    Üye Ol
-                  </Button>
-                </Link>
-              </>
+              <Link href="/signup">
+                <Button 
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                  data-testid="button-signup"
+                >
+                  Üye Ol
+                </Button>
+              </Link>
             )}
           </div>
           
@@ -246,26 +236,15 @@ export default function Header() {
                   </div>
                 </>
               ) : (
-                <>
-                  <Link href="/login">
-                    <Button 
-                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      data-testid="button-mobile-login"
-                    >
-                      Giriş Yap
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button 
-                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      data-testid="button-mobile-signup"
-                    >
-                      Üye Ol
-                    </Button>
-                  </Link>
-                </>
+                <Link href="/signup">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    data-testid="button-mobile-signup"
+                  >
+                    Üye Ol
+                  </Button>
+                </Link>
               )}
             </div>
           </div>

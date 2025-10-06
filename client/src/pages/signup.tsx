@@ -67,23 +67,43 @@ export default function Signup() {
             <div className="max-w-md mx-auto">
               <div className="bg-gray-900/50 rounded-lg p-8 text-center">
                 <div className="mb-6">
-                  <CheckCircle className="w-20 h-20 text-accent-amber mx-auto mb-4" />
-                  <h1 className="text-3xl font-bold mb-4">
-                    <span className="text-white">Başarıyla</span>
-                    <span className="text-accent-amber ml-2">Üye Oldunuz!</span>
+                  <CheckCircle className="w-20 h-20 text-accent-amber mx-auto mb-4 animate-pulse" />
+                  <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                    <span className="text-white">Başarıyla Üye Oldunuz!</span>
                   </h1>
+                  <p className="text-accent-amber text-2xl font-bold mb-2">
+                    Teşekkürler! 🎉
+                  </p>
                   <p className="text-gray-300 text-lg">
                     Hoş geldiniz! Hesabınız başarıyla oluşturuldu.
                   </p>
                 </div>
 
                 <div className="space-y-4 mb-8">
+                  <div className="p-6 bg-gradient-to-br from-accent-amber/20 to-accent-amber/10 rounded-xl border border-accent-amber/40">
+                    <p className="text-accent-amber font-bold text-lg mb-3">
+                      🚀 Lansman Öncesi Hazırlıklar Devam Ediyor!
+                    </p>
+                    <p className="text-gray-200 leading-relaxed mb-4">
+                      Sizler için özel olarak tasarladığımız platform özellikleri ve anlaşmalarımız hızla tamamlanıyor. 
+                      En iyi deneyimi sunmak için çalışmalarımızı sürdürüyoruz.
+                    </p>
+                    <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+                      <p className="text-accent-amber font-semibold mb-2">
+                        ✨ Giriş Özelliği Yakında Hazır!
+                      </p>
+                      <p className="text-gray-300 text-sm">
+                        Hesabınız güvenle kaydedildi. Giriş sistemi çok yakında aktif olacak ve size özel bildirim göndereceğiz.
+                      </p>
+                    </div>
+                  </div>
+                  
                   <div className="p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
                     <p className="text-accent-amber font-semibold">
-                      🎉 Hoş Geldiniz!
+                      🎁 Özel Avantajlarınız
                     </p>
                     <p className="text-gray-300 mt-2">
-                      %10 indirim kuponu ve 100 puan hesabınıza yüklendi. Profilinize yönlendiriliyorsunuz...
+                      %10 indirim kuponu ve 100 ETKİNİUM puan hesabınıza yüklendi!
                     </p>
                   </div>
                 </div>
@@ -177,15 +197,6 @@ export default function Signup() {
                     "Üye Ol"
                   )}
                 </Button>
-                
-                <div className="text-center pt-4">
-                  <p className="text-gray-400">
-                    Zaten hesabınız var mı?{" "}
-                    <Link href="/login" className="text-accent-amber hover:underline">
-                      Giriş Yap
-                    </Link>
-                  </p>
-                </div>
               </form>
               
               <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
