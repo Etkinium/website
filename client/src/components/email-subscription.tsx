@@ -172,7 +172,7 @@ export default function EmailSubscription() {
             </Dialog>
           </div>
           
-          <div className="mt-8 flex items-center justify-center space-x-8 text-sm text-gray-500">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-xs md:text-sm text-gray-500 px-4">
             <div className="flex items-center space-x-2">
               <Building2 className="text-accent-amber w-4 h-4" />
               <span>Kurumsal Çözümler</span>

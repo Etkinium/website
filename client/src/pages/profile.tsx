@@ -73,23 +73,23 @@ export default function Profile() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Profile Header */}
-            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-8 mb-8 border border-gray-700">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 bg-accent-amber/20 rounded-full flex items-center justify-center text-4xl">
+            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-4 md:p-8 mb-8 border border-gray-700">
+              <div className="flex flex-col md:flex-row items-center md:justify-between gap-6">
+                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left w-full md:w-auto">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-accent-amber/20 rounded-full flex items-center justify-center text-3xl md:text-4xl">
                     👤
                   </div>
                   <div>
-                    <h1 className="text-3xl font-bold text-white mb-2" data-testid="text-user-name">
+                    <h1 className="text-2xl md:text-3xl font-bold text-white mb-2" data-testid="text-user-name">
                       {user?.name}
                     </h1>
-                    <p className="text-gray-400" data-testid="text-user-email">{user?.email}</p>
+                    <p className="text-sm md:text-base text-gray-400" data-testid="text-user-email">{user?.email}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-accent-amber/10 border border-accent-amber/30 rounded-xl px-6 py-3">
+                <div className="w-full md:w-auto flex justify-center">
+                  <div className="bg-accent-amber/10 border border-accent-amber/30 rounded-xl px-8 py-3">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-accent-amber" data-testid="text-user-points">
+                      <div className="text-2xl md:text-3xl font-bold text-accent-amber" data-testid="text-user-points">
                         {user?.points}
                       </div>
                       <div className="text-sm text-gray-400">Puan</div>

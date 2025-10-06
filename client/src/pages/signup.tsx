@@ -104,8 +104,8 @@ export default function Signup() {
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto">
-            <div className="bg-gray-900/50 rounded-lg p-8">
-              <h1 className="text-3xl font-bold mb-8 text-center">
+            <div className="bg-gray-900/50 rounded-lg p-6 md:p-8">
+              <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">
                 <span className="text-white">Üye</span>
                 <span className="text-accent-amber ml-2">Ol</span>
               </h1>

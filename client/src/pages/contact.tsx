@@ -114,8 +114,8 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             {/* Contact Form */}
-            <div className="bg-gray-800 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
+            <div className="bg-gray-800 rounded-2xl p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl font-bold mb-6">Lütfen Mesajınızı Yazınız</h2>
               
               <Form {...form}>
                 <div className="space-y-6">

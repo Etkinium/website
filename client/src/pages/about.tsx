@@ -35,7 +35,7 @@ export default function About() {
           <div className="max-w-6xl mx-auto">
             {/* Vision Card */}
             <div className="mb-16 group">
-              <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-10 md:p-14 border border-accent-amber/20 hover:border-accent-amber/40 transition-all duration-500 hover:shadow-2xl hover:shadow-accent-amber/10">
+              <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-6 md:p-10 lg:p-14 border border-accent-amber/20 hover:border-accent-amber/40 transition-all duration-500 hover:shadow-2xl hover:shadow-accent-amber/10">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent-amber/5 rounded-full blur-3xl group-hover:bg-accent-amber/10 transition-all duration-500"></div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-6">
@@ -55,7 +55,7 @@ export default function About() {
 
             {/* Mission Card */}
             <div className="group">
-              <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-10 md:p-14 border border-accent-amber/20 hover:border-accent-amber/40 transition-all duration-500 hover:shadow-2xl hover:shadow-accent-amber/10">
+              <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-6 md:p-10 lg:p-14 border border-accent-amber/20 hover:border-accent-amber/40 transition-all duration-500 hover:shadow-2xl hover:shadow-accent-amber/10">
                 <div className="absolute top-0 left-0 w-32 h-32 bg-accent-amber/5 rounded-full blur-3xl group-hover:bg-accent-amber/10 transition-all duration-500"></div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-6">
@@ -130,32 +130,6 @@ export default function About() {
                     güvenini kazanıyor ve koruyoruz.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-spotify-black">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-accent-amber mb-2">100K+</div>
-                <div className="text-gray-400">Hedef Kullanıcı</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-accent-amber mb-2">50+</div>
-                <div className="text-gray-400">Partner</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-accent-amber mb-2">7/24</div>
-                <div className="text-gray-400">Destek</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-accent-amber mb-2">%100</div>
-                <div className="text-gray-400">Güvenli</div>
               </div>
             </div>
           </div>

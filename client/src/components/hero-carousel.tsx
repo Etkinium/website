@@ -82,11 +82,11 @@ export default function HeroCarousel() {
       </div>
       
       {/* Fixed Signup Button */}
-      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10 px-4 w-full flex justify-center">
         <Link href="/signup">
           <Button
             size="lg"
-            className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-12 py-6 rounded-full transition-all transform hover:scale-105 text-xl"
+            className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-8 md:px-12 py-4 md:py-6 rounded-full transition-all transform hover:scale-105 text-lg md:text-xl"
             data-testid="button-hero-signup"
           >
             Üye Ol

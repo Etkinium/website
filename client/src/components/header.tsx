@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User } from "lucide-react";
+import { User, LogOut, Ticket } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserProfile {
   id: string;
@@ -14,11 +23,39 @@ interface UserProfile {
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
   const { data: user } = useQuery<UserProfile>({
     queryKey: ["/api/user"],
     retry: false,
   });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("POST", "/api/logout", {});
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Başarılı!",
+        description: data.message,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      setLocation("/");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Hata",
+        description: error.message || "Çıkış yapılırken bir hata oluştu.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -61,22 +98,46 @@ export default function Header() {
             </Link>
             
             {user ? (
-              <Link href="/profile">
-                <Button 
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
-                  data-testid="button-profile"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">👤</span>
-                    <div className="flex flex-col items-start">
-                      <span className="text-xs leading-none">{user.name}</span>
-                      <span className="text-accent-amber text-xs font-bold leading-none" data-testid="text-header-points">
-                        {user.points} puan
-                      </span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                    data-testid="button-profile"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">👤</span>
+                      <div className="flex flex-col items-start">
+                        <span className="text-xs leading-none">{user.name}</span>
+                        <span className="text-accent-amber text-xs font-bold leading-none" data-testid="text-header-points">
+                          {user.points} puan
+                        </span>
+                      </div>
                     </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-700">
+                  <DropdownMenuItem 
+                    className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800"
+                    data-testid="menu-coupons"
+                  >
+                    <Ticket className="mr-2 h-4 w-4" />
+                    <span>Kuponlarım</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <DropdownMenuItem 
+                    onClick={handleLogout}
+                    className="cursor-pointer text-red-400 hover:bg-gray-800 hover:text-red-300 focus:bg-gray-800 focus:text-red-300"
+                    data-testid="menu-logout"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Çıkış Yap</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <div className="px-2 py-1.5 text-xs text-gray-400 text-center" data-testid="text-details-soon">
+                    Detaylar yakında duyurulacak
                   </div>
-                </Button>
-              </Link>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <>
                 <Link href="/login">
@@ -145,23 +206,45 @@ export default function Header() {
               </Link>
               
               {user ? (
-                <Link href="/profile">
-                  <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid="button-mobile-profile"
-                  >
-                    <div className="flex items-center gap-2">
+                <>
+                  <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+                    <div className="flex items-center gap-2 mb-3">
                       <span className="text-xl">👤</span>
                       <div className="flex flex-col items-start">
-                        <span className="text-xs">{user.name}</span>
-                        <span className="text-accent-amber text-xs font-bold">
+                        <span className="text-sm text-white">{user.name}</span>
+                        <span className="text-accent-amber text-xs font-bold" data-testid="text-mobile-points">
                           {user.points} puan
                         </span>
                       </div>
                     </div>
-                  </Button>
-                </Link>
+                    <div className="space-y-2">
+                      <Button 
+                        variant="ghost"
+                        className="w-full justify-start text-white hover:bg-gray-800"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        data-testid="button-mobile-coupons"
+                      >
+                        <Ticket className="mr-2 h-4 w-4" />
+                        Kuponlarım
+                      </Button>
+                      <Button 
+                        variant="ghost"
+                        className="w-full justify-start text-red-400 hover:bg-gray-800 hover:text-red-300"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          handleLogout();
+                        }}
+                        data-testid="button-mobile-logout"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Çıkış Yap
+                      </Button>
+                      <div className="text-xs text-gray-400 text-center pt-2 border-t border-gray-700" data-testid="text-mobile-details-soon">
+                        Detaylar yakında duyurulacak
+                      </div>
+                    </div>
+                  </div>
+                </>
               ) : (
                 <>
                   <Link href="/login">
