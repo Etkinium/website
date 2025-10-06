@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertUserSchema, loginSchema } from "@shared/schema";
+import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertUserSchema, loginSchema } from "@shared/schema";
 import { z } from "zod";
 import "./types";
 
@@ -203,6 +203,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(contacts);
     } catch (error) {
       console.error("Get contacts error:", error);
+      res.status(500).json({ message: "Bir hata oluştu" });
+    }
+  });
+
+  // Partnership application endpoint
+  app.post("/api/partnership", async (req, res) => {
+    try {
+      const validatedData = insertPartnershipApplicationSchema.parse(req.body);
+      
+      const application = await storage.createPartnershipApplication(validatedData);
+      
+      res.status(201).json({ 
+        message: "İş birliği başvurunuz alındı! Uzman ekibimiz en kısa sürede sizlerle iletişime geçecektir.",
+        application: {
+          id: application.id,
+          createdAt: application.createdAt
+        }
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Partnership application error:", error);
+      res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
+    }
+  });
+
+  // Get all partnership applications (for admin purposes)
+  app.get("/api/partnerships", async (req, res) => {
+    try {
+      const applications = await storage.getAllPartnershipApplications();
+      res.json(applications);
+    } catch (error) {
+      console.error("Get partnership applications error:", error);
       res.status(500).json({ message: "Bir hata oluştu" });
     }
   });
