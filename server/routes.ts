@@ -23,17 +23,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create user (in production, hash the password!)
       const user = await storage.createUser(validatedData);
       
-      // Set session
-      req.session.userId = user.id;
+      // Do not auto-login - user will login separately when login feature is enabled
       
       res.status(201).json({ 
         message: "Başarıyla üye oldunuz!",
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          points: user.points,
-        }
+        success: true
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
