@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Sparkles, Globe, Award, Target } from "lucide-react";
+import { Sparkles, Globe, Award, Target, Users } from "lucide-react";
 
 export default function About() {
   return (
@@ -21,9 +21,10 @@ export default function About() {
               <span className="text-accent-amber ml-4">Hakkında</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Türkiye'nin en yenilikçi seyahat ve etkinlik platformu olma yolculuğunda, 
-              <span className="text-accent-amber font-semibold"> premium deneyimleri </span>
-              sizinle buluşturuyoruz
+              Türkiye'nin en yenilikçi <span className="text-accent-amber font-semibold">dijital biletleme platformu</span> olma yolculuğunda, 
+              konser biletleri, tiyatro biletleri, spor etkinlikleri, festival organizasyonları ve premium konaklama hizmetlerini 
+              <span className="text-accent-amber font-semibold"> tek platform </span>
+              altında sizinle buluşturuyoruz
             </p>
           </div>
         </div>
@@ -45,9 +46,10 @@ export default function About() {
                     <h2 className="text-4xl md:text-5xl font-black text-accent-amber">Vizyonumuz</h2>
                   </div>
                   <p className="text-gray-200 text-xl md:text-2xl leading-relaxed font-light">
-                    Türkiye'nin en güçlü seyahat ve etkinlik platformu olmak, 
+                    Türkiye'nin en güçlü <span className="text-accent-amber font-semibold">online bilet satış ve etkinlik platformu</span> olmak, 
+                    CEO ve yönetim ekibimizin liderliğinde 
                     <span className="text-accent-amber font-semibold"> küresel pazara açılarak </span>
-                    milyonlarca kullanıcıya ulaşmak ve onların hayatlarına değer katan deneyimler sunmak.
+                    milyonlarca kullanıcıya ulaşmak ve onların hayatlarına değer katan premium etkinlik deneyimleri sunmak.
                   </p>
                 </div>
               </div>
@@ -65,9 +67,64 @@ export default function About() {
                     <h2 className="text-4xl md:text-5xl font-black text-accent-amber">Misyonumuz</h2>
                   </div>
                   <p className="text-gray-200 text-xl md:text-2xl leading-relaxed font-light">
-                    Konaklama, seyahat ve etkinlik biletlerini 
+                    Konaklama rezervasyonları, uçak biletleri, konser biletleri, tiyatro biletleri, spor etkinlikleri ve festival biletlerini 
                     <span className="text-accent-amber font-semibold"> tek çatı altında </span>
-                    toplayarak kullanıcıya en kolay ve güvenli deneyimi sunmak.
+                    toplayarak kullanıcılarımıza Türkiye'nin en kolay ve güvenli <span className="text-accent-amber font-semibold">dijital etkinlik deneyimini</span> sunmak.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section className="py-24 bg-gradient-to-b from-spotify-black to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-6">
+                <Users className="w-16 h-16 text-accent-amber mx-auto" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black mb-4">
+                <span className="text-white">Yönetim & CEO</span>
+              </h2>
+              <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+                ETKİNİUM'un başarısının arkasında, <span className="text-accent-amber font-semibold">deneyimli CEO ve yönetim ekibi</span> bulunmaktadır. 
+                Sektördeki uzun yıllara dayanan tecrübemiz ve vizyoner liderliğimiz sayesinde, 
+                Türkiye'nin en güvenilir <span className="text-accent-amber font-semibold">dijital biletleme ve etkinlik platformunu</span> inşa ediyoruz.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-3xl p-8 md:p-12 border border-accent-amber/20">
+              <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-6">Liderlik Vizyonumuz</h3>
+              <div className="grid md:grid-cols-2 gap-8 text-gray-200">
+                <div>
+                  <h4 className="text-xl font-semibold text-white mb-3">Deneyimli Kurucu Kadro</h4>
+                  <p className="leading-relaxed">
+                    CEO ve kurucu ekibimiz, etkinlik yönetimi, teknoloji ve dijital pazarlama alanlarında 
+                    <span className="text-accent-amber font-semibold"> 15+ yıllık deneyime</span> sahiptir.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-white mb-3">Yenilikçi Yönetim Anlayışı</h4>
+                  <p className="leading-relaxed">
+                    Yönetim ekibimiz, kullanıcı odaklı yaklaşım ve sürekli inovasyon ilkeleriyle 
+                    <span className="text-accent-amber font-semibold"> sektöre yön vermektedir</span>.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-white mb-3">Stratejik Büyüme</h4>
+                  <p className="leading-relaxed">
+                    CEO liderliğinde, konser biletleri, tiyatro biletleri, festival organizasyonları ve 
+                    konaklama hizmetlerinde <span className="text-accent-amber font-semibold">sürdürülebilir büyüme</span> hedefliyoruz.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-white mb-3">Müşteri Odaklı Liderlik</h4>
+                  <p className="leading-relaxed">
+                    Yöneticilerimiz, her kararı <span className="text-accent-amber font-semibold">kullanıcı memnuniyeti</span> ve 
+                    güvenli alışveriş deneyimi sağlamak üzerine şekillendirir.
                   </p>
                 </div>
               </div>
