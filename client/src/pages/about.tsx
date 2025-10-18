@@ -1,15 +1,14 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Sparkles, Award, HelpCircle, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { Sparkles, Award, HelpCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function About() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   const faqs = [
     {
       question: "Mobil Uygulama olacak mı?",
@@ -129,44 +128,35 @@ export default function About() {
               </p>
             </div>
 
-            <div className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
-                <div 
+                <AccordionItem 
                   key={index} 
-                  className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700 overflow-hidden hover:border-accent-amber/50 transition-all duration-300"
+                  value={`item-${index}`}
+                  className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700 overflow-hidden hover:border-accent-amber/50 transition-all duration-300 px-6 md:px-8"
                   data-testid={`faq-item-${index}`}
                 >
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-5 md:px-8 md:py-6 flex items-center justify-between text-left group"
+                  <AccordionTrigger 
+                    className="py-5 md:py-6 hover:no-underline group"
                     data-testid={`button-faq-toggle-${index}`}
                   >
-                    <h3 className="text-lg md:text-xl font-semibold text-white pr-4 group-hover:text-accent-amber transition-colors">
+                    <h3 className="text-lg md:text-xl font-semibold text-white text-left pr-4 group-hover:text-accent-amber transition-colors">
                       {faq.question}
                     </h3>
-                    <ChevronDown 
-                      className={`w-6 h-6 text-accent-amber flex-shrink-0 transition-transform duration-300 ${
-                        openFaq === index ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
+                  </AccordionTrigger>
+                  <AccordionContent 
+                    className="pb-6 md:pb-8"
+                    data-testid={`text-faq-answer-${index}`}
                   >
-                    <div className="px-6 pb-6 md:px-8 md:pb-8 pt-0" data-testid={`text-faq-answer-${index}`}>
-                      <div className="border-t border-gray-700 pt-4">
-                        <p className="text-gray-300 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
+                    <div className="border-t border-gray-700 pt-4">
+                      <p className="text-gray-300 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
-                  </div>
-                </div>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </div>
       </section>
