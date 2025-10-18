@@ -42,10 +42,9 @@ export default function About() {
               <span className="text-accent-amber ml-4">Hakkında</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="text-about-description">
-              Türkiye'nin en yenilikçi <span className="text-accent-amber font-semibold">dijital biletleme platformu</span> olma yolculuğunda, 
-              konser biletleri, tiyatro biletleri, spor etkinlikleri, festival organizasyonları ve premium konaklama hizmetlerini 
-              <span className="text-accent-amber font-semibold"> tek platform </span>
-              altında sizinle buluşturuyoruz
+              Türkiye'nin en yenilikçi, <span className="text-accent-amber font-semibold">dijital dünyanın yeni nesil deneyim platformudur</span>. 
+              Kullanıcılarına farklı alanlarda <span className="text-accent-amber font-semibold">tek merkezden erişim ve kolaylık</span> sağlar. 
+              Lansman sonrası detaylar resmi duyurularla paylaşılacaktır.
             </p>
           </div>
         </div>
