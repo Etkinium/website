@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
 import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
-import joinImage from "@assets/stock_images/happy_diverse_people_81d6a5f1.jpg";
+import joinImage from "@assets/stock_images/black_and_gold_luxur_c82d619e.jpg";
 
 const slides = [
   {
