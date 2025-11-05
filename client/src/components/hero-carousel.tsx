@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
 import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
-import travelImage from "@assets/stock_images/passenger_airplane_f_92dad434.jpg";
+import joinImage from "@assets/stock_images/happy_diverse_people_81d6a5f1.jpg";
 
 const slides = [
   {
@@ -21,9 +21,9 @@ const slides = [
   },
   {
     id: 3,
-    backgroundImage: travelImage,
-    title: "Seyahat Keşfi",
-    description: "Uçak ve kara yolculukları ile dünyayı keşfedin",
+    backgroundImage: joinImage,
+    title: "Aramıza Katıl",
+    description: "İndirimlerden faydalan, avantajları yakala!",
   }
 ];
 
