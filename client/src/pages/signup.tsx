@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
 import { CheckCircle, Loader2 } from "lucide-react";
-import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
 
 export default function Signup() {
   const [, setLocation] = useLocation();
@@ -22,18 +22,32 @@ export default function Signup() {
 
   const signupMutation = useMutation({
     mutationFn: async (data: { name: string; email: string; password: string }) => {
-      const response = await apiRequest("POST", "/api/signup", data);
-      return response.json();
+      const { data: authData, error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            name: data.name
+          }
+        }
+      });
+      
+      if (error) {
+        console.error('Supabase signup error:', error);
+        throw error;
+      }
+      return authData;
     },
     onSuccess: (data) => {
+      console.log('Signup success:', data);
       setIsSuccess(true);
       toast({
-        title: "Başarılı!",
-        description: data.message,
+        title: "Sign up successful!",
+        description: "Hesabınız başarıyla oluşturuldu.",
       });
-      // Do not auto-login or redirect - just show success message
     },
     onError: (error: any) => {
+      console.error('Signup mutation error:', error);
       toast({
         title: "Hata",
         description: error.message || "Üye olurken bir hata oluştu.",

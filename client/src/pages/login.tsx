@@ -6,9 +6,9 @@ import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
-import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function Login() {
   const [, setLocation] = useLocation();
@@ -20,18 +20,27 @@ export default function Login() {
 
   const loginMutation = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
-      const response = await apiRequest("POST", "/api/login", data);
-      return response.json();
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+      
+      if (error) {
+        console.error('Supabase login error:', error);
+        throw error;
+      }
+      return authData;
     },
     onSuccess: (data) => {
+      console.log('Login success:', data);
       toast({
-        title: "Başarılı!",
-        description: data.message,
+        title: "Login successful!",
+        description: "Başarıyla giriş yaptınız.",
       });
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       setLocation("/");
     },
     onError: (error: any) => {
+      console.error('Login mutation error:', error);
       toast({
         title: "Hata",
         description: error.message || "Giriş yapılırken bir hata oluştu.",
