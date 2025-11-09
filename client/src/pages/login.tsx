@@ -83,16 +83,16 @@ export default function Login() {
     <div className="min-h-screen bg-spotify-black text-white">
       <Header />
       
-      <main className="pt-32 pb-20">
-        <div className="container mx-auto px-4">
+      <main className="pt-24 md:pt-32 pb-12 md:pb-20">
+        <div className="container mx-auto px-3 sm:px-4">
           <div className="max-w-md mx-auto">
-            <div className="bg-gray-900/50 rounded-lg p-6 md:p-8 border border-gray-800">
-              <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+            <div className="bg-gray-900/50 rounded-lg p-4 sm:p-6 md:p-8 border border-gray-800">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-center">
                 <span className="text-white">ETKİNİUM'e</span>
                 <span className="text-accent-amber ml-2">Hoş Geldiniz</span>
               </h1>
               
-              <p className="text-gray-300 text-center mb-8">
+              <p className="text-sm sm:text-base text-gray-300 text-center mb-6 md:mb-8">
                 Hesabınıza giriş yapın
               </p>
               
@@ -161,7 +161,7 @@ export default function Login() {
                   <Button
                     type="submit"
                     disabled={loginMutation.isPending}
-                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all py-6 text-lg font-semibold"
+                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all py-5 sm:py-6 text-base sm:text-lg font-semibold"
                     data-testid="button-login"
                   >
                     {loginMutation.isPending ? "Giriş yapılıyor..." : "Giriş Yap"}
@@ -169,8 +169,8 @@ export default function Login() {
                 </form>
               </Form>
 
-              <div className="mt-6 text-center">
-                <p className="text-gray-400">
+              <div className="mt-4 sm:mt-6 text-center">
+                <p className="text-sm sm:text-base text-gray-400">
                   Hesabınız yok mu?{" "}
                   <a href="/signup" className="text-accent-amber hover:underline">
                     Üye Ol
@@ -178,8 +178,8 @@ export default function Login() {
                 </p>
               </div>
 
-              <div className="mt-6 p-4 bg-gray-800/50 rounded-lg border border-gray-700">
-                <p className="text-xs text-gray-400 text-center">
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+                <p className="text-xs sm:text-sm text-gray-400 text-center">
                   Giriş yaparak{" "}
                   <a href="/kullanim-kosullari" className="text-accent-amber hover:underline">
                     Kullanım Koşulları

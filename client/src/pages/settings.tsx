@@ -94,43 +94,43 @@ export default function Settings() {
     <div className="min-h-screen bg-spotify-black text-white">
       <Header />
       
-      <main className="pt-32 pb-20">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">
+      <main className="pt-24 md:pt-32 pb-12 md:pb-20">
+        <div className="container mx-auto px-3 sm:px-4 max-w-4xl">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8">
             <span className="text-white">Ayarlar</span>
           </h1>
 
           <Card className="bg-gray-900/50 border-gray-800">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Bell className="h-5 w-5 text-accent-amber" />
+              <CardTitle className="text-base sm:text-lg text-white flex items-center gap-2">
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-accent-amber" />
                 Bildirim Tercihleri
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-xs sm:text-sm text-gray-400">
                 Bildirim almak istediğiniz kanalları seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                   <FormField
                     control={form.control}
                     name="emailNotifications"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-gray-700 p-4 bg-gray-800/50">
+                      <FormItem className="flex flex-row items-start space-x-2 sm:space-x-3 space-y-0 rounded-md border border-gray-700 p-3 sm:p-4 bg-gray-800/50">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="border-gray-600 data-[state=checked]:bg-accent-amber data-[state=checked]:border-accent-amber"
+                            className="border-gray-600 data-[state=checked]:bg-accent-amber data-[state=checked]:border-accent-amber mt-0.5"
                             data-testid="checkbox-email"
                           />
                         </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel className="text-white font-medium cursor-pointer">
+                        <div className="space-y-1 leading-none flex-1">
+                          <FormLabel className="text-sm sm:text-base text-white font-medium cursor-pointer">
                             E-posta Bildirimleri
                           </FormLabel>
-                          <FormDescription className="text-gray-400 text-sm">
+                          <FormDescription className="text-xs sm:text-sm text-gray-400">
                             Kampanyalar, etkinlikler ve özel fırsatlar hakkında e-posta bildirimleri almak istiyorum
                           </FormDescription>
                         </div>
@@ -142,20 +142,20 @@ export default function Settings() {
                     control={form.control}
                     name="smsNotifications"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-gray-700 p-4 bg-gray-800/50">
+                      <FormItem className="flex flex-row items-start space-x-2 sm:space-x-3 space-y-0 rounded-md border border-gray-700 p-3 sm:p-4 bg-gray-800/50">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="border-gray-600 data-[state=checked]:bg-accent-amber data-[state=checked]:border-accent-amber"
+                            className="border-gray-600 data-[state=checked]:bg-accent-amber data-[state=checked]:border-accent-amber mt-0.5"
                             data-testid="checkbox-sms"
                           />
                         </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel className="text-white font-medium cursor-pointer">
+                        <div className="space-y-1 leading-none flex-1">
+                          <FormLabel className="text-sm sm:text-base text-white font-medium cursor-pointer">
                             SMS Bildirimleri
                           </FormLabel>
-                          <FormDescription className="text-gray-400 text-sm">
+                          <FormDescription className="text-xs sm:text-sm text-gray-400">
                             Kampanyalar, etkinlikler ve özel fırsatlar hakkında SMS bildirimleri almak istiyorum
                           </FormDescription>
                         </div>
@@ -166,7 +166,7 @@ export default function Settings() {
                   <Button
                     type="submit"
                     disabled={updateMutation.isPending}
-                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all"
+                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all py-5 sm:py-6 text-sm sm:text-base"
                     data-testid="button-save-settings"
                   >
                     {updateMutation.isPending ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
@@ -176,17 +176,17 @@ export default function Settings() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800 mt-6">
+          <Card className="bg-gray-900/50 border-gray-800 mt-4 sm:mt-6">
             <CardHeader>
-              <CardTitle className="text-white">İletişim</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardTitle className="text-base sm:text-lg text-white">İletişim</CardTitle>
+              <CardDescription className="text-xs sm:text-sm text-gray-400">
                 Bizimle iletişime geçin
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-                <p className="text-sm text-gray-400 mb-2">E-posta</p>
-                <a href="mailto:iletisim@etkinium.com" className="text-accent-amber hover:underline font-medium">
+              <div className="bg-gray-800/50 rounded-lg p-3 sm:p-4 border border-gray-700">
+                <p className="text-xs sm:text-sm text-gray-400 mb-2">E-posta</p>
+                <a href="mailto:iletisim@etkinium.com" className="text-sm sm:text-base text-accent-amber hover:underline font-medium break-all">
                   iletisim@etkinium.com
                 </a>
               </div>
