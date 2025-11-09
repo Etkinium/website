@@ -5,36 +5,31 @@ import EmailSubscription from "@/components/email-subscription";
 import Footer from "@/components/footer";
 import logoImage from "@assets/logo-final.png";
 
-const verticalSlides = [
+const horizontalSlides = [
   {
     id: 1,
     logo: logoImage,
     brandName: "ETKİNİUM",
-    tagline: "Tek Platform, Sonsuz Sanat",
-    contactInfo: "Reklam vermek için: iletisim@etkinium.com"
+    tagline: "Tek Platform, Sonsuz Sanat"
   },
   {
     id: 2,
-    logo: logoImage,
-    brandName: "ETKİNİUM",
-    tagline: "Etkinlik, Seyahat, Konaklama",
-    contactInfo: "Reklam vermek için: iletisim@etkinium.com"
+    title: "Lansmana Özel",
+    description: "%10 İndirim + 100 Puan Hediye!"
   },
   {
     id: 3,
-    logo: logoImage,
-    brandName: "ETKİNİUM",
-    tagline: "Yapay Zeka Destekli Biletleme",
-    contactInfo: "Reklam vermek için: iletisim@etkinium.com"
+    title: "Her İşlemde",
+    description: "ETKİNİUM Puan Kazan"
   }
 ];
 
 export default function Home() {
-  const [currentVerticalSlide, setCurrentVerticalSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentVerticalSlide((prev) => (prev + 1) % verticalSlides.length);
+      setCurrentSlide((prev) => (prev + 1) % horizontalSlides.length);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -46,72 +41,91 @@ export default function Home() {
       
       <HeroCarousel />
 
-      {/* VERTICAL SLIDER - Ana Sayfaya Özel Reklam Alanı */}
-      <section className="py-16 px-4 md:px-8 lg:px-16">
+      {/* HORIZONTAL SLIDER - Genişlemesine, Kompakt */}
+      <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-8 px-4 md:px-8 lg:px-16">
         <div className="max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 to-black border border-accent-amber/20 shadow-2xl"
-               style={{ height: "400px" }}>
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-accent-amber/30 shadow-xl"
+               style={{ height: "140px" }}>
             <div className="relative h-full">
-              {verticalSlides.map((slide, index) => {
-                const position = index - currentVerticalSlide;
-                const isActive = index === currentVerticalSlide;
-                const isPrev = position === -1 || (currentVerticalSlide === 0 && index === verticalSlides.length - 1);
-                const isNext = position === 1 || (currentVerticalSlide === verticalSlides.length - 1 && index === 0);
+              {horizontalSlides.map((slide, index) => {
+                const position = index - currentSlide;
+                const isActive = index === currentSlide;
+                const isPrev = position === -1 || (currentSlide === 0 && index === horizontalSlides.length - 1);
+                const isNext = position === 1 || (currentSlide === horizontalSlides.length - 1 && index === 0);
                 
                 return (
                   <div
                     key={slide.id}
                     className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                      isActive ? "translate-y-0 opacity-100 z-10" :
-                      isPrev ? "translate-y-full opacity-0 z-0" :
-                      isNext ? "-translate-y-full opacity-0 z-0" :
-                      "-translate-y-full opacity-0 z-0"
+                      isActive ? "translate-x-0 opacity-100 z-10" :
+                      isPrev ? "-translate-x-full opacity-0 z-0" :
+                      isNext ? "translate-x-full opacity-0 z-0" :
+                      "translate-x-full opacity-0 z-0"
                     }`}
-                    data-testid={`vertical-slide-${index}`}
+                    data-testid={`horizontal-slide-${index}`}
                   >
-                    <div className="flex flex-col items-center justify-center h-full p-8">
-                      <img 
-                        src={slide.logo}
-                        alt="ETKİNİUM Logo"
-                        className="w-32 h-32 md:w-40 md:h-40 object-contain mb-6"
-                      />
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-accent-amber">
-                        {slide.brandName}
-                      </h2>
-                      <p className="text-xl md:text-2xl text-white mb-8 text-center font-semibold">
-                        {slide.tagline}
-                      </p>
-                      <p className="text-sm md:text-base text-gray-300">
-                        {slide.contactInfo.split(": ")[0]}:{" "}
-                        <a 
-                          href={`mailto:${slide.contactInfo.split(": ")[1]}`}
-                          className="text-accent-amber hover:underline font-semibold"
-                        >
-                          {slide.contactInfo.split(": ")[1]}
-                        </a>
-                      </p>
-                    </div>
+                    {slide.logo ? (
+                      <div className="flex items-center justify-center h-full gap-6 px-8">
+                        <img 
+                          src={slide.logo}
+                          alt="ETKİNİUM Logo"
+                          className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                        />
+                        <div>
+                          <h2 className="text-3xl md:text-4xl font-bold text-accent-amber mb-1">
+                            {slide.brandName}
+                          </h2>
+                          <p className="text-lg md:text-xl text-white font-semibold">
+                            {slide.tagline}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center h-full px-8">
+                        <div className="text-center">
+                          <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-2">
+                            {slide.title}
+                          </h3>
+                          <p className="text-lg md:text-xl text-white font-semibold">
+                            {slide.description}
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               })}
             </div>
 
-            {/* DOTS - Vertical Slider */}
-            <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-20">
-              {verticalSlides.map((_, index) => (
+            {/* DOTS - Horizontal Slider */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+              {horizontalSlides.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentVerticalSlide(index)}
+                  onClick={() => setCurrentSlide(index)}
                   className={`rounded-full transition-all duration-300 ${
-                    index === currentVerticalSlide
-                      ? "h-8 w-3 bg-accent-amber"
-                      : "h-3 w-3 bg-white/30 hover:bg-white/50"
+                    index === currentSlide
+                      ? "w-8 h-3 bg-accent-amber"
+                      : "w-3 h-3 bg-white/30 hover:bg-white/50"
                   }`}
-                  data-testid={`vertical-dot-${index}`}
-                  aria-label={`Vertical Slide ${index + 1}`}
+                  data-testid={`horizontal-dot-${index}`}
+                  aria-label={`Slide ${index + 1}`}
                 />
               ))}
             </div>
+          </div>
+
+          {/* REKLAM VERMEK İÇİN - Bağımsız */}
+          <div className="text-center mt-6">
+            <p className="text-sm md:text-base text-gray-400">
+              Reklam vermek için:{" "}
+              <a 
+                href="mailto:iletisim@etkinium.com"
+                className="text-accent-amber hover:underline font-semibold"
+              >
+                iletisim@etkinium.com
+              </a>
+            </p>
           </div>
         </div>
       </section>

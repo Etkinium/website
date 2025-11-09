@@ -439,8 +439,7 @@ export default function Konaklama() {
                   setSelectedCity("all");
                   setSelectedDistrict("all");
                 }}
-                variant="outline"
-                className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+                className="bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
                 data-testid="button-clear-filters"
               >
                 Filtreleri Temizle
@@ -535,7 +534,7 @@ export default function Konaklama() {
                 setSelectedCity("all");
                 setSelectedDistrict("all");
               }}
-              className="mt-4 bg-accent-amber text-spotify-black hover:bg-accent-amber/90"
+              className="mt-4 bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
             >
               Tüm Otelleri Göster
             </Button>

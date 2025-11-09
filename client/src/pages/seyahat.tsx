@@ -228,8 +228,8 @@ export default function Seyahat() {
                   onClick={() => setActiveTab(option.id)}
                   className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                     isActive 
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/50" 
-                      : "bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-white"
+                      ? "bg-accent-amber text-black shadow-lg shadow-accent-amber/50" 
+                      : "bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black"
                   }`}
                   data-testid={`tab-${option.id}`}
                 >
@@ -301,14 +301,14 @@ export default function Seyahat() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="mailto:iletisim@etkinium.com"
-              className="px-8 py-3 bg-accent-amber text-spotify-black font-semibold rounded-xl hover:bg-accent-amber/90 transition-all"
+              className="px-8 py-3 bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black font-semibold rounded-xl transition-all"
               data-testid="button-contact-email"
             >
               Bilgi Almak İstiyorum
             </a>
             <a
               href="/"
-              className="px-8 py-3 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-700 transition-all"
+              className="px-8 py-3 bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black font-semibold rounded-xl transition-all"
               data-testid="button-home"
             >
               Ana Sayfaya Dön

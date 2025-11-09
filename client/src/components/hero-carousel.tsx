@@ -82,7 +82,7 @@ export default function HeroCarousel() {
       </div>
       
       {/* Fixed Signup Button */}
-      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-10 px-4 w-full flex justify-center">
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10 px-4 w-full flex justify-center">
         <Link href="/signup">
           <Button
             size="lg"
