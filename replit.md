@@ -44,17 +44,17 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
-- **Nov 09, 2025**: HOMEPAGE HORIZONTAL SLIDER & BUTTON STANDARDIZATION
-  - Converted homepage slider from vertical to horizontal layout with compact 140px height
-  - Implemented side-by-side logo + text design with left-to-right transitions (8-second intervals)
-  - Created 3 promotional slides: ETKİNİUM branding ("Tek Platform, Sonsuz Sanat"), %10 discount offer, points earning program
-  - Added independent advertising contact below slider: "Reklam vermek için: iletisim@etkinium.com"
-  - Optimized hero carousel "Üye Ol" button position (bottom-20) for better visual hierarchy
-  - Minimized spacing between hero carousel and slider with gradient transition (from-spotify-black via-gray-900)
-  - Standardized ALL buttons platform-wide: black background (bg-black) + gray border + amber hover effect (hover:bg-accent-amber hover:text-black)
-  - Updated Seyahat tab buttons: active tabs show amber background, inactive tabs use black with amber hover
-  - Updated Konaklama filter buttons to match new styling standard
-  - All features tested with E2E playwright tests confirming horizontal slider animation, button hover states, and responsive behavior
+- **Nov 09, 2025**: ADVERTISING SYSTEM & VERTICAL SLIDER IMPLEMENTATION
+  - Converted homepage slider back to vertical (up-down) transitions with compact 220px height
+  - Reduced logo and text sizes for better visual balance (w-16 h-16 mobile, w-20 h-20 desktop)
+  - Created AdvertisingButton reusable component with dialog form system
+  - Implemented advertising application system: database table, API endpoint, form validation
+  - Added "Reklam Vermek İçin Başvuru" button below sliders on Homepage, Konaklama, and Seyahat pages
+  - Dialog features: X button for closing, form fields (name, email, company, message), gradient design
+  - Database: advertising_applications table with PostgreSQL storage
+  - API: POST /api/advertising endpoint with Zod validation
+  - Button standardization: black background with amber hover effect maintained across platform
+  - All features tested with E2E playwright: vertical slider animation, dialog functionality, form submission, multi-page integration
 - **Nov 09, 2025**: UX IMPROVEMENTS & CONTENT ENHANCEMENT
   - Converted Seyahat page to Apple-style tab system with interactive content switching (Uçak, Otobüs, Deniz, Demir Yolları)
   - Updated Footer with "Bizi Takip Edin" social media section (X and Instagram links)
