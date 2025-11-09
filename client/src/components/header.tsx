@@ -76,7 +76,7 @@ export default function Header() {
                 placeholder="Ara..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-48"
+                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-56"
                 data-testid="input-search"
               />
               <button
@@ -88,46 +88,6 @@ export default function Header() {
               </button>
             </form>
             
-            {!user && (
-              <>
-                <Link href="/login">
-                  <Button 
-                    variant="ghost"
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                    data-testid="button-login"
-                  >
-                    Giriş Yap
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                    data-testid="button-signup"
-                  >
-                    Üye Ol
-                  </Button>
-                </Link>
-              </>
-            )}
-            
-            <Link href="/contact">
-              <Button 
-                variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-contact"
-              >
-                İletişim
-              </Button>
-            </Link>
-            <Link href="/about">
-              <Button 
-                variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-about"
-              >
-                Hakkımızda
-              </Button>
-            </Link>
             <Link href="/konaklama">
               <Button 
                 variant="ghost"
@@ -146,6 +106,53 @@ export default function Header() {
                 Seyahat
               </Button>
             </Link>
+            
+            {/* BİZİMLE İLETİŞİME GEÇİN DROPDOWN */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                  data-testid="button-contact-dropdown"
+                >
+                  Bizimle İletişime Geçin
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-700">
+                <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                  <Link href="/about" className="flex items-center w-full">
+                    Hakkımızda
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                  <Link href="/contact" className="flex items-center w-full">
+                    İletişim
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            {!user && (
+              <>
+                <Link href="/signup">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-signup"
+                  >
+                    Üye Ol
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button 
+                    variant="ghost"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-login"
+                  >
+                    Giriş Yap
+                  </Button>
+                </Link>
+              </>
+            )}
             
             {user && (
               <DropdownMenu>
@@ -215,50 +222,6 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              {!user && (
-                <>
-                  <Link href="/login">
-                    <Button 
-                      variant="ghost"
-                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      data-testid="button-mobile-login"
-                    >
-                      Giriş Yap
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button 
-                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      data-testid="button-mobile-signup"
-                    >
-                      Üye Ol
-                    </Button>
-                  </Link>
-                </>
-              )}
-              
-              <Link href="/contact">
-                <Button 
-                  variant="ghost"
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-contact"
-                >
-                  İletişim
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button 
-                  variant="ghost"
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-about"
-                >
-                  Hakkımızda
-                </Button>
-              </Link>
               <Link href="/konaklama">
                 <Button 
                   variant="ghost"
@@ -279,6 +242,54 @@ export default function Header() {
                   Seyahat
                 </Button>
               </Link>
+              
+              <div className="border-t border-gray-700 pt-2">
+                <p className="text-xs text-gray-400 px-2 mb-2">Bizimle İletişime Geçin</p>
+                <Link href="/about">
+                  <Button 
+                    variant="ghost"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    data-testid="button-mobile-about"
+                  >
+                    Hakkımızda
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button 
+                    variant="ghost"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full mt-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    data-testid="button-mobile-contact"
+                  >
+                    İletişim
+                  </Button>
+                </Link>
+              </div>
+              
+              {!user && (
+                <>
+                  <Link href="/signup">
+                    <Button 
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-signup"
+                    >
+                      Üye Ol
+                    </Button>
+                  </Link>
+                  <Link href="/login">
+                    <Button 
+                      variant="ghost"
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-login"
+                    >
+                      Giriş Yap
+                    </Button>
+                  </Link>
+                </>
+              )}
               
               {user && (
                 <>
