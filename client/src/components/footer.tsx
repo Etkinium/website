@@ -7,10 +7,10 @@ export default function Footer() {
     <footer className="bg-spotify-black py-16 border-t border-gray-800">
       <div className="container mx-auto px-4">
         {/* Ana Footer İçeriği */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-12">
           
           {/* Logo ve Email Bölümü */}
-          <div className="lg:col-span-2 text-center lg:text-left">
+          <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start space-x-3 mb-6">
               <img 
                 src={logoImage}
@@ -37,11 +37,11 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Hukuki Belgeler */}
+          {/* Destek & Yasal */}
           <div className="text-center lg:text-left">
             <h3 className="text-xl font-bold text-white mb-6 relative">
               <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
-                Hukuki Belgeler
+                Destek & Yasal
               </span>
               <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
             </h3>
@@ -52,16 +52,7 @@ export default function Footer() {
                   className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
                 >
                   <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>KVKK</span>
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/kullanim-sartlari" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Kullanım Şartları</span>
+                  <span>KVKK Politikası</span>
                 </Link>
               </li>
               <li>
@@ -71,6 +62,24 @@ export default function Footer() {
                 >
                   <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
                   <span>Gizlilik Politikası</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/kullanim-sartlari" 
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                >
+                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
+                  <span>Kullanım Koşulları</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/cerez-politikasi" 
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                >
+                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
+                  <span>Çerez Politikası</span>
                 </Link>
               </li>
             </ul>
@@ -96,11 +105,41 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
+                  href="/sss" 
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                >
+                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
+                  <span>Sıkça Sorulan Sorular</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Hızlı Linkler */}
+          <div className="text-center lg:text-left">
+            <h3 className="text-xl font-bold text-white mb-6 relative">
+              <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
+                Hızlı Linkler
+              </span>
+              <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link 
                   href="/about" 
                   className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
                 >
                   <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
                   <span>Hakkımızda</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/konaklama" 
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                >
+                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
+                  <span>Konaklama</span>
                 </Link>
               </li>
             </ul>

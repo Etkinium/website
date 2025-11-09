@@ -11,8 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import logoImage from "@assets/logo-final.png";
 
 const slides = [
+  {
+    label: "Reklam Alanı",
+    title: "Bu Alana Reklam Verebilirsiniz",
+    description: "Milyonlarca kullanıcıya ulaşmak için bu premium reklam alanından faydalanın. Detaylı bilgi ve fiyatlandırma için iletisim@etkinium.com adresine ulaşın.",
+    isAdvertising: true
+  },
   {
     label: "Etkinium Partner",
     title: "Seçili otellerde lansmana özel %10 indirim",
@@ -286,6 +293,13 @@ export default function Konaklama() {
                   }`}
                   data-testid={`slide-${index}`}
                 >
+                  {slide.isAdvertising && (
+                    <img 
+                      src={logoImage}
+                      alt="ETKİNİUM Logo"
+                      className="absolute left-8 top-8 w-16 h-16 object-contain opacity-30"
+                    />
+                  )}
                   <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
                     {slide.label}
                   </div>

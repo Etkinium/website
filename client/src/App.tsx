@@ -8,12 +8,15 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Konaklama from "@/pages/konaklama";
 import OtelDetay from "@/pages/otel-detay";
+import Seyahat from "@/pages/seyahat";
 import Login from "@/pages/login";
 import Signup from "@/pages/signup";
 import Profile from "@/pages/profile";
 import KVKK from "@/pages/kvkk";
 import KullanimSartlari from "@/pages/kullanim-sartlari";
 import GizlilikPolitikasi from "@/pages/gizlilik-politikasi";
+import CerezPolitikasi from "@/pages/cerez-politikasi";
+import SSS from "@/pages/sss";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,12 +27,15 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/konaklama" component={Konaklama} />
       <Route path="/konaklama/:id" component={OtelDetay} />
+      <Route path="/seyahat" component={Seyahat} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/profile" component={Profile} />
       <Route path="/kvkk" component={KVKK} />
       <Route path="/kullanim-sartlari" component={KullanimSartlari} />
       <Route path="/gizlilik-politikasi" component={GizlilikPolitikasi} />
+      <Route path="/cerez-politikasi" component={CerezPolitikasi} />
+      <Route path="/sss" component={SSS} />
       <Route component={NotFound} />
     </Switch>
   );

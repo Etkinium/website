@@ -96,6 +96,15 @@ export default function Header() {
                 Konaklama
               </Button>
             </Link>
+            <Link href="/seyahat">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-seyahat"
+              >
+                Seyahat
+              </Button>
+            </Link>
             <Link href="/contact">
               <Button 
                 variant="ghost"
@@ -201,6 +210,16 @@ export default function Header() {
                   data-testid="button-mobile-konaklama"
                 >
                   Konaklama
+                </Button>
+              </Link>
+              <Link href="/seyahat">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-seyahat"
+                >
+                  Seyahat
                 </Button>
               </Link>
               <Link href="/contact">
