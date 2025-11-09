@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, jsonb, index } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, jsonb, index, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -14,14 +14,17 @@ export const sessions = pgTable(
   (table) => [index("IDX_session_expire").on(table.expire)],
 );
 
-// User storage table for Replit Auth
+// User storage table - Custom Email/Password Auth
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  email: varchar("email").unique(),
-  firstName: varchar("first_name"),
-  lastName: varchar("last_name"),
-  profileImageUrl: varchar("profile_image_url"),
+  email: varchar("email").notNull().unique(),
+  password: varchar("password").notNull(),
+  firstName: varchar("first_name").notNull(),
+  lastName: varchar("last_name").notNull(),
+  phone: varchar("phone"),
   points: integer("points").notNull().default(100),
+  smsNotifications: boolean("sms_notifications").notNull().default(false),
+  emailNotifications: boolean("email_notifications").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -61,13 +64,32 @@ export const advertisingApplications = pgTable("advertising_applications", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-// Upsert user schema for Replit Auth
-export const upsertUserSchema = createInsertSchema(users).pick({
-  id: true,
+// Register schema for new users
+export const registerUserSchema = createInsertSchema(users).pick({
   email: true,
+  password: true,
   firstName: true,
   lastName: true,
-  profileImageUrl: true,
+}).extend({
+  email: z.string().email("Lütfen geçerli bir e-posta adresi girin"),
+  password: z.string().min(6, "Şifre en az 6 karakter olmalı"),
+  firstName: z.string().min(1, "İsim gerekli"),
+  lastName: z.string().min(1, "Soyisim gerekli"),
+});
+
+// Login schema
+export const loginUserSchema = z.object({
+  email: z.string().email("Lütfen geçerli bir e-posta adresi girin"),
+  password: z.string().min(1, "Şifre gerekli"),
+  rememberMe: z.boolean().optional(),
+});
+
+// Update profile schema
+export const updateProfileSchema = z.object({
+  email: z.string().email("Lütfen geçerli bir e-posta adresi girin").optional(),
+  phone: z.string().min(10, "Lütfen geçerli bir telefon numarası girin").optional(),
+  smsNotifications: z.boolean().optional(),
+  emailNotifications: z.boolean().optional(),
 });
 
 export const insertEmailSubscriptionSchema = createInsertSchema(emailSubscriptions).pick({
@@ -114,7 +136,9 @@ export const insertAdvertisingApplicationSchema = createInsertSchema(advertising
   message: z.string().min(1, "Reklam detayları gerekli"),
 });
 
-export type UpsertUser = z.infer<typeof upsertUserSchema>;
+export type RegisterUser = z.infer<typeof registerUserSchema>;
+export type LoginUser = z.infer<typeof loginUserSchema>;
+export type UpdateProfile = z.infer<typeof updateProfileSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertEmailSubscription = z.infer<typeof insertEmailSubscriptionSchema>;
 export type EmailSubscription = typeof emailSubscriptions.$inferSelect;

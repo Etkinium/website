@@ -1,32 +1,181 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertAdvertisingApplicationSchema } from "@shared/schema";
+import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertAdvertisingApplicationSchema, registerUserSchema, loginUserSchema, updateProfileSchema } from "@shared/schema";
 import { z } from "zod";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import bcrypt from "bcrypt";
+import session from "express-session";
 import "./types";
 
-export async function registerRoutes(app: Express): Promise<Server> {
-  // Setup Replit Auth middleware
-  await setupAuth(app);
+// Extend Express session type
+declare module 'express-session' {
+  interface SessionData {
+    userId?: string;
+  }
+}
 
-  // Auth endpoint - Get current user (public, returns null if not authenticated)
-  app.get('/api/auth/user', async (req: any, res) => {
-    // Return null if not authenticated instead of 401
-    if (!req.isAuthenticated() || !req.user?.claims?.sub) {
+// Auth middleware to check if user is logged in
+function requireAuth(req: Request, res: Response, next: NextFunction) {
+  if (!req.session?.userId) {
+    return res.status(401).json({ message: "Giriş yapmanız gerekiyor" });
+  }
+  next();
+}
+
+export async function registerRoutes(app: Express): Promise<Server> {
+  // Setup session middleware
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'etkinium-secret-key-change-in-production',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    }
+  }));
+
+  // Register endpoint
+  app.post('/api/register', async (req, res) => {
+    try {
+      const validatedData = registerUserSchema.parse(req.body);
+      
+      // Check if email already exists
+      const existingUser = await storage.getUserByEmail(validatedData.email);
+      if (existingUser) {
+        return res.status(409).json({ message: "Bu e-posta adresi zaten kullanılıyor" });
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(validatedData.password, 10);
+      
+      // Create user
+      const user = await storage.createUser({
+        ...validatedData,
+        password: hashedPassword,
+      });
+
+      // Auto-login after registration
+      req.session.userId = user.id;
+      
+      // Return user without password
+      const { password, ...userWithoutPassword } = user;
+      res.status(201).json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Register error:", error);
+      res.status(500).json({ message: "Kayıt sırasında bir hata oluştu" });
+    }
+  });
+
+  // Login endpoint
+  app.post('/api/login', async (req, res) => {
+    try {
+      const validatedData = loginUserSchema.parse(req.body);
+      
+      // Find user by email
+      const user = await storage.getUserByEmail(validatedData.email);
+      if (!user) {
+        return res.status(401).json({ message: "E-posta veya şifre hatalı" });
+      }
+
+      // Check password
+      const isPasswordValid = await bcrypt.compare(validatedData.password, user.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "E-posta veya şifre hatalı" });
+      }
+
+      // Set session
+      req.session.userId = user.id;
+      
+      // Set cookie maxAge based on rememberMe
+      if (validatedData.rememberMe) {
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+      }
+      
+      // Return user without password
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Giriş sırasında bir hata oluştu" });
+    }
+  });
+
+  // Logout endpoint
+  app.post('/api/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Logout error:", err);
+        return res.status(500).json({ message: "Çıkış yapılırken hata oluştu" });
+      }
+      res.json({ message: "Başarıyla çıkış yapıldı" });
+    });
+  });
+
+  // Get current user endpoint (public, returns null if not authenticated)
+  app.get('/api/user', async (req, res) => {
+    if (!req.session?.userId) {
       return res.json(null);
     }
 
     try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
+      const user = await storage.getUser(req.session.userId);
       if (!user) {
         return res.json(null);
       }
-      res.json(user);
+      
+      // Return user without password
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
     } catch (error) {
       console.error("Error fetching user:", error);
       res.status(500).json({ message: "Kullanıcı bilgileri alınırken hata oluştu" });
+    }
+  });
+
+  // Update profile endpoint
+  app.patch('/api/user/profile', requireAuth, async (req, res) => {
+    try {
+      const validatedData = updateProfileSchema.parse(req.body);
+      const userId = req.session.userId!;
+      
+      // If updating email, check if it's already taken
+      if (validatedData.email) {
+        const existingUser = await storage.getUserByEmail(validatedData.email);
+        if (existingUser && existingUser.id !== userId) {
+          return res.status(409).json({ message: "Bu e-posta adresi zaten kullanılıyor" });
+        }
+      }
+      
+      const updatedUser = await storage.updateUser(userId, validatedData);
+      
+      // Return user without password
+      const { password, ...userWithoutPassword } = updatedUser;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Update profile error:", error);
+      res.status(500).json({ message: "Profil güncellenirken hata oluştu" });
     }
   });
 

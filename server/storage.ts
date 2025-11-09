@@ -1,11 +1,13 @@
-import { type User, type UpsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, type AdvertisingApplication, type InsertAdvertisingApplication, users, emailSubscriptions, contactMessages, partnershipApplications, advertisingApplications } from "@shared/schema";
+import { type User, type RegisterUser, type UpdateProfile, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, type AdvertisingApplication, type InsertAdvertisingApplication, users, emailSubscriptions, contactMessages, partnershipApplications, advertisingApplications } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  // Replit Auth user operations
+  // User operations
   getUser(id: string): Promise<User | undefined>;
-  upsertUser(user: UpsertUser): Promise<User>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  createUser(user: RegisterUser): Promise<User>;
+  updateUser(userId: string, data: UpdateProfile): Promise<User>;
   updateUserPoints(userId: string, points: number): Promise<User>;
   
   // Email subscription methods
@@ -32,17 +34,27 @@ export class DatabaseStorage implements IStorage {
     return user || undefined;
   }
 
-  async upsertUser(userData: UpsertUser): Promise<User> {
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user || undefined;
+  }
+
+  async createUser(userData: RegisterUser): Promise<User> {
     const [user] = await db
       .insert(users)
       .values(userData)
-      .onConflictDoUpdate({
-        target: users.id,
-        set: {
-          ...userData,
-          updatedAt: new Date(),
-        },
+      .returning();
+    return user;
+  }
+
+  async updateUser(userId: string, data: UpdateProfile): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({
+        ...data,
+        updatedAt: new Date(),
       })
+      .where(eq(users.id, userId))
       .returning();
     return user;
   }
