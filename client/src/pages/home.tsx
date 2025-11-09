@@ -45,7 +45,7 @@ export default function Home() {
       {/* VERTICAL SLIDER - Yukarı-Aşağı, Yatay Uzun Dikey Kısa */}
       <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-6 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-orange-600/20 via-red-600/20 to-orange-600/20 border-2 border-accent-amber/40 shadow-2xl"
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
                style={{ height: "120px" }}>
             <div className="relative h-full">
               {verticalSlides.map((slide, index) => {
@@ -66,21 +66,19 @@ export default function Home() {
                     data-testid={`vertical-slide-${index}`}
                   >
                     {slide.logo ? (
-                      <div className="flex items-center justify-start h-full gap-3 px-6">
+                      <div className="flex items-center justify-start h-full gap-4 px-6">
                         <div className="flex-shrink-0">
-                          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-accent-amber/30">
-                            <img 
-                              src={slide.logo}
-                              alt="ETKİNİUM Logo"
-                              className="w-14 h-14 object-contain"
-                            />
-                          </div>
+                          <img 
+                            src={slide.logo}
+                            alt="ETKİNİUM Logo"
+                            className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                          />
                         </div>
                         <div>
-                          <h2 className="text-xl md:text-2xl font-bold text-accent-amber">
+                          <h2 className="text-2xl md:text-3xl font-bold text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                             {slide.brandName}
                           </h2>
-                          <p className="text-sm md:text-base text-white/90 font-medium">
+                          <p className="text-base md:text-lg text-white font-medium">
                             {slide.tagline}
                           </p>
                         </div>
@@ -88,10 +86,10 @@ export default function Home() {
                     ) : (
                       <div className="flex items-center justify-center h-full px-6">
                         <div className="text-center">
-                          <h3 className="text-lg md:text-xl font-bold text-accent-amber mb-1">
+                          <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-1 drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                             {slide.title}
                           </h3>
-                          <p className="text-sm md:text-base text-white/90 font-medium">
+                          <p className="text-base md:text-lg text-white font-medium">
                             {slide.description}
                           </p>
                         </div>
