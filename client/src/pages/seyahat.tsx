@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import AdvertisingButton from "@/components/advertising-button";
 import { Plane, Bus, Ship, Train, Calendar, MapPin, Users } from "lucide-react";
 import logoImage from "@assets/logo-final.png";
 
@@ -202,6 +203,11 @@ export default function Seyahat() {
               />
             ))}
           </div>
+        </div>
+
+        {/* REKLAM VERMEK İÇİN BUTON */}
+        <div className="mb-8">
+          <AdvertisingButton />
         </div>
 
         {/* BAŞLIK */}

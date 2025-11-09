@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import AdvertisingButton from "@/components/advertising-button";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star, Wifi, Coffee, Waves, Utensils, Dumbbell, Car } from "lucide-react";
 import {
@@ -356,6 +357,11 @@ export default function Konaklama() {
               />
             ))}
           </div>
+        </div>
+
+        {/* REKLAM VERMEK İÇİN BUTON */}
+        <div className="mb-8">
+          <AdvertisingButton />
         </div>
 
         {/* FİLTRELEME VE BAŞLIK */}
