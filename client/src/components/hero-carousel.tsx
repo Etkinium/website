@@ -50,7 +50,7 @@ export default function HeroCarousel() {
   }, []);
 
   return (
-    <section className="relative h-screen overflow-hidden mt-16">
+    <section className="relative h-[75vh] overflow-hidden mt-16">
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
           <div
@@ -61,7 +61,7 @@ export default function HeroCarousel() {
             style={{
               backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(25,20,20,0.8)), url('${slide.backgroundImage}')`,
               backgroundSize: "cover",
-              backgroundPosition: "center"
+              backgroundPosition: "center 30%"
             }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
