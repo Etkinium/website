@@ -86,7 +86,7 @@ export default function HeroCarousel() {
         <Link href="/signup">
           <Button
             size="lg"
-            className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-8 md:px-12 py-4 md:py-6 rounded-full transition-all transform hover:scale-105 text-lg md:text-xl"
+            className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all transform hover:scale-105 text-base md:text-lg"
             data-testid="button-hero-signup"
           >
             Üye Ol

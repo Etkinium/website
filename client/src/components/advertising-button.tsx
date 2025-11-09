@@ -68,10 +68,10 @@ export default function AdvertisingButton() {
     <div className="text-center mt-6">
       <Button
         onClick={() => setIsOpen(true)}
-        className="bg-accent-amber text-black hover:bg-accent-amber/90 font-bold px-6 py-3 rounded-xl transition-all shadow-lg"
+        className="bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black font-bold px-6 py-3 rounded-xl transition-all shadow-lg"
         data-testid="button-advertising"
       >
-        Reklam Vermek İçin Başvuru
+        Reklam Vermek İçin Başvurun
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

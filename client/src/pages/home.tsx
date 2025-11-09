@@ -42,11 +42,11 @@ export default function Home() {
       
       <HeroCarousel />
 
-      {/* VERTICAL SLIDER - Yukarı-Aşağı */}
-      <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-8 px-4 md:px-8 lg:px-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/30 via-gray-900 to-black border border-accent-amber/30 shadow-xl"
-               style={{ height: "220px" }}>
+      {/* VERTICAL SLIDER - Yukarı-Aşağı, Yatay Uzun Dikey Kısa */}
+      <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-6 px-4 md:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-orange-600/20 via-red-600/20 to-orange-600/20 border-2 border-accent-amber/40 shadow-2xl"
+               style={{ height: "120px" }}>
             <div className="relative h-full">
               {verticalSlides.map((slide, index) => {
                 const position = index - currentSlide;
@@ -66,17 +66,21 @@ export default function Home() {
                     data-testid={`vertical-slide-${index}`}
                   >
                     {slide.logo ? (
-                      <div className="flex items-center justify-center h-full gap-4 px-6">
-                        <img 
-                          src={slide.logo}
-                          alt="ETKİNİUM Logo"
-                          className="w-16 h-16 md:w-20 md:h-20 object-contain"
-                        />
+                      <div className="flex items-center justify-start h-full gap-3 px-6">
+                        <div className="flex-shrink-0">
+                          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-accent-amber/30">
+                            <img 
+                              src={slide.logo}
+                              alt="ETKİNİUM Logo"
+                              className="w-14 h-14 object-contain"
+                            />
+                          </div>
+                        </div>
                         <div>
-                          <h2 className="text-2xl md:text-3xl font-bold text-accent-amber mb-1">
+                          <h2 className="text-xl md:text-2xl font-bold text-accent-amber">
                             {slide.brandName}
                           </h2>
-                          <p className="text-base md:text-lg text-white font-semibold">
+                          <p className="text-sm md:text-base text-white/90 font-medium">
                             {slide.tagline}
                           </p>
                         </div>
@@ -84,10 +88,10 @@ export default function Home() {
                     ) : (
                       <div className="flex items-center justify-center h-full px-6">
                         <div className="text-center">
-                          <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-2">
+                          <h3 className="text-lg md:text-xl font-bold text-accent-amber mb-1">
                             {slide.title}
                           </h3>
-                          <p className="text-base md:text-lg text-white font-semibold">
+                          <p className="text-sm md:text-base text-white/90 font-medium">
                             {slide.description}
                           </p>
                         </div>
@@ -99,15 +103,15 @@ export default function Home() {
             </div>
 
             {/* DOTS - Vertical Slider */}
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
+            <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
               {verticalSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`rounded-full transition-all duration-300 ${
+                  className={`rounded-full transition-all duration-300 shadow-lg ${
                     index === currentSlide
-                      ? "h-8 w-3 bg-accent-amber"
-                      : "h-3 w-3 bg-white/30 hover:bg-white/50"
+                      ? "h-6 w-2.5 bg-accent-amber ring-2 ring-accent-amber/50"
+                      : "h-2.5 w-2.5 bg-white/40 hover:bg-white/70"
                   }`}
                   data-testid={`vertical-dot-${index}`}
                   aria-label={`Slide ${index + 1}`}
