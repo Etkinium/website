@@ -298,9 +298,6 @@ export default function Konaklama() {
                 >
                   {slide.isAdvertising ? (
                     <div className="flex flex-col items-center justify-center h-full p-4">
-                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-6">
-                        {slide.label}
-                      </div>
                       <img 
                         src={logoImage}
                         alt="ETKİNİUM Logo"

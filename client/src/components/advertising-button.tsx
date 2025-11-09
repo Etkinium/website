@@ -76,14 +76,6 @@ export default function AdvertisingButton() {
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="bg-gradient-to-br from-gray-900 to-black text-white border border-accent-amber/30 max-w-lg">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="absolute right-4 top-4 rounded-full p-2 hover:bg-white/10 transition-all"
-            data-testid="button-close-dialog"
-          >
-            <X className="w-5 h-5 text-white" />
-          </button>
-          
           <DialogHeader>
             <DialogTitle className="text-accent-amber text-2xl font-bold">
               Reklam Başvurusu

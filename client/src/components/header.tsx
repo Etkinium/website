@@ -55,8 +55,9 @@ export default function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-spotify-black/95 backdrop-blur-md border-b border-gray-800">
       <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
+        <div className="flex items-center justify-between gap-4">
+          {/* LOGO VE İSİM - SOL KÖŞE */}
+          <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center">
               <img 
                 src={logoImage}
@@ -68,15 +69,15 @@ export default function Header() {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center flex-1 justify-end space-x-2">
-            {/* ARAMA BUTONU */}
+          <div className="hidden lg:flex items-center flex-1 justify-center">
+            {/* ARAMA BUTONU - ORTADA */}
             <form onSubmit={handleSearch} className="relative flex items-center">
               <Input
                 type="text"
                 placeholder="Keşfetmeye başla..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-72"
+                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-96"
                 data-testid="input-search"
               />
               <button
@@ -87,6 +88,10 @@ export default function Header() {
                 <Search className="w-4 h-4" />
               </button>
             </form>
+          </div>
+
+          {/* BUTONLAR - SAĞ TARAFA YAKIN */}
+          <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
             
             <Link href="/konaklama">
               <Button 
