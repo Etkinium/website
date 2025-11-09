@@ -16,8 +16,9 @@ import logoImage from "@assets/logo-final.png";
 const slides = [
   {
     label: "Reklam Alanı",
-    title: "Bu Alana Reklam Verebilirsiniz",
-    description: "Milyonlarca kullanıcıya ulaşmak için bu premium reklam alanından faydalanın. Detaylı bilgi ve fiyatlandırma için iletisim@etkinium.com adresine ulaşın.",
+    title: "ETKİNİUM",
+    description: "Türkiye'nin Yeni Nesil Dijital Biletleme Ekosistemi",
+    contactEmail: "iletisim@etkinium.com",
     isAdvertising: true
   },
   {
@@ -293,22 +294,45 @@ export default function Konaklama() {
                   }`}
                   data-testid={`slide-${index}`}
                 >
-                  {slide.isAdvertising && (
-                    <img 
-                      src={logoImage}
-                      alt="ETKİNİUM Logo"
-                      className="absolute left-8 top-8 w-16 h-16 object-contain opacity-30"
-                    />
+                  {slide.isAdvertising ? (
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-6">
+                        {slide.label}
+                      </div>
+                      <img 
+                        src={logoImage}
+                        alt="ETKİNİUM Logo"
+                        className="w-32 h-32 md:w-40 md:h-40 object-contain mb-4"
+                      />
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber">
+                        {slide.title}
+                      </h2>
+                      <p className="text-base md:text-lg text-gray-200 mb-6 text-center max-w-xl">
+                        {slide.description}
+                      </p>
+                      <p className="text-sm md:text-base text-gray-300">
+                        Reklam vermek için:{" "}
+                        <a 
+                          href={`mailto:${slide.contactEmail}`}
+                          className="text-accent-amber hover:underline font-semibold"
+                        >
+                          {slide.contactEmail}
+                        </a>
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
+                        {slide.label}
+                      </div>
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-yellow-50">
+                        {slide.title}
+                      </h2>
+                      <p className="text-sm md:text-base text-gray-200 max-w-2xl">
+                        {slide.description}
+                      </p>
+                    </>
                   )}
-                  <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
-                    {slide.label}
-                  </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-yellow-50">
-                    {slide.title}
-                  </h2>
-                  <p className="text-sm md:text-base text-gray-200 max-w-2xl">
-                    {slide.description}
-                  </p>
                 </div>
               );
             })}
