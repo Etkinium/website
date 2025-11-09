@@ -1,133 +1,27 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useLocation } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Link } from "wouter";
-import { CheckCircle, Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Signup() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+  const { isAuthenticated, isLoading } = useAuth();
 
-  const signupMutation = useMutation({
-    mutationFn: async (data: { name: string; email: string; password: string }) => {
-      const { data: authData, error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-        options: {
-          data: {
-            name: data.name
-          }
-        }
-      });
-      
-      if (error) {
-        console.error('Supabase signup error:', error);
-        throw error;
-      }
-      return authData;
-    },
-    onSuccess: (data) => {
-      console.log('Signup success:', data);
-      setIsSuccess(true);
-      toast({
-        title: "Sign up successful!",
-        description: "Hesabınız başarıyla oluşturuldu.",
-      });
-    },
-    onError: (error: any) => {
-      console.error('Signup mutation error:', error);
-      toast({
-        title: "Hata",
-        description: error.message || "Üye olurken bir hata oluştu.",
-        variant: "destructive",
-      });
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      setLocation("/");
     }
-  });
+  }, [isAuthenticated, isLoading, setLocation]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    signupMutation.mutate(formData);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  if (isSuccess) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-spotify-black text-white">
-        <Header />
-        
-        <main className="pt-32 pb-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-md mx-auto">
-              <div className="bg-gray-900/50 rounded-lg p-8 text-center">
-                <div className="mb-6">
-                  <CheckCircle className="w-20 h-20 text-accent-amber mx-auto mb-4 animate-pulse" />
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                    <span className="text-white">Teşekkürler! 🎉</span>
-                  </h1>
-                  <p className="text-gray-300 text-lg mb-2">
-                    Hesabınız başarıyla oluşturuldu.
-                  </p>
-                </div>
-
-                <div className="space-y-4 mb-8">
-                  <div className="p-6 bg-gradient-to-br from-accent-amber/20 to-accent-amber/10 rounded-xl border border-accent-amber/40">
-                    <p className="text-accent-amber font-bold text-xl mb-4">
-                      🎊 Etkinlikler ve Çok Daha Fazlası Yakında!
-                    </p>
-                    <p className="text-gray-200 leading-relaxed mb-4 text-left">
-                      ETKİNİUM ailesi olarak sizler için heyecan verici etkinlikler, konserler, seyahat fırsatları ve daha birçok özel içeriği hazırlıyoruz. Platformumuz çok yakında tüm özellikleriyle sizlerle olacak!
-                    </p>
-                    <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700 mb-3">
-                      <p className="text-accent-amber font-semibold mb-2">
-                        ✨ Kullanıcı Girişi Yakında Aktif Olacak!
-                      </p>
-                      <p className="text-gray-300 text-sm text-left">
-                        Hesabınız güvenle kaydedildi. Güncellemeler sonrası giriş sistemi aktif olacak ve size özel e-posta bildirimi göndereceğiz. O zamana kadar bizimle kalın!
-                      </p>
-                    </div>
-                    <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                      <p className="text-accent-amber font-semibold mb-2">
-                        🎁 Özel Avantajlarınız Hazır!
-                      </p>
-                      <p className="text-gray-300 text-sm text-left">
-                        İlk üyelerimize özel %10 indirim kuponu ve 100 ETKİNİUM puan hesabınıza tanımlandı. Platform aktif olduğunda hemen kullanabileceksiniz!
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                    <p className="text-accent-amber font-semibold">
-                      📧 Bildirimlerimizi Takip Edin
-                    </p>
-                    <p className="text-gray-300 mt-2 text-sm">
-                      Kayıt olduğunuz e-posta adresine platform açılışı ve özel fırsatlar hakkında bildirim göndereceğiz.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-
-        <Footer />
+      <div className="min-h-screen bg-spotify-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-accent-amber border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-400">Yükleniyor...</p>
+        </div>
       </div>
     );
   }
@@ -139,88 +33,57 @@ export default function Signup() {
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto">
-            <div className="bg-gray-900/50 rounded-lg p-6 md:p-8">
-              <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">
-                <span className="text-white">Üye</span>
-                <span className="text-accent-amber ml-2">Ol</span>
+            <div className="bg-gray-900/50 rounded-lg p-6 md:p-8 border border-gray-800">
+              <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+                <span className="text-white">ETKİNİUM'e</span>
+                <span className="text-accent-amber ml-2">Katılın</span>
               </h1>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Ad Soyad
-                  </label>
-                  <Input
-                    name="name"
-                    type="text"
-                    placeholder="Ad ve soyadınızı girin"
-                    className="bg-gray-800 border-gray-600 text-white"
-                    data-testid="input-name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    disabled={signupMutation.isPending}
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    E-posta
-                  </label>
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="E-posta adresinizi girin"
-                    className="bg-gray-800 border-gray-600 text-white"
-                    data-testid="input-email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    disabled={signupMutation.isPending}
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Şifre
-                  </label>
-                  <Input
-                    name="password"
-                    type="password"
-                    placeholder="Güçlü bir şifre oluşturun (en az 6 karakter)"
-                    className="bg-gray-800 border-gray-600 text-white"
-                    data-testid="input-password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                    disabled={signupMutation.isPending}
-                  />
-                </div>
-                
-                <Button 
-                  type="submit"
-                  className="w-full text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                  data-testid="button-submit-signup"
-                  disabled={signupMutation.isPending}
-                >
-                  {signupMutation.isPending ? (
-                    <>
-                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                      Üye Olunuyor...
-                    </>
-                  ) : (
-                    "Üye Ol"
-                  )}
-                </Button>
-              </form>
+              <p className="text-gray-300 text-center mb-8">
+                Hesap oluşturmak için Google, Apple, GitHub, X veya E-posta ile devam edin
+              </p>
               
-              <div className="mt-8 p-4 bg-accent-amber/10 rounded-lg border border-accent-amber/30">
-                <p className="text-accent-amber font-semibold text-center">
-                  🎉 Özel Lansman Fırsatı!
+              <Button 
+                onClick={() => window.location.href = "/api/login"}
+                className="w-full text-white bg-gradient-to-r from-accent-amber to-yellow-600 hover:from-yellow-600 hover:to-accent-amber transition-all py-6 text-lg font-semibold"
+                data-testid="button-signup-replit"
+              >
+                Üye Ol / Giriş Yap
+              </Button>
+              
+              <div className="mt-6 p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+                <p className="text-xs text-gray-400 text-center">
+                  Üye olarak{" "}
+                  <a href="/kullanim-kosullari" className="text-accent-amber hover:underline">
+                    Kullanım Koşulları
+                  </a>
+                  {" "}ve{" "}
+                  <a href="/gizlilik-politikasi" className="text-accent-amber hover:underline">
+                    Gizlilik Politikası
+                  </a>
+                  'nı kabul etmiş olursunuz.
                 </p>
-                <p className="text-gray-300 text-center mt-2">
-                  Üye olun, %10 indirim + 100 ETKİNİUM puan kazanın!
-                </p>
+              </div>
+              
+              <div className="mt-8 space-y-4">
+                <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>Ücretsiz hesap oluşturma</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>100 hoşgeldin puanı hediye</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>Özel kampanya ve fırsatlar</span>
+                </div>
               </div>
             </div>
           </div>

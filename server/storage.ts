@@ -1,11 +1,11 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, type AdvertisingApplication, type InsertAdvertisingApplication, users, emailSubscriptions, contactMessages, partnershipApplications, advertisingApplications } from "@shared/schema";
+import { type User, type UpsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, type AdvertisingApplication, type InsertAdvertisingApplication, users, emailSubscriptions, contactMessages, partnershipApplications, advertisingApplications } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
+  // Replit Auth user operations
   getUser(id: string): Promise<User | undefined>;
-  getUserByEmail(email: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  upsertUser(user: UpsertUser): Promise<User>;
   updateUserPoints(userId: string, points: number): Promise<User>;
   
   // Email subscription methods
@@ -32,15 +32,17 @@ export class DatabaseStorage implements IStorage {
     return user || undefined;
   }
 
-  async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    return user || undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async upsertUser(userData: UpsertUser): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(insertUser)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
       .returning();
     return user;
   }

@@ -29,34 +29,12 @@ export default function Header() {
   const { toast } = useToast();
 
   const { data: user } = useQuery<UserProfile>({
-    queryKey: ["/api/user"],
+    queryKey: ["/api/auth/user"],
     retry: false,
   });
 
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      const response = await apiRequest("POST", "/api/logout", {});
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Başarılı!",
-        description: data.message,
-      });
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      setLocation("/");
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Hata",
-        description: error.message || "Çıkış yapılırken bir hata oluştu.",
-        variant: "destructive",
-      });
-    }
-  });
-
   const handleLogout = () => {
-    logoutMutation.mutate();
+    window.location.href = "/api/logout";
   };
 
   const toggleMobileMenu = () => {

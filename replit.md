@@ -23,15 +23,19 @@ Preferred communication style: Simple, everyday language.
 - **Runtime**: Node.js with Express.js framework for RESTful API endpoints
 - **Language**: TypeScript for type safety across the entire codebase
 - **API Design**: RESTful architecture with structured error handling and request logging
-- **Data Storage**: In-memory storage implementation with interface for future database integration
-- **Session Management**: Express sessions with PostgreSQL session store configuration
+- **Authentication**: Replit Auth (OpenID Connect) supporting Google, Apple, GitHub, X, Email/Password
+- **Session Management**: PostgreSQL session store with 7-day cookie persistence, secure in production
 
 ### Database Schema
 - **ORM**: Drizzle ORM with PostgreSQL dialect for type-safe database operations
 - **Schema Definition**: Shared schema definitions between client and server
 - **Tables**:
-  - `users`: User authentication with username/password
+  - `sessions`: Replit Auth session storage (sid, sess JSONB, expire timestamp)
+  - `users`: User profiles from Replit Auth (id, email, firstName, lastName, profileImageUrl, points, timestamps)
   - `email_subscriptions`: Email subscription management with active status tracking
+  - `contact_messages`: Contact form submissions
+  - `partnership_applications`: Business partnership requests
+  - `advertising_applications`: Advertising inquiries and applications
 - **Validation**: Zod schemas for runtime type validation and error messages
 
 ### External Dependencies
@@ -44,6 +48,19 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
+- **Nov 09, 2025**: REPLIT AUTH MIGRATION & GOOGLE/APPLE LOGIN
+  - Migrated from custom email/password to Replit Auth for multi-provider authentication
+  - Now supports Google, Apple, GitHub, X, and Email/Password login through Replit OIDC
+  - Added sessions table for PostgreSQL session storage with 7-day persistence
+  - Updated users table schema: removed password/name, added firstName/lastName/profileImageUrl
+  - Created server/replitAuth.ts with full OpenID Connect integration
+  - Updated authentication endpoints: /api/login, /api/logout, /api/callback, /api/auth/user
+  - Simplified login/signup pages to redirect to Replit Auth UI
+  - Fixed secure cookie handling for development (HTTP) and production (HTTPS)
+  - Public /api/auth/user endpoint returns null when not authenticated (no 401 errors)
+  - Remember Me functionality built-in via 7-day session cookie maxAge
+  - Header navigation updated: query key changed from /api/user to /api/auth/user
+  - Created useAuth hook for consistent authentication state management
 - **Nov 09, 2025**: ADVERTISING SYSTEM & VERTICAL SLIDER IMPLEMENTATION
   - Converted homepage slider back to vertical (up-down) transitions with compact 220px height
   - Reduced logo and text sizes for better visual balance (w-16 h-16 mobile, w-20 h-20 desktop)
@@ -93,3 +110,4 @@ Preferred communication style: Simple, everyday language.
 - **Error Handling**: Centralized error handling with user-friendly Turkish language messages
 - **Performance**: Optimized bundle splitting and lazy loading capabilities through Vite
 - **SEO Strategy**: Comprehensive search engine optimization with Schema.org structured data, meta tags, and keyword-rich content for improved Google visibility and traffic growth
+- **Authentication Strategy**: Replit Auth for simplified multi-provider OAuth integration, automatic token refresh, and secure session management with PostgreSQL persistence

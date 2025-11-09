@@ -1,123 +1,32 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertAdvertisingApplicationSchema, insertUserSchema, loginSchema } from "@shared/schema";
+import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertAdvertisingApplicationSchema } from "@shared/schema";
 import { z } from "zod";
+import { setupAuth, isAuthenticated } from "./replitAuth";
 import "./types";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Signup endpoint
-  app.post("/api/signup", async (req, res) => {
-    try {
-      const validatedData = insertUserSchema.parse(req.body);
-      
-      // Check if email already exists
-      const existingUser = await storage.getUserByEmail(validatedData.email);
-      if (existingUser) {
-        return res.status(409).json({ 
-          message: "Bu e-posta adresi zaten kayıtlı",
-          alreadyExists: true 
-        });
-      }
+  // Setup Replit Auth middleware
+  await setupAuth(app);
 
-      // Create user (in production, hash the password!)
-      const user = await storage.createUser(validatedData);
-      
-      // Do not auto-login - user will login separately when login feature is enabled
-      
-      res.status(201).json({ 
-        message: "Başarıyla üye oldunuz!",
-        success: true
-      });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          message: error.errors[0].message,
-          field: error.errors[0].path[0]
-        });
-      }
-      
-      console.error("Signup error:", error);
-      res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
+  // Auth endpoint - Get current user (public, returns null if not authenticated)
+  app.get('/api/auth/user', async (req: any, res) => {
+    // Return null if not authenticated instead of 401
+    if (!req.isAuthenticated() || !req.user?.claims?.sub) {
+      return res.json(null);
     }
-  });
 
-  // Login endpoint
-  app.post("/api/login", async (req, res) => {
     try {
-      const validatedData = loginSchema.parse(req.body);
-      
-      // Find user by email
-      const user = await storage.getUserByEmail(validatedData.email);
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
       if (!user) {
-        return res.status(401).json({ 
-          message: "E-posta veya şifre hatalı"
-        });
+        return res.json(null);
       }
-
-      // Check password (in production, compare hashed password!)
-      if (user.password !== validatedData.password) {
-        return res.status(401).json({ 
-          message: "E-posta veya şifre hatalı"
-        });
-      }
-
-      // Set session
-      req.session.userId = user.id;
-      
-      res.json({ 
-        message: "Başarıyla giriş yaptınız!",
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          points: user.points,
-        }
-      });
+      res.json(user);
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          message: error.errors[0].message,
-          field: error.errors[0].path[0]
-        });
-      }
-      
-      console.error("Login error:", error);
-      res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
-    }
-  });
-
-  // Logout endpoint
-  app.post("/api/logout", (req, res) => {
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(500).json({ message: "Çıkış yapılırken bir hata oluştu" });
-      }
-      res.json({ message: "Başarıyla çıkış yaptınız" });
-    });
-  });
-
-  // Get current user endpoint
-  app.get("/api/user", async (req, res) => {
-    if (!req.session.userId) {
-      return res.status(401).json({ message: "Giriş yapmanız gerekiyor" });
-    }
-
-    try {
-      const user = await storage.getUser(req.session.userId);
-      if (!user) {
-        return res.status(404).json({ message: "Kullanıcı bulunamadı" });
-      }
-
-      res.json({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        points: user.points,
-      });
-    } catch (error) {
-      console.error("Get user error:", error);
-      res.status(500).json({ message: "Bir hata oluştu" });
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Kullanıcı bilgileri alınırken hata oluştu" });
     }
   });
 
