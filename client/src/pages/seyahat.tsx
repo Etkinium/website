@@ -77,7 +77,7 @@ const transportOptions = [
     id: "tren",
     icon: Train,
     title: "Demir Yolları",
-    tabLabel: "Trenler",
+    tabLabel: "Demir Yolları",
     gradient: "from-purple-600 to-pink-500",
     content: {
       title: "Hızlı Tren ve Banliyö Hatları",
