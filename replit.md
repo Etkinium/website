@@ -48,9 +48,20 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
+- **Nov 09, 2025**: CUSTOM EMAIL/PASSWORD AUTHENTICATION COMPLETED
+  - Full migration from Replit Auth to custom email/password system with bcrypt hashing
+  - Created login page: email, password, "beni hatırla" checkbox, Enter key support, session 7-day max age
+  - Created signup page: firstName, lastName, email, password with auto-login after registration
+  - Updated database schema: password (hashed with bcrypt), phone, smsNotifications, emailNotifications fields added
+  - Created profile page: displays points (read-only), email update form, phone number management
+  - Created settings page: SMS/email notification preferences (checkboxes), contact info (iletisim@etkinium.com)
+  - Header updated: User initials displayed (firstName[0] + lastName[0]) with dropdown menu
+  - Dropdown structure: Profilim → Ayarlar → Contact info → Çıkış Yap
+  - API endpoints: POST /api/register, POST /api/login, POST /api/logout, PATCH /api/user/profile
+  - Created useAuth hook for consistent authentication state management across application
+  - Removed "Reklam Alanı" badge from Konaklama/Seyahat sliders for cleaner professional appearance
 - **Nov 09, 2025**: HEADER OPTIMIZATION & BANNER CLEANUP
   - Reorganized header layout: Logo+name (left) → Search bar (center, w-96) → All nav buttons (right)
-  - Removed "Reklam Alanı" badge from Konaklama/Seyahat sliders for cleaner, professional appearance
   - Fixed duplicate X close button in advertising application dialog (reduced from 2 to 1)
   - Header now uses three-section layout: flex-shrink-0 (logo), flex-1 justify-center (search), flex-shrink-0 (buttons)
   - Wider search input (w-96) positioned centrally for better discoverability

@@ -82,11 +82,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Find user by email
       const user = await storage.getUserByEmail(validatedData.email);
       if (!user) {
+        console.log('[LOGIN] User not found:', validatedData.email);
         return res.status(401).json({ message: "E-posta veya şifre hatalı" });
       }
 
+      console.log('[LOGIN] Found user:', user.email, 'Comparing password...');
+      
       // Check password
       const isPasswordValid = await bcrypt.compare(validatedData.password, user.password);
+      console.log('[LOGIN] Password valid:', isPasswordValid);
+      
       if (!isPasswordValid) {
         return res.status(401).json({ message: "E-posta veya şifre hatalı" });
       }
