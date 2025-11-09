@@ -68,15 +68,15 @@ export default function Header() {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center flex-1 justify-end space-x-2">
             {/* ARAMA BUTONU */}
             <form onSubmit={handleSearch} className="relative flex items-center">
               <Input
                 type="text"
-                placeholder="Ara..."
+                placeholder="Keşfetmeye başla..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-56"
+                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-72"
                 data-testid="input-search"
               />
               <button

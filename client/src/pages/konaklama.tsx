@@ -275,8 +275,7 @@ export default function Konaklama() {
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
         {/* SLIDER - KAYAN ANİMASYON */}
-        <div className="relative overflow-hidden rounded-3xl mb-12 shadow-2xl h-64"
-             style={{ background: "radial-gradient(circle at top left, #3b0764, #111827)" }}>
+        <div className="relative overflow-hidden rounded-xl mb-12 h-64 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300">
           <div className="relative h-full">
             {slides.map((slide, index) => {
               const position = index - currentSlide;
@@ -305,12 +304,12 @@ export default function Konaklama() {
                       <img 
                         src={logoImage}
                         alt="ETKİNİUM Logo"
-                        className="w-32 h-32 md:w-40 md:h-40 object-contain mb-4"
+                        className="w-16 h-16 object-contain mb-4 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
                       />
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                         {slide.title}
                       </h2>
-                      <p className="text-base md:text-lg text-gray-200 mb-6 text-center max-w-xl">
+                      <p className="text-base md:text-lg text-white mb-6 text-center max-w-xl">
                         {slide.description}
                       </p>
                       <p className="text-sm md:text-base text-gray-300">
@@ -328,10 +327,10 @@ export default function Konaklama() {
                       <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
                         {slide.label}
                       </div>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-yellow-50">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                         {slide.title}
                       </h2>
-                      <p className="text-sm md:text-base text-gray-200 max-w-2xl">
+                      <p className="text-sm md:text-base text-white max-w-2xl">
                         {slide.description}
                       </p>
                     </>
