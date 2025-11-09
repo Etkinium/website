@@ -38,6 +38,15 @@ export const partnershipApplications = pgTable("partnership_applications", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const advertisingApplications = pgTable("advertising_applications", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  company: text("company").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   name: true,
   email: true,
@@ -85,6 +94,18 @@ export const insertPartnershipApplicationSchema = createInsertSchema(partnership
   message: z.string().min(1, "Mesaj gerekli"),
 });
 
+export const insertAdvertisingApplicationSchema = createInsertSchema(advertisingApplications).pick({
+  name: true,
+  email: true,
+  company: true,
+  message: true,
+}).extend({
+  name: z.string().min(1, "Ad gerekli"),
+  email: z.string().email("Lütfen geçerli bir e-posta adresi girin"),
+  company: z.string().min(1, "Şirket/Kurum gerekli"),
+  message: z.string().min(1, "Reklam detayları gerekli"),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type LoginCredentials = z.infer<typeof loginSchema>;
@@ -94,3 +115,5 @@ export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertPartnershipApplication = z.infer<typeof insertPartnershipApplicationSchema>;
 export type PartnershipApplication = typeof partnershipApplications.$inferSelect;
+export type InsertAdvertisingApplication = z.infer<typeof insertAdvertisingApplicationSchema>;
+export type AdvertisingApplication = typeof advertisingApplications.$inferSelect;

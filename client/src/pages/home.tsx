@@ -3,9 +3,10 @@ import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
 import EmailSubscription from "@/components/email-subscription";
 import Footer from "@/components/footer";
+import AdvertisingButton from "@/components/advertising-button";
 import logoImage from "@assets/logo-final.png";
 
-const horizontalSlides = [
+const verticalSlides = [
   {
     id: 1,
     logo: logoImage,
@@ -29,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % horizontalSlides.length);
+      setCurrentSlide((prev) => (prev + 1) % verticalSlides.length);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -41,52 +42,52 @@ export default function Home() {
       
       <HeroCarousel />
 
-      {/* HORIZONTAL SLIDER - Genişlemesine, Kompakt */}
+      {/* VERTICAL SLIDER - Yukarı-Aşağı */}
       <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-8 px-4 md:px-8 lg:px-16">
         <div className="max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-accent-amber/30 shadow-xl"
-               style={{ height: "140px" }}>
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/30 via-gray-900 to-black border border-accent-amber/30 shadow-xl"
+               style={{ height: "220px" }}>
             <div className="relative h-full">
-              {horizontalSlides.map((slide, index) => {
+              {verticalSlides.map((slide, index) => {
                 const position = index - currentSlide;
                 const isActive = index === currentSlide;
-                const isPrev = position === -1 || (currentSlide === 0 && index === horizontalSlides.length - 1);
-                const isNext = position === 1 || (currentSlide === horizontalSlides.length - 1 && index === 0);
+                const isPrev = position === -1 || (currentSlide === 0 && index === verticalSlides.length - 1);
+                const isNext = position === 1 || (currentSlide === verticalSlides.length - 1 && index === 0);
                 
                 return (
                   <div
                     key={slide.id}
                     className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                      isActive ? "translate-x-0 opacity-100 z-10" :
-                      isPrev ? "-translate-x-full opacity-0 z-0" :
-                      isNext ? "translate-x-full opacity-0 z-0" :
-                      "translate-x-full opacity-0 z-0"
+                      isActive ? "translate-y-0 opacity-100 z-10" :
+                      isPrev ? "translate-y-full opacity-0 z-0" :
+                      isNext ? "-translate-y-full opacity-0 z-0" :
+                      "-translate-y-full opacity-0 z-0"
                     }`}
-                    data-testid={`horizontal-slide-${index}`}
+                    data-testid={`vertical-slide-${index}`}
                   >
                     {slide.logo ? (
-                      <div className="flex items-center justify-center h-full gap-6 px-8">
+                      <div className="flex items-center justify-center h-full gap-4 px-6">
                         <img 
                           src={slide.logo}
                           alt="ETKİNİUM Logo"
-                          className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                          className="w-16 h-16 md:w-20 md:h-20 object-contain"
                         />
                         <div>
-                          <h2 className="text-3xl md:text-4xl font-bold text-accent-amber mb-1">
+                          <h2 className="text-2xl md:text-3xl font-bold text-accent-amber mb-1">
                             {slide.brandName}
                           </h2>
-                          <p className="text-lg md:text-xl text-white font-semibold">
+                          <p className="text-base md:text-lg text-white font-semibold">
                             {slide.tagline}
                           </p>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center h-full px-8">
+                      <div className="flex items-center justify-center h-full px-6">
                         <div className="text-center">
-                          <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-2">
+                          <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-2">
                             {slide.title}
                           </h3>
-                          <p className="text-lg md:text-xl text-white font-semibold">
+                          <p className="text-base md:text-lg text-white font-semibold">
                             {slide.description}
                           </p>
                         </div>
@@ -97,36 +98,26 @@ export default function Home() {
               })}
             </div>
 
-            {/* DOTS - Horizontal Slider */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-              {horizontalSlides.map((_, index) => (
+            {/* DOTS - Vertical Slider */}
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
+              {verticalSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`rounded-full transition-all duration-300 ${
                     index === currentSlide
-                      ? "w-8 h-3 bg-accent-amber"
-                      : "w-3 h-3 bg-white/30 hover:bg-white/50"
+                      ? "h-8 w-3 bg-accent-amber"
+                      : "h-3 w-3 bg-white/30 hover:bg-white/50"
                   }`}
-                  data-testid={`horizontal-dot-${index}`}
+                  data-testid={`vertical-dot-${index}`}
                   aria-label={`Slide ${index + 1}`}
                 />
               ))}
             </div>
           </div>
 
-          {/* REKLAM VERMEK İÇİN - Bağımsız */}
-          <div className="text-center mt-6">
-            <p className="text-sm md:text-base text-gray-400">
-              Reklam vermek için:{" "}
-              <a 
-                href="mailto:iletisim@etkinium.com"
-                className="text-accent-amber hover:underline font-semibold"
-              >
-                iletisim@etkinium.com
-              </a>
-            </p>
-          </div>
+          {/* REKLAM VERMEK İÇİN BUTON */}
+          <AdvertisingButton />
         </div>
       </section>
       

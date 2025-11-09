@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, users, emailSubscriptions, contactMessages, partnershipApplications } from "@shared/schema";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type ContactMessage, type InsertContactMessage, type PartnershipApplication, type InsertPartnershipApplication, type AdvertisingApplication, type InsertAdvertisingApplication, users, emailSubscriptions, contactMessages, partnershipApplications, advertisingApplications } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -20,6 +20,10 @@ export interface IStorage {
   // Partnership application methods
   createPartnershipApplication(application: InsertPartnershipApplication): Promise<PartnershipApplication>;
   getAllPartnershipApplications(): Promise<PartnershipApplication[]>;
+  
+  // Advertising application methods
+  createAdvertisingApplication(application: InsertAdvertisingApplication): Promise<AdvertisingApplication>;
+  getAllAdvertisingApplications(): Promise<AdvertisingApplication[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -89,6 +93,18 @@ export class DatabaseStorage implements IStorage {
 
   async getAllPartnershipApplications(): Promise<PartnershipApplication[]> {
     return await db.select().from(partnershipApplications);
+  }
+
+  async createAdvertisingApplication(insertApplication: InsertAdvertisingApplication): Promise<AdvertisingApplication> {
+    const [application] = await db
+      .insert(advertisingApplications)
+      .values(insertApplication)
+      .returning();
+    return application;
+  }
+
+  async getAllAdvertisingApplications(): Promise<AdvertisingApplication[]> {
+    return await db.select().from(advertisingApplications);
   }
 }
 

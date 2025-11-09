@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertUserSchema, loginSchema } from "@shared/schema";
+import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartnershipApplicationSchema, insertAdvertisingApplicationSchema, insertUserSchema, loginSchema } from "@shared/schema";
 import { z } from "zod";
 import "./types";
 
@@ -230,6 +230,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       console.error("Partnership application error:", error);
+      res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
+    }
+  });
+
+  // Advertising application endpoint
+  app.post("/api/advertising", async (req, res) => {
+    try {
+      const validatedData = insertAdvertisingApplicationSchema.parse(req.body);
+      
+      const application = await storage.createAdvertisingApplication(validatedData);
+      
+      res.status(201).json({ 
+        message: "Reklam başvurunuz alındı! En kısa sürede sizinle iletişime geçeceğiz.",
+        application: {
+          id: application.id,
+          createdAt: application.createdAt
+        }
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: error.errors[0].message,
+          field: error.errors[0].path[0]
+        });
+      }
+      
+      console.error("Advertising application error:", error);
       res.status(500).json({ message: "Bir hata oluştu, lütfen tekrar deneyin" });
     }
   });
