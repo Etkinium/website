@@ -15,17 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-
-interface UserProfile {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  points: number;
-  phone?: string;
-  smsNotifications: boolean;
-  emailNotifications: boolean;
-}
+import type { User as UserProfile } from "@shared/schema";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,16 +23,15 @@ export default function Header() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
 
-  const { data: user } = useQuery<UserProfile>({
+  const { data: user } = useQuery<UserProfile | null>({
     queryKey: ["/api/user"],
     retry: false,
   });
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      return await apiRequest("/api/logout", {
-        method: "POST",
-      });
+      const res = await apiRequest("POST", "/api/logout");
+      return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
