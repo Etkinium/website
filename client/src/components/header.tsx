@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User, LogOut, Ticket, Search } from "lucide-react";
+import { User, LogOut, Ticket, Search, Settings, Mail } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -17,9 +18,13 @@ import { useToast } from "@/hooks/use-toast";
 
 interface UserProfile {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   points: number;
+  phone?: string;
+  smsNotifications: boolean;
+  emailNotifications: boolean;
 }
 
 export default function Header() {
@@ -29,12 +34,33 @@ export default function Header() {
   const { toast } = useToast();
 
   const { data: user } = useQuery<UserProfile>({
-    queryKey: ["/api/auth/user"],
+    queryKey: ["/api/user"],
     retry: false,
   });
 
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest("/api/logout", {
+        method: "POST",
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      setLocation("/");
+      toast({
+        title: "Çıkış yapıldı",
+        description: "Başarıyla çıkış yaptınız",
+      });
+    },
+  });
+
   const handleLogout = () => {
-    window.location.href = "/api/logout";
+    logoutMutation.mutate();
+  };
+
+  const getUserInitials = () => {
+    if (!user) return "";
+    return (user.firstName[0] + user.lastName[0]).toUpperCase();
   };
 
   const toggleMobileMenu = () => {
@@ -163,28 +189,47 @@ export default function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
                     data-testid="button-profile"
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">👤</span>
-                      <div className="flex flex-col items-start">
-                        <span className="text-xs leading-none">{user.name}</span>
-                        <span className="text-accent-amber text-xs font-bold leading-none" data-testid="text-header-points">
-                          {user.points} puan
-                        </span>
-                      </div>
+                    <div className="w-8 h-8 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold">
+                      {getUserInitials()}
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-700">
-                  <DropdownMenuItem 
-                    className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800"
-                    data-testid="menu-coupons"
-                  >
-                    <Ticket className="mr-2 h-4 w-4" />
-                    <span>Kuponlarım</span>
+                <DropdownMenuContent align="end" className="w-64 bg-gray-900 border-gray-700">
+                  <DropdownMenuLabel className="text-white">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
+                      <p className="text-xs text-gray-400">{user.email}</p>
+                      <p className="text-xs text-accent-amber font-bold">{user.points} puan</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                    <Link href="/profile" className="flex items-center w-full" data-testid="menu-profile">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profilim</span>
+                    </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                    <Link href="/settings" className="flex items-center w-full" data-testid="menu-settings">
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Ayarlar</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <div className="px-2 py-2 text-xs text-gray-400">
+                    <div className="flex items-start gap-2">
+                      <Mail className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-white mb-1">Bizimle İletişime Geç</p>
+                        <a href="mailto:iletisim@etkinium.com" className="text-accent-amber hover:underline">
+                          iletisim@etkinium.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                   <DropdownMenuSeparator className="bg-gray-700" />
                   <DropdownMenuItem 
                     onClick={handleLogout}
@@ -194,10 +239,6 @@ export default function Header() {
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Çıkış Yap</span>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-gray-700" />
-                  <div className="px-2 py-1.5 text-xs text-gray-400 text-center" data-testid="text-details-soon">
-                    Detaylar yakında duyurulacak
-                  </div>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
@@ -299,28 +340,49 @@ export default function Header() {
               {user && (
                 <>
                   <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xl">👤</span>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold text-lg">
+                        {getUserInitials()}
+                      </div>
                       <div className="flex flex-col items-start">
-                        <span className="text-sm text-white">{user.name}</span>
+                        <span className="text-sm text-white font-medium">{user.firstName} {user.lastName}</span>
                         <span className="text-accent-amber text-xs font-bold" data-testid="text-mobile-points">
                           {user.points} puan
                         </span>
                       </div>
                     </div>
                     <div className="space-y-2">
+                      <Link href="/profile">
+                        <Button 
+                          variant="ghost"
+                          className="w-full justify-start text-white hover:bg-gray-800"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          data-testid="button-mobile-profile"
+                        >
+                          <User className="mr-2 h-4 w-4" />
+                          Profilim
+                        </Button>
+                      </Link>
+                      <Link href="/settings">
+                        <Button 
+                          variant="ghost"
+                          className="w-full justify-start text-white hover:bg-gray-800"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          data-testid="button-mobile-settings"
+                        >
+                          <Settings className="mr-2 h-4 w-4" />
+                          Ayarlar
+                        </Button>
+                      </Link>
+                      <div className="text-xs text-gray-400 py-2 border-t border-gray-700">
+                        <p className="font-medium text-white mb-1">Bizimle İletişime Geç</p>
+                        <a href="mailto:iletisim@etkinium.com" className="text-accent-amber hover:underline">
+                          iletisim@etkinium.com
+                        </a>
+                      </div>
                       <Button 
                         variant="ghost"
-                        className="w-full justify-start text-white hover:bg-gray-800"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        data-testid="button-mobile-coupons"
-                      >
-                        <Ticket className="mr-2 h-4 w-4" />
-                        Kuponlarım
-                      </Button>
-                      <Button 
-                        variant="ghost"
-                        className="w-full justify-start text-red-400 hover:bg-gray-800 hover:text-red-300"
+                        className="w-full justify-start text-red-400 hover:bg-gray-800 hover:text-red-300 border-t border-gray-700 rounded-none pt-4"
                         onClick={() => {
                           setIsMobileMenuOpen(false);
                           handleLogout();
@@ -330,9 +392,6 @@ export default function Header() {
                         <LogOut className="mr-2 h-4 w-4" />
                         Çıkış Yap
                       </Button>
-                      <div className="text-xs text-gray-400 text-center pt-2 border-t border-gray-700" data-testid="text-mobile-details-soon">
-                        Detaylar yakında duyurulacak
-                      </div>
                     </div>
                   </div>
                 </>

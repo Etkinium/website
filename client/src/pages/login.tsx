@@ -1,19 +1,74 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { z } from "zod";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+
+const loginSchema = z.object({
+  email: z.string().email("Lütfen geçerli bir e-posta adresi girin"),
+  password: z.string().min(1, "Şifre gerekli"),
+  rememberMe: z.boolean().optional(),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const [, setLocation] = useLocation();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
+  const { toast } = useToast();
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
+    if (!isLoading && user) {
       setLocation("/");
     }
-  }, [isAuthenticated, isLoading, setLocation]);
+  }, [user, isLoading, setLocation]);
+
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: async (data: LoginFormData) => {
+      return await apiRequest("/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      toast({
+        title: "Başarılı!",
+        description: "Giriş yapıldı",
+      });
+      setLocation("/");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Hata",
+        description: error.message || "Giriş yapılırken bir hata oluştu",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    loginMutation.mutate(data);
+  };
 
   if (isLoading) {
     return (
@@ -40,17 +95,91 @@ export default function Login() {
               </h1>
               
               <p className="text-gray-300 text-center mb-8">
-                Google, Apple, GitHub, X veya E-posta ile giriş yapabilirsiniz
+                Hesabınıza giriş yapın
               </p>
               
-              <Button 
-                onClick={() => window.location.href = "/api/login"}
-                className="w-full text-white bg-gradient-to-r from-accent-amber to-yellow-600 hover:from-yellow-600 hover:to-accent-amber transition-all py-6 text-lg font-semibold"
-                data-testid="button-login-replit"
-              >
-                Giriş Yap / Üye Ol
-              </Button>
-              
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Mail Adresi</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="email"
+                            placeholder="ornek@email.com"
+                            className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
+                            data-testid="input-email"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Şifre</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="password"
+                            placeholder="••••••••"
+                            className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
+                            data-testid="input-password"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="rememberMe"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            className="border-gray-700 data-[state=checked]:bg-accent-amber data-[state=checked]:border-accent-amber"
+                            data-testid="checkbox-remember"
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm text-gray-300 font-normal cursor-pointer">
+                          Beni hatırla
+                        </FormLabel>
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button
+                    type="submit"
+                    disabled={loginMutation.isPending}
+                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all py-6 text-lg font-semibold"
+                    data-testid="button-login"
+                  >
+                    {loginMutation.isPending ? "Giriş yapılıyor..." : "Giriş Yap"}
+                  </Button>
+                </form>
+              </Form>
+
+              <div className="mt-6 text-center">
+                <p className="text-gray-400">
+                  Hesabınız yok mu?{" "}
+                  <a href="/signup" className="text-accent-amber hover:underline">
+                    Üye Ol
+                  </a>
+                </p>
+              </div>
+
               <div className="mt-6 p-4 bg-gray-800/50 rounded-lg border border-gray-700">
                 <p className="text-xs text-gray-400 text-center">
                   Giriş yaparak{" "}
@@ -63,27 +192,6 @@ export default function Login() {
                   </a>
                   'nı kabul etmiş olursunuz.
                 </p>
-              </div>
-              
-              <div className="mt-8 space-y-4">
-                <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Güvenli ve hızlı giriş</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Birden fazla giriş seçeneği</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <svg className="w-5 h-5 text-accent-amber" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>7 gün otomatik oturum (Remember Me)</span>
-                </div>
               </div>
             </div>
           </div>
