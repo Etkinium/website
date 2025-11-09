@@ -44,8 +44,14 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
+- **Nov 09, 2025**: HOMEPAGE OPTIMIZATION & ADVERTISING ENHANCEMENTS
+  - Updated Seyahat page: "Trenler" tab renamed to "Demir Yolları"
+  - Added advertising slides to Konaklama and Seyahat pages with centered ETKİNİUM logo, brand name, and contact info (iletisim@etkinium.com)
+  - Optimized homepage hero carousel: reduced height from h-screen to h-[75vh] and adjusted position to center 30% for better visual balance
+  - Added homepage vertical slider: 8-second auto-rotating promotional section featuring ETKİNİUM branding, rotating taglines ("Tek Platform, Sonsuz Sanat", etc.), and advertising contact information
+  - All features tested with E2E playwright tests and architect-approved
 - **Nov 09, 2025**: UX IMPROVEMENTS & CONTENT ENHANCEMENT
-  - Converted Seyahat page to Apple-style tab system with interactive content switching (Uçak, Otobüs, Deniz, Tren)
+  - Converted Seyahat page to Apple-style tab system with interactive content switching (Uçak, Otobüs, Deniz, Demir Yolları)
   - Updated Footer with "Bizi Takip Edin" social media section (X and Instagram links)
   - Enhanced legal pages (KVKK, Gizlilik Politikası, Kullanım Koşulları) to match detailed Çerez Politikası format
   - Updated SSS content: revised ETKİNİUM definition to emphasize AI-powered ecosystem, added blockchain/dynamic QR security question
