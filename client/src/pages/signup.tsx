@@ -109,7 +109,7 @@ export default function Signup() {
                           <Input
                             {...field}
                             type="text"
-                            placeholder="Ahmet"
+                            placeholder="Lütfen isim giriniz"
                             className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
                             data-testid="input-firstName"
                           />
@@ -129,7 +129,7 @@ export default function Signup() {
                           <Input
                             {...field}
                             type="text"
-                            placeholder="Yılmaz"
+                            placeholder="Lütfen soyisim giriniz"
                             className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
                             data-testid="input-lastName"
                           />
@@ -149,7 +149,7 @@ export default function Signup() {
                           <Input
                             {...field}
                             type="email"
-                            placeholder="ornek@email.com"
+                            placeholder="Lütfen mail giriniz"
                             className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
                             data-testid="input-email"
                           />
@@ -169,7 +169,7 @@ export default function Signup() {
                           <Input
                             {...field}
                             type="password"
-                            placeholder="En az 6 karakter"
+                            placeholder="Lütfen şifre oluşturunuz"
                             className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
                             data-testid="input-password"
                           />
