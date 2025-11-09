@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Plane, Bus, Ship, Train } from "lucide-react";
+import { Plane, Bus, Ship, Train, Calendar, MapPin, Users } from "lucide-react";
 
 const slides = [
   {
@@ -26,38 +26,75 @@ const transportOptions = [
     id: "ucak",
     icon: Plane,
     title: "Uçak Bileti",
-    description: "İç ve dış hat uçuşlar",
-    badge: "Yakında",
-    gradient: "from-blue-600 to-cyan-500"
+    tabLabel: "Uçaklar",
+    gradient: "from-blue-600 to-cyan-500",
+    content: {
+      title: "İç ve Dış Hat Uçak Biletleri",
+      description: "Türkiye'nin dört bir yanına ve yurt dışına uygun fiyatlı uçak biletleri. Anında onay, dijital bilet.",
+      features: [
+        { icon: Calendar, text: "Esnek tarih seçenekleri" },
+        { icon: MapPin, text: "100+ destinasyon" },
+        { icon: Users, text: "Grup rezervasyonu imkanı" }
+      ],
+      comingSoon: "Uçak bileti satışlarımız çok yakında başlıyor!"
+    }
   },
   {
     id: "otobus",
     icon: Bus,
     title: "Otobüs Bileti",
-    description: "Şehirlerarası konforlu yolculuk",
-    badge: "Yakında",
-    gradient: "from-green-600 to-emerald-500"
+    tabLabel: "Otobüs",
+    gradient: "from-green-600 to-emerald-500",
+    content: {
+      title: "Şehirlerarası Otobüs Seferleri",
+      description: "Konforlu ve güvenli otobüs yolculuğu için en uygun biletler. Tüm büyük firmalarla çalışıyoruz.",
+      features: [
+        { icon: Calendar, text: "7/24 sefer bulma" },
+        { icon: MapPin, text: "Tüm şehirlere ulaşım" },
+        { icon: Users, text: "Koltuk seçimi" }
+      ],
+      comingSoon: "Otobüs bileti rezervasyonları yakında aktif olacak!"
+    }
   },
   {
     id: "deniz",
     icon: Ship,
     title: "Deniz Yolları",
-    description: "Feribot ve gemi seferleri",
-    badge: "Yakında",
-    gradient: "from-indigo-600 to-blue-500"
+    tabLabel: "Deniz Yolları",
+    gradient: "from-indigo-600 to-blue-500",
+    content: {
+      title: "Feribot ve Gemi Seferleri",
+      description: "Adalara ve kıyı şehirlerine deniz yoluyla seyahat edin. Arabalı ve yolcu biletleri.",
+      features: [
+        { icon: Calendar, text: "Sefer programları" },
+        { icon: MapPin, text: "Ada ve sahil rotaları" },
+        { icon: Users, text: "Araç taşıma seçeneği" }
+      ],
+      comingSoon: "Deniz yolu biletleri çok yakında satışta!"
+    }
   },
   {
     id: "tren",
     icon: Train,
     title: "Demir Yolları",
-    description: "Hızlı tren ve banliyö hatları",
-    badge: "Yakında",
-    gradient: "from-purple-600 to-pink-500"
+    tabLabel: "Trenler",
+    gradient: "from-purple-600 to-pink-500",
+    content: {
+      title: "Hızlı Tren ve Banliyö Hatları",
+      description: "TCDD hızlı tren ve banliyö hatlarında konforlu yolculuk. Ekonomik ve çevre dostu ulaşım.",
+      features: [
+        { icon: Calendar, text: "Dakik hareket saatleri" },
+        { icon: MapPin, text: "Merkezi istasyonlar" },
+        { icon: Users, text: "Aile biletleri" }
+      ],
+      comingSoon: "Tren biletleri yakında ETKİNİUM'da!"
+    }
   }
 ];
 
 export default function Seyahat() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeTab, setActiveTab] = useState("ucak");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,6 +103,8 @@ export default function Seyahat() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const activeOption = transportOptions.find(opt => opt.id === activeTab);
 
   return (
     <div className="min-h-screen bg-spotify-black text-white">
@@ -126,7 +165,7 @@ export default function Seyahat() {
         </div>
 
         {/* BAŞLIK */}
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-accent-amber">Seyahat</span> Seçenekleri
           </h1>
@@ -135,46 +174,81 @@ export default function Seyahat() {
           </p>
         </div>
 
-        {/* ULAŞIM SEÇENEKLERİ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {transportOptions.map((option) => (
-            <div
-              key={option.id}
-              className="group relative bg-gray-900/50 rounded-3xl border border-gray-800 overflow-hidden hover:border-accent-amber/50 transition-all duration-300 cursor-pointer hover:scale-105"
-              data-testid={`transport-${option.id}`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${option.gradient} opacity-0 group-hover:opacity-10 transition-opacity`} />
+        {/* APPLE TARZI TAB SİSTEMİ */}
+        <div className="max-w-6xl mx-auto">
+          {/* TAB BUTTONS */}
+          <div className="flex justify-center mb-8 gap-3 flex-wrap">
+            {transportOptions.map((option) => {
+              const Icon = option.icon;
+              const isActive = activeTab === option.id;
               
-              <div className="relative p-8 flex flex-col items-center text-center">
-                {/* ICON */}
-                <div className={`mb-6 p-6 rounded-2xl bg-gradient-to-br ${option.gradient} shadow-xl`}>
-                  <option.icon className="w-12 h-12 text-white" />
+              return (
+                <button
+                  key={option.id}
+                  onClick={() => setActiveTab(option.id)}
+                  className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                    isActive 
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/50" 
+                      : "bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-white"
+                  }`}
+                  data-testid={`tab-${option.id}`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{option.tabLabel}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* TAB CONTENT */}
+          {activeOption && (
+            <div 
+              className="bg-gradient-to-br from-gray-900/80 to-gray-900/40 rounded-3xl p-8 md:p-12 border border-gray-800 transition-all duration-500 ease-in-out"
+              data-testid={`content-${activeOption.id}`}
+            >
+              {/* ICON & TITLE */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-4 rounded-2xl bg-gradient-to-br ${activeOption.gradient} shadow-xl`}>
+                  <activeOption.icon className="w-10 h-10 text-white" />
                 </div>
-
-                {/* BADGE */}
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold">
-                  {option.badge}
+                <div>
+                  <h2 className="text-3xl font-bold text-white mb-1">{activeOption.content.title}</h2>
+                  <div className="px-3 py-1 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold inline-block">
+                    Yakında
+                  </div>
                 </div>
-
-                {/* TITLE */}
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent-amber transition-colors">
-                  {option.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-                <p className="text-sm text-gray-400">
-                  {option.description}
-                </p>
               </div>
 
-              {/* HOVER BORDER */}
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent-amber/30 rounded-3xl transition-all pointer-events-none" />
+              {/* DESCRIPTION */}
+              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                {activeOption.content.description}
+              </p>
+
+              {/* FEATURES */}
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
+                {activeOption.content.features.map((feature, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-center gap-3 bg-gray-800/50 rounded-xl p-4 border border-gray-700"
+                  >
+                    <feature.icon className="w-5 h-5 text-accent-amber" />
+                    <span className="text-white">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* COMING SOON MESSAGE */}
+              <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-2xl p-6 border border-purple-700/30 text-center">
+                <p className="text-purple-200 font-semibold text-lg">
+                  {activeOption.content.comingSoon}
+                </p>
+              </div>
             </div>
-          ))}
+          )}
         </div>
 
         {/* BILGILENDIRME */}
-        <div className="bg-gradient-to-br from-purple-900/30 to-gray-900/30 rounded-3xl p-8 md:p-12 border border-gray-800 text-center">
+        <div className="bg-gradient-to-br from-purple-900/30 to-gray-900/30 rounded-3xl p-8 md:p-12 border border-gray-800 text-center mt-12">
           <h2 className="text-3xl font-bold text-white mb-4">
             Seyahat Servisleri Çok Yakında!
           </h2>
@@ -188,12 +262,14 @@ export default function Seyahat() {
             <a
               href="mailto:iletisim@etkinium.com"
               className="px-8 py-3 bg-accent-amber text-spotify-black font-semibold rounded-xl hover:bg-accent-amber/90 transition-all"
+              data-testid="button-contact-email"
             >
               Bilgi Almak İstiyorum
             </a>
             <a
               href="/"
               className="px-8 py-3 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-700 transition-all"
+              data-testid="button-home"
             >
               Ana Sayfaya Dön
             </a>

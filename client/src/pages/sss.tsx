@@ -9,11 +9,7 @@ const faqs = [
     questions: [
       {
         q: "ETKİNİUM nedir?",
-        a: "ETKİNİUM, Türkiye'nin yeni nesil dijital biletleme ve etkinlik platformudur. Konser, tiyatro, festival biletleri ile otel rezervasyonlarını tek platformda sunuyoruz."
-      },
-      {
-        q: "Üyelik ücretsiz mi?",
-        a: "Evet, ETKİNİUM üyeliği tamamen ücretsizdir. Üye olarak puan kazanabilir ve özel fırsatlardan yararlanabilirsiniz."
+        a: "ETKİNİUM, etkinlik, seyahat ve konaklamayı tek çatı altında birleştiren Türkiye'nin ilk yapay zeka destekli dijital biletleme ekosistemidir."
       },
       {
         q: "ETKİNİUM Puan sistemi nasıl çalışır?",
@@ -30,15 +26,11 @@ const faqs = [
       },
       {
         q: "Biletimi iptal edebilir miyim?",
-        a: "İptal koşulları etkinlik organizatörüne göre değişir. Bilet detay sayfasında iptal koşullarını görebilirsiniz. Genel olarak etkinlikten 48 saat öncesine kadar iptal mümkündür."
+        a: "Bilet iptal seçeneklerinde esneklikler mevcut olup, organizatöre göre değişkenlik göstermektedir. İptal şartlarını satın alma öncesi mutlaka kontrol ediniz."
       },
       {
-        q: "Biletim kaybolursa ne yapmalıyım?",
-        a: "Tüm biletleriniz dijital olarak hesabınızda saklanır. İstediğiniz zaman 'Profilim' sayfasından biletlerinize ulaşabilirsiniz."
-      },
-      {
-        q: "QR kodlu biletler nasıl çalışır?",
-        a: "Biletinizde bulunan QR kodu etkinlik girişinde göstermeniz yeterlidir. Mobil cihazınızdan veya çıktı alarak kullanabilirsiniz."
+        q: "Biletim güvende mi?",
+        a: "Evet, biletleriniz blockchain tabanlı teknoloji ile güvence altındadır. Her bilet, 10 saniyede bir değişen dinamik QR kod sistemi ile korunur ve sahtecilik riskini minimuma indirir."
       }
     ]
   },
@@ -47,7 +39,7 @@ const faqs = [
     questions: [
       {
         q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?",
-        a: "Kredi kartı, banka kartı, havale/EFT ve ETKİNİUM Puan ile ödeme yapabilirsiniz. Tüm ödemeler SSL sertifikası ile güvence altındadır."
+        a: "Kredi kartı, banka kartı ve ETKİNİUM Puan ile ödeme gerçekleştirebilirsiniz. Diğer ödeme özellikleri lansman sonrası açıklanacaktır."
       },
       {
         q: "Ödeme bilgilerim güvende mi?",

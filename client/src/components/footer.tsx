@@ -1,6 +1,7 @@
-import { Mail, Users, Star, Shield, Headphones } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Link } from "wouter";
 import logoImage from "@assets/logo-final.png";
+import { SiX, SiInstagram } from "react-icons/si";
 
 export default function Footer() {
   return (
@@ -115,32 +116,38 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Hızlı Linkler */}
+          {/* Bizi Takip Edin */}
           <div className="text-center lg:text-left">
             <h3 className="text-xl font-bold text-white mb-6 relative">
               <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
-                Hızlı Linkler
+                Bizi Takip Edin
               </span>
               <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link 
-                  href="/about" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                <a 
+                  href="https://x.com/etkinium" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-3 group"
+                  data-testid="link-x"
                 >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Hakkımızda</span>
-                </Link>
+                  <SiX className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span>Etkinium</span>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="/konaklama" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
+                <a 
+                  href="https://instagram.com/etkinium" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-3 group"
+                  data-testid="link-instagram"
                 >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Konaklama</span>
-                </Link>
+                  <SiInstagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span>Etkinium</span>
+                </a>
               </li>
             </ul>
           </div>
