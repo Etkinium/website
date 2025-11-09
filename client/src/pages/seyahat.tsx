@@ -2,8 +2,16 @@ import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Plane, Bus, Ship, Train, Calendar, MapPin, Users } from "lucide-react";
+import logoImage from "@assets/logo-final.png";
 
 const slides = [
+  {
+    label: "Reklam Alanı",
+    title: "ETKİNİUM",
+    description: "Türkiye'nin Yeni Nesil Dijital Biletleme Ekosistemi",
+    contactEmail: "iletisim@etkinium.com",
+    isAdvertising: true
+  },
   {
     label: "Seyahat Fırsatları",
     title: "Türkiye'nin her yerine uygun fiyatlarla seyahat edin",
@@ -132,15 +140,45 @@ export default function Seyahat() {
                   }`}
                   data-testid={`slide-${index}`}
                 >
-                  <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
-                    {slide.label}
-                  </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-yellow-50">
-                    {slide.title}
-                  </h2>
-                  <p className="text-sm md:text-base text-gray-200 max-w-2xl">
-                    {slide.description}
-                  </p>
+                  {slide.isAdvertising ? (
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-6">
+                        {slide.label}
+                      </div>
+                      <img 
+                        src={logoImage}
+                        alt="ETKİNİUM Logo"
+                        className="w-32 h-32 md:w-40 md:h-40 object-contain mb-4"
+                      />
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber">
+                        {slide.title}
+                      </h2>
+                      <p className="text-base md:text-lg text-gray-200 mb-6 text-center max-w-xl">
+                        {slide.description}
+                      </p>
+                      <p className="text-sm md:text-base text-gray-300">
+                        Reklam vermek için:{" "}
+                        <a 
+                          href={`mailto:${slide.contactEmail}`}
+                          className="text-accent-amber hover:underline font-semibold"
+                        >
+                          {slide.contactEmail}
+                        </a>
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
+                        {slide.label}
+                      </div>
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-yellow-50">
+                        {slide.title}
+                      </h2>
+                      <p className="text-sm md:text-base text-gray-200 max-w-2xl">
+                        {slide.description}
+                      </p>
+                    </>
+                  )}
                 </div>
               );
             })}
