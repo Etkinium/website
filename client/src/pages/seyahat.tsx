@@ -132,7 +132,9 @@ export default function Seyahat() {
               return (
                 <div
                   key={index}
-                  className={`absolute inset-0 p-8 md:p-10 transition-all duration-700 ease-in-out ${
+                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                    slide.isAdvertising ? "" : "p-8 md:p-10"
+                  } ${
                     isActive ? "translate-x-0 opacity-100 z-10" :
                     isPrev ? "-translate-x-full opacity-0 z-0" :
                     isNext ? "translate-x-full opacity-0 z-0" :
@@ -141,7 +143,7 @@ export default function Seyahat() {
                   data-testid={`slide-${index}`}
                 >
                   {slide.isAdvertising ? (
-                    <div className="flex flex-col items-center justify-center h-full">
+                    <div className="flex flex-col items-center justify-center h-full p-4">
                       <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-6">
                         {slide.label}
                       </div>
