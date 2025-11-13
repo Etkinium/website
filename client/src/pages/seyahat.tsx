@@ -16,17 +16,12 @@ const slides = [
   {
     label: "Seyahat Fırsatları",
     title: "Türkiye'nin her yerine uygun fiyatlarla seyahat edin",
-    description: "Uçak, otobüs, deniz ve demiryolu biletlerini tek platformdan alın. ETKİNİUM Puan kazanın!"
+    description: "Uçak, otobüs, deniz ve demiryolu biletlerini tek platformdan alın."
   },
   {
     label: "Hızlı ve Güvenli",
     title: "Dijital bilet, anında onay",
     description: "Biletiniz QR kodlu olarak e-postanıza gelir, kuyruklarda beklemeye son!"
-  },
-  {
-    label: "Puan Kazan",
-    title: "Her seyahatte ETKİNİUM Puan",
-    description: "Kazandığınız puanları sonraki seyahatlerinizde veya etkinliklerde kullanın."
   }
 ];
 

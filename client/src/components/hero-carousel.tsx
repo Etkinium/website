@@ -66,9 +66,6 @@ export default function HeroCarousel() {
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center space-y-6 px-4 max-w-4xl animate-slide-in">
-                <div className="bg-accent-amber text-black px-6 py-2 rounded-full font-bold text-sm md:text-base mx-auto inline-block mb-4 animate-pulse">
-                  🎉 Lansman Öncesi Özel: %10 İndirim + 100 ETKİNİUM Puan! 🎉
-                </div>
                 <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
                   {slide.title}
                 </h1>

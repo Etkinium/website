@@ -13,7 +13,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import { Award } from "lucide-react";
 
 const profileUpdateSchema = z.object({
   email: z.string().email("Lütfen geçerli bir e-posta adresi girin"),
@@ -104,30 +103,7 @@ export default function Profile() {
             <span className="text-white">Profilim</span>
           </h1>
 
-          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
-            <Card className="bg-gray-900/50 border-gray-800">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Award className="h-5 w-5 text-accent-amber" />
-                  Puanlarım
-                </CardTitle>
-                <CardDescription className="text-gray-400">
-                  Her işlemde puan kazanın
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl sm:text-5xl font-bold text-accent-amber" data-testid="text-points">
-                    {user.points}
-                  </span>
-                  <span className="text-lg sm:text-xl text-gray-400">puan</span>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4">
-                  Puanlarınızı bilet alımlarında kullanabilirsiniz
-                </p>
-              </CardContent>
-            </Card>
-
+          <div className="grid gap-4 sm:gap-6">
             <Card className="bg-gray-900/50 border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">Hesap Bilgileri</CardTitle>

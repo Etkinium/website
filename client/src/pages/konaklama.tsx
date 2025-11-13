@@ -24,13 +24,8 @@ const slides = [
   },
   {
     label: "Etkinium Partner",
-    title: "Seçili otellerde lansmana özel %10 indirim",
+    title: "Seçili otellerde özel fiyatlar",
     description: "Etkinium üzerinden rezervasyon yapan kullanıcılara özel fiyat avantajı."
-  },
-  {
-    label: "Puan Sistemi",
-    title: "Her rezervasyonda Etkinium Puan kazan",
-    description: "Puanlarını sonraki konaklamalarda veya etkinliklerde kullan."
   },
   {
     label: "Güvenli Rezervasyon",
@@ -133,7 +128,6 @@ const hotels = [
     description: "Boğaz manzaralı lüks konaklama",
     features: ["Ücretsiz Wi-Fi", "Açık Havuz", "Spa & Wellness", "Vale Park"],
     price: 4500,
-    points: 4500,
     image: "🏰"
   },
   {
@@ -146,7 +140,6 @@ const hotels = [
     description: "Her şey dahil ultra lüks tatil",
     features: ["Özel Plaj", "5 Restoran", "Aquapark", "Kids Club"],
     price: 3800,
-    points: 3800,
     image: "🌅"
   },
   {
@@ -159,7 +152,6 @@ const hotels = [
     description: "Termal su ve kaplıca merkezi",
     features: ["Termal Havuz", "Masaj", "Sauna", "Kahvaltı Dahil"],
     price: 2200,
-    points: 2200,
     image: "♨️"
   },
   {
@@ -172,7 +164,6 @@ const hotels = [
     description: "Denize sıfır butik otel",
     features: ["Özel Plaj", "Infinity Pool", "Bar", "Transfer"],
     price: 3200,
-    points: 3200,
     image: "⛵"
   },
   {
@@ -185,7 +176,6 @@ const hotels = [
     description: "Modern iş oteli - Merkezi konum",
     features: ["Toplantı Salonu", "Business Center", "Fitness", "Otopark"],
     price: 1800,
-    points: 1800,
     image: "🏢"
   },
   {
@@ -198,7 +188,6 @@ const hotels = [
     description: "Mağara odalarda eşsiz deneyim",
     features: ["Balon Turu", "Teras Kahvaltı", "Concierge", "Spa"],
     price: 4200,
-    points: 4200,
     image: "🎈"
   },
   {
@@ -211,7 +200,6 @@ const hotels = [
     description: "Aile dostu tatil konsepti",
     features: ["Animasyon", "Aquapark", "Mini Club", "6 Restoran"],
     price: 3500,
-    points: 3500,
     image: "🏖️"
   },
   {
@@ -224,7 +212,6 @@ const hotels = [
     description: "Kordon sahil şeridi premium daireler",
     features: ["Deniz Manzarası", "Mutfak", "Balkon", "Merkezi Konum"],
     price: 2600,
-    points: 2600,
     image: "🌊"
   }
 ];
@@ -232,7 +219,6 @@ const hotels = [
 export default function Konaklama() {
   const [, setLocation] = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [usePoints, setUsePoints] = useState(false);
   const [selectedCity, setSelectedCity] = useState<string>("all");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("all");
 
@@ -246,10 +232,6 @@ export default function Konaklama() {
 
   const formatTl = (value: number) => {
     return new Intl.NumberFormat("tr-TR").format(value) + " TL";
-  };
-
-  const formatPuan = (value: number) => {
-    return new Intl.NumberFormat("tr-TR").format(value) + " Etkinium Puan";
   };
 
   const filteredHotels = hotels.filter(hotel => {
@@ -366,27 +348,6 @@ export default function Konaklama() {
             <h3 className="text-2xl md:text-3xl font-bold text-white" data-testid="text-konaklama-title">
               <span className="text-accent-amber">Konaklama</span> Seçenekleri
             </h3>
-
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-400">TL</span>
-              <button
-                onClick={() => setUsePoints(!usePoints)}
-                className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors shadow-md ${
-                  usePoints ? "bg-accent-amber" : "bg-gray-700"
-                }`}
-                data-testid="button-toggle-points"
-                aria-label="Puan ile öde"
-              >
-                <span
-                  className={`inline-block h-5 w-5 transform rounded-full transition-transform shadow-sm ${
-                    usePoints
-                      ? "translate-x-6 bg-spotify-black"
-                      : "translate-x-1 bg-accent-amber"
-                  }`}
-                />
-              </button>
-              <span className="text-sm text-gray-400">Puan</span>
-            </div>
           </div>
 
           {/* FİLTRELER */}
@@ -496,26 +457,16 @@ export default function Konaklama() {
 
                 {/* FİYAT */}
                 <div className="pt-4 border-t border-gray-800">
-                  {usePoints ? (
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="text-xs text-gray-400">Gecelik başlangıç fiyatı</p>
+                    </div>
                     <div className="text-right">
-                      <p className="text-xs text-gray-400 mb-1">Puan ile</p>
-                      <p className="text-2xl font-bold text-accent-amber" data-testid={`price-points-${hotel.id}`}>
-                        {formatPuan(hotel.points)}
+                      <p className="text-3xl font-bold text-accent-amber" data-testid={`price-tl-${hotel.id}`}>
+                        {formatTl(hotel.price)}
                       </p>
                     </div>
-                  ) : (
-                    <div className="flex items-end justify-between">
-                      <div>
-                        <p className="text-xs text-gray-400">Gecelik başlangıç fiyatı</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-3xl font-bold text-accent-amber" data-testid={`price-tl-${hotel.id}`}>
-                          {formatTl(hotel.price)}
-                        </p>
-                        <p className="text-xs text-gray-500">~{hotel.points} puan</p>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* HOVER INDICATOR */}
