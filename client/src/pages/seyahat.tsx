@@ -36,7 +36,7 @@ const transportOptions = [
       description: "Türkiye'nin dört bir yanına ve yurt dışına uygun fiyatlı uçak biletleri. Anında onay, dijital bilet.",
       features: [
         { icon: Calendar, text: "Esnek tarih seçenekleri" },
-        { icon: MapPin, text: "100+ destinasyon" },
+        { icon: MapPin, text: "Yurt içi ve yurt dışı uçuşlar" },
         { icon: Users, text: "Grup rezervasyonu imkanı" }
       ],
       comingSoon: "Uçak bileti satışlarımız çok yakında başlıyor!"
@@ -83,8 +83,8 @@ const transportOptions = [
     tabLabel: "Demir Yolları",
     gradient: "from-purple-600 to-pink-500",
     content: {
-      title: "Hızlı Tren ve Banliyö Hatları",
-      description: "TCDD hızlı tren ve banliyö hatlarında konforlu yolculuk. Ekonomik ve çevre dostu ulaşım.",
+      title: "Hızlı Tren",
+      description: "TCDD hızlı tren seferlerinde konforlu yolculuk. Ekonomik ve çevre dostu ulaşım.",
       features: [
         { icon: Calendar, text: "Dakik hareket saatleri" },
         { icon: MapPin, text: "Merkezi istasyonlar" },
@@ -102,7 +102,7 @@ export default function Seyahat() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % verticalSlides.length);
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, []);
@@ -114,9 +114,9 @@ export default function Seyahat() {
       <Header />
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
-        {/* VERTICAL SLIDER - Yukarı-Aşağı */}
-        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
-             style={{ height: "120px" }}>
+        {/* HORIZONTAL SLIDER - Sağa-Sola */}
+        <div className="relative overflow-hidden rounded-2xl mb-12 bg-gradient-to-r from-gray-900 via-black to-gray-900 border-4 border-accent-amber/60 shadow-[0_0_40px_rgba(251,191,36,0.4)] hover:shadow-[0_0_50px_rgba(251,191,36,0.6)] transition-shadow duration-300"
+             style={{ height: "220px" }}>
           <div className="relative h-full">
             {verticalSlides.map((slide, index) => {
               const position = index - currentSlide;
@@ -127,39 +127,39 @@ export default function Seyahat() {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                    isActive ? "translate-y-0 opacity-100 z-10" :
-                    isPrev ? "translate-y-full opacity-0 z-0" :
-                    isNext ? "-translate-y-full opacity-0 z-0" :
-                    "-translate-y-full opacity-0 z-0"
+                  className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                    isActive ? "translate-x-0 opacity-100 z-10" :
+                    isPrev ? "-translate-x-full opacity-0 z-0" :
+                    isNext ? "translate-x-full opacity-0 z-0" :
+                    "translate-x-full opacity-0 z-0"
                   }`}
-                  data-testid={`vertical-slide-${index}`}
+                  data-testid={`horizontal-slide-${index}`}
                 >
                   {slide.logo ? (
-                    <div className="flex items-center justify-start h-full gap-4 px-6">
+                    <div className="flex flex-col md:flex-row items-center justify-center md:justify-start h-full gap-6 px-8 md:px-12">
                       <div className="flex-shrink-0">
                         <img 
                           src={slide.logo}
                           alt="ETKİNİUM Logo"
-                          className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                          className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)]"
                         />
                       </div>
-                      <div>
-                        <h2 className="text-2xl md:text-3xl font-bold text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                      <div className="text-center md:text-left">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent-amber drop-shadow-[0_4px_15px_rgba(251,191,36,0.4)] mb-2">
                           {slide.brandName}
                         </h2>
-                        <p className="text-base md:text-lg text-white font-medium">
+                        <p className="text-lg md:text-xl lg:text-2xl text-white font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
                           {slide.tagline}
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center h-full px-6">
+                    <div className="flex items-center justify-center h-full px-8">
                       <div className="text-center">
-                        <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-1 drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-accent-amber mb-3 drop-shadow-[0_4px_15px_rgba(251,191,36,0.4)]">
                           {slide.title}
                         </h3>
-                        <p className="text-base md:text-lg text-white font-medium">
+                        <p className="text-lg md:text-xl lg:text-2xl text-white font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
                           {slide.description}
                         </p>
                       </div>
@@ -170,18 +170,18 @@ export default function Seyahat() {
             })}
           </div>
 
-          {/* DOTS - Vertical Slider */}
-          <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
+          {/* DOTS - Horizontal Slider */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
             {verticalSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`rounded-full transition-all duration-300 shadow-lg ${
                   index === currentSlide
-                    ? "h-6 w-2.5 bg-accent-amber ring-2 ring-accent-amber/50"
-                    : "h-2.5 w-2.5 bg-white/40 hover:bg-white/70"
+                    ? "w-10 h-3 bg-accent-amber ring-2 ring-accent-amber/50"
+                    : "w-3 h-3 bg-white/40 hover:bg-white/70"
                 }`}
-                data-testid={`vertical-dot-${index}`}
+                data-testid={`horizontal-dot-${index}`}
                 aria-label={`Slide ${index + 1}`}
               />
             ))}
@@ -198,9 +198,14 @@ export default function Seyahat() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-accent-amber">Seyahat</span> Seçenekleri
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-4">
             Türkiye'nin her yerine güvenli ve konforlu ulaşım. Dilediğiniz aracı seçin, biletinizi anında alın.
           </p>
+          <div className="bg-gradient-to-r from-accent-amber/20 to-accent-amber/10 rounded-2xl p-4 border border-accent-amber/30 max-w-3xl mx-auto">
+            <p className="text-lg font-semibold text-accent-amber">
+              Seyahat servisleri çok yakında!
+            </p>
+          </div>
         </div>
 
         {/* APPLE TARZI TAB SİSTEMİ */}
