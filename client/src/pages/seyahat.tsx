@@ -110,7 +110,7 @@ export default function Seyahat() {
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
         {/* HORIZONTAL BANNER SLIDER */}
-        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-red-900/40 via-red-800/50 to-red-900/40 border-2 border-accent-amber/40 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-shadow duration-300"
+        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
              style={{ height: "160px" }}>
           <div className="relative h-full">
             {bannerSlides.map((slide, index) => {
@@ -122,7 +122,8 @@ export default function Seyahat() {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
+                  style={{ transitionDuration: '2000ms' }}
+                  className={`absolute inset-0 transition-all ease-in-out ${
                     isActive ? "translate-x-0 opacity-100 z-10" :
                     isPrev ? "-translate-x-full opacity-0 z-0" :
                     isNext ? "translate-x-full opacity-0 z-0" :
