@@ -178,12 +178,13 @@ export default function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
                     data-testid="button-profile"
                   >
                     <div className="w-8 h-8 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold">
                       {getUserInitials()}
                     </div>
+                    <span className="hidden md:inline">Hesabım</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-64 bg-gray-900 border-gray-700">
@@ -191,7 +192,6 @@ export default function Header() {
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
                       <p className="text-xs text-gray-400">{user.email}</p>
-                      <p className="text-xs text-accent-amber font-bold">{user.points} puan</p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-gray-700" />

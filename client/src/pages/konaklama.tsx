@@ -5,7 +5,7 @@ import AdvertisingButton from "@/components/advertising-button";
 import { Hotel, Building2, Home, Palmtree, Calendar, MapPin, Users } from "lucide-react";
 import logoImage from "@assets/logo-final.png";
 
-const verticalSlides = [
+const bannerSlides = [
   {
     id: 1,
     logo: logoImage,
@@ -16,11 +16,6 @@ const verticalSlides = [
     id: 2,
     title: "Yeni Özellikler",
     description: "Çok Yakında Sizlerle!"
-  },
-  {
-    id: 3,
-    title: "Reklamlarınız İçin İdeal Platform",
-    description: "partner@etkinium.com ile iletişime geçebilirsiniz"
   }
 ];
 
@@ -283,8 +278,8 @@ export default function Konaklama() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % verticalSlides.length);
-    }, 8000);
+      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -296,52 +291,52 @@ export default function Konaklama() {
       <Header />
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
-        {/* HORIZONTAL SLIDER - Sağa-Sola */}
-        <div className="relative overflow-hidden rounded-2xl mb-12 bg-gradient-to-r from-gray-900 via-black to-gray-900 border-4 border-accent-amber/60 shadow-[0_0_40px_rgba(251,191,36,0.4)] hover:shadow-[0_0_50px_rgba(251,191,36,0.6)] transition-shadow duration-300"
-             style={{ height: "220px" }}>
+        {/* HORIZONTAL BANNER SLIDER */}
+        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-red-900/40 via-red-800/50 to-red-900/40 border-2 border-accent-amber/40 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-shadow duration-300"
+             style={{ height: "160px" }}>
           <div className="relative h-full">
-            {verticalSlides.map((slide, index) => {
+            {bannerSlides.map((slide, index) => {
               const position = index - currentSlide;
               const isActive = index === currentSlide;
-              const isPrev = position === -1 || (currentSlide === 0 && index === verticalSlides.length - 1);
-              const isNext = position === 1 || (currentSlide === verticalSlides.length - 1 && index === 0);
+              const isPrev = position === -1 || (currentSlide === 0 && index === bannerSlides.length - 1);
+              const isNext = position === 1 || (currentSlide === bannerSlides.length - 1 && index === 0);
               
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                  className={`absolute inset-0 transition-all duration-1200 ease-in-out ${
                     isActive ? "translate-x-0 opacity-100 z-10" :
                     isPrev ? "-translate-x-full opacity-0 z-0" :
                     isNext ? "translate-x-full opacity-0 z-0" :
                     "translate-x-full opacity-0 z-0"
                   }`}
-                  data-testid={`horizontal-slide-${index}`}
+                  data-testid={`banner-slide-${index}`}
                 >
                   {slide.logo ? (
-                    <div className="flex flex-col md:flex-row items-center justify-center md:justify-start h-full gap-6 px-8 md:px-12">
+                    <div className="flex items-center justify-start h-full gap-4 px-6 md:px-8">
                       <div className="flex-shrink-0">
                         <img 
                           src={slide.logo}
                           alt="ETKİNİUM Logo"
-                          className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)]"
+                          className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]"
                         />
                       </div>
-                      <div className="text-center md:text-left">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent-amber drop-shadow-[0_4px_15px_rgba(251,191,36,0.4)] mb-2">
+                      <div>
+                        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                           {slide.brandName}
                         </h2>
-                        <p className="text-lg md:text-xl lg:text-2xl text-white font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                        <p className="text-sm md:text-base lg:text-lg text-white font-medium">
                           {slide.tagline}
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center h-full px-8">
+                    <div className="flex items-center justify-center h-full px-6">
                       <div className="text-center">
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-accent-amber mb-3 drop-shadow-[0_4px_15px_rgba(251,191,36,0.4)]">
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-accent-amber mb-2 drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
                           {slide.title}
                         </h3>
-                        <p className="text-lg md:text-xl lg:text-2xl text-white font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                        <p className="text-sm md:text-base lg:text-lg text-white font-medium">
                           {slide.description}
                         </p>
                       </div>
@@ -352,18 +347,18 @@ export default function Konaklama() {
             })}
           </div>
 
-          {/* DOTS - Horizontal Slider */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-            {verticalSlides.map((_, index) => (
+          {/* DOTS - Banner Navigation */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+            {bannerSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`rounded-full transition-all duration-300 shadow-lg ${
+                className={`rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? "w-10 h-3 bg-accent-amber ring-2 ring-accent-amber/50"
-                    : "w-3 h-3 bg-white/40 hover:bg-white/70"
+                    ? "w-8 h-2.5 bg-accent-amber"
+                    : "w-2.5 h-2.5 bg-white/50 hover:bg-white/80"
                 }`}
-                data-testid={`horizontal-dot-${index}`}
+                data-testid={`banner-dot-${index}`}
                 aria-label={`Slide ${index + 1}`}
               />
             ))}
