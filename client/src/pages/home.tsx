@@ -14,11 +14,6 @@ const verticalSlides = [
     tagline: "Tek Platform, Sonsuz Sanat"
   },
   {
-    id: 2,
-    title: "Lansmana Özel",
-    description: "%10 İndirim + 100 Puan Hediye!"
-  },
-  {
     id: 3,
     title: "Her İşlemde",
     description: "ETKİNİUM Puan Kazan"
