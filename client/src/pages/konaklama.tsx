@@ -1,36 +1,97 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import AdvertisingButton from "@/components/advertising-button";
-import { Button } from "@/components/ui/button";
-import { MapPin, Star, Wifi, Coffee, Waves, Utensils, Dumbbell, Car } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Hotel, Building2, Home, Palmtree, Calendar, MapPin, Users } from "lucide-react";
 import logoImage from "@assets/logo-final.png";
 
-const slides = [
+const verticalSlides = [
   {
-    label: "Reklam Alanı",
-    title: "ETKİNİUM",
-    description: "Türkiye'nin Yeni Nesil Dijital Biletleme Ekosistemi",
-    contactEmail: "iletisim@etkinium.com",
-    isAdvertising: true
+    id: 1,
+    logo: logoImage,
+    brandName: "ETKİNİUM",
+    tagline: "Tek Platform, Sonsuz Sanat"
   },
   {
-    label: "Etkinium Partner",
-    title: "Seçili otellerde özel fiyatlar",
-    description: "Etkinium üzerinden rezervasyon yapan kullanıcılara özel fiyat avantajı."
+    id: 2,
+    title: "Yeni Özellikler",
+    description: "Çok Yakında Sizlerle!"
   },
   {
-    label: "Güvenli Rezervasyon",
-    title: "Tek panelden otel, etkinlik ve seyahat yönetimi",
-    description: "İptal, değişiklik ve destek süreçlerinde şeffaf ve güvenilir yapı."
+    id: 3,
+    title: "Reklamlarınız İçin İdeal Platform",
+    description: "partner@etkinium.com ile iletişime geçebilirsiniz"
+  }
+];
+
+const accommodationOptions = [
+  {
+    id: "otel",
+    icon: Hotel,
+    title: "Şehir Otelleri",
+    tabLabel: "Şehir Otelleri",
+    gradient: "from-blue-600 to-cyan-500",
+    content: {
+      title: "Şehir Merkezinde Konforlu Konaklama",
+      description: "Türkiye'nin tüm şehirlerinde merkezi konumlarda yer alan otellerimizle iş ve tatil seyahatlerinizde konforu yaşayın.",
+      features: [
+        { icon: MapPin, text: "Merkezi lokasyon" },
+        { icon: Calendar, text: "Esnek rezervasyon" },
+        { icon: Users, text: "Kurumsal fırsatlar" }
+      ],
+      comingSoon: "Şehir oteli rezervasyonları çok yakında!"
+    }
+  },
+  {
+    id: "tatil",
+    icon: Palmtree,
+    title: "Tatil Köyleri",
+    tabLabel: "Tatil Köyleri",
+    gradient: "from-orange-500 to-red-500",
+    content: {
+      title: "Her Şey Dahil Tatil Deneyimi",
+      description: "Akdeniz ve Ege kıyılarında yer alan lüks tatil köylerinde unutulmaz bir tatil deneyimi sizi bekliyor.",
+      features: [
+        { icon: Palmtree, text: "Her şey dahil konsept" },
+        { icon: Users, text: "Aile dostu aktiviteler" },
+        { icon: Calendar, text: "Erken rezervasyon fırsatları" }
+      ],
+      comingSoon: "Tatil köyü rezervasyonları çok yakında ETKİNİUM'da!"
+    }
+  },
+  {
+    id: "butik",
+    icon: Building2,
+    title: "Butik Oteller",
+    tabLabel: "Butik Oteller",
+    gradient: "from-purple-600 to-pink-500",
+    content: {
+      title: "Özel ve Benzersiz Konaklama",
+      description: "Tarihi dokusu ve modern konforuyla birleşen butik otellerimizde kendinizi özel hissedin.",
+      features: [
+        { icon: Building2, text: "Kişiye özel hizmet" },
+        { icon: MapPin, text: "Tarihi lokasyonlar" },
+        { icon: Users, text: "Romantik atmosfer" }
+      ],
+      comingSoon: "Butik otel rezervasyonları yakında hizmette!"
+    }
+  },
+  {
+    id: "apart",
+    icon: Home,
+    title: "Apart Oteller",
+    tabLabel: "Apart Oteller",
+    gradient: "from-green-600 to-teal-500",
+    content: {
+      title: "Ev Konforunda Uzun Süreli Konaklama",
+      description: "Mutfak ve oturma alanıyla donatılmış apart otellerimizde uzun dönem konaklamalarınızda evinizdeymişsiniz gibi hissedin.",
+      features: [
+        { icon: Home, text: "Tam donanımlı mutfak" },
+        { icon: Calendar, text: "Uzun dönem indirimleri" },
+        { icon: Users, text: "Aile büyüklüğü seçenekleri" }
+      ],
+      comingSoon: "Apart otel rezervasyonları çok yakında!"
+    }
   }
 ];
 
@@ -217,120 +278,92 @@ const hotels = [
 ];
 
 export default function Konaklama() {
-  const [, setLocation] = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedCity, setSelectedCity] = useState<string>("all");
-  const [selectedDistrict, setSelectedDistrict] = useState<string>("all");
+  const [activeTab, setActiveTab] = useState("otel");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
+      setCurrentSlide((prev) => (prev + 1) % verticalSlides.length);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const formatTl = (value: number) => {
-    return new Intl.NumberFormat("tr-TR").format(value) + " TL";
-  };
-
-  const filteredHotels = hotels.filter(hotel => {
-    if (selectedCity !== "all" && hotel.city !== selectedCity) return false;
-    if (selectedDistrict !== "all" && hotel.district !== selectedDistrict) return false;
-    return true;
-  });
-
-  const availableDistricts = selectedCity !== "all" ? districts[selectedCity] || [] : [];
-
-  const getCityLabel = (cityValue: string) => {
-    return turkishCities.find(c => c.value === cityValue)?.label || cityValue;
-  };
-
-  const getDistrictLabel = (districtValue: string) => {
-    if (selectedCity === "all") return districtValue;
-    return availableDistricts.find(d => d.value === districtValue)?.label || districtValue;
-  };
+  const activeOption = accommodationOptions.find(opt => opt.id === activeTab);
 
   return (
     <div className="min-h-screen bg-spotify-black text-white">
       <Header />
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
-        {/* SLIDER - KAYAN ANİMASYON */}
-        <div className="relative overflow-hidden rounded-xl mb-12 h-64 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300">
+        {/* VERTICAL SLIDER - Yukarı-Aşağı */}
+        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
+             style={{ height: "120px" }}>
           <div className="relative h-full">
-            {slides.map((slide, index) => {
+            {verticalSlides.map((slide, index) => {
               const position = index - currentSlide;
               const isActive = index === currentSlide;
-              const isPrev = position === -1 || (currentSlide === 0 && index === slides.length - 1);
-              const isNext = position === 1 || (currentSlide === slides.length - 1 && index === 0);
+              const isPrev = position === -1 || (currentSlide === 0 && index === verticalSlides.length - 1);
+              const isNext = position === 1 || (currentSlide === verticalSlides.length - 1 && index === 0);
               
               return (
                 <div
-                  key={index}
+                  key={slide.id}
                   className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                    slide.isAdvertising ? "" : "p-8 md:p-10"
-                  } ${
-                    isActive ? "translate-x-0 opacity-100 z-10" :
-                    isPrev ? "-translate-x-full opacity-0 z-0" :
-                    isNext ? "translate-x-full opacity-0 z-0" :
-                    "translate-x-full opacity-0 z-0"
+                    isActive ? "translate-y-0 opacity-100 z-10" :
+                    isPrev ? "translate-y-full opacity-0 z-0" :
+                    isNext ? "-translate-y-full opacity-0 z-0" :
+                    "-translate-y-full opacity-0 z-0"
                   }`}
-                  data-testid={`slide-${index}`}
+                  data-testid={`vertical-slide-${index}`}
                 >
-                  {slide.isAdvertising ? (
-                    <div className="flex flex-col items-center justify-center h-full p-4">
-                      <img 
-                        src={logoImage}
-                        alt="ETKİNİUM Logo"
-                        className="w-16 h-16 object-contain mb-4 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
-                      />
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
-                        {slide.title}
-                      </h2>
-                      <p className="text-base md:text-lg text-white mb-6 text-center max-w-xl">
-                        {slide.description}
-                      </p>
-                      <p className="text-sm md:text-base text-gray-300">
-                        Reklam vermek için:{" "}
-                        <a 
-                          href={`mailto:${slide.contactEmail}`}
-                          className="text-accent-amber hover:underline font-semibold"
-                        >
-                          {slide.contactEmail}
-                        </a>
-                      </p>
+                  {slide.logo ? (
+                    <div className="flex items-center justify-start h-full gap-4 px-6">
+                      <div className="flex-shrink-0">
+                        <img 
+                          src={slide.logo}
+                          alt="ETKİNİUM Logo"
+                          className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-bold text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                          {slide.brandName}
+                        </h2>
+                        <p className="text-base md:text-lg text-white font-medium">
+                          {slide.tagline}
+                        </p>
+                      </div>
                     </div>
                   ) : (
-                    <>
-                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
-                        {slide.label}
+                    <div className="flex items-center justify-center h-full px-6">
+                      <div className="text-center">
+                        <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-1 drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                          {slide.title}
+                        </h3>
+                        <p className="text-base md:text-lg text-white font-medium">
+                          {slide.description}
+                        </p>
                       </div>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
-                        {slide.title}
-                      </h2>
-                      <p className="text-sm md:text-base text-white max-w-2xl">
-                        {slide.description}
-                      </p>
-                    </>
+                    </div>
                   )}
                 </div>
               );
             })}
           </div>
 
-          {/* DOTS */}
-          <div className="absolute right-6 bottom-6 flex gap-2 z-20">
-            {slides.map((_, index) => (
+          {/* DOTS - Vertical Slider */}
+          <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
+            {verticalSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`rounded-full transition-all duration-300 ${
+                className={`rounded-full transition-all duration-300 shadow-lg ${
                   index === currentSlide
-                    ? "w-8 h-3 bg-accent-amber"
-                    : "w-3 h-3 bg-white/30 hover:bg-white/50"
+                    ? "h-6 w-2.5 bg-accent-amber ring-2 ring-accent-amber/50"
+                    : "h-2.5 w-2.5 bg-white/40 hover:bg-white/70"
                 }`}
-                data-testid={`dot-${index}`}
+                data-testid={`vertical-dot-${index}`}
                 aria-label={`Slide ${index + 1}`}
               />
             ))}
@@ -342,157 +375,88 @@ export default function Konaklama() {
           <AdvertisingButton />
         </div>
 
-        {/* FİLTRELEME VE BAŞLIK */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-white" data-testid="text-konaklama-title">
-              <span className="text-accent-amber">Konaklama</span> Seçenekleri
-            </h3>
-          </div>
-
-          {/* FİLTRELER */}
-          <div className="flex flex-col sm:flex-row gap-4 bg-gray-900/30 p-4 rounded-2xl border border-gray-800">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-2">Şehir Seç</label>
-              <Select value={selectedCity} onValueChange={(value) => {
-                setSelectedCity(value);
-                setSelectedDistrict("all");
-              }}>
-                <SelectTrigger className="bg-gray-800 border-gray-700 text-white" data-testid="select-city">
-                  <SelectValue placeholder="Tüm Şehirler" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700">
-                  <SelectItem value="all" className="text-white hover:bg-gray-700">Tüm Şehirler</SelectItem>
-                  {turkishCities.map(city => (
-                    <SelectItem key={city.value} value={city.value} className="text-white hover:bg-gray-700">
-                      {city.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-2">İlçe Seç</label>
-              <Select 
-                value={selectedDistrict} 
-                onValueChange={setSelectedDistrict}
-                disabled={selectedCity === "all" || availableDistricts.length === 0}
-              >
-                <SelectTrigger 
-                  className="bg-gray-800 border-gray-700 text-white disabled:opacity-50" 
-                  data-testid="select-district"
-                >
-                  <SelectValue placeholder="Tüm İlçeler" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700">
-                  <SelectItem value="all" className="text-white hover:bg-gray-700">Tüm İlçeler</SelectItem>
-                  {availableDistricts.map(district => (
-                    <SelectItem key={district.value} value={district.value} className="text-white hover:bg-gray-700">
-                      {district.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex items-end">
-              <Button
-                onClick={() => {
-                  setSelectedCity("all");
-                  setSelectedDistrict("all");
-                }}
-                className="bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-clear-filters"
-              >
-                Filtreleri Temizle
-              </Button>
-            </div>
-          </div>
+        {/* BAŞLIK */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="text-accent-amber">Konaklama</span> Seçenekleri
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Türkiye'nin dört bir yanında konforlu ve güvenli konaklama. İhtiyacınıza göre seçin, hemen rezerve edin.
+          </p>
         </div>
 
-        {/* OTEL LİSTESİ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {filteredHotels.map((hotel) => (
-            <div
-              key={hotel.id}
-              onClick={() => setLocation(`/konaklama/${hotel.id}`)}
-              className="group relative bg-gradient-to-br from-gray-900/90 to-gray-950/90 rounded-3xl border border-gray-800/50 overflow-hidden hover:border-accent-amber/50 transition-all duration-300 cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-amber/20"
-              data-testid={`hotel-item-${hotel.id}`}
+        {/* APPLE TARZI TAB SİSTEMİ */}
+        <div className="max-w-6xl mx-auto">
+          {/* TAB BUTTONS */}
+          <div className="flex justify-center mb-8 gap-3 flex-wrap">
+            {accommodationOptions.map((option) => {
+              const Icon = option.icon;
+              const isActive = activeTab === option.id;
+              
+              return (
+                <button
+                  key={option.id}
+                  onClick={() => setActiveTab(option.id)}
+                  className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                    isActive 
+                      ? "bg-accent-amber text-black shadow-lg shadow-accent-amber/50" 
+                      : "bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black"
+                  }`}
+                  data-testid={`tab-${option.id}`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{option.tabLabel}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* TAB CONTENT */}
+          {activeOption && (
+            <div 
+              className="bg-gradient-to-br from-gray-900/80 to-gray-900/40 rounded-3xl p-8 md:p-12 border border-gray-800 transition-all duration-500 ease-in-out"
+              data-testid={`content-${activeOption.id}`}
             >
-              <div className="p-6">
-                {/* BAŞLIK VE İCON */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-4xl">{hotel.image}</span>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-accent-amber text-accent-amber" />
-                        <span className="text-sm font-semibold text-white">{hotel.rating}</span>
-                        <span className="text-xs text-gray-400">({hotel.reviews} değerlendirme)</span>
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-1 group-hover:text-accent-amber transition-colors" data-testid={`hotel-name-${hotel.id}`}>
-                      {hotel.name}
-                    </h4>
-                    <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-2">
-                      <MapPin className="w-4 h-4" />
-                      <span>{getCityLabel(hotel.city)}, {getDistrictLabel(hotel.district)}</span>
-                    </div>
-                    <p className="text-sm text-gray-300 mb-4">{hotel.description}</p>
+              {/* ICON & TITLE */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-4 rounded-2xl bg-gradient-to-br ${activeOption.gradient} shadow-xl`}>
+                  <activeOption.icon className="w-10 h-10 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-white mb-1">{activeOption.content.title}</h2>
+                  <div className="px-3 py-1 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold inline-block">
+                    Yakında
                   </div>
                 </div>
+              </div>
 
-                {/* ÖZELLİKLER */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {hotel.features.slice(0, 4).map((feature, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs px-3 py-1 rounded-full bg-gray-800/50 text-gray-300 border border-gray-700"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
+              {/* DESCRIPTION */}
+              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                {activeOption.content.description}
+              </p>
 
-                {/* FİYAT */}
-                <div className="pt-4 border-t border-gray-800">
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <p className="text-xs text-gray-400">Gecelik başlangıç fiyatı</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-3xl font-bold text-accent-amber" data-testid={`price-tl-${hotel.id}`}>
-                        {formatTl(hotel.price)}
-                      </p>
-                    </div>
+              {/* FEATURES */}
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
+                {activeOption.content.features.map((feature, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-center gap-3 bg-gray-800/50 rounded-xl p-4 border border-gray-700"
+                  >
+                    <feature.icon className="w-5 h-5 text-accent-amber" />
+                    <span className="text-white">{feature.text}</span>
                   </div>
-                </div>
+                ))}
+              </div>
 
-                {/* HOVER INDICATOR */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent-amber/30 rounded-3xl transition-all pointer-events-none" />
+              {/* COMING SOON MESSAGE */}
+              <div className="bg-gradient-to-r from-accent-amber/20 to-transparent rounded-2xl p-6 border border-accent-amber/30">
+                <p className="text-xl font-semibold text-accent-amber">
+                  {activeOption.content.comingSoon}
+                </p>
               </div>
             </div>
-          ))}
+          )}
         </div>
-
-        {/* SONUÇ BULUNAMADI */}
-        {filteredHotels.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-xl text-gray-400">
-              Seçili filtrelere uygun otel bulunamadı.
-            </p>
-            <Button
-              onClick={() => {
-                setSelectedCity("all");
-                setSelectedDistrict("all");
-              }}
-              className="mt-4 bg-black text-white border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-            >
-              Tüm Otelleri Göster
-            </Button>
-          </div>
-        )}
       </main>
 
       <Footer />

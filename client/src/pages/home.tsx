@@ -15,13 +15,13 @@ const verticalSlides = [
   },
   {
     id: 2,
-    title: "ETKİNİUM",
-    description: "Çok Yakında!"
+    title: "Yeni Özellikler",
+    description: "Çok Yakında Sizlerle!"
   },
   {
     id: 3,
-    title: "Etkili Reklam İçin",
-    description: "partner@etkinium.com ile iletişime geçin"
+    title: "Reklamlarınız İçin İdeal Platform",
+    description: "partner@etkinium.com ile iletişime geçebilirsiniz"
   }
 ];
 

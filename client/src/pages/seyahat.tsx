@@ -5,23 +5,22 @@ import AdvertisingButton from "@/components/advertising-button";
 import { Plane, Bus, Ship, Train, Calendar, MapPin, Users } from "lucide-react";
 import logoImage from "@assets/logo-final.png";
 
-const slides = [
+const verticalSlides = [
   {
-    label: "Reklam Alanı",
-    title: "ETKİNİUM",
-    description: "Türkiye'nin Yeni Nesil Dijital Biletleme Ekosistemi",
-    contactEmail: "iletisim@etkinium.com",
-    isAdvertising: true
+    id: 1,
+    logo: logoImage,
+    brandName: "ETKİNİUM",
+    tagline: "Tek Platform, Sonsuz Sanat"
   },
   {
-    label: "Seyahat Fırsatları",
-    title: "Türkiye'nin her yerine uygun fiyatlarla seyahat edin",
-    description: "Uçak, otobüs, deniz ve demiryolu biletlerini tek platformdan alın."
+    id: 2,
+    title: "Yeni Özellikler",
+    description: "Çok Yakında Sizlerle!"
   },
   {
-    label: "Hızlı ve Güvenli",
-    title: "Dijital bilet, anında onay",
-    description: "Biletiniz QR kodlu olarak e-postanıza gelir, kuyruklarda beklemeye son!"
+    id: 3,
+    title: "Reklamlarınız İçin İdeal Platform",
+    description: "partner@etkinium.com ile iletişime geçebilirsiniz"
   }
 ];
 
@@ -102,8 +101,8 @@ export default function Seyahat() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
+      setCurrentSlide((prev) => (prev + 1) % verticalSlides.length);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -115,81 +114,74 @@ export default function Seyahat() {
       <Header />
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
-        {/* SLIDER */}
-        <div className="relative overflow-hidden rounded-xl mb-12 h-64 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300">
+        {/* VERTICAL SLIDER - Yukarı-Aşağı */}
+        <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
+             style={{ height: "120px" }}>
           <div className="relative h-full">
-            {slides.map((slide, index) => {
+            {verticalSlides.map((slide, index) => {
               const position = index - currentSlide;
               const isActive = index === currentSlide;
-              const isPrev = position === -1 || (currentSlide === 0 && index === slides.length - 1);
-              const isNext = position === 1 || (currentSlide === slides.length - 1 && index === 0);
+              const isPrev = position === -1 || (currentSlide === 0 && index === verticalSlides.length - 1);
+              const isNext = position === 1 || (currentSlide === verticalSlides.length - 1 && index === 0);
               
               return (
                 <div
-                  key={index}
+                  key={slide.id}
                   className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                    slide.isAdvertising ? "" : "p-8 md:p-10"
-                  } ${
-                    isActive ? "translate-x-0 opacity-100 z-10" :
-                    isPrev ? "-translate-x-full opacity-0 z-0" :
-                    isNext ? "translate-x-full opacity-0 z-0" :
-                    "translate-x-full opacity-0 z-0"
+                    isActive ? "translate-y-0 opacity-100 z-10" :
+                    isPrev ? "translate-y-full opacity-0 z-0" :
+                    isNext ? "-translate-y-full opacity-0 z-0" :
+                    "-translate-y-full opacity-0 z-0"
                   }`}
-                  data-testid={`slide-${index}`}
+                  data-testid={`vertical-slide-${index}`}
                 >
-                  {slide.isAdvertising ? (
-                    <div className="flex flex-col items-center justify-center h-full p-4">
-                      <img 
-                        src={logoImage}
-                        alt="ETKİNİUM Logo"
-                        className="w-16 h-16 object-contain mb-4 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
-                      />
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
-                        {slide.title}
-                      </h2>
-                      <p className="text-base md:text-lg text-white mb-6 text-center max-w-xl">
-                        {slide.description}
-                      </p>
-                      <p className="text-sm md:text-base text-gray-300">
-                        Reklam vermek için:{" "}
-                        <a 
-                          href={`mailto:${slide.contactEmail}`}
-                          className="text-accent-amber hover:underline font-semibold"
-                        >
-                          {slide.contactEmail}
-                        </a>
-                      </p>
+                  {slide.logo ? (
+                    <div className="flex items-center justify-start h-full gap-4 px-6">
+                      <div className="flex-shrink-0">
+                        <img 
+                          src={slide.logo}
+                          alt="ETKİNİUM Logo"
+                          className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-bold text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                          {slide.brandName}
+                        </h2>
+                        <p className="text-base md:text-lg text-white font-medium">
+                          {slide.tagline}
+                        </p>
+                      </div>
                     </div>
                   ) : (
-                    <>
-                      <div className="inline-block px-4 py-1.5 rounded-full bg-accent-amber text-spotify-black text-xs font-semibold mb-3">
-                        {slide.label}
+                    <div className="flex items-center justify-center h-full px-6">
+                      <div className="text-center">
+                        <h3 className="text-xl md:text-2xl font-bold text-accent-amber mb-1 drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                          {slide.title}
+                        </h3>
+                        <p className="text-base md:text-lg text-white font-medium">
+                          {slide.description}
+                        </p>
                       </div>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-accent-amber drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
-                        {slide.title}
-                      </h2>
-                      <p className="text-sm md:text-base text-white max-w-2xl">
-                        {slide.description}
-                      </p>
-                    </>
+                    </div>
                   )}
                 </div>
               );
             })}
           </div>
 
-          {/* DOTS */}
-          <div className="absolute right-6 bottom-6 flex gap-2 z-20">
-            {slides.map((_, index) => (
+          {/* DOTS - Vertical Slider */}
+          <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
+            {verticalSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`rounded-full transition-all duration-300 ${
+                className={`rounded-full transition-all duration-300 shadow-lg ${
                   index === currentSlide
-                    ? "w-8 h-3 bg-accent-amber"
-                    : "w-3 h-3 bg-white/30 hover:bg-white/50"
+                    ? "h-6 w-2.5 bg-accent-amber ring-2 ring-accent-amber/50"
+                    : "h-2.5 w-2.5 bg-white/40 hover:bg-white/70"
                 }`}
-                data-testid={`dot-${index}`}
+                data-testid={`vertical-dot-${index}`}
                 aria-label={`Slide ${index + 1}`}
               />
             ))}
