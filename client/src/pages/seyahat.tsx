@@ -112,23 +112,19 @@ export default function Seyahat() {
         {/* HORIZONTAL BANNER SLIDER */}
         <div className="relative overflow-hidden rounded-xl mb-12 bg-gradient-to-r from-black via-gray-900 to-black border-4 border-accent-amber/60 shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-shadow duration-300"
              style={{ height: "160px" }}>
-          <div className="relative h-full">
+          <div className="relative w-full h-full overflow-hidden">
             {bannerSlides.map((slide, index) => {
-              const position = index - currentSlide;
               const isActive = index === currentSlide;
-              const isPrev = position === -1 || (currentSlide === 0 && index === bannerSlides.length - 1);
-              const isNext = position === 1 || (currentSlide === bannerSlides.length - 1 && index === 0);
               
               return (
                 <div
                   key={slide.id}
-                  style={{ transitionDuration: '2000ms' }}
-                  className={`absolute inset-0 transition-all ease-in-out ${
-                    isActive ? "translate-x-0 opacity-100 z-10" :
-                    isPrev ? "-translate-x-full opacity-0 z-0" :
-                    isNext ? "translate-x-full opacity-0 z-0" :
-                    "translate-x-full opacity-0 z-0"
-                  }`}
+                  style={{ 
+                    transform: isActive ? 'translateX(0%)' : `translateX(${index < currentSlide ? '-100%' : '100%'})`,
+                    transition: 'transform 2s ease-in-out, opacity 2s ease-in-out',
+                    opacity: isActive ? 1 : 0
+                  }}
+                  className="absolute inset-0 w-full h-full"
                   data-testid={`banner-slide-${index}`}
                 >
                   {slide.logo ? (
