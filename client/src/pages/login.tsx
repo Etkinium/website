@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ export default function Login() {
   const [, setLocation] = useLocation();
   const { user, isLoading } = useAuth();
   const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -125,13 +127,27 @@ export default function Login() {
                       <FormItem>
                         <FormLabel className="text-white">Şifre</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            type="password"
-                            placeholder="••••••••"
-                            className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber"
-                            data-testid="input-password"
-                          />
+                          <div className="relative">
+                            <Input
+                              {...field}
+                              type={showPassword ? "text" : "password"}
+                              placeholder="••••••••"
+                              className="bg-gray-800 border-gray-700 text-white focus:border-accent-amber pr-10"
+                              data-testid="input-password"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-accent-amber transition-colors"
+                              data-testid="button-toggle-password"
+                            >
+                              {showPassword ? (
+                                <EyeOff className="w-5 h-5" />
+                              ) : (
+                                <Eye className="w-5 h-5" />
+                              )}
+                            </button>
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>

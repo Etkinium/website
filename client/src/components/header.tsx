@@ -177,15 +177,15 @@ export default function Header() {
             {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button 
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                  <button 
+                    className="bg-black hover:bg-accent-amber text-white hover:text-black rounded-full px-4 py-2 transition-all flex items-center gap-2"
                     data-testid="button-profile"
                   >
                     <div className="w-8 h-8 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold">
                       {getUserInitials()}
                     </div>
-                    <span className="hidden md:inline">Hesabım</span>
-                  </Button>
+                    <span className="hidden md:inline font-medium">Hesabım</span>
+                  </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-64 bg-gray-900 border-gray-700">
                   <DropdownMenuLabel className="text-white">
@@ -335,9 +335,7 @@ export default function Header() {
                       </div>
                       <div className="flex flex-col items-start">
                         <span className="text-sm text-white font-medium">{user.firstName} {user.lastName}</span>
-                        <span className="text-accent-amber text-xs font-bold" data-testid="text-mobile-points">
-                          {user.points} puan
-                        </span>
+                        <span className="text-gray-400 text-xs">{user.email}</span>
                       </div>
                     </div>
                     <div className="space-y-2">

@@ -179,6 +179,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Change password endpoint
+  app.post('/api/user/change-password', requireAuth, async (req, res) => {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      const userId = req.session.userId!;
+
+      if (!currentPassword || !newPassword) {
+        return res.status(400).json({ message: "Mevcut şifre ve yeni şifre gerekli" });
+      }
+
+      if (newPassword.length < 6) {
+        return res.status(400).json({ message: "Yeni şifre en az 6 karakter olmalı" });
+      }
+
+      // Get current user
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+      }
+
+      // Verify current password
+      const isValidPassword = await bcrypt.compare(currentPassword, user.password);
+      if (!isValidPassword) {
+        return res.status(401).json({ message: "Mevcut şifre yanlış" });
+      }
+
+      // Hash new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update password
+      await storage.updateUser(userId, { password: hashedPassword });
+
+      res.json({ message: "Şifre başarıyla değiştirildi" });
+    } catch (error) {
+      console.error("Change password error:", error);
+      res.status(500).json({ message: "Şifre değiştirilirken hata oluştu" });
+    }
+  });
+
   // Email subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
     try {

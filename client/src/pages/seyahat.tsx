@@ -97,7 +97,7 @@ export default function Seyahat() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
-    }, 10000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, []);
@@ -122,7 +122,7 @@ export default function Seyahat() {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 transition-all duration-1200 ease-in-out ${
+                  className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
                     isActive ? "translate-x-0 opacity-100 z-10" :
                     isPrev ? "-translate-x-full opacity-0 z-0" :
                     isNext ? "translate-x-full opacity-0 z-0" :
