@@ -177,7 +177,7 @@ export default function Login() {
                   <Button
                     type="submit"
                     disabled={loginMutation.isPending}
-                    className="w-full bg-black hover:bg-accent-amber text-white hover:text-black transition-all py-5 sm:py-6 text-base sm:text-lg font-semibold"
+                    className="w-full bg-accent-amber hover:bg-yellow-500 text-black font-bold transition-all py-5 sm:py-6 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     data-testid="button-login"
                   >
                     {loginMutation.isPending ? "Giriş yapılıyor..." : "Giriş Yap"}
