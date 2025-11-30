@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
 import EmailSubscription from "@/components/email-subscription";
@@ -11,17 +11,17 @@ const verticalSlides = [
     id: 1,
     logo: logoImage,
     brandName: "ETKİNİUM",
-    tagline: "TEK PLATFORM, SONSUZ SANAT"
+    subtitle: "Dijital Biletleme Ekosistemi"
   },
   {
     id: 2,
     title: "YENİ ÖZELLİKLER",
-    description: "ÇOK YAKINDA SİZLERLE"
+    subtitle: "Çok Yakında Sizlerle"
   },
   {
     id: 3,
-    title: "REKLAM ALANLARIMIZ",
-    description: "MARKANIZI MİLYONLARA ULAŞTIRIN"
+    title: "REKLAM ALANLARI",
+    subtitle: "Markanızı Milyonlara Ulaştırın"
   }
 ];
 
@@ -29,23 +29,60 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [prevSlide, setPrevSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const animatingRef = useRef(false);
 
-  const goToSlide = (newIndex: number) => {
-    if (isAnimating || newIndex === currentSlide) return;
+  const goToSlide = useCallback((newIndex: number, isAutomatic: boolean = false) => {
+    if (animatingRef.current && !isAutomatic) return;
+    if (newIndex === currentSlide && !isAutomatic) return;
+    
+    animatingRef.current = true;
     setIsAnimating(true);
     setPrevSlide(currentSlide);
     setCurrentSlide(newIndex);
-    setTimeout(() => setIsAnimating(false), 800);
-  };
+    
+    setTimeout(() => {
+      animatingRef.current = false;
+      setIsAnimating(false);
+    }, 700);
+  }, [currentSlide]);
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    timerRef.current = setInterval(() => {
+      setCurrentSlide(prev => {
+        const nextSlide = (prev + 1) % verticalSlides.length;
+        setPrevSlide(prev);
+        setIsAnimating(true);
+        animatingRef.current = true;
+        setTimeout(() => {
+          animatingRef.current = false;
+          setIsAnimating(false);
+        }, 700);
+        return nextSlide;
+      });
+    }, 5000);
+  }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const nextSlide = (currentSlide + 1) % verticalSlides.length;
-      goToSlide(nextSlide);
-    }, 5000);
+    startTimer();
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [startTimer]);
 
-    return () => clearInterval(interval);
-  }, [currentSlide, isAnimating]);
+  const handleDotClick = (index: number) => {
+    if (index === currentSlide) return;
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    goToSlide(index, false);
+    startTimer();
+  };
 
   return (
     <div className="min-h-screen bg-spotify-black text-white">
@@ -53,95 +90,114 @@ export default function Home() {
       
       <HeroCarousel />
 
-      {/* BILLBOARD SLIDER - Metro Style */}
+      {/* PROFESSIONAL AD BANNER - TV Style */}
       <section className="bg-spotify-black py-8 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-xl bg-neutral-950 border-4 border-neutral-800/80 shadow-[0_30px_80px_rgba(0,0,0,0.9)]"
-               style={{ height: "200px" }}>
-            
-            {/* Sol Altın Şerit - Billboard Accent */}
-            <div className="absolute left-0 top-6 bottom-6 w-1 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-r-full z-10" />
-            
-            {/* Sağ Altın Şerit - Billboard Accent */}
-            <div className="absolute right-0 top-6 bottom-6 w-1 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-l-full z-10" />
-            
-            {/* Metro Style Slider */}
-            <div className="relative h-full bg-neutral-950">
-              {verticalSlides.map((slide, index) => {
-                const isActive = index === currentSlide;
-                const isPrev = index === prevSlide;
-                
-                const shouldShow = isActive || (isPrev && isAnimating);
-                
-                let transformStyle = 'translateY(100%)';
-                let zIndex = 0;
-                
-                if (isActive) {
-                  transformStyle = 'translateY(0)';
-                  zIndex = 10;
-                } else if (isPrev && isAnimating) {
-                  transformStyle = 'translateY(-100%)';
-                  zIndex = 5;
-                }
-                
-                return (
-                  <div
-                    key={slide.id}
-                    className="absolute inset-0 bg-neutral-950"
-                    style={{ 
-                      transform: transformStyle,
-                      transition: shouldShow ? 'transform 700ms ease-in-out' : 'none',
-                      zIndex,
-                      willChange: 'transform'
-                    }}
-                    data-testid={`vertical-slide-${index}`}
-                  >
-                    {slide.logo ? (
-                      <div className="flex flex-col items-center justify-center h-full gap-3 px-10">
-                        <img 
-                          src={slide.logo}
-                          alt="ETKİNİUM Logo"
-                          className="w-14 h-14 md:w-16 md:h-16 object-contain"
-                        />
-                        <div className="text-center">
-                          <h2 className="text-2xl md:text-3xl font-black text-[#f5d76e] tracking-[0.18em] uppercase">
-                            {slide.brandName}
-                          </h2>
-                          <p className="text-xs md:text-sm text-white/90 font-semibold tracking-[0.22em] uppercase mt-1">
-                            {slide.tagline}
-                          </p>
+          {/* Outer Frame - Thick Dark Border */}
+          <div className="rounded-2xl p-3 md:p-4 bg-[#1a1a2e] shadow-[0_0_60px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.05)]">
+            {/* Inner Banner Container */}
+            <div className="relative overflow-hidden rounded-xl"
+                 style={{ height: "140px" }}>
+              
+              {/* Slides */}
+              <div className="relative h-full">
+                {verticalSlides.map((slide, index) => {
+                  const isActive = index === currentSlide;
+                  const isPrev = index === prevSlide;
+                  const shouldShow = isActive || (isPrev && isAnimating);
+                  
+                  let transformStyle = 'translateY(100%)';
+                  let zIndex = 0;
+                  
+                  if (isActive) {
+                    transformStyle = 'translateY(0)';
+                    zIndex = 10;
+                  } else if (isPrev && isAnimating) {
+                    transformStyle = 'translateY(-100%)';
+                    zIndex = 5;
+                  }
+                  
+                  return (
+                    <div
+                      key={slide.id}
+                      className="absolute inset-0 bg-gradient-to-r from-orange-600 via-red-500 to-red-700"
+                      style={{ 
+                        transform: transformStyle,
+                        transition: shouldShow ? 'transform 600ms ease-in-out' : 'none',
+                        zIndex,
+                        willChange: 'transform'
+                      }}
+                      data-testid={`vertical-slide-${index}`}
+                    >
+                      {/* CANLI Badge */}
+                      <div className="absolute top-3 left-4 z-20">
+                        <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-lg">
+                          CANLI
+                        </span>
+                      </div>
+
+                      {/* Content - Logo and Title Side by Side */}
+                      <div className="flex items-center h-full px-6 md:px-10">
+                        {slide.logo ? (
+                          <div className="flex items-center gap-4 md:gap-6">
+                            <img 
+                              src={slide.logo}
+                              alt="ETKİNİUM Logo"
+                              className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
+                            />
+                            <div>
+                              <h2 className="text-2xl md:text-4xl font-black text-white tracking-wide uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                {slide.brandName}
+                              </h2>
+                              <p className="text-sm md:text-base text-white/90 font-medium mt-1">
+                                {slide.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-4 md:gap-6">
+                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                              <span className="text-3xl md:text-4xl">📢</span>
+                            </div>
+                            <div>
+                              <h3 className="text-2xl md:text-4xl font-black text-white tracking-wide uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                {slide.title}
+                              </h3>
+                              <p className="text-sm md:text-base text-white/90 font-medium mt-1">
+                                {slide.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Right Side Info */}
+                        <div className="ml-auto text-right hidden md:block">
+                          <div className="text-xs text-white/70 font-medium">Gündüz Kuşağı 09:00-18:00</div>
+                          <div className="text-xl font-bold text-[#f5d76e] mt-1">₺5.000/hafta</div>
+                          <div className="text-xs text-white/60 mt-1">Reklam • 8 saniye</div>
                         </div>
                       </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center h-full px-10">
-                        <h3 className="text-2xl md:text-3xl font-black text-[#f5d76e] tracking-[0.15em] uppercase text-center">
-                          {slide.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-white/90 font-semibold tracking-[0.18em] uppercase mt-2 text-center">
-                          {slide.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
 
-            {/* Navigation - Dash Bar Style */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-              {verticalSlides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`transition-all duration-300 rounded-full ${
-                    index === currentSlide
-                      ? "w-10 h-1.5 bg-[#f5d76e]"
-                      : "w-3 h-1.5 bg-neutral-600 hover:bg-neutral-400"
-                  }`}
-                  data-testid={`vertical-dot-${index}`}
-                  aria-label={`Slide ${index + 1}`}
-                />
-              ))}
+              {/* Navigation Dots */}
+              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+                {verticalSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleDotClick(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === currentSlide
+                        ? "w-8 h-2 bg-white"
+                        : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                    }`}
+                    data-testid={`vertical-dot-${index}`}
+                    aria-label={`Slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
