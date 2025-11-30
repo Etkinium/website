@@ -5,6 +5,8 @@ import { insertEmailSubscriptionSchema, insertContactMessageSchema, insertPartne
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
+import { pool } from "./db";
 import "./types";
 
 // Extend Express session type
@@ -23,14 +25,26 @@ function requireAuth(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Setup session middleware
+  // Trust proxy for production (Replit runs behind a proxy)
+  app.set('trust proxy', 1);
+  
+  // Setup PostgreSQL session store
+  const PgSession = connectPgSimple(session);
+  
+  // Setup session middleware with PostgreSQL store
   app.use(session({
+    store: new PgSession({
+      pool: pool,
+      tableName: 'sessions',
+      createTableIfMissing: false,
+    }),
     secret: process.env.SESSION_SECRET || 'etkinium-secret-key-change-in-production',
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }
   }));
