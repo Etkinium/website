@@ -209,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
       // Update password
-      await storage.updateUser(userId, { password: hashedPassword });
+      await storage.updateUserPassword(userId, hashedPassword);
 
       res.json({ message: "Şifre başarıyla değiştirildi" });
     } catch (error) {

@@ -8,7 +8,7 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: RegisterUser): Promise<User>;
   updateUser(userId: string, data: UpdateProfile): Promise<User>;
-  updateUserPoints(userId: string, points: number): Promise<User>;
+  updateUserPassword(userId: string, hashedPassword: string): Promise<User>;
   
   // Email subscription methods
   getEmailSubscription(email: string): Promise<EmailSubscription | undefined>;
@@ -59,10 +59,10 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async updateUserPoints(userId: string, points: number): Promise<User> {
+  async updateUserPassword(userId: string, hashedPassword: string): Promise<User> {
     const [user] = await db
       .update(users)
-      .set({ points })
+      .set({ password: hashedPassword, updatedAt: new Date() })
       .where(eq(users.id, userId))
       .returning();
     return user;
