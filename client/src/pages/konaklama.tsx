@@ -274,15 +274,26 @@ const hotels = [
 
 export default function Konaklama() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [prevSlide, setPrevSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [activeTab, setActiveTab] = useState("otel");
+
+  const goToSlide = (newIndex: number) => {
+    if (isAnimating || newIndex === currentSlide) return;
+    setIsAnimating(true);
+    setPrevSlide(currentSlide);
+    setCurrentSlide(newIndex);
+    setTimeout(() => setIsAnimating(false), 800);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+      const nextSlide = (currentSlide + 1) % bannerSlides.length;
+      goToSlide(nextSlide);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentSlide, isAnimating]);
 
   const activeOption = accommodationOptions.find(opt => opt.id === activeTab);
 
@@ -291,59 +302,71 @@ export default function Konaklama() {
       <Header />
 
       <main className="pt-32 pb-20 px-4 md:px-8 lg:px-16">
-        {/* HORIZONTAL BANNER SLIDER - Billboard Style */}
-        <div className="relative overflow-hidden rounded-2xl mb-12 bg-neutral-950 border border-neutral-800/50 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
-             style={{ height: "160px" }}>
+        {/* BILLBOARD SLIDER - Metro Style */}
+        <div className="relative overflow-hidden rounded-xl mb-12 bg-neutral-950 border-4 border-neutral-800/80 shadow-[0_30px_80px_rgba(0,0,0,0.9)]"
+             style={{ height: "200px" }}>
           
           {/* Sol Altın Şerit - Billboard Accent */}
-          <div className="absolute left-0 top-4 bottom-4 w-1.5 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-r-full" />
+          <div className="absolute left-0 top-6 bottom-6 w-1 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-r-full z-10" />
           
-          {/* Subtle Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none" />
+          {/* Sağ Altın Şerit - Billboard Accent */}
+          <div className="absolute right-0 top-6 bottom-6 w-1 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-l-full z-10" />
           
-          <div className="relative w-full h-full overflow-hidden">
+          {/* Metro Style Slider */}
+          <div className="relative h-full bg-neutral-950">
             {bannerSlides.map((slide, index) => {
               const isActive = index === currentSlide;
+              const isPrev = index === prevSlide;
+              
+              const shouldShow = isActive || (isPrev && isAnimating);
+              
+              let transformStyle = 'translateX(100%)';
+              let zIndex = 0;
+              
+              if (isActive) {
+                transformStyle = 'translateX(0)';
+                zIndex = 10;
+              } else if (isPrev && isAnimating) {
+                transformStyle = 'translateX(-100%)';
+                zIndex = 5;
+              }
               
               return (
                 <div
                   key={slide.id}
+                  className="absolute inset-0 bg-neutral-950"
                   style={{ 
-                    transform: isActive ? 'translateX(0%)' : `translateX(${index < currentSlide ? '-100%' : '100%'})`,
-                    transition: 'transform 1.5s ease-out, opacity 1s ease-out',
-                    opacity: isActive ? 1 : 0
+                    transform: transformStyle,
+                    transition: shouldShow ? 'transform 700ms ease-in-out' : 'none',
+                    zIndex,
+                    willChange: 'transform'
                   }}
-                  className="absolute inset-0 w-full h-full"
                   data-testid={`banner-slide-${index}`}
                 >
                   {slide.logo ? (
-                    <div className="flex items-center justify-start h-full gap-6 px-10 md:px-14">
-                      <div className="flex-shrink-0">
-                        <img 
-                          src={slide.logo}
-                          alt="ETKİNİUM Logo"
-                          className="w-20 h-20 md:w-24 md:h-24 object-contain"
-                        />
-                      </div>
-                      <div>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#f5d76e] tracking-wide uppercase">
+                    <div className="flex flex-col items-center justify-center h-full gap-3 px-10">
+                      <img 
+                        src={slide.logo}
+                        alt="ETKİNİUM Logo"
+                        className="w-14 h-14 md:w-16 md:h-16 object-contain"
+                      />
+                      <div className="text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#f5d76e] tracking-[0.18em] uppercase">
                           {slide.brandName}
                         </h2>
-                        <p className="text-sm md:text-base lg:text-lg text-white/90 font-semibold tracking-[0.15em] uppercase mt-1">
+                        <p className="text-xs md:text-sm text-white/90 font-semibold tracking-[0.22em] uppercase mt-1">
                           {slide.tagline}
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center h-full px-10">
-                      <div className="text-center">
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-[#f5d76e] tracking-wide uppercase">
-                          {slide.title}
-                        </h3>
-                        <p className="text-sm md:text-base lg:text-lg text-white/90 font-semibold tracking-[0.12em] uppercase mt-2">
-                          {slide.description}
-                        </p>
-                      </div>
+                    <div className="flex flex-col items-center justify-center h-full px-10">
+                      <h3 className="text-2xl md:text-3xl font-black text-[#f5d76e] tracking-[0.15em] uppercase text-center">
+                        {slide.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-white/90 font-semibold tracking-[0.18em] uppercase mt-2 text-center">
+                        {slide.description}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -356,11 +379,11 @@ export default function Konaklama() {
             {bannerSlides.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => goToSlide(index)}
                 className={`transition-all duration-300 rounded-full ${
                   index === currentSlide
-                    ? "w-12 h-2 bg-[#f5d76e]"
-                    : "w-4 h-2 bg-neutral-600 hover:bg-neutral-400"
+                    ? "w-10 h-1.5 bg-[#f5d76e]"
+                    : "w-3 h-1.5 bg-neutral-600 hover:bg-neutral-400"
                 }`}
                 data-testid={`banner-dot-${index}`}
                 aria-label={`Slide ${index + 1}`}
