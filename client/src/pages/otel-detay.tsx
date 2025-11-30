@@ -16,7 +16,6 @@ const hotels = [
     fullDescription: "Bosphorus Palace Hotel, İstanbul Boğazı'nın eşsiz manzarasıyla öne çıkan lüks bir konaklama deneyimi sunuyor. Beşiktaş'ın merkezinde yer alan otelimiz, modern mimarisi ve tarihi dokusunu ustaca harmanlayan tasarımıyla dikkat çekiyor.",
     features: ["Ücretsiz Wi-Fi", "Açık Havuz", "Spa & Wellness", "Vale Park"],
     price: 4500,
-    points: 4500,
     image: "🏰",
     amenities: [
       { icon: Wifi, text: "Ücretsiz Yüksek Hızlı Wi-Fi" },
@@ -43,7 +42,6 @@ const hotels = [
     fullDescription: "Akdeniz'in masmavi sularıyla buluşan Sunset Beach Resort, her şey dahil konseptiyle ailenize unutulmaz bir tatil deneyimi sunuyor.",
     features: ["Özel Plaj", "5 Restoran", "Aquapark", "Kids Club"],
     price: 3800,
-    points: 3800,
     image: "🌅",
     amenities: [
       { icon: Waves, text: "500m Özel Plaj" },
@@ -70,7 +68,6 @@ const hotels = [
     fullDescription: "Bursa'nın ünlü termal sularından faydalanan lüks wellness otelimiz, şifa ve dinlenme arayanlar için ideal bir kaçış noktası.",
     features: ["Termal Havuz", "Masaj", "Sauna", "Kahvaltı Dahil"],
     price: 2200,
-    points: 2200,
     image: "♨️",
     amenities: [
       { icon: Waves, text: "Doğal Termal Havuz" },
@@ -97,7 +94,6 @@ const hotels = [
     fullDescription: "Ege'nin turkuaz sularına nazır butik otelimiz, sakin ve lüks bir tatil deneyimi için tasarlandı.",
     features: ["Özel Plaj", "Infinity Pool", "Bar", "Transfer"],
     price: 3200,
-    points: 3200,
     image: "⛵",
     amenities: [
       { icon: Waves, text: "Özel Plaj Alanı" },
@@ -124,7 +120,6 @@ const hotels = [
     fullDescription: "Ankara'nın iş merkezinde konumlanan modern otelimiz, iş seyahati için ideal konaklama imkanı sunuyor.",
     features: ["Toplantı Salonu", "Business Center", "Fitness", "Otopark"],
     price: 1800,
-    points: 1800,
     image: "🏢",
     amenities: [
       { icon: Wifi, text: "Yüksek Hızlı Wi-Fi" },
@@ -151,7 +146,6 @@ const hotels = [
     fullDescription: "Kapadokya'nın büyülü peribacaları arasında, mağara odalarda konaklama deneyimi. Balon turları ile unutulmaz anılar.",
     features: ["Balon Turu", "Teras Kahvaltı", "Concierge", "Spa"],
     price: 4200,
-    points: 4200,
     image: "🎈",
     amenities: [
       { icon: Waves, text: "Panoramik Teras" },
@@ -178,7 +172,6 @@ const hotels = [
     fullDescription: "Kemer'in muhteşem doğasında, ailenizle birlikte eğlence dolu bir tatil için her şey hazır.",
     features: ["Animasyon", "Aquapark", "Mini Club", "6 Restoran"],
     price: 3500,
-    points: 3500,
     image: "🏖️",
     amenities: [
       { icon: Waves, text: "Aquapark & Kaydıraklar" },
@@ -205,7 +198,6 @@ const hotels = [
     fullDescription: "İzmir Kordon'da, deniz manzaralı apart daireler. Uzun süreli konaklama ve şehir keşfi için ideal.",
     features: ["Deniz Manzarası", "Mutfak", "Balkon", "Merkezi Konum"],
     price: 2600,
-    points: 2600,
     image: "🌊",
     amenities: [
       { icon: Waves, text: "Kordon Sahil Manzarası" },
@@ -321,7 +313,6 @@ export default function OtelDetay() {
                     <p className="text-3xl font-bold text-accent-amber">
                       {new Intl.NumberFormat("tr-TR").format(room.price)} TL
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">~{room.price} puan</p>
                   </div>
                 </div>
               ))}

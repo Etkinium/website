@@ -15,12 +15,12 @@ export default function About() {
       answer: "Mobil Uygulama lansman sonrası aktif hale gelecektir. Güncellemeler duyurularda paylaşılacaktır."
     },
     {
-      question: "Kazandığım %10 indirim ve 100 Etkinium puanı nasıl kullanabilirim?",
-      answer: "Hiçbir alt limit olmadan Lansman sonrası kullanıma açılacaktır ve puan ile %10 indirim fırsatınızı tek kampanyada bile birleştirerek kullanabilirsiniz."
+      question: "ETKİNİUM'u nasıl kullanabilirim?",
+      answer: "Ücretsiz üye olarak tüm etkinlik, konaklama ve seyahat hizmetlerinden faydalanabilirsiniz. Lansman sonrası tüm özellikler aktif hale gelecektir."
     },
     {
-      question: "Etkinium ne zaman kullanıma açılacak?",
-      answer: "Etkinium'un lansmanı çok yakında gerçekleşecektir. Lansman ile birlikte tüm Giriş Paneli aktif hale gelecek ve mail adresinize İndirim ve Puan Haklarınız aktif tanımlanmış olacaktır."
+      question: "ETKİNİUM ne zaman kullanıma açılacak?",
+      answer: "ETKİNİUM'un lansmanı çok yakında gerçekleşecektir. Lansman ile birlikte tüm özellikler aktif hale gelecektir."
     }
   ];
 

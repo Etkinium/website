@@ -12,8 +12,8 @@ const faqs = [
         a: "ETKİNİUM, etkinlik, seyahat ve konaklamayı tek çatı altında birleştiren Türkiye'nin ilk yapay zeka destekli dijital biletleme ekosistemidir."
       },
       {
-        q: "ETKİNİUM Puan sistemi nasıl çalışır?",
-        a: "Her bilet alımında ve rezervasyonda puan kazanırsınız. Kazandığınız puanları sonraki alımlarınızda kullanabilir veya özel indirimlerden faydalanabilirsiniz."
+        q: "ETKİNİUM'un avantajları nelerdir?",
+        a: "Tek platformdan etkinlik bileti, konaklama rezervasyonu ve seyahat hizmeti alabilirsiniz. Blockchain tabanlı güvenli biletleme ve yapay zeka destekli öneri sistemi ile benzersiz bir deneyim yaşarsınız."
       }
     ]
   },
@@ -39,7 +39,7 @@ const faqs = [
     questions: [
       {
         q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?",
-        a: "Kredi kartı, banka kartı ve ETKİNİUM Puan ile ödeme gerçekleştirebilirsiniz. Diğer ödeme özellikleri lansman sonrası açıklanacaktır."
+        a: "Kredi kartı ve banka kartı ile güvenli ödeme gerçekleştirebilirsiniz. Diğer ödeme özellikleri lansman sonrası açıklanacaktır."
       },
       {
         q: "Ödeme bilgilerim güvende mi?",
@@ -63,8 +63,8 @@ const faqs = [
         a: "Otelin iptal koşullarına bağlı olarak rezervasyonunuzu değiştirebilir veya iptal edebilirsiniz. Detaylar rezervasyon onay mailinizde belirtilmiştir."
       },
       {
-        q: "Konaklama için de puan kazanabilir miyim?",
-        a: "Evet, otel rezervasyonlarınızda da ETKİNİUM Puan kazanırsınız."
+        q: "Konaklama rezervasyonlarım güvende mi?",
+        a: "Evet, tüm konaklama rezervasyonlarınız güvenli altyapımızla korunmaktadır. Onay e-postanız anında gönderilir."
       }
     ]
   },

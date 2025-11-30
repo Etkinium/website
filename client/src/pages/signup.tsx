@@ -94,7 +94,7 @@ export default function Signup() {
               </h1>
               
               <p className="text-sm sm:text-base text-gray-300 text-center mb-6 md:mb-8">
-                Hemen üye olun ve 100 puan kazanın
+                Hemen üye olun, ayrıcalıklı dünyaya adım atın
               </p>
               
               <Form {...form}>
@@ -224,7 +224,7 @@ export default function Signup() {
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-accent-amber flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>100 hoşgeldin puanı hediye</span>
+                  <span>Güvenli bilet ve rezervasyon</span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-400">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-accent-amber flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

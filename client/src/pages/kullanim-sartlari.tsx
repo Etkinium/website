@@ -41,7 +41,7 @@ export default function KullanimSartlari() {
                 <li>Etkinlik biletleri satın alabilir</li>
                 <li>Konaklama rezervasyonu yapabilir</li>
                 <li>Ulaşım biletleri satın alabilir (yakında)</li>
-                <li>ETKİNİUM Puan kazanabilir ve kullanabilirsiniz</li>
+                <li>Özel kampanyalardan faydalanabilirsiniz</li>
               </ul>
             </section>
 
@@ -96,7 +96,6 @@ export default function KullanimSartlari() {
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>Kredi kartı (Visa, Mastercard, American Express)</li>
                   <li>Banka kartı</li>
-                  <li>ETKİNİUM Puan</li>
                 </ul>
                 <p>
                   Ödeme bilgileriniz PCI-DSS standartlarına uygun şekilde şifrelenir ve saklanır. 
@@ -128,18 +127,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">6. ETKİNİUM Puan Sistemi</h2>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Her satın alımda ETKİNİUM Puan kazanırsınız</li>
-                <li>Puanlar sonraki alışverişlerde indirim olarak kullanılabilir</li>
-                <li>Puan kullanım koşulları ve geçerlilik süresi değişebilir</li>
-                <li>Puanlar başka hesaplara transfer edilemez</li>
-                <li>İade durumunda kullanılan puanlar hesaba iade edilir</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">7. Yasaklanan Davranışlar</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">6. Yasaklanan Davranışlar</h2>
               <p className="mb-4">
                 Platformu kullanırken aşağıdaki davranışlar kesinlikle yasaktır:
               </p>
@@ -155,7 +143,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">8. Fikri Mülkiyet Hakları</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">7. Fikri Mülkiyet Hakları</h2>
               <p>
                 ETKİNİUM platformundaki tüm içerik, tasarım, logo, yazılım ve materyaller 
                 ETKİNİUM'un mülkiyetindedir ve telif hakkı yasalarıyla korunmaktadır. 
@@ -164,7 +152,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">9. Sorumluluk Sınırlaması</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">8. Sorumluluk Sınırlaması</h2>
               <div className="space-y-4">
                 <p>
                   ETKİNİUM, aşağıdaki durumlardan sorumlu tutulamaz:
@@ -180,7 +168,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">10. Değişiklikler ve Güncellemeler</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">9. Değişiklikler ve Güncellemeler</h2>
               <p>
                 ETKİNİUM, kullanım koşullarını ve hizmetlerini herhangi bir zamanda değiştirme 
                 hakkını saklı tutar. Önemli değişiklikler e-posta ile bildirilecektir. 
@@ -190,7 +178,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">11. Hesap Kapatma</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">10. Hesap Kapatma</h2>
               <p>
                 ETKİNİUM, kullanım koşullarını ihlal eden hesapları uyarı vermeksizin askıya 
                 alma veya kalıcı olarak kapatma hakkını saklı tutar. Hesabınızı kendiniz kapatmak 
@@ -199,7 +187,7 @@ export default function KullanimSartlari() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">12. Uygulanacak Hukuk</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">11. Uygulanacak Hukuk</h2>
               <p>
                 Bu kullanım koşulları Türkiye Cumhuriyeti yasalarına tabidir. Herhangi bir 
                 uyuşmazlık durumunda İstanbul mahkemeleri ve icra daireleri yetkilidir.
