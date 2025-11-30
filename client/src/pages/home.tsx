@@ -11,17 +11,17 @@ const verticalSlides = [
     id: 1,
     logo: logoImage,
     brandName: "ETKİNİUM",
-    tagline: "Tek Platform, Sonsuz Sanat"
+    tagline: "TEK PLATFORM, SONSUZ SANAT"
   },
   {
     id: 2,
-    title: "Yeni Özellikler",
-    description: "Çok Yakında Sizlerle!"
+    title: "YENİ ÖZELLİKLER",
+    description: "ÇOK YAKINDA SİZLERLE"
   },
   {
     id: 3,
-    title: "Reklamlarınız İçin İdeal Platform",
-    description: "partner@etkinium.com ile iletişime geçebilirsiniz"
+    title: "REKLAM ALANLARIMIZ",
+    description: "MARKANIZI MİLYONLARA ULAŞTIRIN"
   }
 ];
 
@@ -42,61 +42,55 @@ export default function Home() {
       
       <HeroCarousel />
 
-      {/* VERTICAL SLIDER - Premium Oval Tasarım */}
-      <section className="bg-gradient-to-b from-spotify-black via-gray-900 to-spotify-black py-8 px-4 md:px-8 lg:px-16">
+      {/* VERTICAL SLIDER - Billboard Style */}
+      <section className="bg-spotify-black py-8 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-[60px] bg-gradient-to-r from-black via-gray-900/95 to-black border-[6px] border-accent-amber shadow-[0_0_50px_rgba(251,191,36,0.4),0_0_100px_rgba(251,191,36,0.2),inset_0_0_30px_rgba(251,191,36,0.1)] hover:shadow-[0_0_60px_rgba(251,191,36,0.6),0_0_120px_rgba(251,191,36,0.3),inset_0_0_40px_rgba(251,191,36,0.15)] transition-all duration-500"
-               style={{ height: "140px" }}>
+          <div className="relative overflow-hidden rounded-2xl bg-neutral-950 border border-neutral-800/50 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+               style={{ height: "160px" }}>
             
-            {/* Işık Efekti Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-amber/5 via-transparent to-accent-amber/5 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-accent-amber/10 via-transparent to-accent-amber/10 pointer-events-none" />
+            {/* Sol Altın Şerit - Billboard Accent */}
+            <div className="absolute left-0 top-4 bottom-4 w-1.5 bg-gradient-to-b from-[#d4af37] via-[#f5d76e] to-[#8a6c1d] rounded-r-full" />
+            
+            {/* Subtle Vignette */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none" />
             
             <div className="relative h-full">
               {verticalSlides.map((slide, index) => {
-                const position = index - currentSlide;
                 const isActive = index === currentSlide;
-                const isPrev = position === -1 || (currentSlide === 0 && index === verticalSlides.length - 1);
-                const isNext = position === 1 || (currentSlide === verticalSlides.length - 1 && index === 0);
                 
                 return (
                   <div
                     key={slide.id}
-                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                      isActive ? "translate-y-0 opacity-100 z-10" :
-                      isPrev ? "translate-y-full opacity-0 z-0" :
-                      isNext ? "-translate-y-full opacity-0 z-0" :
-                      "-translate-y-full opacity-0 z-0"
+                    className={`absolute inset-0 transition-all duration-700 ease-out ${
+                      isActive ? "translate-y-0 opacity-100 z-10" : "translate-y-8 opacity-0 z-0"
                     }`}
                     data-testid={`vertical-slide-${index}`}
                   >
                     {slide.logo ? (
-                      <div className="flex items-center justify-start h-full gap-5 px-8 md:px-12">
-                        <div className="flex-shrink-0 relative">
-                          {/* Logo Glow Effect */}
-                          <div className="absolute -inset-3 bg-accent-amber/30 rounded-full blur-xl animate-pulse" />
+                      <div className="flex items-center justify-start h-full gap-6 px-10 md:px-14">
+                        <div className="flex-shrink-0">
                           <img 
                             src={slide.logo}
                             alt="ETKİNİUM Logo"
-                            className="relative w-20 h-20 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.8)] filter brightness-110"
+                            className="w-20 h-20 md:w-24 md:h-24 object-contain"
                           />
                         </div>
                         <div>
-                          <h2 className="text-3xl md:text-4xl font-bold text-accent-amber drop-shadow-[0_2px_15px_rgba(251,191,36,0.5)]">
+                          <h2 className="text-4xl md:text-5xl font-black text-[#f5d76e] tracking-wide uppercase">
                             {slide.brandName}
                           </h2>
-                          <p className="text-lg md:text-xl text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                          <p className="text-base md:text-lg text-white/90 font-semibold tracking-[0.15em] uppercase mt-1">
                             {slide.tagline}
                           </p>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center h-full px-8">
+                      <div className="flex items-center justify-center h-full px-10">
                         <div className="text-center">
-                          <h3 className="text-2xl md:text-3xl font-bold text-accent-amber mb-2 drop-shadow-[0_2px_15px_rgba(251,191,36,0.5)]">
+                          <h3 className="text-3xl md:text-4xl font-black text-[#f5d76e] tracking-wide uppercase">
                             {slide.title}
                           </h3>
-                          <p className="text-lg md:text-xl text-white font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                          <p className="text-base md:text-lg text-white/90 font-semibold tracking-[0.12em] uppercase mt-2">
                             {slide.description}
                           </p>
                         </div>
@@ -107,16 +101,16 @@ export default function Home() {
               })}
             </div>
 
-            {/* DOTS - Premium Style */}
-            <div className="absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-2.5 z-20">
+            {/* Navigation - Dash Bar Style */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
               {verticalSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`rounded-full transition-all duration-300 ${
+                  className={`transition-all duration-300 rounded-full ${
                     index === currentSlide
-                      ? "h-7 w-3 bg-accent-amber ring-2 ring-accent-amber/60 shadow-[0_0_15px_rgba(251,191,36,0.8)]"
-                      : "h-3 w-3 bg-white/50 hover:bg-white/80 shadow-lg"
+                      ? "w-12 h-2 bg-[#f5d76e]"
+                      : "w-4 h-2 bg-neutral-600 hover:bg-neutral-400"
                   }`}
                   data-testid={`vertical-dot-${index}`}
                   aria-label={`Slide ${index + 1}`}
