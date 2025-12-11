@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User, LogOut, Ticket, Search, Settings, Mail } from "lucide-react";
+import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -58,10 +58,6 @@ export default function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    const query = searchQuery.trim().toLowerCase();
-    if (query.includes("seyahat") || query.includes("uçak") || query.includes("otobüs") || query.includes("tren")) {
-      setLocation("/seyahat");
-    }
     setSearchQuery("");
   };
 
@@ -105,40 +101,37 @@ export default function Header() {
 
           {/* BUTONLAR - SAĞ TARAFA YAKIN */}
           <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
-            <Link href="/seyahat">
+            <Link href="/etkinlikler">
               <Button 
                 variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-seyahat"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                data-testid="button-etkinlikler"
               >
-                Seyahat
+                <Calendar className="w-4 h-4" />
+                Etkinlikler
               </Button>
             </Link>
             
-            {/* BİZİMLE İLETİŞİME GEÇİN DROPDOWN */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost"
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                  data-testid="button-contact-dropdown"
-                >
-                  Bizimle İletişime Geçin
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-700">
-                <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
-                  <Link href="/about" className="flex items-center w-full">
-                    Hakkımızda
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
-                  <Link href="/contact" className="flex items-center w-full">
-                    İletişim
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Link href="/restoranlar">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                data-testid="button-restoranlar"
+              >
+                <UtensilsCrossed className="w-4 h-4" />
+                Restoranlar
+              </Button>
+            </Link>
+            
+            <Link href="/contact">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-contact"
+              >
+                Bizimle İletişime Geçin
+              </Button>
+            </Link>
             
             {!user && (
               <>
@@ -245,40 +238,40 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              <Link href="/seyahat">
+              <Link href="/etkinlikler">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-etkinlikler"
+                >
+                  <Calendar className="w-4 h-4" />
+                  Etkinlikler
+                </Button>
+              </Link>
+              
+              <Link href="/restoranlar">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-restoranlar"
+                >
+                  <UtensilsCrossed className="w-4 h-4" />
+                  Restoranlar
+                </Button>
+              </Link>
+              
+              <Link href="/contact">
                 <Button 
                   variant="ghost"
                   className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-seyahat"
+                  data-testid="button-mobile-contact"
                 >
-                  Seyahat
+                  Bizimle İletişime Geçin
                 </Button>
               </Link>
-              
-              <div className="border-t border-gray-700 pt-2">
-                <p className="text-xs text-gray-400 px-2 mb-2">Bizimle İletişime Geçin</p>
-                <Link href="/about">
-                  <Button 
-                    variant="ghost"
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid="button-mobile-about"
-                  >
-                    Hakkımızda
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button 
-                    variant="ghost"
-                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full mt-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid="button-mobile-contact"
-                  >
-                    İletişim
-                  </Button>
-                </Link>
-              </div>
               
               {!user && (
                 <>

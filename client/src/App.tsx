@@ -6,7 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
-import Seyahat from "@/pages/seyahat";
+import Etkinlikler from "@/pages/etkinlikler";
+import Restoranlar from "@/pages/restoranlar";
 import Login from "@/pages/login";
 import Signup from "@/pages/signup";
 import Profile from "@/pages/profile";
@@ -24,7 +25,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
-      <Route path="/seyahat" component={Seyahat} />
+      <Route path="/etkinlikler" component={Etkinlikler} />
+      <Route path="/restoranlar" component={Restoranlar} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/profile" component={Profile} />
