@@ -1,126 +1,135 @@
 import { useState, useEffect } from "react";
+import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
+import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
+import faturaportLogo from "@assets/image_1765452970912.png";
+import etkineumLogo from "@assets/logo-final.png";
 
 const adSlides = [
   {
     id: 1,
-    content: null,
+    logo: rezervemLogo,
+    text: "Misafirperverliğin Geleceği",
+    brand: "Rezervem",
+    bgColor: "#ffffff",
+    textColor: "#1a5c3a",
   },
   {
     id: 2,
-    content: null,
+    logo: tamamliyoLogo,
+    text: "Sigortayı dijitale kolayca entegre edin",
+    brand: "Tamamliyo",
+    bgColor: "#f5f7fa",
+    textColor: "#1e3a5f",
   },
   {
     id: 3,
-    content: null,
+    logo: faturaportLogo,
+    text: "Faturaport ile Çok Kolay!",
+    brand: "Faturaport",
+    bgColor: "#ffffff",
+    textColor: "#2d3a8c",
+  },
+  {
+    id: 4,
+    logo: etkineumLogo,
+    text: "İşletmeniz Burada Görünsün",
+    brand: "Markanızı Öne Çıkarın!",
+    bgColor: "#000000",
+    textColor: "#ffd600",
+    isPromo: true,
   },
 ];
 
 export default function OvalAdBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % adSlides.length);
-        setIsAnimating(false);
-      }, 500);
-    }, 8000);
+      setCurrentIndex((prev) => (prev + 1) % adSlides.length);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full px-4 py-6 md:py-8">
+    <div className="w-full px-3 md:px-4 py-4 md:py-6">
       <div 
-        className="relative mx-auto w-full max-w-[1000px] h-[60px] md:h-[70px] rounded-full overflow-hidden cursor-pointer group"
+        className="relative mx-auto w-full max-w-[900px] h-[56px] md:h-[65px] rounded-full overflow-hidden cursor-pointer group"
         style={{ 
-          background: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,214,0,0.1)",
-          border: "2px solid rgba(255,214,0,0.3)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+          border: "2px solid rgba(255,214,0,0.4)",
         }}
         data-testid="oval-ad-banner"
       >
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{
-            background: "linear-gradient(135deg, rgba(255,214,0,0.05) 0%, transparent 50%, rgba(255,214,0,0.05) 100%)",
-          }}
-        />
-        
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-          {adSlides.map((slide, index) => (
-            <div
-              key={slide.id}
-              className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out"
-              style={{
-                transform: `translateY(${
-                  index === currentIndex 
-                    ? "0%" 
-                    : index === (currentIndex - 1 + adSlides.length) % adSlides.length 
-                      ? "-100%" 
-                      : "100%"
-                })`,
-                opacity: index === currentIndex ? 1 : 0,
-              }}
-              data-testid={`ad-slide-${index}`}
-            >
-              <div className="flex items-center justify-center gap-2 md:gap-4 px-4 md:px-8">
-                <div className="flex items-center gap-2">
-                  <div 
-                    className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full animate-pulse"
-                    style={{ backgroundColor: "#ffd600" }}
-                  />
+        {adSlides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out px-3 md:px-6"
+            style={{
+              transform: `translateY(${
+                index === currentIndex 
+                  ? "0%" 
+                  : index === (currentIndex - 1 + adSlides.length) % adSlides.length 
+                    ? "-100%" 
+                    : "100%"
+              })`,
+              opacity: index === currentIndex ? 1 : 0,
+              backgroundColor: slide.bgColor,
+            }}
+            data-testid={`ad-slide-${index}`}
+          >
+            {slide.isPromo ? (
+              <div className="flex items-center justify-center gap-2 md:gap-4 w-full">
+                <img 
+                  src={slide.logo} 
+                  alt="ETKİNİUM" 
+                  className="h-7 md:h-9 w-auto object-contain"
+                />
+                <div className="flex flex-col md:flex-row items-center gap-0.5 md:gap-2">
                   <span 
-                    className="text-xs md:text-sm font-medium tracking-wider uppercase"
-                    style={{ color: "rgba(255,214,0,0.7)" }}
+                    className="text-xs md:text-sm font-bold"
+                    style={{ color: slide.textColor }}
                   >
-                    Reklam
+                    {slide.text}
                   </span>
-                </div>
-                
-                <div className="h-4 md:h-5 w-px bg-gray-700" />
-                
-                <div className="flex-1 flex items-center justify-center">
-                  <div 
-                    className="px-4 md:px-6 py-1.5 md:py-2 rounded-full border border-dashed"
+                  <span 
+                    className="text-[10px] md:text-xs font-semibold px-2 py-0.5 rounded-full"
                     style={{ 
-                      borderColor: "rgba(255,214,0,0.4)",
-                      background: "rgba(255,214,0,0.03)"
+                      backgroundColor: "rgba(255,214,0,0.2)",
+                      color: slide.textColor 
                     }}
                   >
-                    <span 
-                      className="text-sm md:text-base font-semibold tracking-wide"
-                      style={{ color: "#ffd600" }}
-                    >
-                      Reklam Alanı
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="h-4 md:h-5 w-px bg-gray-700" />
-                
-                <div className="hidden sm:flex items-center gap-2">
-                  <span 
-                    className="text-xs font-medium"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
-                  >
-                    iletisim@etkinium.com
+                    {slide.brand}
                   </span>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ) : (
+              <div className="flex items-center justify-center gap-3 md:gap-5 w-full">
+                <img 
+                  src={slide.logo} 
+                  alt={slide.brand} 
+                  className="h-6 md:h-8 w-auto object-contain max-w-[100px] md:max-w-[140px]"
+                />
+                <div className="h-5 md:h-6 w-px bg-gray-300" />
+                <span 
+                  className="text-xs md:text-sm font-semibold text-center leading-tight"
+                  style={{ color: slide.textColor }}
+                >
+                  {slide.text}
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
 
-        <div className="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 flex gap-1">
+        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 z-10">
           {adSlides.map((_, index) => (
-            <div
+            <button
               key={index}
-              className="w-1 h-1 rounded-full transition-all duration-300"
+              onClick={() => setCurrentIndex(index)}
+              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300"
               style={{
-                backgroundColor: index === currentIndex ? "#ffd600" : "rgba(255,255,255,0.2)",
+                backgroundColor: index === currentIndex ? "#ffd600" : "rgba(0,0,0,0.3)",
                 transform: index === currentIndex ? "scale(1.2)" : "scale(1)",
               }}
             />
