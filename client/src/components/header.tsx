@@ -59,9 +59,7 @@ export default function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim().toLowerCase();
-    if (query.includes("konaklama") || query.includes("otel")) {
-      setLocation("/konaklama");
-    } else if (query.includes("seyahat") || query.includes("uçak") || query.includes("otobüs") || query.includes("tren")) {
+    if (query.includes("seyahat") || query.includes("uçak") || query.includes("otobüs") || query.includes("tren")) {
       setLocation("/seyahat");
     }
     setSearchQuery("");
@@ -107,16 +105,6 @@ export default function Header() {
 
           {/* BUTONLAR - SAĞ TARAFA YAKIN */}
           <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
-            
-            <Link href="/konaklama">
-              <Button 
-                variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
-                data-testid="button-konaklama"
-              >
-                Konaklama
-              </Button>
-            </Link>
             <Link href="/seyahat">
               <Button 
                 variant="ghost"
@@ -257,16 +245,6 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              <Link href="/konaklama">
-                <Button 
-                  variant="ghost"
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="button-mobile-konaklama"
-                >
-                  Konaklama
-                </Button>
-              </Link>
               <Link href="/seyahat">
                 <Button 
                   variant="ghost"

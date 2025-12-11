@@ -16,7 +16,7 @@ export default function About() {
     },
     {
       question: "ETKİNİUM'u nasıl kullanabilirim?",
-      answer: "Ücretsiz üye olarak tüm etkinlik, konaklama ve seyahat hizmetlerinden faydalanabilirsiniz. Lansman sonrası tüm özellikler aktif hale gelecektir."
+      answer: "Ücretsiz üye olarak tüm etkinlik ve seyahat hizmetlerinden faydalanabilirsiniz. Lansman sonrası tüm özellikler aktif hale gelecektir."
     },
     {
       question: "ETKİNİUM ne zaman kullanıma açılacak?",

@@ -9,11 +9,11 @@ const faqs = [
     questions: [
       {
         q: "ETKİNİUM nedir?",
-        a: "ETKİNİUM, etkinlik, seyahat ve konaklamayı tek çatı altında birleştiren Türkiye'nin ilk yapay zeka destekli dijital biletleme ekosistemidir."
+        a: "ETKİNİUM, etkinlik ve seyahati tek çatı altında birleştiren Türkiye'nin ilk yapay zeka destekli dijital biletleme ekosistemidir."
       },
       {
         q: "ETKİNİUM'un avantajları nelerdir?",
-        a: "Tek platformdan etkinlik bileti, konaklama rezervasyonu ve seyahat hizmeti alabilirsiniz. Blockchain tabanlı güvenli biletleme ve yapay zeka destekli öneri sistemi ile benzersiz bir deneyim yaşarsınız."
+        a: "Tek platformdan etkinlik bileti ve seyahat hizmeti alabilirsiniz. Blockchain tabanlı güvenli biletleme ve yapay zeka destekli öneri sistemi ile benzersiz bir deneyim yaşarsınız."
       }
     ]
   },
@@ -48,23 +48,6 @@ const faqs = [
       {
         q: "Fatura alabilir miyim?",
         a: "Evet, her alışverişiniz için e-fatura düzenlenebilir. Fatura bilgilerinizi ödeme sırasında girebilir veya profil ayarlarınızdan kaydedebilirsiniz."
-      }
-    ]
-  },
-  {
-    category: "Konaklama",
-    questions: [
-      {
-        q: "Otel rezervasyonu nasıl yapılır?",
-        a: "Konaklama sekmesinden şehir ve tarihleri seçin, uygun oteli seçip rezervasyon yapın. Onay e-postanız hemen gelecektir."
-      },
-      {
-        q: "Rezervasyonumu değiştirebilir miyim?",
-        a: "Otelin iptal koşullarına bağlı olarak rezervasyonunuzu değiştirebilir veya iptal edebilirsiniz. Detaylar rezervasyon onay mailinizde belirtilmiştir."
-      },
-      {
-        q: "Konaklama rezervasyonlarım güvende mi?",
-        a: "Evet, tüm konaklama rezervasyonlarınız güvenli altyapımızla korunmaktadır. Onay e-postanız anında gönderilir."
       }
     ]
   },

@@ -48,6 +48,17 @@ Preferred communication style: Simple, everyday language.
   - PostCSS with Autoprefixer for CSS processing
 
 ### Recent Changes
+- **Dec 11, 2025**: KONAKLAMA REMOVAL & OVAL AD BANNER
+  - Removed ALL konaklama (accommodation) related content from entire website
+  - Deleted konaklama.tsx and otel-detay.tsx pages
+  - Removed konaklama routes from App.tsx
+  - Removed konaklama buttons from header navigation (desktop and mobile)
+  - Updated SSS, about, kullanim-sartlari, kvkk pages to remove konaklama references
+  - Removed konaklama slide from hero carousel
+  - Added oval-shaped advertising banner slider to homepage (3 rotating slides, 8-second intervals)
+  - Banner component: client/src/components/oval-ad-banner.tsx
+  - PostgreSQL session store (connect-pg-simple) for production session persistence
+  - Trust proxy and secure cookie configuration for Replit production environment
 - **Nov 09, 2025**: CUSTOM EMAIL/PASSWORD AUTHENTICATION COMPLETED
   - Full migration from Replit Auth to custom email/password system with bcrypt hashing
   - Created login page: email, password, "beni hatırla" checkbox, Enter key support, session 7-day max age

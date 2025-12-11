@@ -33,13 +33,12 @@ export default function KullanimSartlari() {
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">1. Hizmet Tanımı</h2>
               <p className="mb-4">
-                ETKİNİUM, etkinlik, konser, tiyatro, festival, konaklama ve seyahat hizmetlerini 
+                ETKİNİUM, etkinlik, konser, tiyatro, festival ve seyahat hizmetlerini 
                 tek platformda birleştiren Türkiye'nin ilk yapay zeka destekli dijital biletleme 
                 ekosistemidir. Platform aracılığıyla:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Etkinlik biletleri satın alabilir</li>
-                <li>Konaklama rezervasyonu yapabilir</li>
                 <li>Ulaşım biletleri satın alabilir (yakında)</li>
                 <li>Özel kampanyalardan faydalanabilirsiniz</li>
               </ul>
@@ -159,7 +158,7 @@ export default function KullanimSartlari() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>Etkinlik organizatörlerinin iptal, değişiklik veya kalite sorunları</li>
-                  <li>Konaklama ve seyahat hizmeti sağlayıcılarının hataları</li>
+                  <li>Seyahat hizmeti sağlayıcılarının hataları</li>
                   <li>Kullanıcı hatalarından kaynaklanan sorunlar</li>
                   <li>İnternet bağlantısı veya teknik aksaklıklar</li>
                   <li>Mücbir sebepler (doğal afet, pandemi, vb.)</li>

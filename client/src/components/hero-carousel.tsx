@@ -3,7 +3,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
-import hotelImage from "@assets/stock_images/luxury_business_hote_faf7411c.jpg";
 import joinImage from "@assets/stock_images/crowd_people_enjoyin_e049ed7f.jpg";
 
 const slides = [
@@ -15,12 +14,6 @@ const slides = [
   },
   {
     id: 2,
-    backgroundImage: hotelImage,
-    title: "Lüks Konaklama",
-    description: "Deniz manzaralı eşsiz otel deneyimleri",
-  },
-  {
-    id: 3,
     backgroundImage: joinImage,
     title: "Aramıza Katıl",
     description: "İndirimlerden faydalan, avantajları yakala!",

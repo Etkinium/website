@@ -102,7 +102,7 @@ export default function KVKK() {
                 <li>Etkinlik organizatörleri (bilet doğrulama amacıyla)</li>
                 <li>Bulut altyapı sağlayıcıları (veri saklama)</li>
                 <li>Yasal merciler (yasal zorunluluk halinde)</li>
-                <li>İş ortakları (konaklama ve seyahat hizmetleri)</li>
+                <li>İş ortakları (seyahat hizmetleri)</li>
               </ul>
             </section>
 
