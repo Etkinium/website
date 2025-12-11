@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
-import faturaportLogo from "@assets/image_1765452970912.png";
 import etkineumLogo from "@assets/logo-final.png";
 
 const adSlides = [
   {
     id: 1,
     logo: rezervemLogo,
-    text: "Misafirperverliğin Geleceği",
+    text: "Misafirperverliğin Geleceği!",
     brand: "Rezervem",
     bgColor: "#ffffff",
     textColor: "#1a5c3a",
@@ -16,24 +15,16 @@ const adSlides = [
   {
     id: 2,
     logo: tamamliyoLogo,
-    text: "Sigortayı dijitale kolayca entegre edin",
+    text: "Sigortayı Dijitale Kolayca Entegre Edin!",
     brand: "Tamamliyo",
     bgColor: "#f5f7fa",
     textColor: "#1e3a5f",
   },
   {
     id: 3,
-    logo: faturaportLogo,
-    text: "Faturaport ile Çok Kolay!",
-    brand: "Faturaport",
-    bgColor: "#ffffff",
-    textColor: "#2d3a8c",
-  },
-  {
-    id: 4,
     logo: etkineumLogo,
-    text: "İşletmeniz Burada Görünsün",
-    brand: "Markanızı Öne Çıkarın!",
+    text: "Markanızı Öne Çıkarın!",
+    brand: "ETKİNİUM",
     bgColor: "#000000",
     textColor: "#ffd600",
     isPromo: true,
@@ -85,21 +76,12 @@ export default function OvalAdBanner() {
                   alt="ETKİNİUM" 
                   className="h-7 md:h-9 w-auto object-contain"
                 />
-                <div className="flex flex-col md:flex-row items-center gap-0.5 md:gap-2">
+                <div className="flex items-center gap-2">
                   <span 
-                    className="text-xs md:text-sm font-bold"
+                    className="text-sm md:text-base font-bold"
                     style={{ color: slide.textColor }}
                   >
                     {slide.text}
-                  </span>
-                  <span 
-                    className="text-[10px] md:text-xs font-semibold px-2 py-0.5 rounded-full"
-                    style={{ 
-                      backgroundColor: "rgba(255,214,0,0.2)",
-                      color: slide.textColor 
-                    }}
-                  >
-                    {slide.brand}
                   </span>
                 </div>
               </div>
