@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
+import faturaportLogo from "@assets/download_1765541159072.png";
 import etkineumLogo from "@assets/logo-final.png";
 
 const adSlides = [
@@ -22,6 +23,14 @@ const adSlides = [
   },
   {
     id: 3,
+    logo: faturaportLogo,
+    text: "e-fatura'nın Mobili!",
+    brand: "Faturaport",
+    bgColor: "#ffffff",
+    textColor: "#1e3a8a",
+  },
+  {
+    id: 4,
     logo: etkineumLogo,
     text: "Markanızı Öne Çıkarın!",
     brand: "ETKİNİUM",
