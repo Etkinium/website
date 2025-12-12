@@ -7,7 +7,7 @@ import AdApplicationButton from "@/components/ad-application-button";
 import EmailSubscription from "@/components/email-subscription";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, Ticket, Zap, Shield, Smartphone } from "lucide-react";
+import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -226,102 +226,6 @@ export default function Home() {
                 Tümünü Gör
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
-            <Link href="/etkinlikler">
-              <div className="relative bg-gradient-to-br from-purple-900/60 via-purple-800/40 to-gray-900 border border-purple-500/40 rounded-2xl p-6 sm:p-8 hover:border-purple-400 transition-all group cursor-pointer overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" />
-                <Calendar className="w-12 h-12 sm:w-14 sm:h-14 text-purple-400 mb-4 relative z-10" />
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-purple-300 transition-colors relative z-10">Etkinlikleri Keşfet</h3>
-                <p className="text-gray-400 text-sm sm:text-base mb-4 relative z-10">
-                  Konserler, tiyatrolar, festivaller ve daha fazlası. Türkiye'nin en özel etkinliklerine bilet alın.
-                </p>
-                <span className="text-purple-400 font-semibold flex items-center text-sm sm:text-base relative z-10 group-hover:translate-x-2 transition-transform">
-                  Etkinliklere Git <ChevronRight className="w-5 h-5 ml-1" />
-                </span>
-              </div>
-            </Link>
-            <Link href="/restoranlar">
-              <div className="relative bg-gradient-to-br from-amber-900/60 via-amber-800/40 to-gray-900 border border-amber-500/40 rounded-2xl p-6 sm:p-8 hover:border-amber-400 transition-all group cursor-pointer overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl" />
-                <UtensilsCrossed className="w-12 h-12 sm:w-14 sm:h-14 text-amber-400 mb-4 relative z-10" />
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-amber-300 transition-colors relative z-10">Restoranları Keşfet</h3>
-                <p className="text-gray-400 text-sm sm:text-base mb-4 relative z-10">
-                  En seçkin restoranlardan kolayca rezervasyon yapın. Fine dining'den cafe'lere her türlü lezzet.
-                </p>
-                <span className="text-amber-400 font-semibold flex items-center text-sm sm:text-base relative z-10 group-hover:translate-x-2 transition-transform">
-                  Restoranlara Git <ChevronRight className="w-5 h-5 ml-1" />
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 sm:py-16">
-        <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-accent-amber/10 via-accent-amber/5 to-transparent border border-accent-amber/30 rounded-3xl p-6 sm:p-10 md:p-12">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                  <span className="text-accent-amber">ETKİNİUM</span> ile Deneyiminizi Yükseltin
-                </h2>
-                <p className="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
-                  Türkiye'nin en kapsamlı dijital biletleme ve rezervasyon platformu. 
-                  Yapay zeka destekli öneriler, güvenli ödeme altyapısı ve anlık bildirimlerle 
-                  etkinlik deneyiminizi bir üst seviyeye taşıyın.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link href="/etkinlikler">
-                    <Button className="bg-accent-amber text-black hover:bg-yellow-400 font-semibold px-6 rounded-full">
-                      <Ticket className="w-4 h-4 mr-2" />
-                      Etkinlikleri Keşfet
-                    </Button>
-                  </Link>
-                  <Link href="/restoranlar">
-                    <Button variant="outline" className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black rounded-full px-6">
-                      <UtensilsCrossed className="w-4 h-4 mr-2" />
-                      Restoran Bul
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-900/80 border border-gray-700 rounded-2xl p-5 text-center hover:border-accent-amber/50 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-accent-amber/10 flex items-center justify-center mx-auto mb-3">
-                    <Zap className="w-6 h-6 text-accent-amber" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-1">Hızlı İşlem</h4>
-                  <p className="text-gray-500 text-xs">Saniyeler içinde bilet alın</p>
-                </div>
-                <div className="bg-gray-900/80 border border-gray-700 rounded-2xl p-5 text-center hover:border-accent-amber/50 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-accent-amber/10 flex items-center justify-center mx-auto mb-3">
-                    <Shield className="w-6 h-6 text-accent-amber" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-1">Güvenli Ödeme</h4>
-                  <p className="text-gray-500 text-xs">256-bit SSL şifreleme</p>
-                </div>
-                <div className="bg-gray-900/80 border border-gray-700 rounded-2xl p-5 text-center hover:border-accent-amber/50 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-accent-amber/10 flex items-center justify-center mx-auto mb-3">
-                    <Smartphone className="w-6 h-6 text-accent-amber" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-1">Mobil Uyumlu</h4>
-                  <p className="text-gray-500 text-xs">Her cihazda mükemmel</p>
-                </div>
-                <div className="bg-gray-900/80 border border-gray-700 rounded-2xl p-5 text-center hover:border-accent-amber/50 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-accent-amber/10 flex items-center justify-center mx-auto mb-3">
-                    <Star className="w-6 h-6 text-accent-amber" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-1">VIP Ayrıcalıklar</h4>
-                  <p className="text-gray-500 text-xs">Özel fırsatlar ve indirimler</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

@@ -42,6 +42,7 @@ const categories = [
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[0] | null>(null);
+  const [isCategoryPaused, setIsCategoryPaused] = useState(false);
   const totalSlides = slides.length;
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -68,9 +69,9 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
+    if (!scrollContainer || isCategoryPaused) return;
 
-    let scrollPosition = 0;
+    let scrollPosition = scrollContainer.scrollLeft;
     const scrollSpeed = 0.5;
 
     const scroll = () => {
@@ -83,7 +84,7 @@ export default function HeroCarousel() {
 
     const interval = setInterval(scroll, 20);
     return () => clearInterval(interval);
-  }, []);
+  }, [isCategoryPaused]);
 
   return (
     <>
@@ -157,6 +158,8 @@ export default function HeroCarousel() {
             ref={scrollRef}
             className="overflow-hidden whitespace-nowrap"
             style={{ maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}
+            onMouseEnter={() => setIsCategoryPaused(true)}
+            onMouseLeave={() => setIsCategoryPaused(false)}
           >
             <div className="inline-flex gap-2 md:gap-3 px-4 animate-none">
               {[...categories, ...categories].map((category, index) => {
