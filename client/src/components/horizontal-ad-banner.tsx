@@ -71,17 +71,12 @@ export default function HorizontalAdBanner() {
           >
             {slide.isPromo ? (
               <div className="flex items-center justify-center gap-4 md:gap-8 w-full">
-                <div className="p-2 md:p-3 rounded-xl bg-accent-amber/20 border border-accent-amber/30">
-                  <img 
-                    src={slide.logo} 
-                    alt="ETKİNİUM" 
-                    className="h-10 md:h-14 w-auto object-contain"
-                  />
-                </div>
+                <img 
+                  src={slide.logo} 
+                  alt="ETKİNİUM" 
+                  className="h-12 md:h-16 w-auto object-contain"
+                />
                 <div className="flex flex-col items-start">
-                  <span className="text-accent-amber text-xs md:text-sm font-medium uppercase tracking-wider">
-                    Reklam Alanı
-                  </span>
                   <span 
                     className="text-lg md:text-2xl font-bold"
                     style={{ color: slide.textColor }}
@@ -99,9 +94,6 @@ export default function HorizontalAdBanner() {
                 />
                 <div className="h-10 md:h-14 w-px bg-gray-300" />
                 <div className="flex flex-col items-start">
-                  <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">
-                    Sponsorlu
-                  </span>
                   <span 
                     className="text-base md:text-xl font-bold leading-tight"
                     style={{ color: slide.textColor }}
@@ -130,7 +122,7 @@ export default function HorizontalAdBanner() {
         </div>
 
         <div className="absolute top-2 right-3 md:right-4">
-          <span className="text-[10px] md:text-xs text-gray-400 bg-black/30 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] md:text-xs font-semibold bg-black text-accent-amber px-2 py-0.5 rounded-full border border-accent-amber/50">
             Reklam
           </span>
         </div>
