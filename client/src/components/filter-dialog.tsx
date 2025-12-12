@@ -47,7 +47,7 @@ export default function FilterDialog({ isOpen, onClose, type }: FilterDialogProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-gradient-to-br from-gray-900 via-black to-gray-900 border-2 border-accent-amber/40 max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-gradient-to-br from-gray-900 via-black to-gray-900 border-2 border-accent-amber/40 max-w-md mx-auto overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <DialogHeader>
           <DialogTitle className="text-center text-xl md:text-2xl font-bold text-white flex items-center justify-center gap-2">
             <Filter className="w-6 h-6 text-accent-amber" />

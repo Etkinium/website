@@ -42,14 +42,17 @@ const adSlides = [
 
 export default function OvalAdBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % adSlides.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   return (
     <div className="w-full px-3 md:px-4 py-4 md:py-6">
@@ -59,6 +62,8 @@ export default function OvalAdBanner() {
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
           border: "2px solid rgba(255,214,0,0.4)",
         }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
         data-testid="oval-ad-banner"
       >
         {adSlides.map((slide, index) => (

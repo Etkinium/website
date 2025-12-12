@@ -42,14 +42,17 @@ const adSlides = [
 
 export default function HorizontalAdBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % adSlides.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   return (
     <div className="w-full px-4 py-4">
@@ -59,6 +62,8 @@ export default function HorizontalAdBanner() {
           boxShadow: "0 8px 32px rgba(255,214,0,0.15), 0 4px 16px rgba(0,0,0,0.4)",
           border: "3px solid rgba(255,214,0,0.5)",
         }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
         data-testid="horizontal-ad-banner"
       >
         {adSlides.map((slide, index) => (
@@ -131,7 +136,7 @@ export default function HorizontalAdBanner() {
         </div>
 
         <div className="absolute top-2 right-3 md:right-4">
-          <span className="text-[10px] md:text-xs font-semibold bg-black text-accent-amber px-2 py-0.5 rounded-full border border-accent-amber/50">
+          <span className="text-[9px] md:text-[10px] font-medium bg-gradient-to-r from-gray-900 to-black text-accent-amber/80 px-2 py-0.5 rounded-md border border-accent-amber/30 tracking-wide uppercase">
             Reklam
           </span>
         </div>
