@@ -42,8 +42,11 @@ const categories = [
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[0] | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const totalSlides = slides.length;
   const scrollRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const scrollPositionRef = useRef(0);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -70,20 +73,27 @@ export default function HeroCarousel() {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let scrollPosition = 0;
     const scrollSpeed = 0.5;
 
     const scroll = () => {
-      scrollPosition += scrollSpeed;
-      if (scrollPosition >= scrollContainer.scrollWidth / 2) {
-        scrollPosition = 0;
+      if (!isPaused) {
+        scrollPositionRef.current += scrollSpeed;
+        if (scrollPositionRef.current >= scrollContainer.scrollWidth / 2) {
+          scrollPositionRef.current = 0;
+        }
+        scrollContainer.scrollLeft = scrollPositionRef.current;
       }
-      scrollContainer.scrollLeft = scrollPosition;
+      animationRef.current = requestAnimationFrame(scroll);
     };
 
-    const interval = setInterval(scroll, 20);
-    return () => clearInterval(interval);
-  }, []);
+    animationRef.current = requestAnimationFrame(scroll);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused]);
 
   return (
     <>
@@ -157,6 +167,8 @@ export default function HeroCarousel() {
             ref={scrollRef}
             className="overflow-hidden whitespace-nowrap"
             style={{ maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
             <div className="inline-flex gap-2 md:gap-3 px-4 animate-none">
               {[...categories, ...categories].map((category, index) => {

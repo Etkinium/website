@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface DateDrawerProps {
   isOpen: boolean;
@@ -12,153 +12,172 @@ const months = [
   "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
 ];
 
-const weekDays = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
-
 export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawerProps) {
   const today = new Date();
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
-  const getDaysInMonth = (month: number, year: number) => {
-    return new Date(year, month + 1, 0).getDate();
+  const dates = Array.from({ length: 60 }, (_, i) => {
+    const date = new Date();
+    date.setDate(today.getDate() + i);
+    return date;
+  });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
   };
 
-  const getFirstDayOfMonth = (month: number, year: number) => {
-    const day = new Date(year, month, 1).getDay();
-    return day === 0 ? 6 : day - 1;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const handlePrevMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear(currentYear - 1);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
-  const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear(currentYear + 1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
   };
 
-  const handleDateClick = (day: number) => {
-    const date = new Date(currentYear, currentMonth, day);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const scrollAmount = 300;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth"
+    });
+  };
+
+  const handleDateClick = (date: Date) => {
     setSelectedDate(date);
     onSelectDate(date);
   };
 
-  const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-  const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
-  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  const emptyDays = Array.from({ length: firstDay }, (_, i) => i);
+  const getDayName = (date: Date) => {
+    const days = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
+    return days[date.getDay()];
+  };
+
+  useEffect(() => {
+    if (isOpen && scrollRef.current) {
+      scrollRef.current.scrollLeft = 0;
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-24"
-      onClick={onClose}
+      className="fixed inset-x-0 top-16 z-50 animate-in slide-in-from-top duration-300"
+      data-testid="date-drawer"
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      
       <div 
-        className="relative w-full max-w-md mx-4 bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-accent-amber/40 rounded-2xl shadow-2xl shadow-accent-amber/10 overflow-hidden animate-in slide-in-from-top-4 duration-300"
-        onClick={(e) => e.stopPropagation()}
-        data-testid="date-drawer"
+        className="relative w-full bg-black/95 backdrop-blur-xl border-b border-accent-amber/30"
+        style={{
+          boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 60px rgba(255,214,0,0.1)"
+        }}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-800">
-          <h3 className="text-lg font-semibold text-white">Tarih Seçin</h3>
+        <div className="absolute top-3 right-4 z-10">
           <button 
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-800 hover:bg-accent-amber hover:text-black flex items-center justify-center text-gray-400 transition-all"
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-accent-amber flex items-center justify-center text-white/60 hover:text-black transition-all border border-white/10"
             data-testid="close-date-drawer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="px-4 py-3">
+          <p className="text-xs text-white/50 mb-3">Tarih Seçin</p>
+          
+          <div className="relative flex items-center">
             <button 
-              onClick={handlePrevMonth}
-              className="w-8 h-8 rounded-full bg-gray-800 hover:bg-accent-amber hover:text-black flex items-center justify-center text-white transition-all"
-              data-testid="prev-month"
+              onClick={() => scroll("left")}
+              className="absolute left-0 z-10 w-10 h-10 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+              style={{ boxShadow: "4px 0 20px rgba(0,0,0,0.8)" }}
+              data-testid="scroll-dates-left"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
-            <span className="text-white font-semibold">
-              {months[currentMonth]} {currentYear}
-            </span>
+            
+            <div 
+              ref={scrollRef}
+              className="flex gap-2 overflow-x-auto py-2 px-12 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleMouseUp}
+            >
+              {dates.map((date, index) => {
+                const isToday = date.toDateString() === today.toDateString();
+                const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+                
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleDateClick(date)}
+                    className={`flex-shrink-0 flex flex-col items-center justify-center w-16 h-20 rounded-2xl transition-all ${
+                      isSelected
+                        ? "bg-accent-amber text-black"
+                        : isToday
+                          ? "bg-accent-amber/20 text-accent-amber border border-accent-amber/50"
+                          : "bg-white/5 text-white/70 hover:bg-white/10 border border-white/5"
+                    }`}
+                    data-testid={`date-${index}`}
+                  >
+                    <span className="text-[10px] font-medium uppercase opacity-70">
+                      {getDayName(date)}
+                    </span>
+                    <span className="text-2xl font-bold">
+                      {date.getDate()}
+                    </span>
+                    <span className="text-[10px] font-medium opacity-70">
+                      {months[date.getMonth()].slice(0, 3)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
             <button 
-              onClick={handleNextMonth}
-              className="w-8 h-8 rounded-full bg-gray-800 hover:bg-accent-amber hover:text-black flex items-center justify-center text-white transition-all"
-              data-testid="next-month"
+              onClick={() => scroll("right")}
+              className="absolute right-0 z-10 w-10 h-10 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+              style={{ boxShadow: "-4px 0 20px rgba(0,0,0,0.8)" }}
+              data-testid="scroll-dates-right"
             >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-7 gap-1 mb-2">
-            {weekDays.map((day) => (
-              <div key={day} className="text-center text-xs text-gray-500 font-medium py-2">
-                {day}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-7 gap-1">
-            {emptyDays.map((_, index) => (
-              <div key={`empty-${index}`} className="aspect-square" />
-            ))}
-            {days.map((day) => {
-              const isToday = day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
-              const isSelected = selectedDate && day === selectedDate.getDate() && currentMonth === selectedDate.getMonth() && currentYear === selectedDate.getFullYear();
-              const isPast = new Date(currentYear, currentMonth, day) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-              
-              return (
-                <button
-                  key={day}
-                  onClick={() => !isPast && handleDateClick(day)}
-                  disabled={isPast}
-                  className={`aspect-square rounded-xl flex items-center justify-center text-sm font-medium transition-all ${
-                    isSelected
-                      ? "bg-accent-amber text-black"
-                      : isToday
-                        ? "bg-accent-amber/20 text-accent-amber border border-accent-amber/50"
-                        : isPast
-                          ? "text-gray-600 cursor-not-allowed"
-                          : "text-white hover:bg-gray-800"
-                  }`}
-                  data-testid={`day-${day}`}
-                >
-                  {day}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-gray-800 flex gap-3">
-            <button
-              onClick={() => { setSelectedDate(null); onClose(); }}
-              className="flex-1 py-2.5 rounded-xl bg-gray-800 text-white text-sm font-medium hover:bg-gray-700 transition-all"
-            >
-              Temizle
-            </button>
-            <button
-              onClick={onClose}
-              className="flex-1 py-2.5 rounded-xl bg-accent-amber text-black text-sm font-semibold hover:bg-yellow-400 transition-all"
-            >
-              Uygula
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
+      
+      <div 
+        className="fixed inset-0 -z-10" 
+        onClick={onClose}
+      />
     </div>
   );
 }
