@@ -1,0 +1,78 @@
+Mevcut Etkinium projesinde Header / NavBar alanına KESİNLİKLE dokunma.
+Navbar aynen kalacak.
+
+Sadece sayfa içindeki TÜM butonları (kategori butonları, CTA’lar, ok butonları, takvim butonu, kart içi butonlar) yeniden tasarla:
+- Butonlar KÜÇÜLECEK
+- Mobil uyumlu olacak
+- İkonlar küçülecek
+- Daha premium ve kaliteli görünecek
+- Taşma/kesilme hissi olmayacak
+
+BUTON TASARIM KURALLARI (ÇOK NET)
+1) Boyut
+- Masaüstü: yükseklik 36-40px
+- Mobil: yükseklik 32-36px
+- Padding: px-3 / py-2 (mobilde px-2.5)
+- Font: 12-14px (mobilde 12-13px)
+- İkon: 14-16px (mobilde 12-14px)
+- Asla “büyük şişkin” buton olmayacak
+
+2) Şekil
+- Pill yerine premium kompakt şekil kullan:
+  • rounded-xl veya rounded-lg (kareye yakın, modern)
+  • istersek bazıları rounded-full olabilir ama default rounded-xl olsun
+- Butonlar daha “product UI” gibi dursun (premium settings tarzı)
+
+3) Premium stil
+- Dark glass / premium:
+  bg-white/5 + border border-white/10 + backdrop-blur
+- Hover:
+  bg-white/8 + border-white/15 + hafif shadow artışı
+- Active:
+  scale-95 (çok küçük) + hızlı geri dönüş
+- Sarı vurgu:
+  sadece seçili durumda veya ana CTA’da kullan
+  (her şey sarı olmayacak; premium için kontrollü)
+
+4) Taşma ve hizalama
+- Kategori şeridi ve buton satırları container içinde kalacak (max-w-6xl, px-4)
+- Kenarda kesilme hissi olmayacak:
+  • İlk ve son buton tam görünsün
+  • Eğer yatay scroll varsa, kenarlarda yumuşak fade mask kullan
+  • Butonlar arası gap küçük (gap-2/2.5)
+
+BİLEŞEN İSTEĞİ
+- Tek bir “PremiumButton” komponenti oluştur.
+- Variant’lar:
+  1) default (dark glass)
+  2) active (border + glow sarı çok hafif)
+  3) primary (sarı, sadece ana CTA)
+  4) icon (küçük square icon button: w-9 h-9 mobilde w-8 h-8)
+- Tüm sayfadaki butonları bu komponentle değiştir.
+
+TAKVİM DAVRANIŞI
+- Takvim butonuna basınca sayfa açılmasın.
+- Aynı sayfada drawer gibi açılan yatay takvim paneli çıksın:
+  • Butonun hemen altında
+  • container genişliğinde
+  • günler küçük premium rounded-lg butonlar
+  • ikonlar küçük
+
+REKLAM BANNER
+- Reklam alanındaki firma adları net görünsün.
+- Logo/görsel arkaplan bloklarını kaldır (transparent).
+- Banner yazı tipini ve hiyerarşisini premium hale getir.
+- Yapısal olarak banner konumu/yüksekliği değişmesin.
+
+ETKİNLİK & RESTORAN KARTLARI
+- Kart içi CTA butonları küçülsün ve premium olsun (rounded-xl).
+- Badge ve tag pill’leri küçülsün.
+
+SPONSOR SLIDER EKLE
+- SponsorSlider.tsx oluştur.
+- embla-carousel-react kullan.
+- Yükseklik 160px (mobil 120px), rounded-3xl dark glass panel.
+- Ok butonları küçük square/rounded icon button olsun (w-9 h-9 / mobil w-8 h-8).
+- app/page.tsx içinde 2 bölüm arasına yerleştir.
+
+Amaç: Daha küçük, daha premium, mobil uyumlu, taşmayan, kaliteli buton sistemi ve genel UI.

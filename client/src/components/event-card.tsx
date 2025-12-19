@@ -1,5 +1,5 @@
 import { Heart, Calendar, MapPin } from "lucide-react";
-import GlassButton from "./glass-button";
+import PremiumButton from "./premium-button";
 import { Link } from "wouter";
 
 interface EventCardProps {
@@ -11,39 +11,39 @@ interface EventCardProps {
 export default function EventCard({ index, badge, categories = [] }: EventCardProps) {
   return (
     <div 
-      className="group flex-shrink-0 w-[220px] sm:w-[240px] bg-[#0B0B0B] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:bg-white/5 hover:border-white/20 hover:shadow-[0_8px_40px_rgba(247,198,0,0.12)] hover:scale-[1.03] transition-all duration-300 snap-start"
+      className="group flex-shrink-0 w-[180px] md:w-[200px] bg-[#0B0B0B] backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden hover:bg-white/5 hover:border-white/15 hover:shadow-[0_4px_24px_rgba(247,198,0,0.08)] hover:scale-[1.02] transition-all duration-200 snap-start"
       data-testid={`event-card-${index}`}
     >
       <div className="relative aspect-[3/4] bg-gradient-to-br from-purple-900/30 via-gray-900 to-[#0B0B0B]">
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center">
-            <Calendar className="w-8 h-8 text-purple-400" />
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center">
+            <Calendar className="w-6 h-6 md:w-7 md:h-7 text-purple-400" />
           </div>
         </div>
 
         {badge && (
-          <div className="absolute top-3 left-3">
-            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
+          <div className="absolute top-2 left-2">
+            <span className={`text-[9px] font-bold px-2 py-0.5 rounded-md ${
               badge === "indirim" 
-                ? "bg-red-500 text-white" 
-                : "bg-orange-500 text-white"
+                ? "bg-red-500/90 text-white" 
+                : "bg-orange-500/90 text-white"
             }`}>
               {badge === "indirim" ? "İndirim" : "Tükeniyor"}
             </span>
           </div>
         )}
 
-        <button className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:text-red-500 hover:border-red-500/30 hover:scale-110 active:scale-95 transition-all duration-300">
-          <Heart className="w-4 h-4" />
+        <button className="absolute top-2 right-2 w-7 h-7 rounded-lg bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:text-red-500 hover:border-red-500/30 active:scale-95 transition-all duration-200">
+          <Heart className="w-3.5 h-3.5" />
         </button>
 
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent p-4 pt-12">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent p-3 pt-10">
           {categories.length > 0 && (
-            <div className="flex gap-1.5 mb-2 overflow-hidden">
+            <div className="flex gap-1 overflow-hidden">
               {categories.slice(0, 2).map((cat, i) => (
                 <span 
                   key={i} 
-                  className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 text-white uppercase tracking-wide"
+                  className="text-[8px] font-semibold px-1.5 py-0.5 rounded bg-white/10 backdrop-blur-xl border border-white/10 text-white uppercase tracking-wide"
                 >
                   {cat}
                 </span>
@@ -53,26 +53,26 @@ export default function EventCard({ index, badge, categories = [] }: EventCardPr
         </div>
       </div>
 
-      <div className="p-4 space-y-2">
-        <h3 className="font-semibold text-white text-sm line-clamp-2 group-hover:text-[#F7C600] transition-colors leading-tight">
+      <div className="p-3 space-y-1.5">
+        <h3 className="font-semibold text-white text-xs md:text-sm line-clamp-2 group-hover:text-[#F7C600] transition-colors leading-tight">
           Etkinlik Başlığı
         </h3>
 
-        <div className="flex items-center justify-between text-xs">
-          <span className="text-[#F7C600] font-semibold">Cum, 19 Ara</span>
+        <div className="flex items-center justify-between text-[10px] md:text-xs">
+          <span className="text-[#F7C600] font-medium">Cum, 19 Ara</span>
           <span className="text-[#F7C600] font-bold">₺—</span>
         </div>
 
-        <div className="flex items-center gap-1.5 text-xs text-gray-500">
-          <MapPin className="w-3 h-3" />
+        <div className="flex items-center gap-1 text-[10px] text-gray-500">
+          <MapPin className="w-2.5 h-2.5" />
           <span className="truncate">Mekan Adı</span>
         </div>
 
-        <div className="pt-3">
+        <div className="pt-2">
           <Link href="/bilet-al" className="block">
-            <GlassButton variant="primary" size="sm" className="w-full text-xs">
+            <PremiumButton variant="primary" size="sm" className="w-full text-[10px] md:text-xs">
               Bilet Al
-            </GlassButton>
+            </PremiumButton>
           </Link>
         </div>
       </div>

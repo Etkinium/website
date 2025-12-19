@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Music, Theater, Wrench, PartyPopper, Users, Mic2, Wine, Coffee, Disc3, UtensilsCrossed, Clock } from "lucide-react";
 import { Link } from "wouter";
-import GlassButton from "./glass-button";
+import PremiumButton from "./premium-button";
 import eventImage from "@assets/stock_images/luxury_concert_hall__dfa50100.jpg";
 import joinImage from "@assets/stock_images/crowd_people_enjoyin_e049ed7f.jpg";
 import {
@@ -101,7 +101,7 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
 
   return (
     <>
-      <section className="relative h-[50vh] md:h-[55vh] overflow-hidden mt-16">
+      <section className="relative h-[45vh] md:h-[50vh] overflow-hidden mt-14">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => (
             <div
@@ -116,11 +116,11 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
               }}
             >
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-4 md:space-y-5 px-4 max-w-4xl">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-white drop-shadow-2xl">
+                <div className="text-center space-y-3 md:space-y-4 px-4 max-w-3xl">
+                  <h1 className="text-2xl md:text-4xl lg:text-5xl font-black leading-tight text-white drop-shadow-2xl">
                     {slide.title}
                   </h1>
-                  <p className="text-lg md:text-xl lg:text-2xl text-[#F7C600] font-semibold drop-shadow-lg">
+                  <p className="text-base md:text-lg lg:text-xl text-[#F7C600] font-semibold drop-shadow-lg">
                     {slide.description}
                   </p>
                 </div>
@@ -129,54 +129,54 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
           ))}
         </div>
         
-        <div className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 z-10 px-4 w-full flex justify-center">
+        <div className="absolute bottom-14 md:bottom-16 left-1/2 transform -translate-x-1/2 z-10 px-4">
           <Link href="/signup">
-            <GlassButton
-              variant="outline"
-              size="md"
-              data-testid="button-hero-signup"
-            >
+            <PremiumButton variant="primary" size="md" data-testid="button-hero-signup">
               Üye Ol
-            </GlassButton>
+            </PremiumButton>
           </Link>
         </div>
         
-        <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-5 md:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-1.5">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide 
-                  ? "bg-[#F7C600] shadow-[0_0_10px_rgba(247,198,0,0.5)]" 
+                  ? "bg-[#F7C600] w-5 shadow-[0_0_8px_rgba(247,198,0,0.5)]" 
                   : "bg-white/30 hover:bg-white/50"
               }`}
             />
           ))}
         </div>
 
-        <button
+        <PremiumButton
+          variant="icon"
+          size="sm"
           onClick={prevSlide}
-          className="absolute left-3 md:left-5 top-1/2 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg"
+          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2"
         >
-          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-        </button>
-        <button
+          <ChevronLeft className="w-4 h-4" />
+        </PremiumButton>
+        <PremiumButton
+          variant="icon"
+          size="sm"
           onClick={nextSlide}
-          className="absolute right-3 md:right-5 top-1/2 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg"
+          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2"
         >
-          <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-        </button>
+          <ChevronRight className="w-4 h-4" />
+        </PremiumButton>
 
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pt-10 pb-2">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pt-8 pb-1.5">
           <div 
             ref={scrollRef}
             className="overflow-hidden whitespace-nowrap"
-            style={{ maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}
+            style={{ maskImage: "linear-gradient(to right, transparent, black 4%, black 96%, transparent)" }}
             onMouseEnter={() => setIsCategoryPaused(true)}
             onMouseLeave={() => setIsCategoryPaused(false)}
           >
-            <div className="inline-flex gap-2 md:gap-3 px-4 animate-none">
+            <div className="inline-flex gap-1.5 md:gap-2 px-4 animate-none">
               {[...categories, ...categories].map((category, index) => {
                 const IconComponent = category.icon;
                 const isActive = selectedCategory === category.name;
@@ -185,20 +185,20 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
                     key={index}
                     onClick={() => handleCategoryClick(category)}
                     className={`
-                      inline-flex items-center gap-1.5 md:gap-2 px-4 md:px-5 py-2 md:py-2.5 
-                      rounded-full text-xs md:text-sm font-semibold 
+                      inline-flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3 py-1.5 md:py-2 
+                      rounded-lg text-[10px] md:text-xs font-medium 
                       backdrop-blur-xl border
-                      transition-all duration-300 ease-out
-                      hover:scale-105 active:scale-95
+                      transition-all duration-200 ease-out
+                      active:scale-95
                       whitespace-nowrap cursor-pointer
                       ${isActive 
-                        ? "bg-[#F7C600]/20 border-[#F7C600] text-[#F7C600] shadow-[0_0_20px_rgba(247,198,0,0.3)]"
-                        : "bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20"
+                        ? "bg-[#F7C600]/15 border-[#F7C600]/40 text-[#F7C600] shadow-[0_0_12px_rgba(247,198,0,0.2)]"
+                        : "bg-white/5 border-white/10 text-white hover:bg-white/8 hover:border-white/15"
                       }
                     `}
                     data-testid={`category-${category.name.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <IconComponent className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <IconComponent className="w-3 h-3 md:w-3.5 md:h-3.5" />
                     {category.name}
                   </button>
                 );
@@ -209,13 +209,13 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
       </section>
 
       <Dialog open={!!dialogCategory} onOpenChange={() => setDialogCategory(null)}>
-        <DialogContent className="bg-[#0B0B0B]/95 backdrop-blur-2xl border border-white/10 max-w-md mx-auto shadow-2xl">
+        <DialogContent className="bg-[#0B0B0B]/95 backdrop-blur-2xl border border-white/10 max-w-sm mx-auto shadow-2xl">
           <DialogHeader>
-            <DialogTitle className="text-center text-2xl md:text-3xl font-bold text-white flex items-center justify-center gap-3">
+            <DialogTitle className="text-center text-xl md:text-2xl font-bold text-white flex items-center justify-center gap-2">
               {dialogCategory && (
                 <>
-                  <div className="p-2.5 rounded-2xl bg-[#F7C600]/20 border border-[#F7C600]/30">
-                    <dialogCategory.icon className="w-6 h-6 md:w-8 md:h-8 text-[#F7C600]" />
+                  <div className="p-2 rounded-lg bg-[#F7C600]/15 border border-[#F7C600]/30">
+                    <dialogCategory.icon className="w-5 h-5 md:w-6 md:h-6 text-[#F7C600]" />
                   </div>
                   <span className="text-[#F7C600]">{dialogCategory.name}</span>
                 </>
@@ -223,36 +223,36 @@ export default function HeroCarousel({ onCategorySelect, selectedCategory }: Her
             </DialogTitle>
           </DialogHeader>
           
-          <div className="py-6 md:py-8 text-center space-y-6">
+          <div className="py-5 md:py-6 text-center space-y-4">
             <div className="flex items-center justify-center gap-2 text-[#F7C600]">
-              <Clock className="w-5 h-5 animate-spin" style={{ animationDuration: "3s" }} />
-              <span className="text-sm font-medium uppercase tracking-widest">Çok Yakında</span>
-              <Clock className="w-5 h-5 animate-spin" style={{ animationDuration: "3s" }} />
+              <Clock className="w-4 h-4 animate-spin" style={{ animationDuration: "3s" }} />
+              <span className="text-xs font-medium uppercase tracking-widest">Çok Yakında</span>
+              <Clock className="w-4 h-4 animate-spin" style={{ animationDuration: "3s" }} />
             </div>
             
-            <div className="space-y-3">
-              <p className="text-xl md:text-2xl font-bold text-white">
+            <div className="space-y-2">
+              <p className="text-lg md:text-xl font-bold text-white">
                 Heyecan Verici Deneyimler
               </p>
-              <p className="text-lg md:text-xl text-[#F7C600] font-semibold">
+              <p className="text-base md:text-lg text-[#F7C600] font-semibold">
                 Kapınızda!
               </p>
             </div>
             
-            <p className="text-gray-400 text-sm md:text-base max-w-xs mx-auto leading-relaxed">
+            <p className="text-gray-400 text-xs md:text-sm max-w-xs mx-auto leading-relaxed">
               <span className="text-white font-medium">{dialogCategory?.name}</span> etkinlikleri için geri sayım başladı. 
               Üye olun, ilk siz haberdar olun!
             </p>
             
-            <div className="pt-4">
+            <div className="pt-3">
               <Link href="/signup">
-                <GlassButton
+                <PremiumButton
                   variant="primary"
-                  size="lg"
+                  size="md"
                   onClick={() => setDialogCategory(null)}
                 >
                   Hemen Üye Ol
-                </GlassButton>
+                </PremiumButton>
               </Link>
             </div>
           </div>
