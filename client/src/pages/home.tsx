@@ -2,49 +2,53 @@ import { useState, useRef } from "react";
 import { Link } from "wouter";
 import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
+import DateStrip from "@/components/date-strip";
 import OvalAdBanner from "@/components/oval-ad-banner";
-import AdApplicationButton from "@/components/ad-application-button";
+import Top10List from "@/components/top10-list";
 import EmailSubscription from "@/components/email-subscription";
 import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft } from "lucide-react";
+import GlassButton from "@/components/glass-button";
+import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, Ticket } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
-    className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-accent-amber/50 transition-all duration-300 group cursor-pointer hover:shadow-xl hover:shadow-accent-amber/10 flex-shrink-0 w-[260px] sm:w-[300px]"
+    className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_40px_rgba(247,198,0,0.1)] transition-all duration-300 flex-shrink-0 w-[280px] sm:w-[320px]"
     data-testid={`featured-event-${index}`}
   >
-    <div className="relative h-32 sm:h-40 bg-gradient-to-br from-purple-900/30 to-gray-800">
+    <div className="relative h-36 sm:h-44 bg-gradient-to-br from-purple-900/40 to-[#0B0B0B]">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center">
-          <Calendar className="w-7 h-7 text-purple-400" />
+        <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center">
+          <Calendar className="w-8 h-8 text-purple-400" />
         </div>
       </div>
-      <div className="absolute top-2 left-2">
-        <span className="bg-accent-amber text-black text-[10px] font-bold px-2 py-0.5 rounded-full">Yakında</span>
+      <div className="absolute top-3 left-3">
+        <span className="bg-[#F7C600] text-black text-[10px] font-bold px-3 py-1 rounded-full">Yakında</span>
       </div>
-      <button className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:text-red-500 transition-colors">
+      <button className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:text-red-500 hover:border-red-500/30 transition-all duration-300">
         <Heart className="w-4 h-4" />
       </button>
     </div>
-    <div className="p-4 space-y-2">
-      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-sm sm:text-base">
+    <div className="p-5 space-y-3">
+      <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-[#F7C600] transition-colors line-clamp-1">
         Etkinlik Başlığı
       </h3>
-      <div className="flex items-center gap-2 text-xs text-gray-400">
-        <Calendar className="w-3.5 h-3.5 text-accent-amber" />
-        <span>— — ——</span>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <Calendar className="w-4 h-4 text-[#F7C600]" />
+          <span>— — ——</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <MapPin className="w-4 h-4 text-[#F7C600]" />
+          <span className="line-clamp-1">Konum Bilgisi</span>
+        </div>
       </div>
-      <div className="flex items-center gap-2 text-xs text-gray-400">
-        <MapPin className="w-3.5 h-3.5 text-accent-amber" />
-        <span className="line-clamp-1">Konum Bilgisi</span>
-      </div>
-      <div className="pt-3 border-t border-gray-700 flex items-center justify-between">
-        <span className="text-accent-amber font-bold text-lg">— ₺</span>
+      <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+        <span className="text-[#F7C600] font-bold text-xl">— ₺</span>
         <Link href="/bilet-al">
-          <Button size="sm" className="bg-accent-amber text-black hover:bg-yellow-400 font-semibold rounded-full px-4 text-xs h-8">
+          <GlassButton variant="primary" size="sm">
+            <Ticket className="w-4 h-4" />
             Bilet Al
-          </Button>
+          </GlassButton>
         </Link>
       </div>
     </div>
@@ -53,47 +57,49 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
-    className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-accent-amber/50 transition-all duration-300 group cursor-pointer hover:shadow-xl hover:shadow-accent-amber/10 flex-shrink-0 w-[260px] sm:w-[300px]"
+    className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_40px_rgba(247,198,0,0.1)] transition-all duration-300 flex-shrink-0 w-[280px] sm:w-[320px]"
     data-testid={`featured-restaurant-${index}`}
   >
-    <div className="relative h-32 sm:h-40 bg-gradient-to-br from-amber-900/30 to-gray-800">
+    <div className="relative h-36 sm:h-44 bg-gradient-to-br from-amber-900/40 to-[#0B0B0B]">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center">
-          <UtensilsCrossed className="w-7 h-7 text-amber-400" />
+        <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center">
+          <UtensilsCrossed className="w-8 h-8 text-amber-400" />
         </div>
       </div>
-      <div className="absolute top-2 left-2 flex gap-1.5">
-        <span className="bg-accent-amber text-black text-[10px] font-bold px-2 py-0.5 rounded-full">Popüler</span>
-        <span className="bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Açık</span>
+      <div className="absolute top-3 left-3 flex gap-2">
+        <span className="bg-[#F7C600] text-black text-[10px] font-bold px-3 py-1 rounded-full">Popüler</span>
+        <span className="bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full">Açık</span>
       </div>
-      <button className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:text-red-500 transition-colors">
+      <button className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:text-red-500 hover:border-red-500/30 transition-all duration-300">
         <Heart className="w-4 h-4" />
       </button>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-        <div className="flex items-center gap-1 text-accent-amber text-xs">
-          <Star className="w-3.5 h-3.5 fill-accent-amber" />
-          <span className="font-medium">—</span>
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B0B0B] to-transparent p-4">
+        <div className="flex items-center gap-1.5 text-[#F7C600]">
+          <Star className="w-4 h-4 fill-[#F7C600]" />
+          <span className="font-bold">—</span>
         </div>
       </div>
     </div>
-    <div className="p-4 space-y-2">
-      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-sm sm:text-base">
+    <div className="p-5 space-y-3">
+      <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-[#F7C600] transition-colors line-clamp-1">
         Restoran Adı
       </h3>
-      <div className="flex items-center gap-2 text-xs text-gray-400">
-        <MapPin className="w-3.5 h-3.5 text-accent-amber" />
-        <span className="line-clamp-1">Konum Bilgisi</span>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <MapPin className="w-4 h-4 text-[#F7C600]" />
+          <span className="line-clamp-1">Konum Bilgisi</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <Clock className="w-4 h-4 text-[#F7C600]" />
+          <span>—:— - —:—</span>
+        </div>
       </div>
-      <div className="flex items-center gap-2 text-xs text-gray-400">
-        <Clock className="w-3.5 h-3.5 text-accent-amber" />
-        <span>—:— - —:—</span>
-      </div>
-      <div className="pt-3 border-t border-gray-700 flex items-center justify-between">
-        <span className="text-accent-amber font-bold text-lg">—— ₺</span>
+      <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+        <span className="text-[#F7C600] font-bold text-xl">—— ₺</span>
         <Link href="/restoranlar">
-          <Button size="sm" className="bg-accent-amber text-black hover:bg-yellow-400 font-semibold rounded-full px-4 text-xs h-8">
+          <GlassButton variant="primary" size="sm">
             Rezervasyon
-          </Button>
+          </GlassButton>
         </Link>
       </div>
     </div>
@@ -101,12 +107,14 @@ const FeaturedRestaurantCard = ({ index }: { index: number }) => (
 );
 
 export default function Home() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const restaurantsRef = useRef<HTMLDivElement>(null);
 
   const scrollEvents = (direction: "left" | "right") => {
     if (eventsRef.current) {
-      const scrollAmount = 320;
+      const scrollAmount = 340;
       eventsRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth"
@@ -116,7 +124,7 @@ export default function Home() {
 
   const scrollRestaurants = (direction: "left" | "right") => {
     if (restaurantsRef.current) {
-      const scrollAmount = 320;
+      const scrollAmount = 340;
       restaurantsRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth"
@@ -125,48 +133,56 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-spotify-black text-white">
+    <div className="min-h-screen bg-[#050505] text-white">
       <Header />
       
-      <HeroCarousel />
+      <HeroCarousel 
+        onCategorySelect={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
+
+      <DateStrip 
+        selectedDate={selectedDate}
+        onDateSelect={setSelectedDate}
+      />
       
       <OvalAdBanner />
-      
-      <AdApplicationButton />
 
       <section className="py-8 sm:py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-accent-amber" />
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/20 backdrop-blur-xl border border-purple-500/30 flex items-center justify-center">
+                <Calendar className="w-5 h-5 text-purple-400" />
+              </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Öne Çıkan Etkinlikler</h2>
             </div>
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => scrollEvents("left")}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300"
                 data-testid="events-scroll-left"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={() => scrollEvents("right")}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300"
                 data-testid="events-scroll-right"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
               <Link href="/etkinlikler">
-                <Button variant="ghost" className="text-accent-amber hover:text-yellow-400 text-sm sm:text-base hidden sm:flex">
+                <GlassButton variant="outline" size="sm" className="hidden sm:flex">
                   Tümünü Gör
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
+                  <ChevronRight className="w-4 h-4" />
+                </GlassButton>
               </Link>
             </div>
           </div>
           <div 
             ref={eventsRef}
-            className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {[...Array(8)].map((_, i) => (
               <FeaturedEventCard key={i} index={i} />
@@ -174,47 +190,49 @@ export default function Home() {
           </div>
           <div className="mt-4 flex justify-center sm:hidden">
             <Link href="/etkinlikler">
-              <Button variant="outline" size="sm" className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black">
+              <GlassButton variant="outline" size="sm">
                 Tümünü Gör
-              </Button>
+              </GlassButton>
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 bg-gradient-to-b from-transparent via-gray-900/30 to-transparent">
+      <section className="py-8 sm:py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <UtensilsCrossed className="w-6 h-6 sm:w-7 sm:h-7 text-accent-amber" />
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/20 backdrop-blur-xl border border-amber-500/30 flex items-center justify-center">
+                <UtensilsCrossed className="w-5 h-5 text-amber-400" />
+              </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Popüler Restoranlar</h2>
             </div>
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => scrollRestaurants("left")}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300"
                 data-testid="restaurants-scroll-left"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={() => scrollRestaurants("right")}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300"
                 data-testid="restaurants-scroll-right"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
               <Link href="/restoranlar">
-                <Button variant="ghost" className="text-accent-amber hover:text-yellow-400 text-sm sm:text-base hidden sm:flex">
+                <GlassButton variant="outline" size="sm" className="hidden sm:flex">
                   Tümünü Gör
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
+                  <ChevronRight className="w-4 h-4" />
+                </GlassButton>
               </Link>
             </div>
           </div>
           <div 
             ref={restaurantsRef}
-            className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {[...Array(8)].map((_, i) => (
               <FeaturedRestaurantCard key={i} index={i} />
@@ -222,13 +240,15 @@ export default function Home() {
           </div>
           <div className="mt-4 flex justify-center sm:hidden">
             <Link href="/restoranlar">
-              <Button variant="outline" size="sm" className="border-accent-amber text-accent-amber hover:bg-accent-amber hover:text-black">
+              <GlassButton variant="outline" size="sm">
                 Tümünü Gör
-              </Button>
+              </GlassButton>
             </Link>
           </div>
         </div>
       </section>
+
+      <Top10List />
       
       <EmailSubscription />
 

@@ -1,0 +1,48 @@
+PROMPT
+“Mevcut Etkinium projesinde Header/NavBar bileşenine dokunma (hiç değiştirme). Sadece ana sayfa içeriğini (hero + kategori şeridi + reklam bandı + event listeleri) yeniden tasarla.
+
+Hedef tasarım: siyah arkaplan + sarı vurgu (#F7C600 civarı), Apple tarzı cam görünümlü pill butonlar (backdrop-blur, border, soft shadow), modern ve temiz spacing.
+
+Sayfa içeriği şu şekilde olsun:
+
+Hero Slider: büyük arkaplan görsel (mevcut slider mantığını koru), ortada büyük başlık + alt başlık, CTA butonu (Apple pill). Ok butonları cam pill.
+
+Kategori şeridi: yatay kaydırılabilir (overflow-x-auto), her kategori bir ‘glass pill button’ (ikon + yazı). Hover’da hafif aydınlanma, seçili durum sarı border + sarı glow.
+
+Reklam alanı: Hero altında ince ve uzun bir ‘ad card’ (rounded-2xl), beyaz zemin değil; koyu cam panel olsun. İçinde logo/başlık ve küçük dot indicator. Altında ‘Reklam vermek için başvurun’ pill buton.
+
+“Öne Çıkan Etkinlikler”: yatay kaydırılabilir kart satırı (Bugece gibi). Kartlar rounded-2xl, görsel, badge (İndirim/Tükeniyor), başlık, tarih, mekan, fiyat, tag pill’leri.
+
+“Top 10” bölümü: list view. Solda küçük kapak görsel, ortada ad + alt satır (tarih • mekan), sağda ‘Satın Al’ pill buton. Liste item’ları cam panel.
+
+Teknik:
+
+Next.js App Router + Tailwind.
+
+Yeni bileşenler oluştur: HeroCarousel, CategoryPills, AdStrip, FeaturedRow, Top10List, GlassButton.
+
+Mock data local array’den gelsin.
+
+Mobilde düzgün: slider küçülsün, pill şerit kaydırılsın, listeler stacked.
+
+Renkler: background #050505–#0B0B0B gradient, yazılar beyaz, vurgu sarı.
+
+Navbar alanını KORU; sadece sayfanın altındaki layout’u değiştir.”
+
+2) “Apple pill” buton komponenti (AI kaçırırsa eklet)
+
+AI’ye ayrıca şunu da yaz (veya sen eklet):
+
+Ek Prompt
+“GlassButton komponenti yaz: rounded-full, backdrop-blur, border, hover glow. Variants: primary (sarı), ghost (cam), outline (cam + sarı border).”
+
+Tailwind örnek sınıflar (kopyala):
+
+Cam pill:
+rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-lg shadow-black/40 hover:bg-white/10 transition
+
+Sarı vurgu:
+text-black bg-[#F7C600] hover:bg-[#ffd84d]
+
+Outline sarı:
+border-[#F7C600]/40 text-[#F7C600] hover:border-[#F7C600]/70
