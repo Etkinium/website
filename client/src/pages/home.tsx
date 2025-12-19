@@ -3,10 +3,9 @@ import { Link } from "wouter";
 import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
 import DateDrawer from "@/components/date-drawer";
-import OvalAdBanner from "@/components/oval-ad-banner";
+import LargeAdSlider from "@/components/large-ad-slider";
 import EventCard from "@/components/event-card";
-import Top10List from "@/components/top10-list";
-import GlassSlider from "@/components/glass-slider";
+import DigitalHighlights from "@/components/digital-highlights";
 import EmailSubscription from "@/components/email-subscription";
 import Footer from "@/components/footer";
 import PremiumButton from "@/components/premium-button";
@@ -14,32 +13,32 @@ import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, Ch
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
-    className="group flex-shrink-0 w-[130px] md:w-[150px] bg-[#0A0A0A] border border-white/15 rounded-xl overflow-hidden hover:border-[#F7C600]/40 hover:shadow-[0_4px_20px_rgba(247,198,0,0.1)] transition-all duration-200 snap-start"
+    className="group w-full bg-[#0A0A0A] border border-white/15 rounded-xl overflow-hidden hover:border-[#F7C600]/40 hover:shadow-[0_4px_20px_rgba(247,198,0,0.1)] transition-all duration-200"
     data-testid={`featured-restaurant-${index}`}
   >
     <div className="relative aspect-[4/3] bg-gradient-to-br from-amber-900/40 via-gray-900 to-[#0A0A0A]">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center">
           <UtensilsCrossed className="w-4 h-4 md:w-5 md:h-5 text-amber-400" />
         </div>
       </div>
-      <div className="absolute top-1.5 left-1.5 flex gap-0.5">
-        <span className="bg-[#F7C600] text-black text-[7px] font-bold px-1 py-0.5 rounded">Popüler</span>
-        <span className="bg-emerald-500 text-white text-[7px] font-bold px-1 py-0.5 rounded">Açık</span>
+      <div className="absolute top-1 left-1 md:top-1.5 md:left-1.5 flex gap-0.5">
+        <span className="bg-[#F7C600] text-black text-[6px] md:text-[7px] font-bold px-1 py-0.5 rounded">Popüler</span>
+        <span className="bg-emerald-500 text-white text-[6px] md:text-[7px] font-bold px-1 py-0.5 rounded">Açık</span>
       </div>
-      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded bg-black/60 border border-white/10 flex items-center justify-center text-white hover:text-red-500 active:scale-95 transition-all">
+      <button className="absolute top-1 right-1 md:top-1.5 md:right-1.5 w-5 h-5 rounded bg-black/60 border border-white/10 flex items-center justify-center text-white hover:text-red-500 active:scale-95 transition-all">
         <Heart className="w-2.5 h-2.5" />
       </button>
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0A0A0A] to-transparent p-1.5">
         <div className="flex items-center gap-0.5 text-[#F7C600]">
           <Star className="w-2.5 h-2.5 fill-[#F7C600]" />
-          <span className="font-bold text-[9px]">—</span>
+          <span className="font-bold text-[8px] md:text-[9px]">—</span>
         </div>
       </div>
     </div>
-    <div className="p-2 space-y-1">
+    <div className="p-1.5 md:p-2 space-y-0.5 md:space-y-1">
       <h3 className="font-semibold text-white text-[9px] md:text-[10px] line-clamp-1 group-hover:text-[#F7C600] transition-colors">
-        Restoran
+        Restoran Adı
       </h3>
       <div className="flex items-center gap-0.5 text-[7px] md:text-[8px] text-gray-500">
         <MapPin className="w-2 h-2" />
@@ -49,9 +48,9 @@ const FeaturedRestaurantCard = ({ index }: { index: number }) => (
         <Clock className="w-2 h-2" />
         <span>—:— - —:—</span>
       </div>
-      <div className="pt-1">
+      <div className="pt-1 md:pt-1.5">
         <Link href="/restoranlar" className="block">
-          <PremiumButton variant="primary" size="sm" className="w-full text-[8px] md:text-[9px] py-1">
+          <PremiumButton variant="primary" size="sm" className="w-full text-[8px] md:text-[9px] py-0.5 md:py-1">
             Rezervasyon
           </PremiumButton>
         </Link>
@@ -69,22 +68,24 @@ export default function Home() {
 
   const scrollEvents = (direction: "left" | "right") => {
     if (eventsRef.current) {
-      eventsRef.current.scrollBy({ left: direction === "left" ? -160 : 160, behavior: "smooth" });
+      const cardWidth = eventsRef.current.offsetWidth / 5;
+      eventsRef.current.scrollBy({ left: direction === "left" ? -cardWidth : cardWidth, behavior: "smooth" });
     }
   };
 
   const scrollRestaurants = (direction: "left" | "right") => {
     if (restaurantsRef.current) {
-      restaurantsRef.current.scrollBy({ left: direction === "left" ? -160 : 160, behavior: "smooth" });
+      const cardWidth = restaurantsRef.current.offsetWidth / 5;
+      restaurantsRef.current.scrollBy({ left: direction === "left" ? -cardWidth : cardWidth, behavior: "smooth" });
     }
   };
 
   const eventBadges: Array<"indirim" | "tukeniyor" | null> = [
-    "indirim", null, "tukeniyor", null, "indirim", null, null, "tukeniyor", null, null
+    "indirim", null, "tukeniyor", null, "indirim"
   ];
 
   const eventCategories = [
-    ["TECHNO"], ["ROCK"], ["POP"], ["JAZZ"], ["HIP-HOP"], ["KLASIK"], ["ELEKTRONIK"], ["ALTERNATIF"], ["DANS"], ["FOLK"]
+    ["TECHNO"], ["ROCK"], ["POP"], ["JAZZ"], ["HIP-HOP"]
   ];
 
   return (
@@ -114,7 +115,7 @@ export default function Home() {
         )}
       </div>
       
-      <OvalAdBanner />
+      <LargeAdSlider />
 
       <section className="py-4 md:py-5">
         <div className="container mx-auto px-4">
@@ -140,23 +141,23 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          
           <div 
             ref={eventsRef}
-            className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3"
           >
-            {[...Array(10)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <EventCard key={i} index={i} badge={eventBadges[i]} categories={eventCategories[i]} />
             ))}
           </div>
-          <div className="mt-2 flex justify-center sm:hidden">
+          
+          <div className="mt-3 flex justify-center sm:hidden">
             <Link href="/etkinlikler">
               <PremiumButton variant="default" size="sm" className="text-[9px]">Tümünü Gör</PremiumButton>
             </Link>
           </div>
         </div>
       </section>
-
-      <GlassSlider />
 
       <section className="py-4 md:py-5">
         <div className="container mx-auto px-4">
@@ -182,15 +183,17 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          
           <div 
             ref={restaurantsRef}
-            className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3"
           >
-            {[...Array(10)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <FeaturedRestaurantCard key={i} index={i} />
             ))}
           </div>
-          <div className="mt-2 flex justify-center sm:hidden">
+          
+          <div className="mt-3 flex justify-center sm:hidden">
             <Link href="/restoranlar">
               <PremiumButton variant="default" size="sm" className="text-[9px]">Tümünü Gör</PremiumButton>
             </Link>
@@ -198,7 +201,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Top10List />
+      <DigitalHighlights />
       
       <EmailSubscription />
 
