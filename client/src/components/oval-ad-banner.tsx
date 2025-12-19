@@ -11,32 +11,24 @@ const adSlides = [
     logo: rezervemLogo,
     text: "Misafirperverliğin Geleceği!",
     brand: "Rezervem",
-    bgColor: "rgba(255,255,255,0.03)",
-    textColor: "#1a5c3a",
   },
   {
     id: 2,
     logo: tamamliyoLogo,
     text: "Sigortayı Dijitale Kolayca Entegre Edin!",
     brand: "Tamamliyo",
-    bgColor: "rgba(255,255,255,0.02)",
-    textColor: "#1e3a5f",
   },
   {
     id: 3,
     logo: faturaportLogo,
     text: "e-fatura'nın Mobili!",
     brand: "Faturaport",
-    bgColor: "rgba(255,255,255,0.03)",
-    textColor: "#1e3a8a",
   },
   {
     id: 4,
     logo: etkineumLogo,
     text: "Markanızı Öne Çıkarın!",
     brand: "ETKİNİUM",
-    bgColor: "rgba(247,198,0,0.05)",
-    textColor: "#F7C600",
     isPromo: true,
   },
 ];
@@ -56,10 +48,10 @@ export default function OvalAdBanner() {
   }, [isPaused]);
 
   return (
-    <div className="w-full px-4 py-6">
-      <div className="max-w-4xl mx-auto space-y-4">
+    <div className="w-full px-4 py-4">
+      <div className="max-w-4xl mx-auto space-y-3">
         <div 
-          className="relative h-[70px] md:h-[80px] rounded-2xl overflow-hidden cursor-pointer backdrop-blur-xl border border-white/10 shadow-lg"
+          className="relative h-[60px] md:h-[70px] rounded-2xl overflow-hidden cursor-pointer backdrop-blur-xl border border-white/10 shadow-lg"
           style={{ 
             background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
           }}
@@ -80,50 +72,32 @@ export default function OvalAdBanner() {
                       : "100%"
                 })`,
                 opacity: index === currentIndex ? 1 : 0,
-                background: slide.bgColor,
               }}
               data-testid={`ad-slide-${index}`}
             >
-              {slide.isPromo ? (
-                <div className="flex items-center justify-center gap-3 md:gap-5 w-full">
-                  <img 
-                    src={slide.logo} 
-                    alt="ETKİNİUM" 
-                    className="h-8 md:h-10 w-auto object-contain"
-                  />
-                  <span 
-                    className="text-base md:text-lg font-bold"
-                    style={{ color: slide.textColor }}
-                  >
-                    {slide.text}
-                  </span>
-                </div>
-              ) : (
-                <div className="flex items-center justify-center gap-4 md:gap-6 w-full">
-                  <img 
-                    src={slide.logo} 
-                    alt={slide.brand} 
-                    className="h-7 md:h-9 w-auto object-contain max-w-[100px] md:max-w-[150px]"
-                  />
-                  <div className="h-6 md:h-8 w-px bg-white/20" />
-                  <span 
-                    className="text-sm md:text-base font-semibold text-white"
-                  >
-                    {slide.text}
-                  </span>
-                </div>
-              )}
+              <div className="flex items-center justify-center gap-4 md:gap-6 w-full">
+                <img 
+                  src={slide.logo} 
+                  alt={slide.brand} 
+                  className={`h-7 md:h-9 w-auto object-contain ${slide.isPromo ? "" : "brightness-0 invert"}`}
+                  style={{ maxWidth: slide.isPromo ? "auto" : "120px" }}
+                />
+                <div className="h-5 md:h-6 w-px bg-white/20" />
+                <span className={`text-sm md:text-base font-semibold ${slide.isPromo ? "text-[#F7C600]" : "text-white"}`}>
+                  {slide.text}
+                </span>
+              </div>
             </div>
           ))}
 
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10">
+          <div className="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10">
             {adSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? "bg-[#F7C600] shadow-[0_0_8px_rgba(247,198,0,0.5)]" 
+                    ? "bg-[#F7C600] shadow-[0_0_6px_rgba(247,198,0,0.5)]" 
                     : "bg-white/30 hover:bg-white/50"
                 }`}
               />
