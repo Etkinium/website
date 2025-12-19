@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed, Menu, X } from "lucide-react";
+import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,61 +61,37 @@ export default function Header() {
     setSearchQuery("");
   };
 
-  const NavButton = ({ href, children, icon: Icon, testId }: { href: string; children: React.ReactNode; icon?: any; testId: string }) => (
-    <Link href={href}>
-      <button
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white text-sm font-medium hover:bg-white/10 hover:border-[#F7C600]/30 hover:shadow-[0_0_15px_rgba(247,198,0,0.1)] hover:scale-105 active:scale-95 transition-all duration-300"
-        data-testid={testId}
-      >
-        {Icon && <Icon className="w-4 h-4 text-[#F7C600]" />}
-        {children}
-      </button>
-    </Link>
-  );
-
-  const AuthButton = ({ href, children, primary, testId }: { href: string; children: React.ReactNode; primary?: boolean; testId: string }) => (
-    <Link href={href}>
-      <button
-        className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95 ${
-          primary
-            ? "bg-gradient-to-r from-[#F7C600] to-[#FFD93D] text-black hover:shadow-[0_0_20px_rgba(247,198,0,0.4)]"
-            : "bg-white/5 backdrop-blur-xl border border-white/10 text-white hover:bg-white/10 hover:border-[#F7C600]/30"
-        }`}
-        data-testid={testId}
-      >
-        {children}
-      </button>
-    </Link>
-  );
-
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10">
-      <nav className="container mx-auto px-4 py-3">
+    <header className="fixed top-0 w-full z-50 bg-spotify-black/95 backdrop-blur-md border-b border-gray-800">
+      <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
+          {/* LOGO VE İSİM - SOL KÖŞE */}
           <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
               <img 
                 src={logoImage}
                 alt="ETKİNİUM Logo"
-                className="w-9 h-9 object-contain"
+                className="w-10 h-10 object-contain"
               />
             </div>
-            <span className="text-xl font-bold text-white">ETKİNİUM</span>
+            <span className="text-xl md:text-2xl font-bold">ETKİNİUM</span>
           </Link>
           
-          <div className="hidden lg:flex items-center flex-1 justify-center max-w-md">
-            <form onSubmit={handleSearch} className="relative flex items-center w-full">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center flex-1 justify-center">
+            {/* ARAMA BUTONU - ORTADA */}
+            <form onSubmit={handleSearch} className="relative flex items-center">
               <Input
                 type="text"
-                placeholder="Etkinlik, restoran ara..."
+                placeholder="Keşfetmeye başla..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 text-white placeholder:text-gray-500 pr-10 rounded-full focus:border-[#F7C600]/50 focus:ring-[#F7C600]/20 transition-all"
+                className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 pr-10 w-96"
                 data-testid="input-search"
               />
               <button
                 type="submit"
-                className="absolute right-3 text-gray-400 hover:text-[#F7C600] transition-colors"
+                className="absolute right-2 text-gray-400 hover:text-accent-amber"
                 data-testid="button-search"
               >
                 <Search className="w-4 h-4" />
@@ -122,27 +99,59 @@ export default function Header() {
             </form>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
-            <NavButton href="/etkinlikler" icon={Calendar} testId="button-etkinlikler">
-              Etkinlikler
-            </NavButton>
+          {/* BUTONLAR - SAĞ TARAFA YAKIN */}
+          <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
+            <Link href="/etkinlikler">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                data-testid="button-etkinlikler"
+              >
+                <Calendar className="w-4 h-4" />
+                Etkinlikler
+              </Button>
+            </Link>
             
-            <NavButton href="/restoranlar" icon={UtensilsCrossed} testId="button-restoranlar">
-              Restoranlar
-            </NavButton>
+            <Link href="/restoranlar">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-2"
+                data-testid="button-restoranlar"
+              >
+                <UtensilsCrossed className="w-4 h-4" />
+                Restoranlar
+              </Button>
+            </Link>
             
-            <NavButton href="/contact" testId="button-contact">
-              İletişim
-            </NavButton>
+            <Link href="/contact">
+              <Button 
+                variant="ghost"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                data-testid="button-contact"
+              >
+                Bizimle İletişime Geçin
+              </Button>
+            </Link>
             
             {!user && (
               <>
-                <AuthButton href="/signup" primary testId="button-signup">
-                  Üye Ol
-                </AuthButton>
-                <AuthButton href="/login" testId="button-login">
-                  Giriş Yap
-                </AuthButton>
+                <Link href="/signup">
+                  <Button 
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-signup"
+                  >
+                    Üye Ol
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button 
+                    variant="ghost"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                    data-testid="button-login"
+                  >
+                    Giriş Yap
+                  </Button>
+                </Link>
               </>
             )}
             
@@ -150,142 +159,202 @@ export default function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button 
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white hover:bg-white/10 hover:border-[#F7C600]/30 hover:scale-105 active:scale-95 transition-all duration-300"
+                    className="bg-black hover:bg-accent-amber text-white hover:text-black rounded-full px-4 py-2 transition-all flex items-center gap-2"
                     data-testid="button-profile"
                   >
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-r from-[#F7C600] to-[#FFD93D] text-black flex items-center justify-center font-bold text-xs">
+                    <div className="w-8 h-8 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold">
                       {getUserInitials()}
                     </div>
-                    <span className="hidden md:inline text-sm font-medium">Hesabım</span>
+                    <span className="hidden md:inline font-medium">Hesabım</span>
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64 bg-[#0B0B0B]/95 backdrop-blur-xl border border-white/10">
+                <DropdownMenuContent align="end" className="w-64 bg-gray-900 border-gray-700">
                   <DropdownMenuLabel className="text-white">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
                       <p className="text-xs text-gray-400">{user.email}</p>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-white/10" />
-                  <DropdownMenuItem className="text-white hover:bg-white/10 cursor-pointer" asChild>
-                    <Link href="/profile" className="flex items-center gap-2">
-                      <User className="w-4 h-4 text-[#F7C600]" />
-                      Profilim
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                    <Link href="/profile" className="flex items-center w-full" data-testid="menu-profile">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profilim</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:bg-white/10 cursor-pointer" asChild>
-                    <Link href="/settings" className="flex items-center gap-2">
-                      <Settings className="w-4 h-4 text-[#F7C600]" />
-                      Ayarlar
+                  <DropdownMenuItem asChild className="cursor-pointer text-white hover:bg-gray-800 focus:bg-gray-800">
+                    <Link href="/settings" className="flex items-center w-full" data-testid="menu-settings">
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Ayarlar</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/10" />
-                  <DropdownMenuItem className="text-gray-400 text-xs">
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-3 h-3" />
-                      iletisim@etkinium.com
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <div className="px-2 py-2 text-xs text-gray-400">
+                    <div className="flex items-start gap-2">
+                      <Mail className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-white mb-1">Bizimle İletişime Geç</p>
+                        <a href="mailto:iletisim@etkinium.com" className="text-accent-amber hover:underline">
+                          iletisim@etkinium.com
+                        </a>
+                      </div>
                     </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/10" />
+                  </div>
+                  <DropdownMenuSeparator className="bg-gray-700" />
                   <DropdownMenuItem 
-                    className="text-red-400 hover:bg-red-500/10 cursor-pointer"
                     onClick={handleLogout}
+                    className="cursor-pointer text-red-400 hover:bg-gray-800 hover:text-red-300 focus:bg-gray-800 focus:text-red-300"
+                    data-testid="menu-logout"
                   >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Çıkış Yap
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Çıkış Yap</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
           </div>
-
-          <button
-            onClick={toggleMobileMenu}
-            className="lg:hidden w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all"
-            data-testid="button-mobile-menu"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          
+          {/* Mobile Menu Button */}
+          <div className="flex items-center space-x-4">
+            <button 
+              className="md:hidden text-white hover:text-accent-amber transition-colors"
+              onClick={toggleMobileMenu}
+              data-testid="button-mobile-menu"
+              aria-label="Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
+        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 space-y-3 border-t border-white/10 pt-4">
-            <form onSubmit={handleSearch} className="relative">
-              <Input
-                type="text"
-                placeholder="Etkinlik, restoran ara..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-white/5 border border-white/10 text-white placeholder:text-gray-500 pr-10 rounded-full"
-                data-testid="input-search-mobile"
-              />
-              <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <Search className="w-4 h-4" />
-              </button>
-            </form>
-
-            <div className="flex flex-col gap-2">
-              <Link href="/etkinlikler" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium">
-                  <Calendar className="w-5 h-5 text-[#F7C600]" />
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
+            <div className="flex flex-col space-y-4 pt-4">
+              <Link href="/etkinlikler">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-etkinlikler"
+                >
+                  <Calendar className="w-4 h-4" />
                   Etkinlikler
-                </button>
+                </Button>
               </Link>
-              <Link href="/restoranlar" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium">
-                  <UtensilsCrossed className="w-5 h-5 text-[#F7C600]" />
+              
+              <Link href="/restoranlar">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-restoranlar"
+                >
+                  <UtensilsCrossed className="w-4 h-4" />
                   Restoranlar
-                </button>
+                </Button>
               </Link>
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium">
-                  <Mail className="w-5 h-5 text-[#F7C600]" />
-                  İletişim
-                </button>
+              
+              <Link href="/contact">
+                <Button 
+                  variant="ghost"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="button-mobile-contact"
+                >
+                  Bizimle İletişime Geçin
+                </Button>
               </Link>
-            </div>
-
-            {!user && (
-              <div className="flex gap-2 pt-2">
-                <Link href="/signup" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
-                  <button className="w-full py-3 rounded-full bg-gradient-to-r from-[#F7C600] to-[#FFD93D] text-black font-semibold">
-                    Üye Ol
-                  </button>
-                </Link>
-                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
-                  <button className="w-full py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium">
-                    Giriş Yap
-                  </button>
-                </Link>
-              </div>
-            )}
-
-            {user && (
-              <div className="pt-2 space-y-2">
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#F7C600] to-[#FFD93D] text-black flex items-center justify-center font-bold">
-                    {getUserInitials()}
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">{user.firstName} {user.lastName}</p>
-                    <p className="text-gray-400 text-sm">{user.email}</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Link href="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
-                    <button className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-sm">
-                      Profilim
-                    </button>
+              
+              {!user && (
+                <>
+                  <Link href="/signup">
+                    <Button 
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-signup"
+                    >
+                      Üye Ol
+                    </Button>
                   </Link>
-                  <button 
-                    onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
-                    className="flex-1 py-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 font-medium text-sm"
-                  >
-                    Çıkış Yap
-                  </button>
-                </div>
-              </div>
-            )}
+                  <Link href="/login">
+                    <Button 
+                      variant="ghost"
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-login"
+                    >
+                      Giriş Yap
+                    </Button>
+                  </Link>
+                </>
+              )}
+              
+              {user && (
+                <>
+                  <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold text-lg">
+                        {getUserInitials()}
+                      </div>
+                      <div className="flex flex-col items-start">
+                        <span className="text-sm text-white font-medium">{user.firstName} {user.lastName}</span>
+                        <span className="text-gray-400 text-xs">{user.email}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Link href="/profile">
+                        <Button 
+                          variant="ghost"
+                          className="w-full justify-start text-white hover:bg-gray-800"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          data-testid="button-mobile-profile"
+                        >
+                          <User className="mr-2 h-4 w-4" />
+                          Profilim
+                        </Button>
+                      </Link>
+                      <Link href="/settings">
+                        <Button 
+                          variant="ghost"
+                          className="w-full justify-start text-white hover:bg-gray-800"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          data-testid="button-mobile-settings"
+                        >
+                          <Settings className="mr-2 h-4 w-4" />
+                          Ayarlar
+                        </Button>
+                      </Link>
+                      <div className="text-xs text-gray-400 py-2 border-t border-gray-700">
+                        <p className="font-medium text-white mb-1">Bizimle İletişime Geç</p>
+                        <a href="mailto:iletisim@etkinium.com" className="text-accent-amber hover:underline">
+                          iletisim@etkinium.com
+                        </a>
+                      </div>
+                      <Button 
+                        variant="ghost"
+                        className="w-full justify-start text-red-400 hover:bg-gray-800 hover:text-red-300 border-t border-gray-700 rounded-none pt-4"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          handleLogout();
+                        }}
+                        data-testid="button-mobile-logout"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Çıkış Yap
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         )}
       </nav>
