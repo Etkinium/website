@@ -6,6 +6,7 @@ import HorizontalAdBanner from "@/components/horizontal-ad-banner";
 import AdApplicationButton from "@/components/ad-application-button";
 import FilterDialog from "@/components/filter-dialog";
 import DateDrawer from "@/components/date-drawer";
+import MobileTabBar from "@/components/mobile-tab-bar";
 import { Calendar, MapPin, Clock, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -111,7 +112,7 @@ export default function Etkinlikler() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pb-16 md:pb-0">
       <Header />
       
       <main className="pt-20 pb-16">
@@ -196,6 +197,8 @@ export default function Etkinlikler() {
         onClose={() => setIsDateDrawerOpen(false)}
         onSelectDate={setSelectedDate}
       />
+
+      <MobileTabBar />
 
       <Footer />
     </div>

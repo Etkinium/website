@@ -61,7 +61,7 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const scrollAmount = 300;
+    const scrollAmount = 200;
     scrollRef.current.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth"
@@ -74,7 +74,7 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
   };
 
   const getDayName = (date: Date) => {
-    const days = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
+    const days = ["Pz", "Pt", "Sa", "Ça", "Pe", "Cu", "Ct"];
     return days[date.getDay()];
   };
 
@@ -88,41 +88,39 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
 
   return (
     <div 
-      className="fixed inset-x-0 top-16 z-50 animate-in slide-in-from-top duration-300"
+      className="fixed inset-x-0 top-16 z-50 animate-in slide-in-from-top duration-200"
       data-testid="date-drawer"
     >
       <div 
-        className="relative w-full bg-black/95 backdrop-blur-xl border-b border-accent-amber/30"
+        className="relative w-full bg-black/95 backdrop-blur-xl border-b border-accent-amber/20"
         style={{
-          boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 60px rgba(255,214,0,0.1)"
+          boxShadow: "0 4px 20px rgba(0,0,0,0.5)"
         }}
       >
-        <div className="absolute top-3 right-4 z-10">
+        <div className="absolute top-2 right-3 z-10">
           <button 
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-white/5 hover:bg-accent-amber flex items-center justify-center text-white/60 hover:text-black transition-all border border-white/10"
+            className="w-6 h-6 rounded-full bg-white/5 hover:bg-accent-amber flex items-center justify-center text-white/60 hover:text-black transition-all border border-white/10"
             data-testid="close-date-drawer"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3 h-3" />
           </button>
         </div>
 
-        <div className="px-4 py-3">
-          <p className="text-xs text-white/50 mb-3">Tarih Seçin</p>
-          
+        <div className="px-3 py-2">
           <div className="relative flex items-center">
             <button 
               onClick={() => scroll("left")}
-              className="absolute left-0 z-10 w-10 h-10 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
-              style={{ boxShadow: "4px 0 20px rgba(0,0,0,0.8)" }}
+              className="absolute left-0 z-10 w-7 h-7 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+              style={{ boxShadow: "4px 0 12px rgba(0,0,0,0.8)" }}
               data-testid="scroll-dates-left"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
             
             <div 
               ref={scrollRef}
-              className="flex gap-2 overflow-x-auto py-2 px-12 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className="flex gap-1.5 overflow-x-auto py-1.5 px-10 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
@@ -139,7 +137,7 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
                   <button
                     key={index}
                     onClick={() => handleDateClick(date)}
-                    className={`flex-shrink-0 flex flex-col items-center justify-center w-16 h-20 rounded-2xl transition-all ${
+                    className={`flex-shrink-0 flex flex-col items-center justify-center w-11 h-14 rounded-xl transition-all ${
                       isSelected
                         ? "bg-accent-amber text-black"
                         : isToday
@@ -148,13 +146,13 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
                     }`}
                     data-testid={`date-${index}`}
                   >
-                    <span className="text-[10px] font-medium uppercase opacity-70">
+                    <span className="text-[8px] font-medium uppercase opacity-70">
                       {getDayName(date)}
                     </span>
-                    <span className="text-2xl font-bold">
+                    <span className="text-lg font-bold">
                       {date.getDate()}
                     </span>
-                    <span className="text-[10px] font-medium opacity-70">
+                    <span className="text-[8px] font-medium opacity-70">
                       {months[date.getMonth()].slice(0, 3)}
                     </span>
                   </button>
@@ -164,11 +162,11 @@ export default function DateDrawer({ isOpen, onClose, onSelectDate }: DateDrawer
 
             <button 
               onClick={() => scroll("right")}
-              className="absolute right-0 z-10 w-10 h-10 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
-              style={{ boxShadow: "-4px 0 20px rgba(0,0,0,0.8)" }}
+              className="absolute right-0 z-10 w-7 h-7 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-white hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+              style={{ boxShadow: "-4px 0 12px rgba(0,0,0,0.8)" }}
               data-testid="scroll-dates-right"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>

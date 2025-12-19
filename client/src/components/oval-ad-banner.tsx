@@ -49,15 +49,15 @@ export default function OvalAdBanner() {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % adSlides.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
 
   return (
-    <div className="w-full px-3 md:px-4 py-4 md:py-6">
+    <div className="w-full px-3 md:px-4 py-3 md:py-4">
       <div 
-        className="relative mx-auto w-full max-w-[900px] h-[56px] md:h-[65px] rounded-full overflow-hidden cursor-pointer group"
+        className="relative mx-auto w-full max-w-[900px] h-[48px] md:h-[56px] rounded-full overflow-hidden cursor-pointer group"
         style={{ 
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
           border: "2px solid rgba(255,214,0,0.4)",
@@ -88,11 +88,11 @@ export default function OvalAdBanner() {
                 <img 
                   src={slide.logo} 
                   alt="ETKİNİUM" 
-                  className="h-7 md:h-9 w-auto object-contain"
+                  className="h-6 md:h-8 w-auto object-contain"
                 />
                 <div className="flex items-center gap-2">
                   <span 
-                    className="text-sm md:text-base font-bold"
+                    className="text-xs md:text-sm font-bold"
                     style={{ color: slide.textColor }}
                   >
                     {slide.text}
@@ -100,15 +100,15 @@ export default function OvalAdBanner() {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center justify-center gap-3 md:gap-5 w-full">
+              <div className="flex items-center justify-center gap-2 md:gap-4 w-full">
                 <img 
                   src={slide.logo} 
                   alt={slide.brand} 
-                  className="h-6 md:h-8 w-auto object-contain max-w-[100px] md:max-w-[140px]"
+                  className="h-5 md:h-7 w-auto object-contain max-w-[80px] md:max-w-[120px]"
                 />
-                <div className="h-5 md:h-6 w-px bg-gray-300" />
+                <div className="h-4 md:h-5 w-px bg-gray-300" />
                 <span 
-                  className="text-xs md:text-sm font-semibold text-center leading-tight"
+                  className="text-[10px] md:text-xs font-semibold text-center leading-tight"
                   style={{ color: slide.textColor }}
                 >
                   {slide.text}
@@ -118,12 +118,12 @@ export default function OvalAdBanner() {
           </div>
         ))}
 
-        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 z-10">
+        <div className="absolute bottom-0.5 left-1/2 transform -translate-x-1/2 flex gap-1 z-10">
           {adSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300"
+              className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full transition-all duration-300"
               style={{
                 backgroundColor: index === currentIndex ? "#ffd600" : "rgba(0,0,0,0.3)",
                 transform: index === currentIndex ? "scale(1.2)" : "scale(1)",

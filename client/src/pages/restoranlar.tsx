@@ -6,6 +6,7 @@ import AdApplicationButton from "@/components/ad-application-button";
 import FilterDialog from "@/components/filter-dialog";
 import ReservationDialog from "@/components/reservation-dialog";
 import DateDrawer from "@/components/date-drawer";
+import MobileTabBar from "@/components/mobile-tab-bar";
 import { UtensilsCrossed, MapPin, Clock, Users, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -113,7 +114,7 @@ export default function Restoranlar() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pb-16 md:pb-0">
       <Header />
       
       <main className="pt-20 pb-16">
@@ -199,6 +200,8 @@ export default function Restoranlar() {
         onClose={() => setIsDateDrawerOpen(false)}
         onSelectDate={setSelectedDate}
       />
+
+      <MobileTabBar />
 
       <Footer />
     </div>

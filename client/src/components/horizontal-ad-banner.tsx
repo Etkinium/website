@@ -49,7 +49,7 @@ export default function HorizontalAdBanner() {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % adSlides.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
