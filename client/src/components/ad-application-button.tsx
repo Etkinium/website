@@ -54,15 +54,15 @@ export default function AdApplicationButton() {
   };
 
   return (
-    <div className="w-full flex justify-center px-3 pb-3">
+    <div className="w-full flex justify-center px-3 pb-2">
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <button
-            className="bg-black text-accent-amber/80 border border-white/10 hover:bg-accent-amber hover:text-black text-[10px] sm:text-xs font-medium px-3 sm:px-4 py-1.5 rounded-full transition-all flex items-center gap-1.5"
+            className="bg-black/60 text-white/50 border border-white/5 hover:bg-accent-amber hover:text-black text-[9px] font-medium px-2.5 py-1 rounded-full transition-all flex items-center gap-1"
             data-testid="button-ad-application"
           >
-            <Megaphone className="w-3 h-3" />
-            <span>İş Birliği Fırsatları</span>
+            <Megaphone className="w-2.5 h-2.5" />
+            <span>İş Birliği</span>
           </button>
         </DialogTrigger>
         

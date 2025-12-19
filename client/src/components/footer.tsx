@@ -5,168 +5,117 @@ import { SiX, SiInstagram } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="bg-spotify-black py-16 border-t border-gray-800">
-      <div className="container mx-auto px-4">
-        {/* Ana Footer İçeriği */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-12">
+    <footer className="bg-black py-8 sm:py-12 border-t border-white/10 mb-16 md:mb-0">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
           
-          {/* Logo ve Email Bölümü */}
-          <div className="text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start space-x-3 mb-6">
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1 text-center lg:text-left mb-2 sm:mb-0">
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
               <img 
                 src={logoImage}
                 alt="ETKİNİUM Logo"
-                className="w-12 h-12 object-contain"
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
               />
-              <span className="text-3xl font-bold text-white tracking-wide">ETKİNİUM</span>
+              <span className="text-lg sm:text-xl font-bold text-white">ETKİNİUM</span>
             </div>
             
-            <div className="flex items-center justify-center lg:justify-start space-x-3 mb-4">
-              <div className="p-2 rounded-lg bg-accent-amber/10 border border-accent-amber/20">
-                <Mail className="text-accent-amber w-5 h-5" />
-              </div>
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
+              <Mail className="text-accent-amber w-3.5 h-3.5" />
               <a 
                 href="mailto:iletisim@etkinium.com" 
-                className="text-gray-300 hover:text-accent-amber transition-all duration-300 text-lg font-medium"
+                className="text-white/60 hover:text-accent-amber transition-all text-xs sm:text-sm"
               >
                 iletisim@etkinium.com
               </a>
             </div>
             
-            <p className="text-gray-400 max-w-md mx-auto lg:mx-0 text-center lg:text-left italic">
+            <p className="text-white/40 text-[10px] sm:text-xs italic">
               Tek Platform, Sonsuz Sanat.
             </p>
           </div>
 
-          {/* Destek & Yasal */}
-          <div className="text-center lg:text-left">
-            <h3 className="text-xl font-bold text-white mb-6 relative">
-              <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
-                Destek & Yasal
-              </span>
-              <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
+          <div className="text-center sm:text-left">
+            <h3 className="text-xs sm:text-sm font-semibold text-accent-amber mb-2 sm:mb-3">
+              Destek & Yasal
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1 sm:space-y-1.5">
               <li>
-                <Link 
-                  href="/kvkk" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>KVKK Politikası</span>
+                <Link href="/kvkk" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  KVKK Politikası
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/gizlilik-politikasi" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Gizlilik Politikası</span>
+                <Link href="/gizlilik-politikasi" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  Gizlilik Politikası
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/kullanim-sartlari" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Kullanım Koşulları</span>
+                <Link href="/kullanim-sartlari" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  Kullanım Koşulları
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/cerez-politikasi" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Çerez Politikası</span>
+                <Link href="/cerez-politikasi" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  Çerez Politikası
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* İletişim */}
-          <div className="text-center lg:text-left">
-            <h3 className="text-xl font-bold text-white mb-6 relative">
-              <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
-                İletişim
-              </span>
-              <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
+          <div className="text-center sm:text-left">
+            <h3 className="text-xs sm:text-sm font-semibold text-accent-amber mb-2 sm:mb-3">
+              İletişim
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1 sm:space-y-1.5">
               <li>
-                <Link 
-                  href="/contact" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Bizimle İletişime Geçin</span>
+                <Link href="/contact" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  Bize Ulaşın
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/sss" 
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-2 group"
-                >
-                  <span className="w-2 h-2 bg-gray-600 group-hover:bg-accent-amber rounded-full transition-all duration-300"></span>
-                  <span>Sıkça Sorulan Sorular</span>
+                <Link href="/sss" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  SSS
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-white/50 hover:text-accent-amber transition-all text-[10px] sm:text-xs">
+                  Hakkımızda
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Bizi Takip Edin */}
-          <div className="text-center lg:text-left">
-            <h3 className="text-xl font-bold text-white mb-6 relative">
-              <span className="bg-gradient-to-r from-accent-amber to-yellow-400 bg-clip-text text-transparent">
-                Bizi Takip Edin
-              </span>
-              <div className="absolute -bottom-2 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-12 h-1 bg-gradient-to-r from-accent-amber to-yellow-400 rounded-full"></div>
+          <div className="text-center sm:text-left col-span-2 sm:col-span-1">
+            <h3 className="text-xs sm:text-sm font-semibold text-accent-amber mb-2 sm:mb-3">
+              Takip Edin
             </h3>
-            <ul className="space-y-3">
-              <li>
-                <a 
-                  href="https://x.com/etkinium" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-3 group"
-                  data-testid="link-x"
-                >
-                  <SiX className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  <span>Etkinium</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://instagram.com/etkinium" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-accent-amber transition-all duration-300 flex items-center justify-center lg:justify-start space-x-3 group"
-                  data-testid="link-instagram"
-                >
-                  <SiInstagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  <span>Etkinium</span>
-                </a>
-              </li>
-            </ul>
+            <div className="flex items-center justify-center sm:justify-start gap-3">
+              <a 
+                href="https://x.com/etkinium" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-accent-amber flex items-center justify-center text-white/50 hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+                data-testid="link-x"
+              >
+                <SiX className="w-3.5 h-3.5" />
+              </a>
+              <a 
+                href="https://instagram.com/etkinium" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-accent-amber flex items-center justify-center text-white/50 hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+                data-testid="link-instagram"
+              >
+                <SiInstagram className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 mb-3">
+        <div className="pt-4 border-t border-white/5 text-center">
+          <p className="text-white/30 text-[10px] sm:text-xs">
             © 2025 ETKİNİUM. Tüm hakları saklıdır.
           </p>
-          <div className="flex items-center justify-center space-x-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-              <img 
-                src={logoImage}
-                alt="ETKİNİUM Logo"
-                className="w-6 h-6 object-contain"
-              />
-            </div>
-            <span className="text-lg font-bold text-white">ETKİNİUM</span>
-          </div>
         </div>
       </div>
     </footer>
