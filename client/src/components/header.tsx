@@ -126,10 +126,10 @@ export default function Header() {
             <Link href="/contact">
               <Button 
                 variant="ghost"
-                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all"
+                className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all text-sm"
                 data-testid="button-contact"
               >
-                Bizimle İletişime Geçin
+                İletişim
               </Button>
             </Link>
             
@@ -265,11 +265,11 @@ export default function Header() {
               <Link href="/contact">
                 <Button 
                   variant="ghost"
-                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full"
+                  className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="button-mobile-contact"
                 >
-                  Bizimle İletişime Geçin
+                  İletişim
                 </Button>
               </Link>
               

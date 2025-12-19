@@ -8,18 +8,11 @@ import EmailSubscription from "@/components/email-subscription";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, ShoppingBag, Ticket, Sparkles, Gift } from "lucide-react";
+import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
 import faturaportLogo from "@assets/download_1765541159072.png";
 import etkineumLogo from "@assets/logo-final.png";
-
-const productBoxes = [
-  { id: 1, title: "VIP Bilet Paketi", subtitle: "Özel Ayrıcalıklar", icon: Ticket, color: "from-purple-500/20 to-purple-900/40" },
-  { id: 2, title: "Hediye Kartı", subtitle: "Sevdiklerine Hediye", icon: Gift, color: "from-pink-500/20 to-pink-900/40" },
-  { id: 3, title: "Premium Üyelik", subtitle: "Sınırsız Erişim", icon: Sparkles, color: "from-amber-500/20 to-amber-900/40" },
-  { id: 4, title: "Grup Paketi", subtitle: "Toplu Alımlarda İndirim", icon: ShoppingBag, color: "from-blue-500/20 to-blue-900/40" },
-];
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -64,8 +57,8 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
       <div className="pt-1.5 border-t border-white/5 flex items-center justify-between">
         <span className="text-accent-amber font-semibold text-xs">— ₺</span>
         <Link href="/bilet-al">
-          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[9px] font-medium px-2 py-0.5 rounded-full transition-all border border-white/10 hover:border-accent-amber">
-            Al
+          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[8px] font-medium px-2 py-1 rounded-full transition-all border border-white/10 hover:border-accent-amber">
+            Satın Al
           </button>
         </Link>
       </div>
@@ -122,8 +115,8 @@ const FeaturedRestaurantCard = ({ index }: { index: number }) => (
       <div className="pt-1.5 border-t border-white/5 flex items-center justify-between">
         <span className="text-accent-amber font-semibold text-xs">—— ₺</span>
         <Link href="/restoranlar">
-          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[9px] font-medium px-2 py-0.5 rounded-full transition-all border border-white/10 hover:border-accent-amber">
-            Rezerve
+          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[8px] font-medium px-2 py-1 rounded-full transition-all border border-white/10 hover:border-accent-amber">
+            Rezerve Et
           </button>
         </Link>
       </div>
@@ -218,49 +211,6 @@ export default function Home() {
             {[...Array(10)].map((_, i) => (
               <FeaturedEventCard key={i} index={i} />
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-4 sm:py-6">
-        <div className="container mx-auto px-3">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-1.5">
-              <ShoppingBag className="w-3.5 h-3.5 text-accent-amber" />
-              <h2 className="text-xs sm:text-sm font-semibold text-white/90">Özel Ürünler</h2>
-            </div>
-            <Link href="/etkinlikler">
-              <button className="flex items-center gap-0.5 text-white/50 hover:text-accent-amber text-[10px] font-medium transition-all">
-                Tümünü Gör
-                <ChevronRight className="w-2.5 h-2.5" />
-              </button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-            {productBoxes.map((product) => {
-              const Icon = product.icon;
-              return (
-                <div 
-                  key={product.id}
-                  className={`group relative bg-gradient-to-br ${product.color} backdrop-blur-xl rounded-xl p-3 sm:p-4 border border-white/10 hover:border-accent-amber/40 transition-all cursor-pointer`}
-                  style={{
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.3)"
-                  }}
-                  data-testid={`product-box-${product.id}`}
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/10">
-                      <Icon className="w-4 h-4 text-accent-amber" />
-                    </div>
-                  </div>
-                  <h3 className="text-[11px] sm:text-xs font-semibold text-white mb-0.5">{product.title}</h3>
-                  <p className="text-[9px] sm:text-[10px] text-white/50 mb-2">{product.subtitle}</p>
-                  <button className="w-full bg-black hover:bg-accent-amber text-white hover:text-black text-[9px] sm:text-[10px] font-medium py-1.5 rounded-lg transition-all border border-white/10 hover:border-accent-amber">
-                    Satın Al
-                  </button>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
