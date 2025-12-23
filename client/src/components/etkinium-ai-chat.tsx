@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { X, Send, Sparkles, MessageCircle, Trash2, Plus, Bot, User, Minimize2, Maximize2 } from "lucide-react";
+import { X, Send, Sparkles, MessageCircle, Trash2, Plus, Bot, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import logoImage from "@assets/logo-final.png";
@@ -32,7 +32,6 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
   const [localMessages, setLocalMessages] = useState<Message[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
-  const [isExpanded, setIsExpanded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
@@ -189,205 +188,191 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
   if (!isOpen) return null;
 
   return (
-    <>
+    <div 
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6"
+      style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)" }}
+      onClick={(e) => e.target === e.currentTarget && handleClose()}
+    >
       <div 
-        className="fixed inset-0 z-[99] bg-black/40 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none md:pointer-events-none"
-        onClick={handleClose}
-      />
-      
-      <div 
-        className={`fixed z-[100] transition-all duration-300 ease-out
-          ${isExpanded 
-            ? "inset-4 md:inset-8" 
-            : "bottom-4 right-4 left-4 md:left-auto md:w-[420px] h-[85vh] md:h-[600px] max-h-[700px]"
-          }
-        `}
+        className="relative w-full max-w-lg h-[85vh] sm:h-[80vh] max-h-[650px] bg-gradient-to-b from-gray-900 via-black to-gray-900 rounded-2xl sm:rounded-3xl border border-accent-amber/30 overflow-hidden flex flex-col animate-in zoom-in-95 fade-in duration-200"
         style={{ 
-          boxShadow: "0 25px 80px rgba(0,0,0,0.5), 0 0 60px rgba(255,214,0,0.1)",
+          boxShadow: "0 25px 80px rgba(0,0,0,0.6), 0 0 80px rgba(255,214,0,0.12)",
         }}
       >
         <div 
-          className="relative w-full h-full bg-gradient-to-b from-gray-900 via-black to-gray-900 rounded-2xl md:rounded-3xl border border-accent-amber/20 overflow-hidden flex flex-col"
-        >
-          <div 
-            className="absolute inset-0 opacity-30 pointer-events-none"
-            style={{
-              background: "radial-gradient(ellipse at top right, rgba(255,214,0,0.15) 0%, transparent 50%)"
-            }}
-          />
+          className="absolute inset-0 opacity-40 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at top, rgba(255,214,0,0.15) 0%, transparent 60%)"
+          }}
+        />
 
-          <div className="relative flex items-center justify-between p-3 md:p-4 border-b border-white/10 bg-black/40 backdrop-blur-sm">
-            <div className="flex items-center gap-2.5">
-              <div className="relative">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center border border-accent-amber/30">
-                  <img src={logoImage} alt="ETKİNİUM AI" className="w-6 h-6 md:w-7 md:h-7 object-contain" />
-                </div>
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
+        <div className="relative flex items-center justify-between p-3 sm:p-4 border-b border-white/10 bg-black/50 backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center border border-accent-amber/30">
+                <img src={logoImage} alt="ETKİNİUM AI" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
               </div>
-              <div>
-                <h2 className="text-sm md:text-base font-bold text-white flex items-center gap-2">
-                  ETKİNİUM AI
-                  <span className="text-[8px] md:text-[9px] bg-gradient-to-r from-accent-amber/30 to-yellow-500/20 text-accent-amber px-1.5 py-0.5 rounded-full font-medium border border-accent-amber/20">
-                    BETA
-                  </span>
-                </h2>
-                <p className="text-[10px] md:text-[11px] text-white/40">Yapay zeka asistanınız</p>
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-black flex items-center justify-center">
+                <Sparkles className="w-2 h-2 text-white" />
               </div>
             </div>
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => createConversationMutation.mutate()}
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-accent-amber/20 flex items-center justify-center text-white/50 hover:text-accent-amber transition-all border border-white/5 hover:border-accent-amber/30"
-                data-testid="button-new-chat"
-              >
-                <Plus className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="hidden md:flex w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 items-center justify-center text-white/50 hover:text-white transition-all border border-white/5"
-              >
-                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-              </button>
-              <button
-                onClick={handleClose}
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-red-500/20 flex items-center justify-center text-white/50 hover:text-red-400 transition-all border border-white/5 hover:border-red-500/30"
-                data-testid="button-close-ai"
-              >
-                <X className="w-4 h-4" />
-              </button>
+            <div>
+              <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                ETKİNİUM AI
+                <span className="text-[9px] bg-gradient-to-r from-accent-amber/30 to-yellow-500/20 text-accent-amber px-2 py-0.5 rounded-full font-medium border border-accent-amber/20">
+                  BETA
+                </span>
+              </h2>
+              <p className="text-[11px] text-white/40">Yapay zeka asistanınız</p>
             </div>
           </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => createConversationMutation.mutate()}
+              className="w-9 h-9 rounded-xl bg-white/5 hover:bg-accent-amber/20 flex items-center justify-center text-white/50 hover:text-accent-amber transition-all border border-white/10 hover:border-accent-amber/30"
+              title="Yeni Sohbet"
+              data-testid="button-new-chat"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleClose}
+              className="w-9 h-9 rounded-xl bg-red-500/10 hover:bg-red-500/20 flex items-center justify-center text-red-400 hover:text-red-300 transition-all border border-red-500/20 hover:border-red-500/40"
+              title="Kapat"
+              data-testid="button-close-ai"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
-          {conversations.length > 0 && (
-            <div className="relative flex gap-1.5 px-3 py-2 border-b border-white/5 overflow-x-auto [&::-webkit-scrollbar]:hidden bg-black/20">
-              {conversations.slice(0, 5).map((conv) => (
-                <button
-                  key={conv.id}
-                  onClick={() => setCurrentConversationId(conv.id)}
-                  className={`group flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] md:text-[11px] whitespace-nowrap transition-all ${
-                    currentConversationId === conv.id
-                      ? "bg-accent-amber/15 text-accent-amber border border-accent-amber/25"
-                      : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/60 border border-transparent"
-                  }`}
-                >
-                  <MessageCircle className="w-3 h-3" />
-                  <span className="max-w-[80px] truncate">{conv.title}</span>
-                  {currentConversationId === conv.id && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteConversationMutation.mutate(conv.id);
-                      }}
-                      className="ml-0.5 text-white/30 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </button>
-                  )}
-                </button>
-              ))}
+        {conversations.length > 0 && (
+          <div className="relative flex gap-2 px-3 py-2 border-b border-white/5 overflow-x-auto [&::-webkit-scrollbar]:hidden bg-black/30">
+            {conversations.slice(0, 5).map((conv) => (
+              <button
+                key={conv.id}
+                onClick={() => setCurrentConversationId(conv.id)}
+                className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] whitespace-nowrap transition-all ${
+                  currentConversationId === conv.id
+                    ? "bg-accent-amber/15 text-accent-amber border border-accent-amber/25"
+                    : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/60 border border-transparent"
+                }`}
+              >
+                <MessageCircle className="w-3 h-3" />
+                <span className="max-w-[100px] truncate">{conv.title}</span>
+                {currentConversationId === conv.id && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteConversationMutation.mutate(conv.id);
+                    }}
+                    className="ml-1 text-white/30 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="relative flex-1 overflow-y-auto p-4 space-y-4">
+          {localMessages.length === 0 && !streamingContent && (
+            <div className="flex flex-col items-center justify-center h-full text-center px-4">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-amber/15 to-yellow-500/5 flex items-center justify-center mb-5 border border-accent-amber/20">
+                <Sparkles className="w-10 h-10 text-accent-amber/60" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">ETKİNİUM AI</h3>
+              <p className="text-sm text-white/40 max-w-sm mb-6">
+                Etkinlikler, restoranlar ve biletler hakkında sorularınızı yanıtlayabilirim.
+              </p>
+              <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
+                {[
+                  "Yaklaşan etkinlikler neler?",
+                  "En iyi restoranları öner",
+                  "Bilet nasıl alırım?",
+                  "VIP paketler hakkında bilgi"
+                ].map((suggestion, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setInput(suggestion)}
+                    className="text-left text-[11px] p-3 rounded-xl bg-white/5 border border-white/5 text-white/50 hover:bg-accent-amber/10 hover:border-accent-amber/20 hover:text-accent-amber transition-all"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
-          <div className="relative flex-1 overflow-y-auto p-3 md:p-4 space-y-3">
-            {localMessages.length === 0 && !streamingContent && (
-              <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-accent-amber/10 to-yellow-500/5 flex items-center justify-center mb-4 border border-accent-amber/20">
-                  <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-accent-amber/70" />
+          {localMessages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              {message.role === "assistant" && (
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
+                  <Bot className="w-4 h-4 text-accent-amber" />
                 </div>
-                <h3 className="text-base md:text-lg font-semibold text-white mb-1.5">ETKİNİUM AI</h3>
-                <p className="text-xs md:text-sm text-white/40 max-w-xs mb-5">
-                  Size nasıl yardımcı olabilirim?
-                </p>
-                <div className="grid grid-cols-2 gap-2 w-full max-w-xs">
-                  {[
-                    "Yaklaşan etkinlikler",
-                    "Restoran önerileri",
-                    "Bilet satın alma",
-                    "VIP paketler"
-                  ].map((suggestion, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setInput(suggestion)}
-                      className="text-left text-[10px] md:text-[11px] p-2.5 rounded-xl bg-white/5 border border-white/5 text-white/50 hover:bg-accent-amber/10 hover:border-accent-amber/20 hover:text-accent-amber transition-all"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {localMessages.map((message) => (
+              )}
               <div
-                key={message.id}
-                className={`flex gap-2.5 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                className={`max-w-[80%] px-4 py-2.5 text-sm ${
+                  message.role === "user"
+                    ? "bg-gradient-to-r from-accent-amber to-yellow-500 text-black rounded-2xl rounded-br-md"
+                    : "bg-white/10 text-white/90 rounded-2xl rounded-bl-md border border-white/5"
+                }`}
               >
-                {message.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
-                    <Bot className="w-3.5 h-3.5 text-accent-amber" />
-                  </div>
-                )}
-                <div
-                  className={`max-w-[85%] px-3 py-2 text-xs md:text-sm ${
-                    message.role === "user"
-                      ? "bg-gradient-to-r from-accent-amber to-yellow-500 text-black rounded-2xl rounded-br-lg"
-                      : "bg-white/8 text-white/85 rounded-2xl rounded-bl-lg border border-white/5"
-                  }`}
-                >
-                  <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                </div>
-                {message.role === "user" && (
-                  <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/5">
-                    <User className="w-3.5 h-3.5 text-white/60" />
-                  </div>
-                )}
+                <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
               </div>
-            ))}
-
-            {streamingContent && (
-              <div className="flex gap-2.5 justify-start">
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
-                  <Bot className="w-3.5 h-3.5 text-accent-amber animate-pulse" />
+              {message.role === "user" && (
+                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/5">
+                  <User className="w-4 h-4 text-white/60" />
                 </div>
-                <div className="max-w-[85%] px-3 py-2 rounded-2xl rounded-bl-lg bg-white/8 text-white/85 text-xs md:text-sm border border-white/5">
-                  <p className="whitespace-pre-wrap leading-relaxed">{streamingContent}</p>
-                  <span className="inline-block w-1.5 h-4 bg-accent-amber/60 animate-pulse ml-0.5 rounded-sm" />
-                </div>
-              </div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-
-          <div className="relative p-3 md:p-4 border-t border-white/10 bg-black/40 backdrop-blur-sm">
-            <div className="flex gap-2 items-end">
-              <div className="flex-1 relative">
-                <Textarea
-                  ref={textareaRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Mesajınızı yazın..."
-                  disabled={isStreaming}
-                  className="min-h-[42px] max-h-[100px] resize-none bg-white/5 border-white/10 text-white placeholder:text-white/25 rounded-xl text-xs md:text-sm pr-3 focus:border-accent-amber/30 focus:ring-accent-amber/20"
-                  data-testid="input-ai-message"
-                />
-              </div>
-              <Button
-                onClick={sendMessage}
-                disabled={!input.trim() || isStreaming}
-                className="h-[42px] w-[42px] bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-yellow-400 hover:to-amber-400 text-black rounded-xl p-0 flex-shrink-0 shadow-lg shadow-accent-amber/20 disabled:opacity-40 disabled:shadow-none"
-                data-testid="button-send-ai"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
+              )}
             </div>
-            <p className="text-[9px] text-white/20 text-center mt-2">
-              ETKİNİUM AI beta aşamasındadır
-            </p>
+          ))}
+
+          {streamingContent && (
+            <div className="flex gap-3 justify-start">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
+                <Bot className="w-4 h-4 text-accent-amber animate-pulse" />
+              </div>
+              <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-bl-md bg-white/10 text-white/90 text-sm border border-white/5">
+                <p className="whitespace-pre-wrap leading-relaxed">{streamingContent}</p>
+                <span className="inline-block w-2 h-4 bg-accent-amber/60 animate-pulse ml-1 rounded-sm" />
+              </div>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="relative p-4 border-t border-white/10 bg-black/50 backdrop-blur-sm">
+          <div className="flex gap-3 items-end">
+            <Textarea
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Mesajınızı yazın..."
+              disabled={isStreaming}
+              className="flex-1 min-h-[46px] max-h-[120px] resize-none bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-xl text-sm focus:border-accent-amber/40 focus:ring-accent-amber/20"
+              data-testid="input-ai-message"
+            />
+            <Button
+              onClick={sendMessage}
+              disabled={!input.trim() || isStreaming}
+              className="h-[46px] w-[46px] bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-yellow-400 hover:to-amber-400 text-black rounded-xl p-0 flex-shrink-0 shadow-lg shadow-accent-amber/25 disabled:opacity-40 disabled:shadow-none"
+              data-testid="button-send-ai"
+            >
+              <Send className="w-5 h-5" />
+            </Button>
           </div>
+          <p className="text-[10px] text-white/25 text-center mt-2.5">
+            ETKİNİUM AI beta aşamasındadır. Yanıtlar her zaman doğru olmayabilir.
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

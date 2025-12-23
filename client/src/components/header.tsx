@@ -109,7 +109,7 @@ export default function Header() {
               data-testid="button-ai-chat"
             >
               <Sparkles className="w-4 h-4" />
-              <span>AI</span>
+              <span>ETKİNİUM AI</span>
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
             </Button>
             
@@ -259,7 +259,7 @@ export default function Header() {
                 data-testid="button-mobile-ai-chat"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Etkinium AI</span>
+                <span>ETKİNİUM AI</span>
                 <span className="absolute top-1/2 -translate-y-1/2 right-3 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               </Button>
               
