@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { X, Send, Sparkles, MessageCircle, Trash2, Plus, Bot, User } from "lucide-react";
@@ -197,7 +198,7 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div 
       className="fixed inset-0 z-[9999] flex items-center justify-center"
       style={{ background: "rgba(0,0,0,0.85)" }}
@@ -383,6 +384,7 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
