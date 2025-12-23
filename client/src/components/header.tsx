@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed } from "lucide-react";
+import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed, Sparkles } from "lucide-react";
+import EtkiniumAIChat from "./etkinium-ai-chat";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +21,7 @@ import type { User as UserProfile } from "@shared/schema";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
 
@@ -101,6 +103,16 @@ export default function Header() {
 
           {/* BUTONLAR - SAĞ TARAFA YAKIN */}
           <div className="hidden lg:flex items-center space-x-2 flex-shrink-0">
+            <Button 
+              onClick={() => setIsAIChatOpen(true)}
+              className="relative bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black font-semibold transition-all flex items-center gap-2 shadow-lg shadow-accent-amber/20"
+              data-testid="button-ai-chat"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>AI</span>
+              <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            </Button>
+            
             <Link href="/etkinlikler">
               <Button 
                 variant="ghost"
@@ -238,6 +250,19 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
+              <Button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsAIChatOpen(true);
+                }}
+                className="relative bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black font-semibold transition-all w-full flex items-center justify-center gap-2"
+                data-testid="button-mobile-ai-chat"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Etkinium AI</span>
+                <span className="absolute top-1/2 -translate-y-1/2 right-3 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              </Button>
+              
               <Link href="/etkinlikler">
                 <Button 
                   variant="ghost"
@@ -358,6 +383,8 @@ export default function Header() {
           </div>
         )}
       </nav>
+      
+      <EtkiniumAIChat isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
     </header>
   );
 }

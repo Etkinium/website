@@ -8,6 +8,7 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import { pool } from "./db";
 import "./types";
+import { registerChatRoutes } from "./replit_integrations/chat";
 
 // Extend Express session type
 declare module 'express-session' {
@@ -382,6 +383,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Bir hata oluştu" });
     }
   });
+
+  // Register AI Chat routes
+  registerChatRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;
