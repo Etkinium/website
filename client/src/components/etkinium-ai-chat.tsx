@@ -62,6 +62,18 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
     }
   }, [isOpen]);
 
+  // Body scroll'u kilitle
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const createConversationMutation = useMutation({
     mutationFn: async () => {
       const res = await apiRequest("POST", "/api/conversations", { title: "Yeni Sohbet" });
