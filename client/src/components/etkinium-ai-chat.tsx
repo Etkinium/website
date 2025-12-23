@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { X, Send, Sparkles, MessageCircle, Trash2, Plus, Bot, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import logoImage from "@assets/logo-final.png";
 
 interface Message {
@@ -33,7 +32,7 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
 
   const { data: conversations = [] } = useQuery<Conversation[]>({
@@ -57,12 +56,11 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
   }, [localMessages, streamingContent]);
 
   useEffect(() => {
-    if (isOpen && textareaRef.current) {
-      setTimeout(() => textareaRef.current?.focus(), 100);
+    if (isOpen && inputRef.current) {
+      setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [isOpen]);
 
-  // Body scroll'u kilitle
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -201,47 +199,41 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6"
-      style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)" }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: "rgba(0,0,0,0.85)" }}
       onClick={(e) => e.target === e.currentTarget && handleClose()}
     >
       <div 
-        className="relative w-full max-w-lg h-[85vh] sm:h-[80vh] max-h-[650px] bg-gradient-to-b from-gray-900 via-black to-gray-900 rounded-2xl sm:rounded-3xl border border-accent-amber/30 overflow-hidden flex flex-col animate-in zoom-in-95 fade-in duration-200"
+        className="relative w-[90%] max-w-md bg-black rounded-2xl border border-accent-amber/40 overflow-hidden flex flex-col"
         style={{ 
-          boxShadow: "0 25px 80px rgba(0,0,0,0.6), 0 0 80px rgba(255,214,0,0.12)",
+          height: "auto",
+          maxHeight: "500px",
+          boxShadow: "0 0 60px rgba(255,214,0,0.15)",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div 
-          className="absolute inset-0 opacity-40 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at top, rgba(255,214,0,0.15) 0%, transparent 60%)"
-          }}
-        />
-
-        <div className="relative flex items-center justify-between p-3 sm:p-4 border-b border-white/10 bg-black/50 backdrop-blur-sm">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center border border-accent-amber/30">
-                <img src={logoImage} alt="ETKİNİUM AI" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
+              <div className="w-9 h-9 rounded-lg bg-accent-amber/10 flex items-center justify-center border border-accent-amber/30">
+                <img src={logoImage} alt="ETKİNİUM AI" className="w-5 h-5 object-contain" />
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-black flex items-center justify-center">
-                <Sparkles className="w-2 h-2 text-white" />
-              </div>
+              <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
                 ETKİNİUM AI
-                <span className="text-[9px] bg-gradient-to-r from-accent-amber/30 to-yellow-500/20 text-accent-amber px-2 py-0.5 rounded-full font-medium border border-accent-amber/20">
+                <span className="text-[8px] bg-accent-amber/20 text-accent-amber px-1.5 py-0.5 rounded-full font-medium">
                   BETA
                 </span>
               </h2>
-              <p className="text-[11px] text-white/40">Yapay zeka asistanınız</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => createConversationMutation.mutate()}
-              className="w-9 h-9 rounded-xl bg-white/5 hover:bg-accent-amber/20 flex items-center justify-center text-white/50 hover:text-accent-amber transition-all border border-white/10 hover:border-accent-amber/30"
+              className="w-8 h-8 rounded-lg bg-white/5 hover:bg-accent-amber/20 flex items-center justify-center text-white/50 hover:text-accent-amber transition-all"
               title="Yeni Sohbet"
               data-testid="button-new-chat"
             >
@@ -249,38 +241,39 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
             </button>
             <button
               onClick={handleClose}
-              className="w-9 h-9 rounded-xl bg-red-500/10 hover:bg-red-500/20 flex items-center justify-center text-red-400 hover:text-red-300 transition-all border border-red-500/20 hover:border-red-500/40"
+              className="w-8 h-8 rounded-lg bg-red-500/20 hover:bg-red-500/30 flex items-center justify-center text-red-400 hover:text-red-300 transition-all"
               title="Kapat"
               data-testid="button-close-ai"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
+        {/* Conversations tabs */}
         {conversations.length > 0 && (
-          <div className="relative flex gap-2 px-3 py-2 border-b border-white/5 overflow-x-auto [&::-webkit-scrollbar]:hidden bg-black/30">
-            {conversations.slice(0, 5).map((conv) => (
+          <div className="flex gap-1.5 px-3 py-2 border-b border-white/5 overflow-x-auto bg-black" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {conversations.slice(0, 4).map((conv) => (
               <button
                 key={conv.id}
                 onClick={() => setCurrentConversationId(conv.id)}
-                className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] whitespace-nowrap transition-all ${
+                className={`group flex items-center gap-1 px-2 py-1 rounded text-[10px] whitespace-nowrap transition-all ${
                   currentConversationId === conv.id
-                    ? "bg-accent-amber/15 text-accent-amber border border-accent-amber/25"
-                    : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/60 border border-transparent"
+                    ? "bg-accent-amber/15 text-accent-amber"
+                    : "bg-white/5 text-white/40 hover:bg-white/10"
                 }`}
               >
-                <MessageCircle className="w-3 h-3" />
-                <span className="max-w-[100px] truncate">{conv.title}</span>
+                <MessageCircle className="w-2.5 h-2.5" />
+                <span className="max-w-[60px] truncate">{conv.title}</span>
                 {currentConversationId === conv.id && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       deleteConversationMutation.mutate(conv.id);
                     }}
-                    className="ml-1 text-white/30 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="ml-0.5 text-white/30 hover:text-red-400"
                   >
-                    <Trash2 className="w-3 h-3" />
+                    <Trash2 className="w-2.5 h-2.5" />
                   </button>
                 )}
               </button>
@@ -288,17 +281,20 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
           </div>
         )}
 
-        <div className="relative flex-1 overflow-y-auto p-4 space-y-4">
+        {/* Messages area */}
+        <div 
+          className="flex-1 overflow-y-auto p-3 space-y-3 bg-black"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', minHeight: '200px', maxHeight: '300px' }}
+        >
+          <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+          
           {localMessages.length === 0 && !streamingContent && (
-            <div className="flex flex-col items-center justify-center h-full text-center px-4">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-amber/15 to-yellow-500/5 flex items-center justify-center mb-5 border border-accent-amber/20">
-                <Sparkles className="w-10 h-10 text-accent-amber/60" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">ETKİNİUM AI</h3>
-              <p className="text-sm text-white/40 max-w-sm mb-6">
+            <div className="flex flex-col items-center justify-center h-full text-center py-4">
+              <Sparkles className="w-8 h-8 text-accent-amber/50 mb-3" />
+              <p className="text-xs text-white/40 mb-4">
                 Etkinlikler, restoranlar ve biletler hakkında sorularınızı yanıtlayabilirim.
               </p>
-              <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
+              <div className="grid grid-cols-2 gap-2 w-full">
                 {[
                   "Yaklaşan etkinlikler neler?",
                   "En iyi restoranları öner",
@@ -308,7 +304,7 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
                   <button
                     key={i}
                     onClick={() => setInput(suggestion)}
-                    className="text-left text-[11px] p-3 rounded-xl bg-white/5 border border-white/5 text-white/50 hover:bg-accent-amber/10 hover:border-accent-amber/20 hover:text-accent-amber transition-all"
+                    className="text-left text-[10px] px-2 py-2 rounded-lg bg-white/5 text-white/40 hover:bg-accent-amber/10 hover:text-accent-amber transition-all"
                   >
                     {suggestion}
                   </button>
@@ -320,38 +316,38 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
           {localMessages.map((message) => (
             <div
               key={message.id}
-              className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+              className={`flex gap-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.role === "assistant" && (
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
-                  <Bot className="w-4 h-4 text-accent-amber" />
+                <div className="w-6 h-6 rounded bg-accent-amber/15 flex items-center justify-center flex-shrink-0">
+                  <Bot className="w-3 h-3 text-accent-amber" />
                 </div>
               )}
               <div
-                className={`max-w-[80%] px-4 py-2.5 text-sm ${
+                className={`max-w-[80%] px-3 py-2 text-xs ${
                   message.role === "user"
-                    ? "bg-gradient-to-r from-accent-amber to-yellow-500 text-black rounded-2xl rounded-br-md"
-                    : "bg-white/10 text-white/90 rounded-2xl rounded-bl-md border border-white/5"
+                    ? "bg-accent-amber text-black rounded-xl rounded-br-sm"
+                    : "bg-white/10 text-white/90 rounded-xl rounded-bl-sm"
                 }`}
               >
                 <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
               </div>
               {message.role === "user" && (
-                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/5">
-                  <User className="w-4 h-4 text-white/60" />
+                <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <User className="w-3 h-3 text-white/60" />
                 </div>
               )}
             </div>
           ))}
 
           {streamingContent && (
-            <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-amber/20 to-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-accent-amber/20">
-                <Bot className="w-4 h-4 text-accent-amber animate-pulse" />
+            <div className="flex gap-2 justify-start">
+              <div className="w-6 h-6 rounded bg-accent-amber/15 flex items-center justify-center flex-shrink-0">
+                <Bot className="w-3 h-3 text-accent-amber animate-pulse" />
               </div>
-              <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-bl-md bg-white/10 text-white/90 text-sm border border-white/5">
+              <div className="max-w-[80%] px-3 py-2 rounded-xl rounded-bl-sm bg-white/10 text-white/90 text-xs">
                 <p className="whitespace-pre-wrap leading-relaxed">{streamingContent}</p>
-                <span className="inline-block w-2 h-4 bg-accent-amber/60 animate-pulse ml-1 rounded-sm" />
+                <span className="inline-block w-1.5 h-3 bg-accent-amber/60 animate-pulse ml-0.5" />
               </div>
             </div>
           )}
@@ -359,28 +355,30 @@ export default function EtkiniumAIChat({ isOpen, onClose }: EtkiniumAIChatProps)
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="relative p-4 border-t border-white/10 bg-black/50 backdrop-blur-sm">
-          <div className="flex gap-3 items-end">
-            <Textarea
-              ref={textareaRef}
+        {/* Input area */}
+        <div className="px-3 py-3 border-t border-white/10 bg-black">
+          <div className="flex gap-2 items-center">
+            <input
+              ref={inputRef}
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Mesajınızı yazın..."
               disabled={isStreaming}
-              className="flex-1 min-h-[46px] max-h-[120px] resize-none bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-xl text-sm focus:border-accent-amber/40 focus:ring-accent-amber/20"
+              className="flex-1 h-10 px-3 bg-white/5 border border-accent-amber/30 text-white placeholder:text-white/30 rounded-lg text-sm focus:outline-none focus:border-accent-amber/60"
               data-testid="input-ai-message"
             />
             <Button
               onClick={sendMessage}
               disabled={!input.trim() || isStreaming}
-              className="h-[46px] w-[46px] bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-yellow-400 hover:to-amber-400 text-black rounded-xl p-0 flex-shrink-0 shadow-lg shadow-accent-amber/25 disabled:opacity-40 disabled:shadow-none"
+              className="h-10 w-10 bg-accent-amber hover:bg-yellow-400 text-black rounded-lg p-0 flex-shrink-0 disabled:opacity-40"
               data-testid="button-send-ai"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-4 h-4" />
             </Button>
           </div>
-          <p className="text-[10px] text-white/25 text-center mt-2.5">
+          <p className="text-[9px] text-white/20 text-center mt-2">
             ETKİNİUM AI beta aşamasındadır. Yanıtlar her zaman doğru olmayabilir.
           </p>
         </div>
