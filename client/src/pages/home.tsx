@@ -9,10 +9,6 @@ import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
 import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
-import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
-import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
-import faturaportLogo from "@assets/download_1765541159072.png";
-import etkineumLogo from "@assets/logo-final.png";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -124,12 +120,6 @@ const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   </div>
 );
 
-const adPartners = [
-  { logo: rezervemLogo, name: "Rezervem" },
-  { logo: tamamliyoLogo, name: "Tamamliyo" },
-  { logo: faturaportLogo, name: "Faturaport" },
-  { logo: etkineumLogo, name: "ETKİNİUM" },
-];
 
 export default function Home() {
   const eventsRef = useRef<HTMLDivElement>(null);
@@ -266,38 +256,27 @@ export default function Home() {
               border: "1px solid rgba(255,255,255,0.06)"
             }}
           >
-            <div className="absolute top-2 right-3">
-              <span className="text-[8px] font-medium text-white/30 px-1.5 py-0.5 rounded tracking-wide uppercase">
-                Reklam Alanı
-              </span>
-            </div>
-            
             <div className="p-4 sm:p-6">
               <div className="text-center mb-4">
-                <p className="text-white/30 text-[10px] mb-1.5 uppercase tracking-wider">Premium Partner Alanı</p>
-                <h3 className="text-sm sm:text-base font-medium text-white/60 mb-2">Markanızı Burada Tanıtın</h3>
-                <p className="text-white/30 text-[10px] max-w-xs mx-auto">
-                  Bu alan markanız için ayrılmıştır
+                <h3 className="text-sm sm:text-base font-semibold text-white mb-2">Basında Biz</h3>
+                <p className="text-white/40 text-[10px] max-w-md mx-auto">
+                  ETKİNİUM hakkında medyada çıkan haberler ve röportajlar
                 </p>
               </div>
               
-              <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 opacity-20">
-                {adPartners.map((partner, index) => (
-                  <img 
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {["Hürriyet", "Sabah", "Milliyet", "NTV"].map((media, index) => (
+                  <div 
                     key={index}
-                    src={partner.logo} 
-                    alt={partner.name}
-                    className="h-5 sm:h-6 w-auto object-contain grayscale"
-                  />
+                    className="bg-white/5 rounded-xl p-3 text-center border border-white/5 hover:border-accent-amber/30 transition-all cursor-pointer"
+                  >
+                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-white/10 flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-white/60">{media[0]}</span>
+                    </div>
+                    <p className="text-[10px] text-white/50 font-medium">{media}</p>
+                    <p className="text-[8px] text-white/30 mt-0.5">Yakında</p>
+                  </div>
                 ))}
-              </div>
-              
-              <div className="mt-4 flex justify-center">
-                <Link href="/contact">
-                  <button className="bg-white/5 hover:bg-accent-amber text-white/50 hover:text-black text-[10px] font-medium px-4 py-1.5 rounded-full transition-all border border-white/10 hover:border-accent-amber">
-                    İletişime Geçin
-                  </button>
-                </Link>
               </div>
             </div>
           </div>
