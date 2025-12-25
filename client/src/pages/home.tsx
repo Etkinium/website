@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
 import OvalAdBanner from "@/components/oval-ad-banner";
-import AdApplicationButton from "@/components/ad-application-button";
 import EmailSubscription from "@/components/email-subscription";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
@@ -154,8 +153,6 @@ export default function Home() {
       <HeroCarousel />
       
       <OvalAdBanner />
-      
-      <AdApplicationButton />
 
       <section className="py-4 sm:py-6">
         <div className="container mx-auto px-3">
