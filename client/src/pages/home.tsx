@@ -6,7 +6,7 @@ import OvalAdBanner from "@/components/oval-ad-banner";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Shield, Zap, Award, Users, Ticket, TrendingUp, Mail, ArrowRight } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Shield, Zap, Ticket, Mail, ArrowRight } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -356,53 +356,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Platform Statistics */}
-      <section className="py-8 sm:py-12">
+      {/* Secondary Ad Banner - Glassmorphism Style */}
+      <section className="py-6 sm:py-10">
         <div className="container mx-auto px-4">
           <div 
-            className="relative rounded-3xl overflow-hidden p-6 sm:p-10"
+            className="relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer group"
             style={{
-              background: "linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(0,0,0,0.95) 50%, rgba(245,158,11,0.05) 100%)",
-              border: "1px solid rgba(245,158,11,0.15)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)"
+              background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.2)"
             }}
+            data-testid="secondary-ad-banner"
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+            {/* Frosted glass overlay effect */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)"
+              }}
+            />
             
-            <div className="text-center mb-8">
-              <h3 className="text-lg sm:text-2xl font-bold text-white mb-2">
-                Neden <span className="text-amber-400">ETKİNİUM</span>?
-              </h3>
-              <p className="text-neutral-400 text-sm max-w-xl mx-auto">
-                Türkiye'nin en güvenilir etkinlik ve rezervasyon platformu
-              </p>
-            </div>
+            {/* Top highlight line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                { icon: Shield, value: "100%", label: "Güvenli Ödeme", color: "from-green-500 to-emerald-600" },
-                { icon: Zap, value: "Anında", label: "E-Bilet Teslimatı", color: "from-amber-500 to-orange-600" },
-                { icon: Award, value: "7/24", label: "Müşteri Desteği", color: "from-blue-500 to-cyan-600" },
-                { icon: TrendingUp, value: "En İyi", label: "Fiyat Garantisi", color: "from-purple-500 to-pink-600" },
-              ].map((stat, index) => (
+            {/* Content area */}
+            <div className="relative p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center text-center min-h-[180px] sm:min-h-[220px]">
+              {/* Ad placeholder content */}
+              <div className="flex flex-col items-center gap-4">
                 <div 
-                  key={index}
-                  className="relative group text-center p-4 sm:p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800/50 hover:border-amber-500/30 transition-all"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+                    border: "1px solid rgba(245,158,11,0.3)",
+                    boxShadow: "0 4px 20px rgba(245,158,11,0.15)"
+                  }}
                 >
-                  <div 
-                    className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%)`,
-                      border: "1px solid rgba(245,158,11,0.2)"
-                    }}
-                  >
-                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
-                  </div>
-                  <p className="text-xl sm:text-2xl font-bold text-white mb-1">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-neutral-400">{stat.label}</p>
+                  <span className="text-amber-400 text-2xl sm:text-3xl font-bold">AD</span>
                 </div>
-              ))}
+                <div>
+                  <p className="text-white/80 text-sm sm:text-base font-medium mb-1">Reklam Alanı</p>
+                  <p className="text-white/40 text-xs sm:text-sm">Markanızı burada tanıtın</p>
+                </div>
+                <a 
+                  href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
+                  className="mt-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all hover:scale-105"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(245,158,11,0.9) 0%, rgba(217,119,6,0.9) 100%)",
+                    color: "black",
+                    boxShadow: "0 4px 20px rgba(245,158,11,0.3)"
+                  }}
+                >
+                  Reklam Vermek İçin İletişime Geçin
+                </a>
+              </div>
             </div>
+            
+            {/* Bottom subtle line */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
           </div>
         </div>
       </section>
