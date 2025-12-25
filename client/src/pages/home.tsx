@@ -6,7 +6,7 @@ import OvalAdBanner from "@/components/oval-ad-banner";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Shield, Zap, Ticket, Mail, ArrowRight } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -415,61 +415,6 @@ export default function Home() {
             
             {/* Bottom subtle line */}
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <div 
-                className="w-1 h-6 rounded-full"
-                style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
-              />
-              <h3 className="text-lg sm:text-2xl font-bold text-white">
-                Nasıl <span className="text-amber-400">Çalışır</span>?
-              </h3>
-            </div>
-            <p className="text-neutral-400 text-sm">3 basit adımda biletinizi alın</p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            {[
-              { step: "01", title: "Etkinlik Seçin", desc: "Binlerce etkinlik arasından size uygun olanı bulun", icon: Ticket },
-              { step: "02", title: "Güvenli Ödeme", desc: "256-bit SSL şifreleme ile güvenle ödeme yapın", icon: Shield },
-              { step: "03", title: "E-Bilet Alın", desc: "Biletiniz anında e-posta ve SMS ile ulaşsın", icon: Zap },
-            ].map((item, index) => (
-              <div 
-                key={index}
-                className="relative group p-6 rounded-2xl transition-all"
-                style={{
-                  background: "linear-gradient(180deg, rgba(26,26,26,0.8) 0%, rgba(13,13,13,0.9) 100%)",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.3)"
-                }}
-              >
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="flex items-start gap-4">
-                  <div 
-                    className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-                      boxShadow: "0 4px 20px rgba(245,158,11,0.3)"
-                    }}
-                  >
-                    <item.icon className="w-5 h-5 text-black" />
-                  </div>
-                  <div>
-                    <span className="text-amber-500/60 text-xs font-bold">ADIM {item.step}</span>
-                    <h4 className="text-white font-semibold mt-1 mb-2">{item.title}</h4>
-                    <p className="text-neutral-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
