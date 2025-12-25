@@ -6,51 +6,81 @@ import OvalAdBanner from "@/components/oval-ad-banner";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
-    className="group relative bg-black rounded-[20px] overflow-hidden border-2 border-accent-amber/20 hover:border-accent-amber/60 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
+    className="group relative overflow-hidden flex-shrink-0 w-[200px] sm:w-[220px] rounded-2xl transition-all duration-500 hover:scale-[1.02]"
     style={{
-      boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(245,158,11,0.1)"
+      background: "linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.1), inset 0 1px 0 rgba(255,255,255,0.03)"
     }}
     data-testid={`featured-event-${index}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div 
+      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      style={{
+        background: "linear-gradient(180deg, rgba(245,158,11,0.08) 0%, transparent 50%)",
+        boxShadow: "inset 0 0 40px rgba(245,158,11,0.05)"
+      }}
+    />
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
     
-    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-gray-900 to-black">
+    <div className="relative h-28 sm:h-32 bg-gradient-to-br from-neutral-800/50 to-neutral-900/80">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/30">
-          <span className="text-accent-amber text-lg font-bold">E</span>
+        <div 
+          className="w-14 h-14 rounded-2xl flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+            border: "1px solid rgba(245,158,11,0.3)",
+            boxShadow: "0 4px 20px rgba(245,158,11,0.15)"
+          }}
+        >
+          <span className="text-amber-400 text-2xl font-bold">E</span>
         </div>
       </div>
-      <div className="absolute top-1.5 left-1.5">
-        <span className="bg-accent-amber text-black text-[8px] font-bold px-2 py-0.5 rounded-full">
-          Yakında
+      <div className="absolute top-3 left-3">
+        <span 
+          className="text-[9px] font-bold px-2.5 py-1 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+            color: "black",
+            boxShadow: "0 2px 10px rgba(245,158,11,0.4)"
+          }}
+        >
+          VIP
         </span>
       </div>
-      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black transition-all border border-accent-amber/20">
-        <Heart className="w-2.5 h-2.5" />
+      <button className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-neutral-400 hover:text-red-400 hover:bg-black/70 transition-all border border-neutral-700/50 group-hover:border-neutral-600">
+        <Heart className="w-3.5 h-3.5" />
       </button>
     </div>
     
-    <div className="relative p-3 space-y-2 bg-black">
-      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-xs sm:text-sm tracking-wide">
+    <div className="relative p-4 space-y-3">
+      <h3 className="font-semibold text-white group-hover:text-amber-400 transition-colors line-clamp-1 text-sm tracking-tight">
         Etkinlik Başlığı
       </h3>
-      <div className="space-y-1">
-        <div className="flex items-center gap-1.5 text-[9px] text-accent-amber/70">
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-2 text-[10px] text-amber-500/80">
+          <CalendarDays className="w-3 h-3" />
           <span>— — ——</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
-          <MapPin className="w-2.5 h-2.5 text-accent-amber" />
+        <div className="flex items-center gap-2 text-[10px] text-neutral-400">
+          <MapPin className="w-3 h-3 text-amber-500/70" />
           <span className="line-clamp-1">Konum</span>
         </div>
       </div>
-      <div className="pt-2 border-t border-accent-amber/10 flex items-center justify-between">
-        <span className="text-accent-amber font-bold text-sm">— ₺</span>
+      <div className="pt-3 border-t border-neutral-800 flex items-center justify-between">
+        <span className="text-amber-400 font-bold text-base">— ₺</span>
         <Link href="/bilet-al">
-          <button className="bg-accent-amber hover:bg-white text-black text-[8px] font-bold px-3 py-1.5 rounded-full transition-all">
+          <button 
+            className="text-[10px] font-bold px-4 py-2 rounded-full transition-all"
+            style={{
+              background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+              color: "black",
+              boxShadow: "0 2px 12px rgba(245,158,11,0.3)"
+            }}
+          >
             Satın Al
           </button>
         </Link>
@@ -61,54 +91,84 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
-    className="group relative bg-black rounded-[20px] overflow-hidden border-2 border-accent-amber/20 hover:border-accent-amber/60 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
+    className="group relative overflow-hidden flex-shrink-0 w-[200px] sm:w-[220px] rounded-2xl transition-all duration-500 hover:scale-[1.02]"
     style={{
-      boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(245,158,11,0.1)"
+      background: "linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.1), inset 0 1px 0 rgba(255,255,255,0.03)"
     }}
     data-testid={`featured-restaurant-${index}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div 
+      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      style={{
+        background: "linear-gradient(180deg, rgba(245,158,11,0.08) 0%, transparent 50%)",
+        boxShadow: "inset 0 0 40px rgba(245,158,11,0.05)"
+      }}
+    />
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
     
-    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-gray-900 to-black">
+    <div className="relative h-28 sm:h-32 bg-gradient-to-br from-neutral-800/50 to-neutral-900/80">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/30">
-          <span className="text-accent-amber text-lg font-bold">R</span>
+        <div 
+          className="w-14 h-14 rounded-2xl flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+            border: "1px solid rgba(245,158,11,0.3)",
+            boxShadow: "0 4px 20px rgba(245,158,11,0.15)"
+          }}
+        >
+          <span className="text-amber-400 text-2xl font-bold">R</span>
         </div>
       </div>
-      <div className="absolute top-1.5 left-1.5 flex gap-1">
-        <span className="bg-accent-amber text-black text-[8px] font-bold px-2 py-0.5 rounded-full">
-          Popüler
+      <div className="absolute top-3 left-3 flex gap-1.5">
+        <span 
+          className="text-[9px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"
+          style={{
+            background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+            color: "black",
+            boxShadow: "0 2px 10px rgba(245,158,11,0.4)"
+          }}
+        >
+          <Sparkles className="w-2.5 h-2.5" />
+          Seçkin
         </span>
       </div>
-      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black transition-all border border-accent-amber/20">
-        <Heart className="w-2.5 h-2.5" />
+      <button className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-neutral-400 hover:text-red-400 hover:bg-black/70 transition-all border border-neutral-700/50 group-hover:border-neutral-600">
+        <Heart className="w-3.5 h-3.5" />
       </button>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-1.5">
-        <div className="flex items-center gap-1 text-accent-amber text-[9px]">
-          <Star className="w-2.5 h-2.5 fill-accent-amber" />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3">
+        <div className="flex items-center gap-1.5 text-amber-400 text-xs">
+          <Star className="w-3 h-3 fill-amber-400" />
           <span className="font-bold">—</span>
         </div>
       </div>
     </div>
     
-    <div className="relative p-3 space-y-2 bg-black">
-      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-xs sm:text-sm tracking-wide">
+    <div className="relative p-4 space-y-3">
+      <h3 className="font-semibold text-white group-hover:text-amber-400 transition-colors line-clamp-1 text-sm tracking-tight">
         Restoran Adı
       </h3>
-      <div className="space-y-1">
-        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
-          <MapPin className="w-2.5 h-2.5 text-accent-amber" />
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-2 text-[10px] text-neutral-400">
+          <MapPin className="w-3 h-3 text-amber-500/70" />
           <span className="line-clamp-1">Konum</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
-          <Clock className="w-2.5 h-2.5 text-accent-amber" />
+        <div className="flex items-center gap-2 text-[10px] text-neutral-400">
+          <Clock className="w-3 h-3 text-amber-500/70" />
           <span>—:— - —:—</span>
         </div>
       </div>
-      <div className="pt-2 border-t border-accent-amber/10 flex items-center justify-between">
-        <span className="text-accent-amber font-bold text-sm">—— ₺</span>
+      <div className="pt-3 border-t border-neutral-800 flex items-center justify-between">
+        <span className="text-amber-400 font-bold text-base">—— ₺</span>
         <Link href="/restoranlar">
-          <button className="bg-accent-amber hover:bg-white text-black text-[8px] font-bold px-3 py-1.5 rounded-full transition-all">
+          <button 
+            className="text-[10px] font-bold px-4 py-2 rounded-full transition-all"
+            style={{
+              background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+              color: "black",
+              boxShadow: "0 2px 12px rgba(245,158,11,0.3)"
+            }}
+          >
             Rezerve Et
           </button>
         </Link>
@@ -152,45 +212,56 @@ export default function Home() {
       
       <OvalAdBanner />
 
-      <section className="py-4 sm:py-6">
-        <div className="container mx-auto px-3">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm sm:text-base font-bold text-white tracking-wide uppercase">Öne Çıkan Etkinlikler</h2>
+      <section className="py-6 sm:py-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <div 
+                    className="w-1 h-6 rounded-full"
+                    style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+                  />
+                  <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+                    ETKİNİUM <span className="text-amber-400">VIP</span> Etkinlikleri
+                  </h2>
+                </div>
+                <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">Özenle seçilmiş premium deneyimler</p>
+              </div>
               <button 
                 onClick={() => setIsDateDrawerOpen(true)}
-                className="w-6 h-6 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-accent-amber hover:text-black transition-all border border-accent-amber/30 hover:border-accent-amber"
+                className="w-8 h-8 rounded-xl bg-neutral-900 hover:bg-amber-500 flex items-center justify-center text-amber-400 hover:text-black transition-all border border-neutral-800 hover:border-amber-500"
                 data-testid="open-date-drawer"
               >
-                <CalendarDays className="w-3 h-3" />
+                <CalendarDays className="w-4 h-4" />
               </button>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <button 
                 onClick={() => scrollEvents("left")}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black border border-white/10 flex items-center justify-center text-white/70 hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-8 h-8 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all"
                 data-testid="events-scroll-left"
               >
-                <ChevronLeft className="w-3 h-3" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => scrollEvents("right")}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black border border-white/10 flex items-center justify-center text-white/70 hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-8 h-8 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all"
                 data-testid="events-scroll-right"
               >
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-4 h-4" />
               </button>
               <Link href="/etkinlikler">
-                <button className="hidden sm:flex items-center gap-0.5 text-white/50 hover:text-accent-amber text-[10px] font-medium transition-all ml-1">
-                  Tümü
-                  <ChevronRight className="w-2.5 h-2.5" />
+                <button className="hidden sm:flex items-center gap-1 text-neutral-400 hover:text-amber-400 text-xs font-medium transition-all ml-2 px-3 py-2 rounded-xl hover:bg-neutral-900">
+                  Tümünü Gör
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </Link>
             </div>
           </div>
           <div 
             ref={eventsRef}
-            className="flex gap-2.5 overflow-x-auto pb-2 -mx-3 px-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {[...Array(10)].map((_, i) => (
               <FeaturedEventCard key={i} index={i} />
@@ -199,38 +270,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-4 sm:py-6">
-        <div className="container mx-auto px-3">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm sm:text-base font-bold text-white tracking-wide uppercase">Popüler Restoranlar</h2>
+      <section className="py-6 sm:py-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <div 
+                  className="w-1 h-6 rounded-full"
+                  style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+                />
+                <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+                  Gastronomi Dünyasının <span className="text-amber-400">Seçkinleri</span>
+                </h2>
+              </div>
+              <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">Unutulmaz lezzet deneyimleri için en iyi restoranlar</p>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <button 
                 onClick={() => scrollRestaurants("left")}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black border border-white/10 flex items-center justify-center text-white/70 hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-8 h-8 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all"
                 data-testid="restaurants-scroll-left"
               >
-                <ChevronLeft className="w-3 h-3" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => scrollRestaurants("right")}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black border border-white/10 flex items-center justify-center text-white/70 hover:bg-accent-amber hover:text-black hover:border-accent-amber transition-all"
+                className="w-8 h-8 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:bg-amber-500 hover:text-black hover:border-amber-500 transition-all"
                 data-testid="restaurants-scroll-right"
               >
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-4 h-4" />
               </button>
               <Link href="/restoranlar">
-                <button className="hidden sm:flex items-center gap-0.5 text-white/50 hover:text-accent-amber text-[10px] font-medium transition-all ml-1">
-                  Tümü
-                  <ChevronRight className="w-2.5 h-2.5" />
+                <button className="hidden sm:flex items-center gap-1 text-neutral-400 hover:text-amber-400 text-xs font-medium transition-all ml-2 px-3 py-2 rounded-xl hover:bg-neutral-900">
+                  Tümünü Gör
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </Link>
             </div>
           </div>
           <div 
             ref={restaurantsRef}
-            className="flex gap-2.5 overflow-x-auto pb-2 -mx-3 px-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {[...Array(10)].map((_, i) => (
               <FeaturedRestaurantCard key={i} index={i} />
