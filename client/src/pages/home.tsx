@@ -6,7 +6,7 @@ import OvalAdBanner from "@/components/oval-ad-banner";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Shield, Zap, Award, Users, Ticket, TrendingUp, Mail, ArrowRight } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -223,10 +223,10 @@ export default function Home() {
                     style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
                   />
                   <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
-                    ETKİNİUM <span className="text-amber-400">VIP</span> Etkinlikleri
+                    Öne Çıkan <span className="text-amber-400">Etkinlikler</span>
                   </h2>
                 </div>
-                <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">Özenle seçilmiş premium deneyimler</p>
+                <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">Sizin için seçilmiş en iyi etkinlikler</p>
               </div>
               <button 
                 onClick={() => setIsDateDrawerOpen(true)}
@@ -280,10 +280,10 @@ export default function Home() {
                   style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
                 />
                 <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
-                  Gastronomi Dünyasının <span className="text-amber-400">Seçkinleri</span>
+                  Öne Çıkan <span className="text-amber-400">Restoranlar</span>
                 </h2>
               </div>
-              <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">Unutulmaz lezzet deneyimleri için en iyi restoranlar</p>
+              <p className="text-xs text-neutral-500 ml-3 mt-1 hidden sm:block">En iyi lezzet deneyimleri için seçilmiş mekanlar</p>
             </div>
             <div className="flex items-center gap-2">
               <button 
@@ -350,6 +350,174 @@ export default function Home() {
                     <p className="text-[8px] text-white/30 mt-0.5">Yakında</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Statistics */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div 
+            className="relative rounded-3xl overflow-hidden p-6 sm:p-10"
+            style={{
+              background: "linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(0,0,0,0.95) 50%, rgba(245,158,11,0.05) 100%)",
+              border: "1px solid rgba(245,158,11,0.15)",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)"
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+            
+            <div className="text-center mb-8">
+              <h3 className="text-lg sm:text-2xl font-bold text-white mb-2">
+                Neden <span className="text-amber-400">ETKİNİUM</span>?
+              </h3>
+              <p className="text-neutral-400 text-sm max-w-xl mx-auto">
+                Türkiye'nin en güvenilir etkinlik ve rezervasyon platformu
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+              {[
+                { icon: Shield, value: "100%", label: "Güvenli Ödeme", color: "from-green-500 to-emerald-600" },
+                { icon: Zap, value: "Anında", label: "E-Bilet Teslimatı", color: "from-amber-500 to-orange-600" },
+                { icon: Award, value: "7/24", label: "Müşteri Desteği", color: "from-blue-500 to-cyan-600" },
+                { icon: TrendingUp, value: "En İyi", label: "Fiyat Garantisi", color: "from-purple-500 to-pink-600" },
+              ].map((stat, index) => (
+                <div 
+                  key={index}
+                  className="relative group text-center p-4 sm:p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800/50 hover:border-amber-500/30 transition-all"
+                >
+                  <div 
+                    className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: `linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%)`,
+                      border: "1px solid rgba(245,158,11,0.2)"
+                    }}
+                  >
+                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+                  </div>
+                  <p className="text-xl sm:text-2xl font-bold text-white mb-1">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-neutral-400">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <div 
+                className="w-1 h-6 rounded-full"
+                style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+              />
+              <h3 className="text-lg sm:text-2xl font-bold text-white">
+                Nasıl <span className="text-amber-400">Çalışır</span>?
+              </h3>
+            </div>
+            <p className="text-neutral-400 text-sm">3 basit adımda biletinizi alın</p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            {[
+              { step: "01", title: "Etkinlik Seçin", desc: "Binlerce etkinlik arasından size uygun olanı bulun", icon: Ticket },
+              { step: "02", title: "Güvenli Ödeme", desc: "256-bit SSL şifreleme ile güvenle ödeme yapın", icon: Shield },
+              { step: "03", title: "E-Bilet Alın", desc: "Biletiniz anında e-posta ve SMS ile ulaşsın", icon: Zap },
+            ].map((item, index) => (
+              <div 
+                key={index}
+                className="relative group p-6 rounded-2xl transition-all"
+                style={{
+                  background: "linear-gradient(180deg, rgba(26,26,26,0.8) 0%, rgba(13,13,13,0.9) 100%)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3)"
+                }}
+              >
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="flex items-start gap-4">
+                  <div 
+                    className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+                      boxShadow: "0 4px 20px rgba(245,158,11,0.3)"
+                    }}
+                  >
+                    <item.icon className="w-5 h-5 text-black" />
+                  </div>
+                  <div>
+                    <span className="text-amber-500/60 text-xs font-bold">ADIM {item.step}</span>
+                    <h4 className="text-white font-semibold mt-1 mb-2">{item.title}</h4>
+                    <p className="text-neutral-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Subscription */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div 
+            className="relative rounded-3xl overflow-hidden p-6 sm:p-10"
+            style={{
+              background: "linear-gradient(135deg, rgba(13,13,13,0.98) 0%, rgba(20,20,20,0.95) 100%)",
+              border: "1px solid rgba(245,158,11,0.2)",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(245,158,11,0.05)"
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+              <div className="flex-1 text-center sm:text-left">
+                <div className="flex items-center justify-center sm:justify-start gap-3 mb-3">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+                      boxShadow: "0 4px 20px rgba(245,158,11,0.4)"
+                    }}
+                  >
+                    <Mail className="w-5 h-5 text-black" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white">
+                    Fırsatları <span className="text-amber-400">Kaçırmayın</span>
+                  </h3>
+                </div>
+                <p className="text-neutral-400 text-sm max-w-md">
+                  En yeni etkinlikler, özel indirimler ve kampanyalardan ilk siz haberdar olun
+                </p>
+              </div>
+              
+              <div className="w-full sm:w-auto">
+                <div className="flex gap-2">
+                  <input 
+                    type="email"
+                    placeholder="E-posta adresiniz"
+                    className="flex-1 sm:w-64 px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-500 text-sm focus:outline-none focus:border-amber-500/50 transition-colors"
+                    data-testid="input-newsletter-email"
+                  />
+                  <button 
+                    className="px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all hover:scale-105"
+                    style={{
+                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+                      color: "black",
+                      boxShadow: "0 4px 20px rgba(245,158,11,0.3)"
+                    }}
+                    data-testid="button-newsletter-subscribe"
+                  >
+                    Abone Ol
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
