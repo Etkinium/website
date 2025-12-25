@@ -29,6 +29,7 @@ export default function Login() {
   const { user, isLoading } = useAuth();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [activeTab, setActiveTab] = useState("user");
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -67,8 +68,34 @@ export default function Login() {
     },
   });
 
+  const businessLoginMutation = useMutation({
+    mutationFn: async (data: LoginFormData) => {
+      const res = await apiRequest("POST", "/api/login", data);
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      toast({
+        title: "Başarılı!",
+        description: "İşletme girişi yapıldı",
+      });
+      setLocation("/business-dashboard");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Hata",
+        description: error.message || "Giriş yapılırken bir hata oluştu",
+        variant: "destructive",
+      });
+    },
+  });
+
   const onSubmit = (data: LoginFormData) => {
     loginMutation.mutate(data);
+  };
+
+  const onBusinessSubmit = (data: LoginFormData) => {
+    businessLoginMutation.mutate(data);
   };
 
   if (isLoading) {
@@ -219,7 +246,7 @@ export default function Login() {
 
                 <TabsContent value="business">
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={form.handleSubmit(onBusinessSubmit)} className="space-y-4">
                       <FormField
                         control={form.control}
                         name="email"
@@ -296,11 +323,11 @@ export default function Login() {
 
                       <Button
                         type="submit"
-                        disabled={loginMutation.isPending}
+                        disabled={businessLoginMutation.isPending}
                         className="w-full bg-accent-amber hover:bg-yellow-500 text-black font-bold transition-all py-5 sm:py-6 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                         data-testid="button-business-login"
                       >
-                        {loginMutation.isPending ? "Giriş yapılıyor..." : "İşletme Girişi"}
+                        {businessLoginMutation.isPending ? "Giriş yapılıyor..." : "İşletme Girişi"}
                       </Button>
                     </form>
                   </Form>
