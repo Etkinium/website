@@ -17,7 +17,6 @@ import {
   PieChart,
   BarChart3,
   ArrowUpRight,
-  ArrowDownRight,
   RefreshCw
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,7 +63,6 @@ const mockCustomerData = {
 const mockFinancialData = {
   grossIncome: "—",
   netIncome: "—",
-  platformFee: "—",
   refundAmount: "—",
   refundRate: "—",
   pendingPayments: "—",
@@ -98,19 +96,19 @@ export default function BusinessDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
-      <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+    <div className="min-h-screen bg-black text-white">
+      <header className="sticky top-0 z-50 bg-black border-b border-accent-amber/20">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-accent-amber/20 flex items-center justify-center border border-accent-amber/30">
+              <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center border-2 border-accent-amber/50">
                 <Building2 className="w-5 h-5 text-accent-amber" />
               </div>
               <div>
-                <h1 className="font-bold text-white text-lg" data-testid="text-business-name">
+                <h1 className="font-bold text-accent-amber text-lg" data-testid="text-business-name">
                   {businessName}
                 </h1>
-                <p className="text-xs text-white/50">İşletme Paneli</p>
+                <p className="text-xs text-accent-amber/60">İşletme Paneli</p>
               </div>
             </div>
 
@@ -118,7 +116,7 @@ export default function BusinessDashboard() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white gap-2"
+                className="border-2 border-accent-amber bg-black text-accent-amber hover:bg-accent-amber hover:text-black font-bold gap-2 transition-all"
                 data-testid="button-support"
               >
                 <Headphones className="w-4 h-4" />
@@ -127,7 +125,7 @@ export default function BusinessDashboard() {
               
               <Button
                 size="sm"
-                className="bg-accent-amber hover:bg-yellow-500 text-black font-semibold gap-2"
+                className="bg-black border-2 border-accent-amber/50 hover:bg-accent-amber text-accent-amber hover:text-black font-bold gap-2 transition-all"
                 data-testid="button-add-event"
               >
                 <Plus className="w-4 h-4" />
@@ -139,13 +137,13 @@ export default function BusinessDashboard() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-white/70 hover:text-white hover:bg-white/10"
+                    className="text-accent-amber hover:text-white hover:bg-accent-amber/20"
                     data-testid="button-settings"
                   >
                     <Settings className="w-5 h-5" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-md">
+                <DialogContent className="bg-black border-2 border-accent-amber/30 text-white max-w-md">
                   <DialogHeader>
                     <DialogTitle className="text-accent-amber flex items-center gap-2">
                       <Settings className="w-5 h-5" />
@@ -153,24 +151,24 @@ export default function BusinessDashboard() {
                     </DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4 mt-4">
-                    <div className="p-4 bg-gray-800/50 rounded-xl border border-gray-700">
+                    <div className="p-4 bg-black rounded-xl border-2 border-accent-amber/20">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-full bg-accent-amber/20 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center border-2 border-accent-amber/50">
                           <Building2 className="w-6 h-6 text-accent-amber" />
                         </div>
                         <div>
-                          <p className="font-semibold text-white">{businessName}</p>
-                          <p className="text-sm text-white/50">İşletme Hesabı</p>
+                          <p className="font-semibold text-accent-amber">{businessName}</p>
+                          <p className="text-sm text-accent-amber/60">İşletme Hesabı</p>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-3 text-sm">
-                        <div className="p-2 bg-gray-700/50 rounded-lg">
-                          <p className="text-white/50">Toplam Etkinlik</p>
-                          <p className="font-semibold text-white">—</p>
+                        <div className="p-2 bg-black rounded-lg border border-accent-amber/20">
+                          <p className="text-accent-amber/60">Toplam Etkinlik</p>
+                          <p className="font-semibold text-accent-amber">—</p>
                         </div>
-                        <div className="p-2 bg-gray-700/50 rounded-lg">
-                          <p className="text-white/50">Satılan Bilet</p>
-                          <p className="font-semibold text-white">—</p>
+                        <div className="p-2 bg-black rounded-lg border border-accent-amber/20">
+                          <p className="text-accent-amber/60">Satılan Bilet</p>
+                          <p className="font-semibold text-accent-amber">—</p>
                         </div>
                       </div>
                     </div>
@@ -178,34 +176,33 @@ export default function BusinessDashboard() {
                     <div className="space-y-2">
                       <a 
                         href="/kullanim-sartlari" 
-                        className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-black rounded-lg border border-accent-amber/20 hover:border-accent-amber/50 transition-colors"
                         data-testid="link-terms"
                       >
                         <FileCheck className="w-5 h-5 text-accent-amber" />
-                        <span>Kullanım Sözleşmesi</span>
+                        <span className="text-accent-amber">Kullanım Sözleşmesi</span>
                       </a>
                       <a 
                         href="/gizlilik-politikasi" 
-                        className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-black rounded-lg border border-accent-amber/20 hover:border-accent-amber/50 transition-colors"
                         data-testid="link-privacy"
                       >
                         <FileText className="w-5 h-5 text-accent-amber" />
-                        <span>Gizlilik Politikası</span>
+                        <span className="text-accent-amber">Gizlilik Politikası</span>
                       </a>
                       <a 
                         href="/kvkk" 
-                        className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-black rounded-lg border border-accent-amber/20 hover:border-accent-amber/50 transition-colors"
                         data-testid="link-kvkk"
                       >
                         <FileText className="w-5 h-5 text-accent-amber" />
-                        <span>KVKK Aydınlatma Metni</span>
+                        <span className="text-accent-amber">KVKK Aydınlatma Metni</span>
                       </a>
                     </div>
 
                     <Button
                       onClick={handleLogout}
-                      variant="destructive"
-                      className="w-full bg-red-600 hover:bg-red-700 text-white gap-2"
+                      className="w-full bg-black border-2 border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white font-bold gap-2 transition-all"
                       data-testid="button-logout"
                     >
                       <LogOut className="w-4 h-4" />
@@ -221,48 +218,48 @@ export default function BusinessDashboard() {
 
       <main className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          <div className="bg-gradient-to-br from-purple-900/40 to-purple-950/60 rounded-xl p-4 border border-purple-500/20">
+          <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
             <div className="flex items-center gap-2 mb-2">
-              <Ticket className="w-4 h-4 text-purple-400" />
-              <span className="text-xs text-purple-300">Satılan Bilet</span>
+              <Ticket className="w-4 h-4 text-accent-amber" />
+              <span className="text-xs text-accent-amber">Satılan Bilet</span>
             </div>
-            <p className="text-2xl font-bold text-white" data-testid="text-total-tickets">—</p>
-            <p className="text-xs text-purple-400/60 mt-1">Toplam</p>
+            <p className="text-2xl font-bold text-accent-amber" data-testid="text-total-tickets">—</p>
+            <p className="text-xs text-accent-amber/50 mt-1">Toplam</p>
           </div>
           
-          <div className="bg-gradient-to-br from-amber-900/40 to-amber-950/60 rounded-xl p-4 border border-amber-500/20">
+          <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
             <div className="flex items-center gap-2 mb-2">
-              <Calendar className="w-4 h-4 text-amber-400" />
-              <span className="text-xs text-amber-300">Etkinlik</span>
+              <Calendar className="w-4 h-4 text-accent-amber" />
+              <span className="text-xs text-accent-amber">Etkinlik</span>
             </div>
-            <p className="text-2xl font-bold text-white" data-testid="text-total-events">—</p>
-            <p className="text-xs text-amber-400/60 mt-1">Düzenlenen</p>
+            <p className="text-2xl font-bold text-accent-amber" data-testid="text-total-events">—</p>
+            <p className="text-xs text-accent-amber/50 mt-1">Düzenlenen</p>
           </div>
           
-          <div className="bg-gradient-to-br from-emerald-900/40 to-emerald-950/60 rounded-xl p-4 border border-emerald-500/20">
+          <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
             <div className="flex items-center gap-2 mb-2">
-              <DollarSign className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs text-emerald-300">Gelir</span>
+              <DollarSign className="w-4 h-4 text-accent-amber" />
+              <span className="text-xs text-accent-amber">Gelir</span>
             </div>
-            <p className="text-2xl font-bold text-white" data-testid="text-total-income">— ₺</p>
-            <p className="text-xs text-emerald-400/60 mt-1">Bu Ay</p>
+            <p className="text-2xl font-bold text-accent-amber" data-testid="text-total-income">— ₺</p>
+            <p className="text-xs text-accent-amber/50 mt-1">Bu Ay</p>
           </div>
           
-          <div className="bg-gradient-to-br from-blue-900/40 to-blue-950/60 rounded-xl p-4 border border-blue-500/20">
+          <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
             <div className="flex items-center gap-2 mb-2">
-              <Users className="w-4 h-4 text-blue-400" />
-              <span className="text-xs text-blue-300">Müşteri</span>
+              <Users className="w-4 h-4 text-accent-amber" />
+              <span className="text-xs text-accent-amber">Müşteri</span>
             </div>
-            <p className="text-2xl font-bold text-white" data-testid="text-total-customers">—</p>
-            <p className="text-xs text-blue-400/60 mt-1">Toplam</p>
+            <p className="text-2xl font-bold text-accent-amber" data-testid="text-total-customers">—</p>
+            <p className="text-xs text-accent-amber/50 mt-1">Toplam</p>
           </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="w-full grid grid-cols-3 bg-gray-800/50 border border-gray-700 mb-6 p-1 rounded-xl">
+          <TabsList className="w-full grid grid-cols-3 bg-black border-2 border-accent-amber/20 mb-6 p-1 rounded-xl">
             <TabsTrigger 
               value="sales" 
-              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black rounded-lg transition-all"
+              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black text-accent-amber rounded-lg transition-all font-bold"
               data-testid="tab-sales"
             >
               <TrendingUp className="w-4 h-4" />
@@ -271,7 +268,7 @@ export default function BusinessDashboard() {
             </TabsTrigger>
             <TabsTrigger 
               value="customers" 
-              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black rounded-lg transition-all"
+              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black text-accent-amber rounded-lg transition-all font-bold"
               data-testid="tab-customers"
             >
               <Users className="w-4 h-4" />
@@ -280,7 +277,7 @@ export default function BusinessDashboard() {
             </TabsTrigger>
             <TabsTrigger 
               value="financial" 
-              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black rounded-lg transition-all"
+              className="flex items-center gap-2 data-[state=active]:bg-accent-amber data-[state=active]:text-black text-accent-amber rounded-lg transition-all font-bold"
               data-testid="tab-financial"
             >
               <FileText className="w-4 h-4" />
@@ -290,46 +287,46 @@ export default function BusinessDashboard() {
           </TabsList>
 
           <TabsContent value="sales" className="space-y-4">
-            <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
+            <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                <h2 className="text-xl font-bold text-accent-amber flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-accent-amber" />
                   Aylık Kazançlar
                 </h2>
-                <Button variant="ghost" size="sm" className="text-white/50 hover:text-white">
+                <Button variant="ghost" size="sm" className="text-accent-amber/50 hover:text-accent-amber">
                   <RefreshCw className="w-4 h-4" />
                 </Button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
-                  <p className="text-sm text-white/50 mb-1">Bu Ay</p>
+                <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/30">
+                  <p className="text-sm text-accent-amber/60 mb-1">Bu Ay</p>
                   <p className="text-3xl font-bold text-accent-amber" data-testid="text-this-month-sales">
                     {mockSalesData.thisMonthSales} ₺
                   </p>
-                  <div className="flex items-center gap-1 mt-2 text-emerald-400 text-sm">
+                  <div className="flex items-center gap-1 mt-2 text-accent-amber text-sm">
                     <ArrowUpRight className="w-4 h-4" />
                     <span>— %</span>
                   </div>
                 </div>
                 
-                <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
-                  <p className="text-sm text-white/50 mb-1">Geçen Ay</p>
-                  <p className="text-3xl font-bold text-white" data-testid="text-last-month-sales">
+                <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
+                  <p className="text-sm text-accent-amber/60 mb-1">Geçen Ay</p>
+                  <p className="text-3xl font-bold text-accent-amber" data-testid="text-last-month-sales">
                     {mockSalesData.lastMonthSales} ₺
                   </p>
                 </div>
                 
-                <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
-                  <p className="text-sm text-white/50 mb-1">Büyüme Oranı</p>
-                  <p className="text-3xl font-bold text-emerald-400" data-testid="text-growth-rate">
+                <div className="bg-black rounded-xl p-4 border-2 border-accent-amber/20">
+                  <p className="text-sm text-accent-amber/60 mb-1">Büyüme Oranı</p>
+                  <p className="text-3xl font-bold text-accent-amber" data-testid="text-growth-rate">
                     {mockSalesData.growthRate}
                   </p>
                 </div>
               </div>
 
-              <div className="h-48 bg-gray-800/30 rounded-xl border border-gray-700 flex items-center justify-center">
-                <div className="text-center text-white/30">
+              <div className="h-48 bg-black rounded-xl border-2 border-accent-amber/10 flex items-center justify-center">
+                <div className="text-center text-accent-amber/30">
                   <BarChart3 className="w-12 h-12 mx-auto mb-2" />
                   <p>API bağlantısı sonrası grafik gösterilecek</p>
                 </div>
@@ -337,44 +334,44 @@ export default function BusinessDashboard() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <Ticket className="w-5 h-5 text-purple-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <Ticket className="w-5 h-5 text-accent-amber" />
                   Bilet Satışları
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Toplam Satılan</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Toplam Satılan</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Bu Ay Satılan</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Bu Ay Satılan</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Ortalama Fiyat</span>
-                    <span className="font-semibold text-white">— ₺</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Ortalama Fiyat</span>
+                    <span className="font-bold text-accent-amber">— ₺</span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-amber-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-accent-amber" />
                   Etkinlik Özeti
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Toplam Etkinlik</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Toplam Etkinlik</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Aktif Etkinlik</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Aktif Etkinlik</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Tamamlanan</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Tamamlanan</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
                 </div>
               </div>
@@ -383,169 +380,161 @@ export default function BusinessDashboard() {
 
           <TabsContent value="customers" className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <PieChart className="w-5 h-5 text-blue-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <PieChart className="w-5 h-5 text-accent-amber" />
                   Yaş Grubu Dağılımı
                 </h3>
                 <div className="space-y-3">
                   {mockCustomerData.ageGroups.map((group, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <span className="text-white/70 w-16">{group.range}</span>
-                      <div className="flex-1 h-3 bg-gray-800 rounded-full overflow-hidden">
+                      <span className="text-accent-amber/70 w-16">{group.range}</span>
+                      <div className="flex-1 h-3 bg-black border border-accent-amber/20 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                          className="h-full bg-accent-amber rounded-full"
                           style={{ width: '0%' }}
                         />
                       </div>
-                      <span className="text-white font-medium w-12 text-right">{group.percentage}</span>
+                      <span className="text-accent-amber font-bold w-12 text-right">{group.percentage}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-emerald-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-accent-amber" />
                   Coğrafi Dağılım
                 </h3>
                 <div className="space-y-3">
                   {mockCustomerData.geoDistribution.map((location, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <span className="text-white/70 w-20">{location.city}</span>
-                      <div className="flex-1 h-3 bg-gray-800 rounded-full overflow-hidden">
+                      <span className="text-accent-amber/70 w-20">{location.city}</span>
+                      <div className="flex-1 h-3 bg-black border border-accent-amber/20 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full"
+                          className="h-full bg-accent-amber rounded-full"
                           style={{ width: '0%' }}
                         />
                       </div>
-                      <span className="text-white font-medium w-12 text-right">{location.percentage}</span>
+                      <span className="text-accent-amber font-bold w-12 text-right">{location.percentage}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+              <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
                 <Users className="w-5 h-5 text-accent-amber" />
                 Müşteri İstatistikleri
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-gray-800/50 rounded-xl p-4 text-center border border-gray-700">
-                  <p className="text-3xl font-bold text-white mb-1">—</p>
-                  <p className="text-sm text-white/50">Toplam Müşteri</p>
+                <div className="bg-black rounded-xl p-4 text-center border-2 border-accent-amber/20">
+                  <p className="text-3xl font-bold text-accent-amber mb-1">—</p>
+                  <p className="text-sm text-accent-amber/60">Toplam Müşteri</p>
                 </div>
-                <div className="bg-gray-800/50 rounded-xl p-4 text-center border border-gray-700">
-                  <p className="text-3xl font-bold text-emerald-400 mb-1">—</p>
-                  <p className="text-sm text-white/50">Tekrar Eden</p>
+                <div className="bg-black rounded-xl p-4 text-center border-2 border-accent-amber/20">
+                  <p className="text-3xl font-bold text-accent-amber mb-1">—</p>
+                  <p className="text-sm text-accent-amber/60">Tekrar Eden</p>
                 </div>
-                <div className="bg-gray-800/50 rounded-xl p-4 text-center border border-gray-700">
-                  <p className="text-3xl font-bold text-blue-400 mb-1">—</p>
-                  <p className="text-sm text-white/50">Yeni Müşteri</p>
+                <div className="bg-black rounded-xl p-4 text-center border-2 border-accent-amber/20">
+                  <p className="text-3xl font-bold text-accent-amber mb-1">—</p>
+                  <p className="text-sm text-accent-amber/60">Yeni Müşteri</p>
                 </div>
-                <div className="bg-gray-800/50 rounded-xl p-4 text-center border border-gray-700">
-                  <p className="text-3xl font-bold text-purple-400 mb-1">— %</p>
-                  <p className="text-sm text-white/50">Sadakat Oranı</p>
+                <div className="bg-black rounded-xl p-4 text-center border-2 border-accent-amber/20">
+                  <p className="text-3xl font-bold text-accent-amber mb-1">— %</p>
+                  <p className="text-sm text-accent-amber/60">Sadakat Oranı</p>
                 </div>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="financial" className="space-y-4">
-            <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+              <h2 className="text-xl font-bold text-accent-amber mb-6 flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-accent-amber" />
                 Gelir Dökümü
               </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-gradient-to-br from-emerald-900/40 to-emerald-950/60 rounded-xl p-5 border border-emerald-500/20">
-                  <p className="text-sm text-emerald-300 mb-2">Brüt Gelir</p>
-                  <p className="text-3xl font-bold text-white" data-testid="text-gross-income">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-black rounded-xl p-5 border-2 border-accent-amber/30">
+                  <p className="text-sm text-accent-amber/60 mb-2">Brüt Gelir</p>
+                  <p className="text-3xl font-bold text-accent-amber" data-testid="text-gross-income">
                     {mockFinancialData.grossIncome} ₺
                   </p>
-                  <p className="text-xs text-emerald-400/60 mt-2">Toplam satış geliri</p>
+                  <p className="text-xs text-accent-amber/50 mt-2">Toplam satış geliri</p>
                 </div>
                 
-                <div className="bg-gradient-to-br from-blue-900/40 to-blue-950/60 rounded-xl p-5 border border-blue-500/20">
-                  <p className="text-sm text-blue-300 mb-2">Net Gelir</p>
-                  <p className="text-3xl font-bold text-white" data-testid="text-net-income">
+                <div className="bg-black rounded-xl p-5 border-2 border-accent-amber/30">
+                  <p className="text-sm text-accent-amber/60 mb-2">Net Gelir</p>
+                  <p className="text-3xl font-bold text-accent-amber" data-testid="text-net-income">
                     {mockFinancialData.netIncome} ₺
                   </p>
-                  <p className="text-xs text-blue-400/60 mt-2">Komisyon düşüldükten sonra</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-amber-900/40 to-amber-950/60 rounded-xl p-5 border border-amber-500/20">
-                  <p className="text-sm text-amber-300 mb-2">Platform Komisyonu</p>
-                  <p className="text-3xl font-bold text-white" data-testid="text-platform-fee">
-                    {mockFinancialData.platformFee} ₺
-                  </p>
-                  <p className="text-xs text-amber-400/60 mt-2">ETKİNİUM hizmet bedeli</p>
+                  <p className="text-xs text-accent-amber/50 mt-2">Komisyon düşüldükten sonra</p>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <RefreshCw className="w-5 h-5 text-red-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <RefreshCw className="w-5 h-5 text-accent-amber" />
                   İade ve Geri Dönüşüm
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Toplam İade</span>
-                    <span className="font-semibold text-red-400">{mockFinancialData.refundAmount} ₺</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Toplam İade</span>
+                    <span className="font-bold text-accent-amber">{mockFinancialData.refundAmount} ₺</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">İade Oranı</span>
-                    <span className="font-semibold text-white">{mockFinancialData.refundRate}</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">İade Oranı</span>
+                    <span className="font-bold text-accent-amber">{mockFinancialData.refundRate}</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">İade Edilen Bilet</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">İade Edilen Bilet</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-purple-400" />
+              <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
+                <h3 className="text-lg font-bold text-accent-amber mb-4 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-accent-amber" />
                   Ödeme Durumu
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Bekleyen Ödeme</span>
-                    <span className="font-semibold text-amber-400">{mockFinancialData.pendingPayments} ₺</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Bekleyen Ödeme</span>
+                    <span className="font-bold text-accent-amber">{mockFinancialData.pendingPayments} ₺</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Tamamlanan Ödeme</span>
-                    <span className="font-semibold text-emerald-400">— ₺</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Tamamlanan Ödeme</span>
+                    <span className="font-bold text-accent-amber">— ₺</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
-                    <span className="text-white/70">Sonraki Ödeme Tarihi</span>
-                    <span className="font-semibold text-white">—</span>
+                  <div className="flex justify-between items-center p-3 bg-black rounded-lg border border-accent-amber/10">
+                    <span className="text-accent-amber/70">Sonraki Ödeme Tarihi</span>
+                    <span className="font-bold text-accent-amber">—</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
+            <div className="bg-black rounded-2xl p-6 border-2 border-accent-amber/20">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <h3 className="text-lg font-bold text-accent-amber flex items-center gap-2">
                   <FileCheck className="w-5 h-5 text-accent-amber" />
                   Mali Raporlar
                 </h3>
                 <Button 
-                  variant="outline" 
+                  variant="outline"
                   size="sm"
-                  className="border-accent-amber/50 text-accent-amber hover:bg-accent-amber hover:text-black"
+                  className="bg-black border-2 border-accent-amber/50 text-accent-amber hover:bg-accent-amber hover:text-black font-bold transition-all"
                   data-testid="button-download-report"
                 >
                   Rapor İndir
                 </Button>
               </div>
-              <div className="text-center py-8 text-white/30">
+              <div className="text-center py-8 text-accent-amber/30">
                 <FileText className="w-12 h-12 mx-auto mb-2" />
                 <p>API bağlantısı sonrası detaylı raporlar burada gösterilecek</p>
               </div>

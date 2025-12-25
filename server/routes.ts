@@ -25,7 +25,31 @@ function requireAuth(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
+// Initialize business user on startup
+async function initializeBusinessUser() {
+  try {
+    const businessEmail = "berkay.gulcin@icloud.com";
+    const existingUser = await storage.getUserByEmail(businessEmail);
+    
+    if (!existingUser) {
+      const hashedPassword = await bcrypt.hash("Berkay34", 10);
+      await storage.createUser({
+        email: businessEmail,
+        password: hashedPassword,
+        firstName: "Berkay",
+        lastName: "Gülçin",
+      });
+      console.log("Business user initialized successfully");
+    }
+  } catch (error) {
+    console.log("Business user initialization skipped (may already exist)");
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Initialize business user
+  await initializeBusinessUser();
+  
   // Trust proxy for production (Replit runs behind a proxy)
   app.set('trust proxy', 1);
   

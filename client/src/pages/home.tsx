@@ -6,52 +6,51 @@ import OvalAdBanner from "@/components/oval-ad-banner";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { Calendar, UtensilsCrossed, MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
-    className="group relative bg-black/60 backdrop-blur-xl rounded-[16px] overflow-hidden border border-white/10 hover:border-accent-amber/40 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
+    className="group relative bg-black rounded-[20px] overflow-hidden border-2 border-accent-amber/20 hover:border-accent-amber/60 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
     style={{
-      boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
+      boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(245,158,11,0.1)"
     }}
     data-testid={`featured-event-${index}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-accent-amber/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     
-    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-purple-900/40 to-gray-900/60">
+    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-gray-900 to-black">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 rounded-lg bg-purple-500/20 backdrop-blur-sm flex items-center justify-center border border-purple-400/20">
-          <Calendar className="w-4 h-4 text-purple-300" />
+        <div className="w-10 h-10 rounded-full bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/30">
+          <span className="text-accent-amber text-lg font-bold">E</span>
         </div>
       </div>
       <div className="absolute top-1.5 left-1.5">
-        <span className="bg-accent-amber/90 backdrop-blur-sm text-black text-[8px] font-semibold px-1.5 py-0.5 rounded-full">
+        <span className="bg-accent-amber text-black text-[8px] font-bold px-2 py-0.5 rounded-full">
           Yakında
         </span>
       </div>
-      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black/60 transition-all border border-white/10">
+      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black transition-all border border-accent-amber/20">
         <Heart className="w-2.5 h-2.5" />
       </button>
     </div>
     
-    <div className="relative p-2.5 space-y-1.5">
-      <h3 className="font-medium text-white/90 group-hover:text-white transition-colors line-clamp-1 text-[11px] sm:text-xs">
+    <div className="relative p-3 space-y-2 bg-black">
+      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-xs sm:text-sm tracking-wide">
         Etkinlik Başlığı
       </h3>
-      <div className="space-y-0.5">
-        <div className="flex items-center gap-1 text-[9px] text-white/50">
-          <Calendar className="w-2 h-2 text-accent-amber/70" />
+      <div className="space-y-1">
+        <div className="flex items-center gap-1.5 text-[9px] text-accent-amber/70">
           <span>— — ——</span>
         </div>
-        <div className="flex items-center gap-1 text-[9px] text-white/50">
-          <MapPin className="w-2 h-2 text-accent-amber/70" />
+        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
+          <MapPin className="w-2.5 h-2.5 text-accent-amber" />
           <span className="line-clamp-1">Konum</span>
         </div>
       </div>
-      <div className="pt-1.5 border-t border-white/5 flex items-center justify-between">
-        <span className="text-accent-amber font-semibold text-xs">— ₺</span>
+      <div className="pt-2 border-t border-accent-amber/10 flex items-center justify-between">
+        <span className="text-accent-amber font-bold text-sm">— ₺</span>
         <Link href="/bilet-al">
-          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[8px] font-medium px-2 py-1 rounded-full transition-all border border-white/10 hover:border-accent-amber">
+          <button className="bg-accent-amber hover:bg-white text-black text-[8px] font-bold px-3 py-1.5 rounded-full transition-all">
             Satın Al
           </button>
         </Link>
@@ -62,54 +61,54 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
-    className="group relative bg-black/60 backdrop-blur-xl rounded-[16px] overflow-hidden border border-white/10 hover:border-accent-amber/40 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
+    className="group relative bg-black rounded-[20px] overflow-hidden border-2 border-accent-amber/20 hover:border-accent-amber/60 transition-all duration-500 flex-shrink-0 w-[160px] sm:w-[180px]"
     style={{
-      boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
+      boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(245,158,11,0.1)"
     }}
     data-testid={`featured-restaurant-${index}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     
-    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-amber-900/40 to-gray-900/60">
+    <div className="relative h-20 sm:h-24 bg-gradient-to-br from-gray-900 to-black">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 rounded-lg bg-amber-500/20 backdrop-blur-sm flex items-center justify-center border border-amber-400/20">
-          <UtensilsCrossed className="w-4 h-4 text-amber-300" />
+        <div className="w-10 h-10 rounded-full bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/30">
+          <span className="text-accent-amber text-lg font-bold">R</span>
         </div>
       </div>
       <div className="absolute top-1.5 left-1.5 flex gap-1">
-        <span className="bg-accent-amber/90 backdrop-blur-sm text-black text-[8px] font-semibold px-1.5 py-0.5 rounded-full">
+        <span className="bg-accent-amber text-black text-[8px] font-bold px-2 py-0.5 rounded-full">
           Popüler
         </span>
       </div>
-      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black/60 transition-all border border-white/10">
+      <button className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-black transition-all border border-accent-amber/20">
         <Heart className="w-2.5 h-2.5" />
       </button>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-1.5">
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-1.5">
         <div className="flex items-center gap-1 text-accent-amber text-[9px]">
-          <Star className="w-2 h-2 fill-accent-amber" />
-          <span className="font-medium">—</span>
+          <Star className="w-2.5 h-2.5 fill-accent-amber" />
+          <span className="font-bold">—</span>
         </div>
       </div>
     </div>
     
-    <div className="relative p-2.5 space-y-1.5">
-      <h3 className="font-medium text-white/90 group-hover:text-white transition-colors line-clamp-1 text-[11px] sm:text-xs">
+    <div className="relative p-3 space-y-2 bg-black">
+      <h3 className="font-bold text-white group-hover:text-accent-amber transition-colors line-clamp-1 text-xs sm:text-sm tracking-wide">
         Restoran Adı
       </h3>
-      <div className="space-y-0.5">
-        <div className="flex items-center gap-1 text-[9px] text-white/50">
-          <MapPin className="w-2 h-2 text-accent-amber/70" />
+      <div className="space-y-1">
+        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
+          <MapPin className="w-2.5 h-2.5 text-accent-amber" />
           <span className="line-clamp-1">Konum</span>
         </div>
-        <div className="flex items-center gap-1 text-[9px] text-white/50">
-          <Clock className="w-2 h-2 text-accent-amber/70" />
+        <div className="flex items-center gap-1.5 text-[9px] text-white/50">
+          <Clock className="w-2.5 h-2.5 text-accent-amber" />
           <span>—:— - —:—</span>
         </div>
       </div>
-      <div className="pt-1.5 border-t border-white/5 flex items-center justify-between">
-        <span className="text-accent-amber font-semibold text-xs">—— ₺</span>
+      <div className="pt-2 border-t border-accent-amber/10 flex items-center justify-between">
+        <span className="text-accent-amber font-bold text-sm">—— ₺</span>
         <Link href="/restoranlar">
-          <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[8px] font-medium px-2 py-1 rounded-full transition-all border border-white/10 hover:border-accent-amber">
+          <button className="bg-accent-amber hover:bg-white text-black text-[8px] font-bold px-3 py-1.5 rounded-full transition-all">
             Rezerve Et
           </button>
         </Link>
@@ -156,15 +155,14 @@ export default function Home() {
       <section className="py-4 sm:py-6">
         <div className="container mx-auto px-3">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-accent-amber" />
-              <h2 className="text-xs sm:text-sm font-semibold text-white/90">Öne Çıkan Etkinlikler</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm sm:text-base font-bold text-white tracking-wide uppercase">Öne Çıkan Etkinlikler</h2>
               <button 
                 onClick={() => setIsDateDrawerOpen(true)}
-                className="ml-0.5 w-5 h-5 rounded-md bg-black hover:bg-accent-amber flex items-center justify-center text-white/60 hover:text-black transition-all border border-white/10 hover:border-accent-amber"
+                className="w-6 h-6 rounded-full bg-black hover:bg-accent-amber flex items-center justify-center text-accent-amber hover:text-black transition-all border border-accent-amber/30 hover:border-accent-amber"
                 data-testid="open-date-drawer"
               >
-                <CalendarDays className="w-2.5 h-2.5" />
+                <CalendarDays className="w-3 h-3" />
               </button>
             </div>
             <div className="flex items-center gap-1">
@@ -204,9 +202,8 @@ export default function Home() {
       <section className="py-4 sm:py-6">
         <div className="container mx-auto px-3">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-1.5">
-              <UtensilsCrossed className="w-3.5 h-3.5 text-accent-amber" />
-              <h2 className="text-xs sm:text-sm font-semibold text-white/90">Popüler Restoranlar</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm sm:text-base font-bold text-white tracking-wide uppercase">Popüler Restoranlar</h2>
             </div>
             <div className="flex items-center gap-1">
               <button 
