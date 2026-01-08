@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import Header from "@/components/header";
 import HeroCarousel from "@/components/hero-carousel";
@@ -69,6 +69,160 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
     </div>
   </div>
 );
+
+const adSlides = [
+  {
+    id: 1,
+    title: "Premium Sponsorluk",
+    subtitle: "Markanızı Milyonlara Ulaştırın",
+    description: "ETKİNİUM'un geniş kullanıcı kitlesine doğrudan erişin",
+    accent: "from-amber-500/30 via-orange-500/20 to-yellow-500/30",
+    iconBg: "from-amber-500 to-orange-500",
+    glowColor: "rgba(245,158,11,0.15)"
+  },
+  {
+    id: 2,
+    title: "Etkinlik Partneri Ol",
+    subtitle: "Özel Etkinliklerde Yer Alın",
+    description: "Konser, festival ve özel gecelerimizde marka görünürlüğü",
+    accent: "from-purple-500/30 via-violet-500/20 to-fuchsia-500/30",
+    iconBg: "from-purple-500 to-violet-500",
+    glowColor: "rgba(139,92,246,0.15)"
+  },
+  {
+    id: 3,
+    title: "Dijital Reklam Alanı",
+    subtitle: "Web & Mobil Platformda",
+    description: "Banner, video ve native reklam çözümleri",
+    accent: "from-cyan-500/30 via-blue-500/20 to-teal-500/30",
+    iconBg: "from-cyan-500 to-blue-500",
+    glowColor: "rgba(6,182,212,0.15)"
+  }
+];
+
+const PremiumAdSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % adSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = adSlides[currentSlide];
+
+  return (
+    <div 
+      className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden group"
+      style={{
+        background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.1) 100%)",
+        backdropFilter: "blur(40px)",
+        WebkitBackdropFilter: "blur(40px)",
+        border: "1px solid rgba(255,255,255,0.15)",
+        boxShadow: `0 25px 80px -12px rgba(0,0,0,0.6), 0 0 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3)`
+      }}
+      data-testid="premium-ad-slider"
+    >
+      {/* Animated gradient background */}
+      <div 
+        className={`absolute inset-0 bg-gradient-to-br ${slide.accent} opacity-60 transition-all duration-1000`}
+      />
+      
+      {/* Frosted glass layers */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.15) 100%)"
+        }}
+      />
+      
+      {/* Top edge highlight */}
+      <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      
+      {/* Subtle noise texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")"
+        }}
+      />
+      
+      {/* Content */}
+      <div className="relative p-8 sm:p-12 md:p-16 min-h-[280px] sm:min-h-[320px] flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Left Content */}
+        <div className="flex-1 text-center md:text-left">
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
+            style={{
+              background: "rgba(255,255,255,0.1)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.15)"
+            }}
+          >
+            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-white/80 text-xs font-medium tracking-wide">REKLAM ALANI</span>
+          </div>
+          
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+            {slide.title}
+          </h2>
+          <p className="text-lg sm:text-xl text-white/90 font-medium mb-3">
+            {slide.subtitle}
+          </p>
+          <p className="text-white/50 text-sm sm:text-base max-w-md mb-6">
+            {slide.description}
+          </p>
+          
+          <a 
+            href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
+              color: "#000",
+              boxShadow: "0 8px 30px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.1)"
+            }}
+          >
+            <Sparkles className="w-4 h-4" />
+            İletişime Geçin
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+        
+        {/* Right Visual Element */}
+        <div className="flex-shrink-0 hidden md:block">
+          <div 
+            className={`w-32 h-32 sm:w-40 sm:h-40 rounded-3xl flex items-center justify-center bg-gradient-to-br ${slide.iconBg} transition-all duration-1000`}
+            style={{
+              boxShadow: `0 20px 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.3)`
+            }}
+          >
+            <span className="text-white text-4xl sm:text-5xl font-bold tracking-tight">AD</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Slide Indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+        {adSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentSlide 
+                ? "w-8 h-2 bg-white" 
+                : "w-2 h-2 bg-white/30 hover:bg-white/50"
+            }`}
+            data-testid={`ad-slide-indicator-${index}`}
+          />
+        ))}
+      </div>
+      
+      {/* Bottom edge reflection */}
+      <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    </div>
+  );
+};
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
@@ -311,66 +465,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Secondary Ad Banner - Glassmorphism Style */}
-      <section className="py-6 sm:py-10">
+      {/* Premium Apple-Style Glassmorphism Ad Slider */}
+      <section className="py-8 sm:py-12">
         <div className="container mx-auto px-4">
-          <div 
-            className="relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer group"
-            style={{
-              background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.2)"
-            }}
-            data-testid="secondary-ad-banner"
-          >
-            {/* Frosted glass overlay effect */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)"
-              }}
-            />
-            
-            {/* Top highlight line */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            
-            {/* Content area */}
-            <div className="relative p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center text-center min-h-[180px] sm:min-h-[220px]">
-              {/* Ad placeholder content */}
-              <div className="flex flex-col items-center gap-4">
-                <div 
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
-                    border: "1px solid rgba(245,158,11,0.3)",
-                    boxShadow: "0 4px 20px rgba(245,158,11,0.15)"
-                  }}
-                >
-                  <span className="text-amber-400 text-2xl sm:text-3xl font-bold">AD</span>
-                </div>
-                <div>
-                  <p className="text-white/80 text-sm sm:text-base font-medium mb-1">Reklam Alanı</p>
-                  <p className="text-white/40 text-xs sm:text-sm">Markanızı burada tanıtın</p>
-                </div>
-                <a 
-                  href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
-                  className="mt-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all hover:scale-105"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(245,158,11,0.9) 0%, rgba(217,119,6,0.9) 100%)",
-                    color: "black",
-                    boxShadow: "0 4px 20px rgba(245,158,11,0.3)"
-                  }}
-                >
-                  Reklam Vermek İçin İletişime Geçin
-                </a>
-              </div>
-            </div>
-            
-            {/* Bottom subtle line */}
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          </div>
+          <PremiumAdSlider />
         </div>
       </section>
 
