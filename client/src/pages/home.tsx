@@ -6,6 +6,9 @@ import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
 import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Users, TrendingUp, Play, Utensils } from "lucide-react";
 import etkineumLogo from "@assets/logo-final.png";
+import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
+import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
+import faturaportLogo from "@assets/download_1765541159072.png";
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -68,6 +71,107 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
     </div>
   </div>
 );
+
+const billboardAds = [
+  {
+    id: 1,
+    logo: tamamliyoLogo,
+    brand: "Tamamliyo",
+    slogan: "Sigortayı Dijitale Kolayca Entegre Edin!",
+    bgColor: "#0a0a0a"
+  },
+  {
+    id: 2,
+    logo: faturaportLogo,
+    brand: "Faturaport",
+    slogan: "e-fatura'nın Mobili!",
+    bgColor: "#0a0a0a"
+  },
+  {
+    id: 3,
+    logo: rezervemLogo,
+    brand: "Rezervem",
+    slogan: "Misafirperverliğin Geleceği!",
+    bgColor: "#0a0a0a"
+  }
+];
+
+const BillboardAdSlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % billboardAds.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div 
+      className="relative h-[100px] sm:h-[120px] rounded-2xl overflow-hidden"
+      style={{
+        background: "#0a0a0a",
+        boxShadow: "0 4px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03)"
+      }}
+      data-testid="billboard-ad-slider"
+    >
+      {/* Slides Container */}
+      <div className="relative w-full h-full">
+        {billboardAds.map((ad, index) => {
+          const isActive = index === currentIndex;
+          const isPrev = index === (currentIndex - 1 + billboardAds.length) % billboardAds.length;
+          
+          return (
+            <div
+              key={ad.id}
+              className="absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out"
+              style={{
+                transform: isActive 
+                  ? "translateX(0)" 
+                  : isPrev 
+                    ? "translateX(-100%)" 
+                    : "translateX(100%)",
+                opacity: isActive ? 1 : 0,
+                backgroundColor: ad.bgColor
+              }}
+            >
+              <div className="flex items-center justify-center gap-6 sm:gap-10 px-6">
+                <img 
+                  src={ad.logo} 
+                  alt={ad.brand}
+                  className="h-10 sm:h-14 w-auto object-contain max-w-[120px] sm:max-w-[180px]"
+                />
+                <div className="h-8 w-px bg-white/10 hidden sm:block" />
+                <p className="text-white/70 text-sm sm:text-base font-medium hidden sm:block">
+                  {ad.slogan}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Indicators */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+        {billboardAds.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentIndex 
+                ? "w-6 h-1.5 bg-accent-amber" 
+                : "w-1.5 h-1.5 bg-white/20 hover:bg-white/40"
+            }`}
+            data-testid={`billboard-indicator-${index}`}
+          />
+        ))}
+      </div>
+      
+      {/* Subtle border glow */}
+      <div className="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none" />
+    </div>
+  );
+};
 
 const FeaturedRestaurantCard = ({ index }: { index: number }) => (
   <div 
@@ -184,21 +288,10 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left - Hero Text */}
             <div className="text-center md:text-left space-y-6">
-              <div 
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-                style={{
-                  background: "rgba(245,158,11,0.1)",
-                  border: "1px solid rgba(245,158,11,0.3)"
-                }}
-              >
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-accent-amber text-xs font-medium tracking-wide">Türkiye'nin Yeni Nesil Platformu</span>
-              </div>
-              
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
                 Tek Platform,<br />
                 <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                  Sonsuz Deneyim
+                  Sonsuz Sanat.
                 </span>
               </h1>
               
@@ -257,66 +350,70 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right - Discovery Cards */}
+            {/* Right - Creative Visual */}
             <div className="relative hidden md:block">
-              <div className="relative w-full max-w-md mx-auto">
-                {/* Card Stack Effect */}
+              <div className="relative w-full max-w-lg mx-auto">
+                {/* Main Visual Container */}
                 <div 
-                  className="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-purple-500/10 border border-purple-500/20"
-                  style={{ transform: "rotate(-6deg)" }}
-                />
-                <div 
-                  className="absolute -top-2 -left-2 w-full h-full rounded-3xl bg-amber-500/10 border border-amber-500/20"
-                  style={{ transform: "rotate(-3deg)" }}
-                />
-                
-                {/* Main Discovery Card */}
-                <div 
-                  className="relative rounded-3xl overflow-hidden"
+                  className="relative rounded-[40px] overflow-hidden aspect-square"
                   style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
-                    backdropFilter: "blur(20px)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    boxShadow: "0 25px 80px -12px rgba(0,0,0,0.6)"
+                    boxShadow: "0 40px 100px -20px rgba(245,158,11,0.3), 0 0 60px rgba(139,92,246,0.15)"
                   }}
                 >
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-bold text-white">Bu Hafta Öne Çıkanlar</h3>
-                      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/20 border border-green-500/30">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                        <span className="text-green-400 text-[10px] font-medium">CANLI</span>
+                  {/* Background Image */}
+                  <img 
+                    src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80"
+                    alt="Concert Experience"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  
+                  {/* Gradient Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-amber-900/30" />
+                  
+                  {/* Floating Elements */}
+                  <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-white text-xs font-medium">CANLI</span>
+                  </div>
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-accent-amber flex items-center justify-center">
+                          <Sparkles className="w-6 h-6 text-black" />
+                        </div>
+                        <div>
+                          <p className="text-white/60 text-xs uppercase tracking-wider">Deneyimin Adresi</p>
+                          <p className="text-white text-xl font-bold">ETKİNİUM</p>
+                        </div>
+                      </div>
+                      
+                      {/* Quick Stats */}
+                      <div className="flex gap-4">
+                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                          <p className="text-accent-amber text-lg font-bold">🎵</p>
+                          <p className="text-white/70 text-xs">Konserler</p>
+                        </div>
+                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                          <p className="text-accent-amber text-lg font-bold">🍽️</p>
+                          <p className="text-white/70 text-xs">Restoranlar</p>
+                        </div>
+                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                          <p className="text-accent-amber text-lg font-bold">🎭</p>
+                          <p className="text-white/70 text-xs">Tiyatrolar</p>
+                        </div>
                       </div>
                     </div>
-                    
-                    {/* Featured Items */}
-                    <div className="space-y-3">
-                      {[
-                        { title: "Konser", desc: "Pop & Rock Gecesi", icon: "🎵", color: "purple" },
-                        { title: "Restoran", desc: "Fine Dining Deneyimi", icon: "🍽️", color: "orange" },
-                        { title: "Tiyatro", desc: "Yeni Sezon Oyunları", icon: "🎭", color: "amber" },
-                      ].map((item, i) => (
-                        <div 
-                          key={i}
-                          className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent-amber/30 transition-all cursor-pointer group"
-                        >
-                          <span className="text-2xl">{item.icon}</span>
-                          <div className="flex-1">
-                            <p className="text-white font-medium text-sm">{item.title}</p>
-                            <p className="text-white/50 text-xs">{item.desc}</p>
-                          </div>
-                          <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-accent-amber group-hover:translate-x-1 transition-all" />
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Quick Action */}
-                    <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-accent-amber/20 border border-accent-amber/30 text-accent-amber text-sm font-medium hover:bg-accent-amber hover:text-black transition-all">
-                      <Play className="w-4 h-4" />
-                      Tümünü Keşfet
-                    </button>
                   </div>
                 </div>
+                
+                {/* Decorative Ring */}
+                <div 
+                  className="absolute -inset-4 rounded-[50px] border-2 border-dashed border-accent-amber/20 animate-spin"
+                  style={{ animationDuration: "30s" }}
+                />
               </div>
             </div>
           </div>
@@ -326,56 +423,10 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </section>
 
-      {/* Partner Spotlight Banner */}
+      {/* Billboard Ad Slider */}
       <section className="py-6 sm:py-8">
         <div className="container mx-auto px-4">
-          <div 
-            className="relative rounded-2xl overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(217,119,6,0.1) 50%, rgba(0,0,0,0.8) 100%)",
-              border: "1px solid rgba(245,158,11,0.3)",
-              boxShadow: "0 8px 40px rgba(245,158,11,0.15)"
-            }}
-            data-testid="partner-spotlight-banner"
-          >
-            <div className="flex flex-col md:flex-row items-center gap-6 p-6 md:p-8">
-              {/* Logo */}
-              <div className="flex-shrink-0">
-                <div 
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center bg-black"
-                  style={{
-                    boxShadow: "0 8px 30px rgba(0,0,0,0.5), 0 0 20px rgba(245,158,11,0.2)"
-                  }}
-                >
-                  <img src={etkineumLogo} alt="ETKİNİUM" className="w-14 h-14 md:w-16 md:h-16 object-contain" />
-                </div>
-              </div>
-              
-              {/* Content */}
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-                  Reklam Alanı — <span className="text-accent-amber">Markanızı Öne Çıkarın</span>
-                </h3>
-                <p className="text-white/50 text-sm md:text-base">
-                  Premium reklam alanları ile binlerce kullanıcıya ulaşın. İş birliği için iletişime geçin.
-                </p>
-              </div>
-
-              {/* CTA */}
-              <div className="flex-shrink-0">
-                <a 
-                  href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105 bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
-                  style={{ boxShadow: "0 4px 20px rgba(245,158,11,0.3)" }}
-                  data-testid="partner-spotlight-cta"
-                >
-                  <Mail className="w-4 h-4" />
-                  İletişime Geçin
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          </div>
+          <BillboardAdSlider />
         </div>
       </section>
 
