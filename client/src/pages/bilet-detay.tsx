@@ -193,7 +193,7 @@ export default function BiletDetay() {
                         <p className="text-white/50 text-xs">Genel giriş</p>
                       </div>
                     </div>
-                    <span className="text-accent-amber font-bold">250 ₺</span>
+                    <span className="text-accent-amber font-bold">— ₺</span>
                   </label>
                   <label className="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-white/10 hover:border-accent-amber/40 cursor-pointer transition-all">
                     <div className="flex items-center gap-3">
@@ -203,7 +203,7 @@ export default function BiletDetay() {
                         <p className="text-white/50 text-xs">Ön sıra + içecek</p>
                       </div>
                     </div>
-                    <span className="text-accent-amber font-bold">450 ₺</span>
+                    <span className="text-accent-amber font-bold">— ₺</span>
                   </label>
                   <label className="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-white/10 hover:border-accent-amber/40 cursor-pointer transition-all">
                     <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ export default function BiletDetay() {
                         <p className="text-white/50 text-xs">Sahne önü + meet & greet</p>
                       </div>
                     </div>
-                    <span className="text-accent-amber font-bold">750 ₺</span>
+                    <span className="text-accent-amber font-bold">— ₺</span>
                   </label>
                 </div>
 
@@ -235,21 +235,21 @@ export default function BiletDetay() {
                 <div className="border-t border-white/10 pt-4 mb-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-white/50 text-sm">Bilet Fiyatı</span>
-                    <span className="text-white font-medium">250 ₺</span>
+                    <span className="text-white font-medium">— ₺</span>
                   </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-white/50 text-sm">Hizmet Bedeli</span>
-                    <span className="text-white font-medium">15 ₺</span>
+                    <span className="text-white font-medium">— ₺</span>
                   </div>
                   <div className="flex items-center justify-between text-lg font-bold">
                     <span className="text-white">Toplam</span>
-                    <span className="text-accent-amber">265 ₺</span>
+                    <span className="text-accent-amber">— ₺</span>
                   </div>
                 </div>
 
                 <Link href="/odeme">
                   <button 
-                    className="w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black shadow-lg shadow-accent-amber/20"
+                    className="w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] bg-gradient-to-r from-accent-amber to-yellow-500 hover:bg-white hover:from-white hover:to-white text-black shadow-lg shadow-accent-amber/20"
                     data-testid="button-buy-ticket"
                   >
                     <CreditCard className="w-4 h-4" />

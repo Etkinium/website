@@ -7,7 +7,7 @@ import FilterDialog from "@/components/filter-dialog";
 import ReservationDialog from "@/components/reservation-dialog";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
-import { UtensilsCrossed, MapPin, Clock, Users, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown } from "lucide-react";
+import { UtensilsCrossed, MapPin, Clock, Users, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown, Shield, Sparkles, CreditCard, CheckCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const cuisineTypes = [
@@ -173,6 +173,50 @@ export default function Restoranlar() {
                 {cuisine}
               </button>
             ))}
+          </div>
+
+          <div 
+            className="mb-6 p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-orange-900/30 via-black/60 to-accent-amber/10 backdrop-blur-xl border border-white/10"
+            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent-amber to-yellow-500 flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">Garantili</p>
+                  <p className="text-white/50 text-[10px]">Masa garantisi</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">Güvenli</p>
+                  <p className="text-white/50 text-[10px]">256-bit SSL</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                  <CreditCard className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">Uygun Ücret</p>
+                  <p className="text-white/50 text-[10px]">Sadece 14,99 ₺</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">Premium</p>
+                  <p className="text-white/50 text-[10px]">VIP deneyim</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">

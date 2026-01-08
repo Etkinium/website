@@ -269,7 +269,7 @@ export default function RestoranDetay() {
 
                 <Link href="/rezervasyon-odeme">
                   <button 
-                    className="w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black shadow-lg shadow-accent-amber/20"
+                    className="w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] bg-gradient-to-r from-accent-amber to-yellow-500 hover:bg-white hover:from-white hover:to-white text-black shadow-lg shadow-accent-amber/20"
                     data-testid="button-reserve"
                   >
                     <CreditCard className="w-4 h-4" />
