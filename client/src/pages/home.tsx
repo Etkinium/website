@@ -105,10 +105,10 @@ const BillboardAdSlider = () => {
 
   return (
     <div 
-      className="relative h-[130px] sm:h-[150px] rounded-2xl overflow-hidden"
+      className="relative h-[100px] sm:h-[130px] md:h-[150px] rounded-xl sm:rounded-2xl overflow-hidden"
       style={{
         background: "linear-gradient(125deg, hsl(0,0%,98%) 0%, hsl(45,30%,92%) 25%, hsl(38,60%,75%) 50%, hsl(35,50%,45%) 70%, hsl(30,30%,15%) 90%, hsl(0,0%,6%) 100%)",
-        boxShadow: "0 15px 60px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -2px 8px rgba(0,0,0,0.2)"
+        boxShadow: "0 10px 40px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -2px 8px rgba(0,0,0,0.2)"
       }}
       data-testid="billboard-ad-slider"
     >
@@ -130,7 +130,7 @@ const BillboardAdSlider = () => {
           return (
             <div
               key={ad.id}
-              className="absolute inset-0 flex items-center justify-between px-8 sm:px-16 transition-all duration-1000 ease-out"
+              className="absolute inset-0 flex items-center justify-between px-4 sm:px-8 md:px-16 transition-all duration-1000 ease-out"
               style={{
                 transform: isActive 
                   ? "translateX(0)" 
@@ -142,7 +142,7 @@ const BillboardAdSlider = () => {
             >
               {/* Logo Container */}
               <div 
-                className="flex items-center justify-center rounded-xl px-4 py-3"
+                className="flex items-center justify-center rounded-lg sm:rounded-xl px-2 sm:px-4 py-2 sm:py-3 flex-shrink-0"
                 style={{
                   background: "rgba(255,255,255,0.9)",
                   backdropFilter: "blur(8px)",
@@ -152,14 +152,14 @@ const BillboardAdSlider = () => {
                 <img 
                   src={ad.logo} 
                   alt={ad.brand}
-                  className="h-12 sm:h-16 md:h-20 w-auto object-contain max-w-[180px] sm:max-w-[240px]"
+                  className="h-8 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[100px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[240px]"
                 />
               </div>
               
               {/* Slogan */}
-              <div className="flex-1 flex items-center justify-end pl-6 sm:pl-10">
+              <div className="flex-1 flex items-center justify-end pl-3 sm:pl-6 md:pl-10">
                 <p 
-                  className="text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-black tracking-tight leading-tight text-right"
+                  className="text-white text-xs sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-black tracking-tight leading-tight text-right"
                   style={{ 
                     textShadow: "0 2px 15px rgba(0,0,0,0.4)",
                     letterSpacing: "-0.01em"
@@ -174,15 +174,15 @@ const BillboardAdSlider = () => {
       </div>
       
       {/* Indicators */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+      <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-10">
         {billboardAds.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`transition-all duration-500 rounded-full ${
               index === currentIndex 
-                ? "w-8 h-2 bg-white" 
-                : "w-2 h-2 bg-white/50 hover:bg-white/70"
+                ? "w-6 sm:w-8 h-1.5 sm:h-2 bg-white" 
+                : "w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/70"
             }`}
             style={{ boxShadow: index === currentIndex ? "0 0 12px rgba(255,255,255,0.6)" : "none" }}
             data-testid={`billboard-indicator-${index}`}
@@ -290,7 +290,7 @@ export default function Home() {
       <Header />
       
       {/* Cinematic Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-[90vh] overflow-hidden mt-16">
+      <section className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] overflow-hidden mt-14 sm:mt-16">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-neutral-950 to-black">
           <div className="absolute inset-0 opacity-30">
@@ -311,35 +311,35 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left - Hero Text */}
             <div className="text-center md:text-left space-y-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight">
                 Tek Platform,<br />
                 <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
                   Sonsuz Sanat.
                 </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/60 max-w-lg mx-auto md:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-lg mx-auto md:mx-0 px-2 sm:px-0">
                 Konserlerden tiyatrolara, lüks restoranlardan özel etkinliklere — hayalinizdeki anlar bir tık uzağınızda.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start px-4 sm:px-0">
                 <Link href="/etkinlikler">
                   <button 
-                    className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
+                    className="group flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105 bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
                     style={{ boxShadow: "0 8px 30px rgba(245,158,11,0.4)" }}
                     data-testid="hero-cta-events"
                   >
-                    <Ticket className="w-5 h-5" />
+                    <Ticket className="w-4 h-4 sm:w-5 sm:h-5" />
                     Etkinlikleri Keşfet
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
                 <Link href="/restoranlar">
                   <button 
-                    className="flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-white/40"
+                    className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-white/40"
                     data-testid="hero-cta-restaurants"
                   >
-                    <Utensils className="w-5 h-5" />
+                    <Utensils className="w-4 h-4 sm:w-5 sm:h-5" />
                     Restoranları Gör
                   </button>
                 </Link>
@@ -432,8 +432,8 @@ export default function Home() {
       </section>
 
       {/* Billboard Ad Slider */}
-      <section className="py-6 sm:py-8">
-        <div className="container mx-auto px-4">
+      <section className="py-4 sm:py-6 md:py-8">
+        <div className="container mx-auto px-3 sm:px-4">
           <BillboardAdSlider />
         </div>
       </section>
@@ -494,6 +494,84 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Infinite Scrolling Categories */}
+      <section className="py-6 sm:py-10 overflow-hidden">
+        <div className="container mx-auto px-4 mb-4">
+          <div className="flex items-center gap-2">
+            <div 
+              className="w-1 h-6 rounded-full"
+              style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+            />
+            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+              Kategorileri <span className="text-amber-400">Keşfet</span>
+            </h2>
+          </div>
+        </div>
+        
+        <div className="relative">
+          {/* Fade Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          
+          {/* Marquee Container */}
+          <div className="marquee-container" data-testid="category-marquee">
+            <div className="marquee-track">
+              {/* First Set */}
+              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
+                <div
+                  key={`first-${i}`}
+                  className="flex-shrink-0 px-5 sm:px-6 py-3 sm:py-4 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
+                  data-testid={`category-${i}`}
+                >
+                  <span className="text-sm sm:text-base font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
+                    {category}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="marquee-track" aria-hidden="true">
+              {/* Duplicate Set */}
+              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
+                <div
+                  key={`second-${i}`}
+                  className="flex-shrink-0 px-5 sm:px-6 py-3 sm:py-4 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
+                >
+                  <span className="text-sm sm:text-base font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
+                    {category}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <style>{`
+          .marquee-container {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+          }
+          .marquee-track {
+            display: flex;
+            gap: 1rem;
+            padding-right: 1rem;
+            animation: scroll 25s linear infinite;
+          }
+          .marquee-container:hover .marquee-track {
+            animation-play-state: paused;
+          }
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .marquee-track {
+              animation: none;
+            }
+          }
+        `}</style>
       </section>
 
       <section className="py-6 sm:py-10">
