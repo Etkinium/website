@@ -73,30 +73,36 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
 const adSlides = [
   {
     id: 1,
-    title: "Premium Sponsorluk",
-    subtitle: "Markanızı Milyonlara Ulaştırın",
-    description: "ETKİNİUM'un geniş kullanıcı kitlesine doğrudan erişin",
-    accent: "from-amber-500/30 via-orange-500/20 to-yellow-500/30",
-    iconBg: "from-amber-500 to-orange-500",
-    glowColor: "rgba(245,158,11,0.15)"
+    title: "Unutulmaz Etkinlikler",
+    subtitle: "Konserler, Festivaller, Tiyatrolar",
+    description: "En popüler etkinliklerin biletlerini hemen alın",
+    accent: "from-purple-500/30 via-violet-500/20 to-fuchsia-500/30",
+    glowColor: "rgba(139,92,246,0.15)",
+    image: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=80",
+    link: "/etkinlikler",
+    buttonText: "Etkinlikleri Keşfet"
   },
   {
     id: 2,
-    title: "Etkinlik Partneri Ol",
-    subtitle: "Özel Etkinliklerde Yer Alın",
-    description: "Konser, festival ve özel gecelerimizde marka görünürlüğü",
-    accent: "from-purple-500/30 via-violet-500/20 to-fuchsia-500/30",
-    iconBg: "from-purple-500 to-violet-500",
-    glowColor: "rgba(139,92,246,0.15)"
+    title: "Lezzet Durağı",
+    subtitle: "En İyi Restoranlar, Özel Menüler",
+    description: "Şehrin en seçkin restoranlarında masa ayırtın",
+    accent: "from-orange-500/30 via-amber-500/20 to-yellow-500/30",
+    glowColor: "rgba(249,115,22,0.15)",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+    link: "/restoranlar",
+    buttonText: "Restoranları Keşfet"
   },
   {
     id: 3,
-    title: "Dijital Reklam Alanı",
-    subtitle: "Web & Mobil Platformda",
-    description: "Banner, video ve native reklam çözümleri",
-    accent: "from-cyan-500/30 via-blue-500/20 to-teal-500/30",
-    iconBg: "from-cyan-500 to-blue-500",
-    glowColor: "rgba(6,182,212,0.15)"
+    title: "Reklam Alanı",
+    subtitle: "Markanızı Burada Tanıtın",
+    description: "Premium reklam alanları için bizimle iletişime geçin",
+    accent: "from-amber-500/30 via-orange-500/20 to-yellow-500/30",
+    glowColor: "rgba(245,158,11,0.15)",
+    image: null,
+    link: null,
+    buttonText: "İletişime Geçin"
   }
 ];
 
@@ -106,7 +112,7 @@ const PremiumAdSlider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % adSlides.length);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
@@ -124,6 +130,18 @@ const PremiumAdSlider = () => {
       }}
       data-testid="premium-ad-slider"
     >
+      {/* Background Image */}
+      {slide.image && (
+        <div className="absolute inset-0">
+          <img 
+            src={slide.image} 
+            alt={slide.title}
+            className="w-full h-full object-cover opacity-40 transition-opacity duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
+      )}
+      
       {/* Animated gradient background */}
       <div 
         className={`absolute inset-0 bg-gradient-to-br ${slide.accent} opacity-60 transition-all duration-1000`}
@@ -161,7 +179,9 @@ const PremiumAdSlider = () => {
             }}
           >
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/80 text-xs font-medium tracking-wide">REKLAM ALANI</span>
+            <span className="text-white/80 text-xs font-medium tracking-wide">
+              {slide.link ? "ETKİNİUM" : "REKLAM ALANI"}
+            </span>
           </div>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
@@ -174,31 +194,62 @@ const PremiumAdSlider = () => {
             {slide.description}
           </p>
           
-          <a 
-            href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-            style={{
-              background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
-              color: "#000",
-              boxShadow: "0 8px 30px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.1)"
-            }}
-          >
-            <Sparkles className="w-4 h-4" />
-            İletişime Geçin
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          {slide.link ? (
+            <Link href={slide.link}>
+              <button
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
+                style={{
+                  boxShadow: "0 8px 30px rgba(245,158,11,0.3), 0 0 40px rgba(245,158,11,0.1)"
+                }}
+              >
+                <Sparkles className="w-4 h-4" />
+                {slide.buttonText}
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+          ) : (
+            <a 
+              href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
+                color: "#000",
+                boxShadow: "0 8px 30px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.1)"
+              }}
+            >
+              <Sparkles className="w-4 h-4" />
+              {slide.buttonText}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          )}
         </div>
         
-        {/* Right Visual Element */}
+        {/* Right Visual Element - Image or AD icon */}
         <div className="flex-shrink-0 hidden md:block">
-          <div 
-            className={`w-32 h-32 sm:w-40 sm:h-40 rounded-3xl flex items-center justify-center bg-gradient-to-br ${slide.iconBg} transition-all duration-1000`}
-            style={{
-              boxShadow: `0 20px 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.3)`
-            }}
-          >
-            <span className="text-white text-4xl sm:text-5xl font-bold tracking-tight">AD</span>
-          </div>
+          {slide.image ? (
+            <div 
+              className="w-40 h-40 sm:w-48 sm:h-48 rounded-3xl overflow-hidden transition-all duration-1000"
+              style={{
+                boxShadow: `0 20px 60px ${slide.glowColor}, 0 0 30px rgba(0,0,0,0.5)`,
+                border: "2px solid rgba(255,255,255,0.2)"
+              }}
+            >
+              <img 
+                src={slide.image} 
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <div 
+              className="w-40 h-40 sm:w-48 sm:h-48 rounded-3xl flex items-center justify-center bg-gradient-to-br from-amber-500 to-orange-500 transition-all duration-1000"
+              style={{
+                boxShadow: `0 20px 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.3)`
+              }}
+            >
+              <span className="text-white text-5xl sm:text-6xl font-bold tracking-tight">AD</span>
+            </div>
+          )}
         </div>
       </div>
       
@@ -208,10 +259,10 @@ const PremiumAdSlider = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
+            className={`transition-all duration-500 rounded-full ${
               index === currentSlide 
-                ? "w-8 h-2 bg-white" 
-                : "w-2 h-2 bg-white/30 hover:bg-white/50"
+                ? "w-10 h-2.5 bg-white" 
+                : "w-2.5 h-2.5 bg-white/30 hover:bg-white/50"
             }`}
             data-testid={`ad-slide-indicator-${index}`}
           />
