@@ -108,7 +108,7 @@ export default function Etkinlikler() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleBuyTicket = () => {
-    setLocation("/bilet-al");
+    setLocation("/bilet-detay");
   };
 
   return (

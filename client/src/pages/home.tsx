@@ -59,7 +59,7 @@ const FeaturedEventCard = ({ index }: { index: number }) => (
           <p className="text-[9px] text-white/40">Başlangıç</p>
           <p className="text-sm font-semibold text-accent-amber">— ₺</p>
         </div>
-        <Link href="/bilet-al">
+        <Link href="/bilet-detay">
           <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all border border-white/10 hover:border-accent-amber flex items-center gap-0.5">
             Bilet Al
             <ChevronRight className="w-3 h-3" />
@@ -121,7 +121,7 @@ const FeaturedRestaurantCard = ({ index }: { index: number }) => (
           <p className="text-[9px] text-white/40">Ortalama</p>
           <p className="text-sm font-semibold text-accent-amber">—— ₺</p>
         </div>
-        <Link href="/restoranlar">
+        <Link href="/restoran-detay">
           <button className="bg-black hover:bg-accent-amber text-white hover:text-black text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all border border-white/10 hover:border-accent-amber flex items-center gap-0.5">
             Rezerve Et
             <ChevronRight className="w-3 h-3" />
