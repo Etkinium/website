@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Utensils, Smartphone } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Utensils } from "lucide-react";
 import etkineumLogo from "@assets/logo-final.png";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
@@ -77,22 +77,19 @@ const billboardAds = [
     id: 1,
     logo: tamamliyoLogo,
     brand: "Tamamliyo",
-    slogan: "Sigortayı Dijitale Kolayca Entegre Edin!",
-    accentColor: "#3B82F6"
+    slogan: "SİGORTAYI DİJİTALE KOLAYCA ENTEGRE EDİN!"
   },
   {
     id: 2,
     logo: faturaportLogo,
     brand: "Faturaport",
-    slogan: "e-fatura'nın Mobili!",
-    accentColor: "#10B981"
+    slogan: "E-FATURA'NIN MOBİLİ!"
   },
   {
     id: 3,
     logo: rezervemLogo,
     brand: "Rezervem",
-    slogan: "Misafirperverliğin Geleceği!",
-    accentColor: "#8B5CF6"
+    slogan: "MİSAFİRPERVERLİĞİN GELECEĞİ!"
   }
 ];
 
@@ -108,12 +105,21 @@ const BillboardAdSlider = () => {
 
   return (
     <div 
-      className="relative h-[140px] sm:h-[160px] rounded-2xl overflow-hidden"
+      className="relative h-[120px] sm:h-[140px] rounded-2xl overflow-hidden"
       style={{
-        boxShadow: "0 8px 40px rgba(0,0,0,0.3)"
+        background: "linear-gradient(135deg, #ffffff 0%, #f8f8f8 35%, #e8e8e8 50%, #1a1a1a 50%, #0d0d0d 100%)",
+        boxShadow: "0 10px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(0,0,0,0.3)"
       }}
       data-testid="billboard-ad-slider"
     >
+      {/* Matte Overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.1) 100%)"
+        }}
+      />
+      
       {/* Slides Container */}
       <div className="relative w-full h-full">
         {billboardAds.map((ad, index) => {
@@ -123,7 +129,7 @@ const BillboardAdSlider = () => {
           return (
             <div
               key={ad.id}
-              className="absolute inset-0 flex transition-all duration-1000 ease-in-out"
+              className="absolute inset-0 flex items-center transition-all duration-1000 ease-out"
               style={{
                 transform: isActive 
                   ? "translateX(0)" 
@@ -133,21 +139,25 @@ const BillboardAdSlider = () => {
                 opacity: isActive ? 1 : 0
               }}
             >
-              {/* Left Half - White */}
-              <div className="w-1/2 h-full bg-white flex items-center justify-center px-6 sm:px-10">
+              {/* Left Side - Logo on White */}
+              <div className="w-1/2 h-full flex items-center justify-center px-6 sm:px-12">
                 <img 
                   src={ad.logo} 
                   alt={ad.brand}
-                  className="h-12 sm:h-16 w-auto object-contain max-w-[160px] sm:max-w-[220px]"
+                  className="h-10 sm:h-14 md:h-16 w-auto object-contain max-w-[140px] sm:max-w-[200px]"
+                  style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}
                 />
               </div>
               
-              {/* Right Half - Colored */}
-              <div 
-                className="w-1/2 h-full flex items-center px-6 sm:px-10"
-                style={{ backgroundColor: ad.accentColor }}
-              >
-                <p className="text-white text-lg sm:text-2xl md:text-3xl font-black leading-tight">
+              {/* Right Side - Slogan on Dark */}
+              <div className="w-1/2 h-full flex items-center px-6 sm:px-10">
+                <p 
+                  className="text-white text-sm sm:text-xl md:text-2xl font-black tracking-tight leading-tight"
+                  style={{ 
+                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                    letterSpacing: "-0.02em"
+                  }}
+                >
                   {ad.slogan}
                 </p>
               </div>
@@ -157,20 +167,24 @@ const BillboardAdSlider = () => {
       </div>
       
       {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
         {billboardAds.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`transition-all duration-300 rounded-full ${
+            className={`transition-all duration-500 rounded-full ${
               index === currentIndex 
-                ? "w-8 h-2 bg-black" 
-                : "w-2 h-2 bg-black/30 hover:bg-black/50"
+                ? "w-8 h-1.5 bg-accent-amber" 
+                : "w-1.5 h-1.5 bg-white/40 hover:bg-white/60"
             }`}
+            style={{ boxShadow: index === currentIndex ? "0 0 10px rgba(245,158,11,0.5)" : "none" }}
             data-testid={`billboard-indicator-${index}`}
           />
         ))}
       </div>
+      
+      {/* Edge Highlight */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/60 via-white/20 to-transparent" />
     </div>
   );
 };
@@ -326,78 +340,178 @@ export default function Home() {
 
             </div>
 
-            {/* Right - iPhone Mockup */}
-            <div className="relative hidden md:block">
-              <div className="relative w-full max-w-sm mx-auto flex flex-col items-center">
-                {/* iPhone Frame */}
+            {/* Right - 3D Holographic Experience */}
+            <div className="relative hidden md:block" style={{ perspective: "1200px" }}>
+              <div className="relative w-full max-w-lg mx-auto flex flex-col items-center">
+                {/* 3D Floating Orb Container */}
                 <div 
-                  className="relative w-[280px] h-[560px] rounded-[50px] p-3"
-                  style={{
-                    background: "linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%)",
-                    boxShadow: "0 50px 100px -20px rgba(0,0,0,0.8), 0 0 60px rgba(245,158,11,0.15), inset 0 1px 0 rgba(255,255,255,0.1)"
-                  }}
+                  className="relative w-[400px] h-[400px]"
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Dynamic Island */}
-                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-8 bg-black rounded-full z-10" />
-                  
-                  {/* Screen */}
+                  {/* Outer Glow Ring */}
                   <div 
-                    className="relative w-full h-full rounded-[40px] overflow-hidden"
+                    className="absolute inset-0 rounded-full animate-spin"
                     style={{
-                      background: "linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)"
+                      background: "conic-gradient(from 0deg, transparent, rgba(245,158,11,0.3), transparent, rgba(139,92,246,0.2), transparent)",
+                      filter: "blur(40px)",
+                      animationDuration: "10s"
+                    }}
+                  />
+                  
+                  {/* Floating Glass Panels */}
+                  <div 
+                    className="absolute top-8 left-8 w-48 h-32 rounded-2xl"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
+                      backdropFilter: "blur(20px)",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      transform: "rotateY(-15deg) rotateX(10deg) translateZ(60px)",
+                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(245,158,11,0.1)",
+                      animation: "float 6s ease-in-out infinite"
                     }}
                   >
-                    {/* App Content Preview */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                      {/* Logo */}
-                      <img 
-                        src={etkineumLogo} 
-                        alt="ETKİNİUM" 
-                        className="w-20 h-20 object-contain mb-4"
-                      />
-                      <p className="text-white text-xl font-bold mb-1">ETKİNİUM</p>
-                      <p className="text-accent-amber text-sm font-medium mb-8">Tek Platform, Sonsuz Sanat.</p>
-                      
-                      {/* Fake UI Elements */}
-                      <div className="w-full space-y-3">
-                        <div className="h-12 rounded-xl bg-white/5 border border-white/10" />
-                        <div className="h-12 rounded-xl bg-white/5 border border-white/10" />
-                        <div className="h-10 rounded-xl bg-accent-amber/80" />
+                    <div className="p-4 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center">
+                        <span className="text-white text-lg">🎵</span>
+                      </div>
+                      <div>
+                        <p className="text-white text-sm font-semibold">Etkinlikler</p>
+                        <p className="text-white/50 text-xs">Konser • Tiyatro • Festival</p>
                       </div>
                     </div>
-                    
-                    {/* Screen Glare */}
+                  </div>
+                  
+                  <div 
+                    className="absolute top-24 right-4 w-44 h-28 rounded-2xl"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
+                      backdropFilter: "blur(20px)",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      transform: "rotateY(20deg) rotateX(-5deg) translateZ(40px)",
+                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(139,92,246,0.1)",
+                      animation: "float 6s ease-in-out infinite 1s"
+                    }}
+                  >
+                    <div className="p-4 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
+                        <span className="text-white text-lg">🍽️</span>
+                      </div>
+                      <div>
+                        <p className="text-white text-sm font-semibold">Restoranlar</p>
+                        <p className="text-white/50 text-xs">Fine Dining</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div 
+                    className="absolute bottom-20 left-12 w-40 h-24 rounded-2xl"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
+                      backdropFilter: "blur(20px)",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      transform: "rotateY(-10deg) rotateX(-15deg) translateZ(30px)",
+                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(245,158,11,0.1)",
+                      animation: "float 6s ease-in-out infinite 2s"
+                    }}
+                  >
+                    <div className="p-4 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center">
+                        <span className="text-white text-lg">🎭</span>
+                      </div>
+                      <div>
+                        <p className="text-white text-sm font-semibold">Tiyatro</p>
+                        <p className="text-white/50 text-xs">Sanat Deneyimi</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Central Holographic Cube */}
+                  <div 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      animation: "rotate3d 20s linear infinite"
+                    }}
+                  >
+                    {/* Cube Faces */}
                     <div 
-                      className="absolute inset-0 opacity-10"
+                      className="absolute inset-0 rounded-2xl flex items-center justify-center"
                       style={{
-                        background: "linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%)"
+                        background: "linear-gradient(135deg, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 100%)",
+                        backdropFilter: "blur(10px)",
+                        border: "1px solid rgba(245,158,11,0.4)",
+                        transform: "translateZ(64px)",
+                        boxShadow: "0 0 60px rgba(245,158,11,0.4)"
+                      }}
+                    >
+                      <img src={etkineumLogo} alt="ETKİNİUM" className="w-16 h-16 object-contain" />
+                    </div>
+                    <div 
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(139,92,246,0.05) 100%)",
+                        border: "1px solid rgba(139,92,246,0.3)",
+                        transform: "rotateY(90deg) translateZ(64px)"
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                        transform: "rotateY(-90deg) translateZ(64px)"
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(16,185,129,0.05) 100%)",
+                        border: "1px solid rgba(16,185,129,0.3)",
+                        transform: "translateZ(-64px)"
                       }}
                     />
                   </div>
                   
-                  {/* Side Buttons */}
-                  <div className="absolute -left-1 top-28 w-1 h-8 bg-neutral-800 rounded-l-sm" />
-                  <div className="absolute -left-1 top-44 w-1 h-14 bg-neutral-800 rounded-l-sm" />
-                  <div className="absolute -left-1 top-60 w-1 h-14 bg-neutral-800 rounded-l-sm" />
-                  <div className="absolute -right-1 top-40 w-1 h-20 bg-neutral-800 rounded-r-sm" />
+                  {/* Particle Effects */}
+                  <div className="absolute top-16 right-20 w-2 h-2 rounded-full bg-accent-amber animate-ping" style={{ animationDuration: "2s" }} />
+                  <div className="absolute bottom-32 left-20 w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" style={{ animationDuration: "3s", animationDelay: "1s" }} />
+                  <div className="absolute top-40 left-32 w-1 h-1 rounded-full bg-white animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
                 </div>
                 
-                {/* Coming Soon Badge */}
-                <div className="mt-8 text-center">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black border border-white/10">
-                      <Smartphone className="w-5 h-5 text-white" />
-                      <span className="text-white text-sm font-medium">App Store</span>
-                    </div>
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black border border-white/10">
-                      <Smartphone className="w-5 h-5 text-white" />
-                      <span className="text-white text-sm font-medium">Google Play</span>
-                    </div>
-                  </div>
-                  <p className="text-accent-amber text-lg font-bold tracking-wide">ÇOK YAKINDA</p>
-                  <p className="text-white/40 text-xs mt-1">Mobil uygulamamız yolda!</p>
+                {/* Brand Tag */}
+                <div 
+                  className="mt-4 px-6 py-3 rounded-full relative overflow-hidden"
+                  style={{
+                    background: "linear-gradient(90deg, rgba(245,158,11,0.1) 0%, rgba(139,92,246,0.1) 100%)",
+                    border: "1px solid rgba(255,255,255,0.1)"
+                  }}
+                >
+                  <div 
+                    className="absolute inset-0 opacity-50"
+                    style={{
+                      background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+                      backgroundSize: "200% 100%",
+                      animation: "shimmer 3s linear infinite"
+                    }}
+                  />
+                  <p className="relative text-white font-bold tracking-widest text-sm">ÇOK YAKINDA</p>
                 </div>
               </div>
+              
+              <style>{`
+                @keyframes float {
+                  0%, 100% { transform: rotateY(-15deg) rotateX(10deg) translateZ(60px) translateY(0); }
+                  50% { transform: rotateY(-15deg) rotateX(10deg) translateZ(60px) translateY(-15px); }
+                }
+                @keyframes rotate3d {
+                  from { transform: rotateY(0deg) rotateX(15deg); }
+                  to { transform: rotateY(360deg) rotateX(15deg); }
+                }
+                @keyframes shimmer {
+                  0% { background-position: -200% 0; }
+                  100% { background-position: 200% 0; }
+                }
+              `}</style>
             </div>
           </div>
         </div>
