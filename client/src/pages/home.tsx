@@ -105,18 +105,19 @@ const BillboardAdSlider = () => {
 
   return (
     <div 
-      className="relative h-[120px] sm:h-[140px] rounded-2xl overflow-hidden"
+      className="relative h-[130px] sm:h-[150px] rounded-2xl overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #ffffff 0%, #f8f8f8 35%, #e8e8e8 50%, #1a1a1a 50%, #0d0d0d 100%)",
-        boxShadow: "0 10px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(0,0,0,0.3)"
+        background: "linear-gradient(125deg, hsl(0,0%,98%) 0%, hsl(45,30%,92%) 25%, hsl(38,60%,75%) 50%, hsl(35,50%,45%) 70%, hsl(30,30%,15%) 90%, hsl(0,0%,6%) 100%)",
+        boxShadow: "0 15px 60px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -2px 8px rgba(0,0,0,0.2)"
       }}
       data-testid="billboard-ad-slider"
     >
-      {/* Matte Overlay */}
+      {/* Matte Finish Overlay */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.1) 100%)"
+          background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, transparent 50%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.2) 100%)",
+          mixBlendMode: "soft-light"
         }}
       />
       
@@ -129,7 +130,7 @@ const BillboardAdSlider = () => {
           return (
             <div
               key={ad.id}
-              className="absolute inset-0 flex items-center transition-all duration-1000 ease-out"
+              className="absolute inset-0 flex items-center justify-between px-8 sm:px-16 transition-all duration-1000 ease-out"
               style={{
                 transform: isActive 
                   ? "translateX(0)" 
@@ -139,23 +140,29 @@ const BillboardAdSlider = () => {
                 opacity: isActive ? 1 : 0
               }}
             >
-              {/* Left Side - Logo on White */}
-              <div className="w-1/2 h-full flex items-center justify-center px-6 sm:px-12">
+              {/* Logo Container */}
+              <div 
+                className="flex items-center justify-center rounded-xl px-4 py-3"
+                style={{
+                  background: "rgba(255,255,255,0.9)",
+                  backdropFilter: "blur(8px)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
+                }}
+              >
                 <img 
                   src={ad.logo} 
                   alt={ad.brand}
-                  className="h-10 sm:h-14 md:h-16 w-auto object-contain max-w-[140px] sm:max-w-[200px]"
-                  style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}
+                  className="h-12 sm:h-16 md:h-20 w-auto object-contain max-w-[180px] sm:max-w-[240px]"
                 />
               </div>
               
-              {/* Right Side - Slogan on Dark */}
-              <div className="w-1/2 h-full flex items-center px-6 sm:px-10">
+              {/* Slogan */}
+              <div className="flex-1 flex items-center justify-end pl-6 sm:pl-10">
                 <p 
-                  className="text-white text-sm sm:text-xl md:text-2xl font-black tracking-tight leading-tight"
+                  className="text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-black tracking-tight leading-tight text-right"
                   style={{ 
-                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-                    letterSpacing: "-0.02em"
+                    textShadow: "0 2px 15px rgba(0,0,0,0.4)",
+                    letterSpacing: "-0.01em"
                   }}
                 >
                   {ad.slogan}
@@ -174,17 +181,17 @@ const BillboardAdSlider = () => {
             onClick={() => setCurrentIndex(index)}
             className={`transition-all duration-500 rounded-full ${
               index === currentIndex 
-                ? "w-8 h-1.5 bg-accent-amber" 
-                : "w-1.5 h-1.5 bg-white/40 hover:bg-white/60"
+                ? "w-8 h-2 bg-white" 
+                : "w-2 h-2 bg-white/50 hover:bg-white/70"
             }`}
-            style={{ boxShadow: index === currentIndex ? "0 0 10px rgba(245,158,11,0.5)" : "none" }}
+            style={{ boxShadow: index === currentIndex ? "0 0 12px rgba(255,255,255,0.6)" : "none" }}
             data-testid={`billboard-indicator-${index}`}
           />
         ))}
       </div>
       
-      {/* Edge Highlight */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/60 via-white/20 to-transparent" />
+      {/* Top Edge Shine */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
     </div>
   );
 };
@@ -340,176 +347,80 @@ export default function Home() {
 
             </div>
 
-            {/* Right - 3D Holographic Experience */}
-            <div className="relative hidden md:block" style={{ perspective: "1200px" }}>
-              <div className="relative w-full max-w-lg mx-auto flex flex-col items-center">
-                {/* 3D Floating Orb Container */}
+            {/* Right - Premium Visual */}
+            <div className="relative hidden md:block">
+              <div className="relative w-full max-w-md mx-auto">
+                {/* Main Visual Container */}
                 <div 
-                  className="relative w-[400px] h-[400px]"
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="relative w-[420px] h-[520px] rounded-[40px] overflow-hidden"
+                  style={{
+                    background: "radial-gradient(circle at 30% 20%, rgba(245,158,11,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(234,88,12,0.25) 0%, transparent 45%), linear-gradient(160deg, rgba(15,15,15,0.98) 0%, rgba(30,20,10,0.9) 50%, rgba(10,10,10,0.98) 100%)",
+                    boxShadow: "0 50px 100px -30px rgba(0,0,0,0.7), 0 0 80px rgba(245,158,11,0.15), inset 0 1px 0 rgba(255,255,255,0.08)"
+                  }}
                 >
-                  {/* Outer Glow Ring */}
+                  {/* Ambient Glow */}
                   <div 
-                    className="absolute inset-0 rounded-full animate-spin"
+                    className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full"
                     style={{
-                      background: "conic-gradient(from 0deg, transparent, rgba(245,158,11,0.3), transparent, rgba(139,92,246,0.2), transparent)",
-                      filter: "blur(40px)",
-                      animationDuration: "10s"
+                      background: "radial-gradient(circle, rgba(245,158,11,0.35) 0%, transparent 70%)",
+                      filter: "blur(60px)"
                     }}
                   />
                   
-                  {/* Floating Glass Panels */}
+                  {/* Glass Card */}
                   <div 
-                    className="absolute top-8 left-8 w-48 h-32 rounded-2xl"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 rounded-3xl p-6 flex flex-col items-center justify-center"
                     style={{
-                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
+                      background: "linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
                       backdropFilter: "blur(20px)",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      transform: "rotateY(-15deg) rotateX(10deg) translateZ(60px)",
-                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(245,158,11,0.1)",
-                      animation: "float 6s ease-in-out infinite"
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      boxShadow: "0 25px 60px -15px rgba(0,0,0,0.5)"
                     }}
                   >
-                    <div className="p-4 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center">
-                        <span className="text-white text-lg">🎵</span>
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-semibold">Etkinlikler</p>
-                        <p className="text-white/50 text-xs">Konser • Tiyatro • Festival</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div 
-                    className="absolute top-24 right-4 w-44 h-28 rounded-2xl"
-                    style={{
-                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
-                      backdropFilter: "blur(20px)",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      transform: "rotateY(20deg) rotateX(-5deg) translateZ(40px)",
-                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(139,92,246,0.1)",
-                      animation: "float 6s ease-in-out infinite 1s"
-                    }}
-                  >
-                    <div className="p-4 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
-                        <span className="text-white text-lg">🍽️</span>
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-semibold">Restoranlar</p>
-                        <p className="text-white/50 text-xs">Fine Dining</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div 
-                    className="absolute bottom-20 left-12 w-40 h-24 rounded-2xl"
-                    style={{
-                      background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
-                      backdropFilter: "blur(20px)",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      transform: "rotateY(-10deg) rotateX(-15deg) translateZ(30px)",
-                      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(245,158,11,0.1)",
-                      animation: "float 6s ease-in-out infinite 2s"
-                    }}
-                  >
-                    <div className="p-4 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center">
-                        <span className="text-white text-lg">🎭</span>
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-semibold">Tiyatro</p>
-                        <p className="text-white/50 text-xs">Sanat Deneyimi</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Central Holographic Cube */}
-                  <div 
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32"
-                    style={{
-                      transformStyle: "preserve-3d",
-                      animation: "rotate3d 20s linear infinite"
-                    }}
-                  >
-                    {/* Cube Faces */}
+                    {/* Logo */}
                     <div 
-                      className="absolute inset-0 rounded-2xl flex items-center justify-center"
+                      className="w-24 h-24 rounded-2xl flex items-center justify-center mb-6"
                       style={{
-                        background: "linear-gradient(135deg, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 100%)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(245,158,11,0.4)",
-                        transform: "translateZ(64px)",
-                        boxShadow: "0 0 60px rgba(245,158,11,0.4)"
+                        background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(234,88,12,0.1) 100%)",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                        boxShadow: "0 0 40px rgba(245,158,11,0.25)"
                       }}
                     >
                       <img src={etkineumLogo} alt="ETKİNİUM" className="w-16 h-16 object-contain" />
                     </div>
-                    <div 
-                      className="absolute inset-0 rounded-2xl"
-                      style={{
-                        background: "linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(139,92,246,0.05) 100%)",
-                        border: "1px solid rgba(139,92,246,0.3)",
-                        transform: "rotateY(90deg) translateZ(64px)"
-                      }}
-                    />
-                    <div 
-                      className="absolute inset-0 rounded-2xl"
-                      style={{
-                        background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
-                        border: "1px solid rgba(245,158,11,0.3)",
-                        transform: "rotateY(-90deg) translateZ(64px)"
-                      }}
-                    />
-                    <div 
-                      className="absolute inset-0 rounded-2xl"
-                      style={{
-                        background: "linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(16,185,129,0.05) 100%)",
-                        border: "1px solid rgba(16,185,129,0.3)",
-                        transform: "translateZ(-64px)"
-                      }}
-                    />
+                    
+                    {/* Brand Name */}
+                    <h3 className="text-2xl font-bold text-white mb-2 tracking-wide">ETKİNİUM</h3>
+                    <p className="text-accent-amber text-sm font-medium mb-6 tracking-wider">EXCLUSIVE EXPERIENCES</p>
+                    
+                    {/* Feature Pills */}
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Konserler</span>
+                      <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Restoranlar</span>
+                      <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Tiyatrolar</span>
+                    </div>
                   </div>
                   
-                  {/* Particle Effects */}
-                  <div className="absolute top-16 right-20 w-2 h-2 rounded-full bg-accent-amber animate-ping" style={{ animationDuration: "2s" }} />
-                  <div className="absolute bottom-32 left-20 w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" style={{ animationDuration: "3s", animationDelay: "1s" }} />
-                  <div className="absolute top-40 left-32 w-1 h-1 rounded-full bg-white animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-                </div>
-                
-                {/* Brand Tag */}
-                <div 
-                  className="mt-4 px-6 py-3 rounded-full relative overflow-hidden"
-                  style={{
-                    background: "linear-gradient(90deg, rgba(245,158,11,0.1) 0%, rgba(139,92,246,0.1) 100%)",
-                    border: "1px solid rgba(255,255,255,0.1)"
-                  }}
-                >
+                  {/* Shimmer Effect */}
                   <div 
-                    className="absolute inset-0 opacity-50"
+                    className="absolute inset-0 pointer-events-none"
                     style={{
-                      background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+                      background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 55%, transparent 60%)",
                       backgroundSize: "200% 100%",
-                      animation: "shimmer 3s linear infinite"
+                      animation: "shimmer 6s ease-in-out infinite"
                     }}
                   />
-                  <p className="relative text-white font-bold tracking-widest text-sm">ÇOK YAKINDA</p>
+                  
+                  {/* Corner Accents */}
+                  <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-accent-amber/30 rounded-tr-xl" />
+                  <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-accent-amber/30 rounded-bl-xl" />
                 </div>
               </div>
               
               <style>{`
-                @keyframes float {
-                  0%, 100% { transform: rotateY(-15deg) rotateX(10deg) translateZ(60px) translateY(0); }
-                  50% { transform: rotateY(-15deg) rotateX(10deg) translateZ(60px) translateY(-15px); }
-                }
-                @keyframes rotate3d {
-                  from { transform: rotateY(0deg) rotateX(15deg); }
-                  to { transform: rotateY(360deg) rotateX(15deg); }
-                }
                 @keyframes shimmer {
-                  0% { background-position: -200% 0; }
-                  100% { background-position: 200% 0; }
+                  0% { background-position: 200% 0; }
+                  100% { background-position: -200% 0; }
                 }
               `}</style>
             </div>
