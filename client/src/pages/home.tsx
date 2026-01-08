@@ -116,145 +116,133 @@ const PremiumAdSlider = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const slide = adSlides[currentSlide];
-
   return (
     <div 
-      className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden group"
+      className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.1) 100%)",
         backdropFilter: "blur(40px)",
         WebkitBackdropFilter: "blur(40px)",
         border: "1px solid rgba(255,255,255,0.15)",
-        boxShadow: `0 25px 80px -12px rgba(0,0,0,0.6), 0 0 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3)`
+        boxShadow: "0 25px 80px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3)"
       }}
       data-testid="premium-ad-slider"
     >
-      {/* Background Image */}
-      {slide.image && (
-        <div className="absolute inset-0">
-          <img 
-            src={slide.image} 
-            alt={slide.title}
-            className="w-full h-full object-cover opacity-40 transition-opacity duration-1000"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-        </div>
-      )}
-      
-      {/* Animated gradient background */}
+      {/* Slides Container */}
       <div 
-        className={`absolute inset-0 bg-gradient-to-br ${slide.accent} opacity-60 transition-all duration-1000`}
-      />
-      
-      {/* Frosted glass layers */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.15) 100%)"
-        }}
-      />
+        className="flex transition-transform duration-1000 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {adSlides.map((slide, index) => (
+          <div 
+            key={slide.id}
+            className="w-full flex-shrink-0 relative min-h-[280px] sm:min-h-[320px]"
+          >
+            {/* Background Image */}
+            {slide.image && (
+              <div className="absolute inset-0">
+                <img 
+                  src={slide.image} 
+                  alt={slide.title}
+                  className="w-full h-full object-cover opacity-50"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+              </div>
+            )}
+            
+            {/* Animated gradient background */}
+            <div 
+              className={`absolute inset-0 bg-gradient-to-br ${slide.accent} opacity-60`}
+            />
+            
+            {/* Frosted glass layers */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.15) 100%)"
+              }}
+            />
+            
+            {/* Content */}
+            <div className="relative p-8 sm:p-12 md:p-16 h-full flex flex-col md:flex-row items-center justify-between gap-8">
+              {/* Left Content */}
+              <div className="flex-1 text-center md:text-left">
+                <div 
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
+                  style={{
+                    background: "rgba(255,255,255,0.1)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255,255,255,0.15)"
+                  }}
+                >
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-white/80 text-xs font-medium tracking-wide">ETKİNİUM</span>
+                </div>
+                
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+                  {slide.title}
+                </h2>
+                <p className="text-lg sm:text-xl text-white/90 font-medium mb-3">
+                  {slide.subtitle}
+                </p>
+                <p className="text-white/50 text-sm sm:text-base max-w-md mb-6">
+                  {slide.description}
+                </p>
+                
+                {slide.link ? (
+                  <Link href={slide.link}>
+                    <button
+                      className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
+                      style={{
+                        boxShadow: "0 8px 30px rgba(245,158,11,0.3), 0 0 40px rgba(245,158,11,0.1)"
+                      }}
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      {slide.buttonText}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </Link>
+                ) : (
+                  <a 
+                    href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
+                    className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
+                    style={{
+                      boxShadow: "0 8px 30px rgba(245,158,11,0.3), 0 0 40px rgba(245,158,11,0.1)"
+                    }}
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    {slide.buttonText}
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+              
+              {/* Right Visual Element - Only for ad slide (no image) */}
+              {!slide.image && (
+                <div className="flex-shrink-0 hidden md:flex flex-col items-center gap-4">
+                  <div 
+                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center bg-gradient-to-br from-accent-amber to-orange-500"
+                    style={{
+                      boxShadow: "0 20px 60px rgba(245,158,11,0.3), inset 0 1px 0 rgba(255,255,255,0.3)"
+                    }}
+                  >
+                    <span className="text-black text-3xl sm:text-4xl font-black tracking-tight">E</span>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-white text-xl font-bold tracking-wide">ETKİNİUM</p>
+                    <p className="text-accent-amber text-xs font-medium mt-1">Tek Platform, Sonsuz Deneyim</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
       
       {/* Top edge highlight */}
       <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
       
-      {/* Subtle noise texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")"
-        }}
-      />
-      
-      {/* Content */}
-      <div className="relative p-8 sm:p-12 md:p-16 min-h-[280px] sm:min-h-[320px] flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Left Content */}
-        <div className="flex-1 text-center md:text-left">
-          <div 
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.15)"
-            }}
-          >
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/80 text-xs font-medium tracking-wide">
-              {slide.link ? "ETKİNİUM" : "REKLAM ALANI"}
-            </span>
-          </div>
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
-            {slide.title}
-          </h2>
-          <p className="text-lg sm:text-xl text-white/90 font-medium mb-3">
-            {slide.subtitle}
-          </p>
-          <p className="text-white/50 text-sm sm:text-base max-w-md mb-6">
-            {slide.description}
-          </p>
-          
-          {slide.link ? (
-            <Link href={slide.link}>
-              <button
-                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black"
-                style={{
-                  boxShadow: "0 8px 30px rgba(245,158,11,0.3), 0 0 40px rgba(245,158,11,0.1)"
-                }}
-              >
-                <Sparkles className="w-4 h-4" />
-                {slide.buttonText}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          ) : (
-            <a 
-              href="mailto:iletisim@etkinium.com?subject=Reklam%20Başvurusu"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
-                color: "#000",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.1)"
-              }}
-            >
-              <Sparkles className="w-4 h-4" />
-              {slide.buttonText}
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          )}
-        </div>
-        
-        {/* Right Visual Element - Image or AD icon */}
-        <div className="flex-shrink-0 hidden md:block">
-          {slide.image ? (
-            <div 
-              className="w-40 h-40 sm:w-48 sm:h-48 rounded-3xl overflow-hidden transition-all duration-1000"
-              style={{
-                boxShadow: `0 20px 60px ${slide.glowColor}, 0 0 30px rgba(0,0,0,0.5)`,
-                border: "2px solid rgba(255,255,255,0.2)"
-              }}
-            >
-              <img 
-                src={slide.image} 
-                alt={slide.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ) : (
-            <div 
-              className="w-40 h-40 sm:w-48 sm:h-48 rounded-3xl flex items-center justify-center bg-gradient-to-br from-amber-500 to-orange-500 transition-all duration-1000"
-              style={{
-                boxShadow: `0 20px 60px ${slide.glowColor}, inset 0 1px 0 rgba(255,255,255,0.3)`
-              }}
-            >
-              <span className="text-white text-5xl sm:text-6xl font-bold tracking-tight">AD</span>
-            </div>
-          )}
-        </div>
-      </div>
-      
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
         {adSlides.map((_, index) => (
           <button
             key={index}
@@ -497,17 +485,17 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {["Hürriyet", "Sabah", "Milliyet", "NTV"].map((media, index) => (
+              <div className="grid grid-cols-3 gap-3">
+                {["Webrazzi", "Shiftdelete", "Courline"].map((media, index) => (
                   <div 
                     key={index}
-                    className="bg-white/5 rounded-xl p-3 text-center border border-white/5 hover:border-accent-amber/30 transition-all cursor-pointer"
+                    className="bg-white/5 rounded-xl p-3 text-center border border-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
                   >
-                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-white/10 flex items-center justify-center">
-                      <span className="text-[10px] font-bold text-white/60">{media[0]}</span>
+                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-white/10 group-hover:bg-black/20 flex items-center justify-center transition-all">
+                      <span className="text-[10px] font-bold text-white/60 group-hover:text-black">{media[0]}</span>
                     </div>
-                    <p className="text-[10px] text-white/50 font-medium">{media}</p>
-                    <p className="text-[8px] text-white/30 mt-0.5">Yakında</p>
+                    <p className="text-[10px] text-white/50 font-medium group-hover:text-black transition-all">{media}</p>
+                    <p className="text-[8px] text-white/30 mt-0.5 group-hover:text-black/60 transition-all">Yakında</p>
                   </div>
                 ))}
               </div>
