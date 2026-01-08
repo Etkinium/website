@@ -7,7 +7,7 @@ import AdApplicationButton from "@/components/ad-application-button";
 import FilterDialog from "@/components/filter-dialog";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
-import { Calendar, MapPin, Clock, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown, Shield, Zap, Ticket, CreditCard } from "lucide-react";
+import { Calendar, MapPin, Clock, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown, TrendingUp, Users, Ticket, Flame, Quote, Play, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const categories = [
@@ -173,48 +173,114 @@ export default function Etkinlikler() {
             ))}
           </div>
 
+          {/* Hero Spotlight */}
           <div 
-            className="mb-6 p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-purple-900/30 via-black/60 to-accent-amber/10 backdrop-blur-xl border border-white/10"
-            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}
+            className="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-900/60 via-black/80 to-accent-amber/20 border border-white/10"
+            style={{ boxShadow: "0 8px 40px rgba(139,92,246,0.15)" }}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent-amber to-yellow-500 flex items-center justify-center">
-                  <Ticket className="w-5 h-5 text-black" />
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">E-Bilet</p>
-                  <p className="text-white/50 text-[10px]">Anında teslimat</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Güvenli</p>
-                  <p className="text-white/50 text-[10px]">256-bit SSL</p>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.15),transparent_50%)]" />
+            <div className="relative p-6 sm:p-8 flex flex-col lg:flex-row gap-6 items-center">
+              <div className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-purple-500/20 backdrop-blur-sm flex items-center justify-center border border-purple-400/30 relative group cursor-pointer">
+                <div className="absolute inset-0 bg-purple-500/10 rounded-2xl animate-pulse" />
+                <Play className="w-12 h-12 text-purple-300 group-hover:scale-110 transition-transform" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                  <span className="text-white text-[8px] font-bold">CANLI</span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-white" />
+              <div className="flex-1 text-center lg:text-left">
+                <div className="flex items-center gap-2 justify-center lg:justify-start mb-2">
+                  <Flame className="w-4 h-4 text-accent-amber animate-pulse" />
+                  <span className="text-accent-amber text-xs font-bold uppercase tracking-wider">Haftanın Vitrini</span>
                 </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Kolay Ödeme</p>
-                  <p className="text-white/50 text-[10px]">Tüm kartlar</p>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">Premium Etkinlik Başlığı</h2>
+                <p className="text-white/60 text-sm mb-4 max-w-lg">Bu hafta kaçırılmaması gereken en özel etkinlik. Sınırlı sayıda bilet ile unutulmaz bir deneyim sizi bekliyor.</p>
+                <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-4">
+                  <div className="flex items-center gap-1 text-white/70 text-xs">
+                    <Calendar className="w-3 h-3 text-accent-amber" />
+                    <span>25 Ocak 2026</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-white/70 text-xs">
+                    <MapPin className="w-3 h-3 text-accent-amber" />
+                    <span>İstanbul</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-accent-amber text-xs">
+                    <Star className="w-3 h-3 fill-accent-amber" />
+                    <span className="font-bold">4.9</span>
+                  </div>
                 </div>
+                <button 
+                  onClick={handleBuyTicket}
+                  className="px-6 py-2.5 rounded-full font-semibold text-sm bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black transition-all hover:scale-105 shadow-lg shadow-accent-amber/30"
+                >
+                  Hemen Bilet Al
+                </button>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-white" />
+              <div className="hidden xl:flex flex-col gap-3 text-right">
+                <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
+                  <p className="text-accent-amber text-lg font-bold">2.500+</p>
+                  <p className="text-white/50 text-[10px]">Bilet Satıldı</p>
                 </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Hızlı İşlem</p>
-                  <p className="text-white/50 text-[10px]">Saniyeler içinde</p>
+                <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
+                  <p className="text-green-400 text-lg font-bold">%87</p>
+                  <p className="text-white/50 text-[10px]">Doluluk</p>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Live Stats Bar */}
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-4 sm:gap-8 py-4 px-6 rounded-xl bg-black/40 backdrop-blur-sm border border-white/5">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-white/70 text-xs"><span className="text-white font-bold">1.247</span> aktif kullanıcı</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Ticket className="w-4 h-4 text-accent-amber" />
+              <span className="text-white/70 text-xs"><span className="text-white font-bold">89</span> bilet son 1 saatte satıldı</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className="text-white/70 text-xs"><span className="text-green-400 font-bold">+23%</span> bu hafta</span>
+            </div>
+          </div>
+
+          {/* Trending Events Carousel */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Flame className="w-5 h-5 text-orange-500" />
+              <h3 className="text-lg font-bold text-white">Trend <span className="text-accent-amber">Etkinlikler</span></h3>
+              <span className="ml-auto text-white/50 text-xs cursor-pointer hover:text-accent-amber transition-colors">Tümünü Gör →</span>
+            </div>
+            <div className="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-4 px-4">
+              {[...Array(6)].map((_, index) => (
+                <div 
+                  key={index}
+                  onClick={handleBuyTicket}
+                  className="flex-shrink-0 w-64 p-4 rounded-xl bg-gradient-to-br from-purple-900/30 to-black/60 backdrop-blur-sm border border-white/10 hover:border-accent-amber/40 cursor-pointer transition-all hover:scale-[1.02] group"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-16 h-16 rounded-lg bg-purple-500/20 flex items-center justify-center border border-purple-400/20 flex-shrink-0">
+                      <Calendar className="w-7 h-7 text-purple-300" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1 mb-1">
+                        <TrendingUp className="w-3 h-3 text-orange-500" />
+                        <span className="text-orange-500 text-[9px] font-bold">#{index + 1} TREND</span>
+                      </div>
+                      <h4 className="text-white font-medium text-sm line-clamp-1 group-hover:text-accent-amber transition-colors">Trend Etkinlik {index + 1}</h4>
+                      <p className="text-white/50 text-[10px] mt-1">İstanbul • 28 Ocak</p>
+                      <p className="text-accent-amber font-bold text-sm mt-2">— ₺</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Main Grid Section Title */}
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-accent-amber" />
+            <h3 className="text-lg font-bold text-white">Tüm <span className="text-accent-amber">Etkinlikler</span></h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
@@ -231,6 +297,58 @@ export default function Etkinlikler() {
               <ChevronDown className="w-4 h-4" />
               Daha Fazla Göster
             </button>
+          </div>
+
+          {/* Testimonials Section */}
+          <div className="mt-12 mb-8">
+            <div className="flex items-center gap-2 mb-6">
+              <Quote className="w-5 h-5 text-accent-amber" />
+              <h3 className="text-lg font-bold text-white">Kullanıcı <span className="text-accent-amber">Yorumları</span></h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                { name: "Ayşe K.", text: "Harika bir deneyimdi! Bilet alma süreci çok hızlı ve güvenli.", rating: 5 },
+                { name: "Mehmet T.", text: "Konsere gitmek hiç bu kadar kolay olmamıştı. Teşekkürler ETKİNİUM!", rating: 5 },
+                { name: "Zeynep A.", text: "Müşteri hizmetleri çok ilgili. Kesinlikle tavsiye ederim.", rating: 4 },
+              ].map((review, index) => (
+                <div 
+                  key={index}
+                  className="p-4 rounded-xl bg-black/40 backdrop-blur-sm border border-white/10 hover:border-accent-amber/20 transition-all"
+                >
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-accent-amber text-accent-amber" />
+                    ))}
+                  </div>
+                  <p className="text-white/70 text-sm mb-3 italic">"{review.text}"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-accent-amber flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">{review.name.charAt(0)}</span>
+                    </div>
+                    <span className="text-white/60 text-xs">{review.name}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Banner */}
+          <div 
+            className="mt-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-accent-amber/20 via-black/60 to-purple-900/20 border border-accent-amber/20 text-center"
+            style={{ boxShadow: "0 8px 40px rgba(245,158,11,0.1)" }}
+          >
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Özel Fırsatları Kaçırmayın!</h3>
+            <p className="text-white/60 text-sm mb-4">Bültene abone olun, indirimlerden ve yeni etkinliklerden ilk siz haberdar olun.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="E-posta adresiniz"
+                className="flex-1 px-4 py-2.5 rounded-full bg-black/60 border border-white/10 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-accent-amber/50"
+              />
+              <button className="px-6 py-2.5 rounded-full font-semibold text-sm bg-gradient-to-r from-accent-amber to-yellow-500 text-black hover:from-white hover:to-white transition-all">
+                Abone Ol
+              </button>
+            </div>
           </div>
         </div>
       </main>

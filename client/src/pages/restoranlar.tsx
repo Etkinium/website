@@ -7,7 +7,8 @@ import FilterDialog from "@/components/filter-dialog";
 import ReservationDialog from "@/components/reservation-dialog";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
-import { UtensilsCrossed, MapPin, Clock, Users, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown, Shield, Sparkles, CreditCard, CheckCircle } from "lucide-react";
+import { UtensilsCrossed, MapPin, Clock, Users, Filter, Search, ChevronRight, Star, Heart, CalendarDays, ChevronDown, TrendingUp, Flame, Quote, ChefHat, Sparkles, Award } from "lucide-react";
+import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
 
 const cuisineTypes = [
@@ -175,48 +176,116 @@ export default function Restoranlar() {
             ))}
           </div>
 
+          {/* Hero Spotlight */}
           <div 
-            className="mb-6 p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-orange-900/30 via-black/60 to-accent-amber/10 backdrop-blur-xl border border-white/10"
-            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}
+            className="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-900/60 via-black/80 to-accent-amber/20 border border-white/10"
+            style={{ boxShadow: "0 8px 40px rgba(249,115,22,0.15)" }}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent-amber to-yellow-500 flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-black" />
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Garantili</p>
-                  <p className="text-white/50 text-[10px]">Masa garantisi</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Güvenli</p>
-                  <p className="text-white/50 text-[10px]">256-bit SSL</p>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(249,115,22,0.15),transparent_50%)]" />
+            <div className="relative p-6 sm:p-8 flex flex-col lg:flex-row gap-6 items-center">
+              <div className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-orange-500/20 backdrop-blur-sm flex items-center justify-center border border-orange-400/30 relative group cursor-pointer">
+                <div className="absolute inset-0 bg-orange-500/10 rounded-2xl animate-pulse" />
+                <ChefHat className="w-12 h-12 text-orange-300 group-hover:scale-110 transition-transform" />
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent-amber rounded-full flex items-center justify-center">
+                  <Award className="w-4 h-4 text-black" />
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-white" />
+              <div className="flex-1 text-center lg:text-left">
+                <div className="flex items-center gap-2 justify-center lg:justify-start mb-2">
+                  <Flame className="w-4 h-4 text-accent-amber animate-pulse" />
+                  <span className="text-accent-amber text-xs font-bold uppercase tracking-wider">Editör Seçimi</span>
                 </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Uygun Ücret</p>
-                  <p className="text-white/50 text-[10px]">Sadece 14,99 ₺</p>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">Premium Fine Dining</h2>
+                <p className="text-white/60 text-sm mb-4 max-w-lg">İstanbul'un en prestijli restoranlarından biri. Michelin yıldızlı şefler tarafından hazırlanan özel menüler.</p>
+                <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-4">
+                  <div className="flex items-center gap-1 text-white/70 text-xs">
+                    <MapPin className="w-3 h-3 text-accent-amber" />
+                    <span>Beşiktaş, İstanbul</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-white/70 text-xs">
+                    <Clock className="w-3 h-3 text-accent-amber" />
+                    <span>12:00 - 00:00</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-accent-amber text-xs">
+                    <Star className="w-3 h-3 fill-accent-amber" />
+                    <span className="font-bold">4.9</span>
+                  </div>
                 </div>
+                <Link href="/restoran-detay">
+                  <button className="px-6 py-2.5 rounded-full font-semibold text-sm bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-white hover:to-white text-black transition-all hover:scale-105 shadow-lg shadow-accent-amber/30">
+                    Hemen Rezervasyon Yap
+                  </button>
+                </Link>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+              <div className="hidden xl:flex flex-col gap-3 text-right">
+                <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
+                  <p className="text-accent-amber text-lg font-bold">1.200+</p>
+                  <p className="text-white/50 text-[10px]">Mutlu Misafir</p>
                 </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">Premium</p>
-                  <p className="text-white/50 text-[10px]">VIP deneyim</p>
+                <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
+                  <p className="text-green-400 text-lg font-bold">%94</p>
+                  <p className="text-white/50 text-[10px]">Memnuniyet</p>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Live Stats Bar */}
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-4 sm:gap-8 py-4 px-6 rounded-xl bg-black/40 backdrop-blur-sm border border-white/5">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-white/70 text-xs"><span className="text-white font-bold">856</span> aktif kullanıcı</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <UtensilsCrossed className="w-4 h-4 text-accent-amber" />
+              <span className="text-white/70 text-xs"><span className="text-white font-bold">42</span> rezervasyon bu saat</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className="text-white/70 text-xs"><span className="text-green-400 font-bold">+18%</span> bu hafta</span>
+            </div>
+          </div>
+
+          {/* Trending Restaurants Carousel */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Flame className="w-5 h-5 text-orange-500" />
+              <h3 className="text-lg font-bold text-white">Trend <span className="text-accent-amber">Restoranlar</span></h3>
+              <span className="ml-auto text-white/50 text-xs cursor-pointer hover:text-accent-amber transition-colors">Tümünü Gör →</span>
+            </div>
+            <div className="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-4 px-4">
+              {[...Array(6)].map((_, index) => (
+                <Link key={index} href="/restoran-detay">
+                  <div 
+                    className="flex-shrink-0 w-64 p-4 rounded-xl bg-gradient-to-br from-orange-900/30 to-black/60 backdrop-blur-sm border border-white/10 hover:border-accent-amber/40 cursor-pointer transition-all hover:scale-[1.02] group"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-16 h-16 rounded-lg bg-orange-500/20 flex items-center justify-center border border-orange-400/20 flex-shrink-0">
+                        <UtensilsCrossed className="w-7 h-7 text-orange-300" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1 mb-1">
+                          <TrendingUp className="w-3 h-3 text-orange-500" />
+                          <span className="text-orange-500 text-[9px] font-bold">#{index + 1} TREND</span>
+                        </div>
+                        <h4 className="text-white font-medium text-sm line-clamp-1 group-hover:text-accent-amber transition-colors">Trend Restoran {index + 1}</h4>
+                        <p className="text-white/50 text-[10px] mt-1">Kadıköy • Fine Dining</p>
+                        <div className="flex items-center gap-1 mt-2">
+                          <Star className="w-3 h-3 fill-accent-amber text-accent-amber" />
+                          <span className="text-accent-amber font-bold text-sm">4.{8 - index % 3}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Main Grid Section Title */}
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-accent-amber" />
+            <h3 className="text-lg font-bold text-white">Tüm <span className="text-accent-amber">Restoranlar</span></h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
@@ -233,6 +302,58 @@ export default function Restoranlar() {
               <ChevronDown className="w-4 h-4" />
               Daha Fazla Göster
             </button>
+          </div>
+
+          {/* Testimonials Section */}
+          <div className="mt-12 mb-8">
+            <div className="flex items-center gap-2 mb-6">
+              <Quote className="w-5 h-5 text-accent-amber" />
+              <h3 className="text-lg font-bold text-white">Misafir <span className="text-accent-amber">Yorumları</span></h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                { name: "Can B.", text: "Yemekler muhteşemdi! Şef'in önerisi ile gittiğimiz menü beklentilerimizi aştı.", rating: 5 },
+                { name: "Selin K.", text: "Rezervasyon süreci çok kolaydı. Restoran tam zamanında hazırdı.", rating: 5 },
+                { name: "Burak A.", text: "Atmosfer ve servis mükemmel. Özel günler için kesinlikle öneriyorum.", rating: 5 },
+              ].map((review, index) => (
+                <div 
+                  key={index}
+                  className="p-4 rounded-xl bg-black/40 backdrop-blur-sm border border-white/10 hover:border-accent-amber/20 transition-all"
+                >
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-accent-amber text-accent-amber" />
+                    ))}
+                  </div>
+                  <p className="text-white/70 text-sm mb-3 italic">"{review.text}"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-accent-amber flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">{review.name.charAt(0)}</span>
+                    </div>
+                    <span className="text-white/60 text-xs">{review.name}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Banner */}
+          <div 
+            className="mt-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-accent-amber/20 via-black/60 to-orange-900/20 border border-accent-amber/20 text-center"
+            style={{ boxShadow: "0 8px 40px rgba(245,158,11,0.1)" }}
+          >
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Özel Masa Fırsatlarını Kaçırmayın!</h3>
+            <p className="text-white/60 text-sm mb-4">Bültene abone olun, en iyi restoranlardan özel teklifler ve indirimler alın.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="E-posta adresiniz"
+                className="flex-1 px-4 py-2.5 rounded-full bg-black/60 border border-white/10 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-accent-amber/50"
+              />
+              <button className="px-6 py-2.5 rounded-full font-semibold text-sm bg-gradient-to-r from-accent-amber to-yellow-500 text-black hover:from-white hover:to-white transition-all">
+                Abone Ol
+              </button>
+            </div>
           </div>
         </div>
       </main>
