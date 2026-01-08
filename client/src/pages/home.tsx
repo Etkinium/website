@@ -347,10 +347,54 @@ export default function Home() {
 
             </div>
 
-            {/* Right - Premium Visual */}
+            {/* Right - Premium Visual (Mobile) */}
+            <div className="relative md:hidden flex justify-center mt-6">
+              <div 
+                className="relative w-48 h-56 rounded-2xl overflow-hidden"
+                style={{
+                  background: "radial-gradient(circle at 30% 20%, rgba(245,158,11,0.3) 0%, transparent 50%), linear-gradient(160deg, rgba(15,15,15,0.98) 0%, rgba(30,20,10,0.9) 50%, rgba(10,10,10,0.98) 100%)",
+                  boxShadow: "0 20px 50px -15px rgba(0,0,0,0.6), 0 0 40px rgba(245,158,11,0.1)"
+                }}
+              >
+                <div 
+                  className="absolute top-1/4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full"
+                  style={{
+                    background: "radial-gradient(circle, rgba(245,158,11,0.3) 0%, transparent 70%)",
+                    filter: "blur(30px)"
+                  }}
+                />
+                <div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-44 rounded-xl p-3 flex flex-col items-center justify-center"
+                  style={{
+                    background: "linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%)",
+                    backdropFilter: "blur(15px)",
+                    border: "1px solid rgba(255,255,255,0.1)"
+                  }}
+                >
+                  <div 
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-3"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(234,88,12,0.1) 100%)",
+                      border: "1px solid rgba(245,158,11,0.25)"
+                    }}
+                  >
+                    <img src={etkineumLogo} alt="ETKİNİUM" className="w-10 h-10 object-contain" />
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-1">ETKİNİUM</h3>
+                  <p className="text-accent-amber text-[10px] font-medium mb-3 tracking-wider">EXCLUSIVE</p>
+                  <div className="flex gap-1 flex-wrap justify-center">
+                    <span className="px-2 py-0.5 rounded-full text-[8px] font-medium text-white/70 bg-white/5 border border-white/10">Konser</span>
+                    <span className="px-2 py-0.5 rounded-full text-[8px] font-medium text-white/70 bg-white/5 border border-white/10">Restoran</span>
+                  </div>
+                </div>
+                <div className="absolute top-3 right-3 w-6 h-6 border-t border-r border-accent-amber/25 rounded-tr-lg" />
+                <div className="absolute bottom-3 left-3 w-6 h-6 border-b border-l border-accent-amber/25 rounded-bl-lg" />
+              </div>
+            </div>
+
+            {/* Right - Premium Visual (Desktop) */}
             <div className="relative hidden md:block">
               <div className="relative w-full max-w-md mx-auto">
-                {/* Main Visual Container */}
                 <div 
                   className="relative w-[420px] h-[520px] rounded-[40px] overflow-hidden"
                   style={{
@@ -358,7 +402,6 @@ export default function Home() {
                     boxShadow: "0 50px 100px -30px rgba(0,0,0,0.7), 0 0 80px rgba(245,158,11,0.15), inset 0 1px 0 rgba(255,255,255,0.08)"
                   }}
                 >
-                  {/* Ambient Glow */}
                   <div 
                     className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full"
                     style={{
@@ -366,8 +409,6 @@ export default function Home() {
                       filter: "blur(60px)"
                     }}
                   />
-                  
-                  {/* Glass Card */}
                   <div 
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 rounded-3xl p-6 flex flex-col items-center justify-center"
                     style={{
@@ -377,7 +418,6 @@ export default function Home() {
                       boxShadow: "0 25px 60px -15px rgba(0,0,0,0.5)"
                     }}
                   >
-                    {/* Logo */}
                     <div 
                       className="w-24 h-24 rounded-2xl flex items-center justify-center mb-6"
                       style={{
@@ -388,20 +428,14 @@ export default function Home() {
                     >
                       <img src={etkineumLogo} alt="ETKİNİUM" className="w-16 h-16 object-contain" />
                     </div>
-                    
-                    {/* Brand Name */}
                     <h3 className="text-2xl font-bold text-white mb-2 tracking-wide">ETKİNİUM</h3>
                     <p className="text-accent-amber text-sm font-medium mb-6 tracking-wider">EXCLUSIVE EXPERIENCES</p>
-                    
-                    {/* Feature Pills */}
                     <div className="flex flex-wrap gap-2 justify-center">
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Konserler</span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Restoranlar</span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium text-white/80 bg-white/5 border border-white/10">Tiyatrolar</span>
                     </div>
                   </div>
-                  
-                  {/* Shimmer Effect */}
                   <div 
                     className="absolute inset-0 pointer-events-none"
                     style={{
@@ -410,8 +444,6 @@ export default function Home() {
                       animation: "shimmer 6s ease-in-out infinite"
                     }}
                   />
-                  
-                  {/* Corner Accents */}
                   <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-accent-amber/30 rounded-tr-xl" />
                   <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-accent-amber/30 rounded-bl-xl" />
                 </div>
@@ -512,33 +544,35 @@ export default function Home() {
         
         <div className="relative">
           {/* Fade Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
           
-          {/* Marquee Container */}
-          <div className="marquee-container" data-testid="category-marquee">
-            <div className="marquee-track">
+          {/* Marquee Wrapper */}
+          <div className="overflow-hidden" data-testid="category-marquee">
+            <div 
+              className="flex w-max animate-marquee-scroll"
+              style={{ gap: "1rem" }}
+            >
               {/* First Set */}
               {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
                 <div
                   key={`first-${i}`}
-                  className="flex-shrink-0 px-5 sm:px-6 py-3 sm:py-4 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
+                  className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
                   data-testid={`category-${i}`}
                 >
-                  <span className="text-sm sm:text-base font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
+                  <span className="text-xs sm:text-sm font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
                     {category}
                   </span>
                 </div>
               ))}
-            </div>
-            <div className="marquee-track" aria-hidden="true">
-              {/* Duplicate Set */}
+              {/* Duplicate Set for seamless loop */}
               {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
                 <div
                   key={`second-${i}`}
-                  className="flex-shrink-0 px-5 sm:px-6 py-3 sm:py-4 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
+                  className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
+                  aria-hidden="true"
                 >
-                  <span className="text-sm sm:text-base font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
+                  <span className="text-xs sm:text-sm font-semibold text-white/80 group-hover:text-black whitespace-nowrap">
                     {category}
                   </span>
                 </div>
@@ -548,26 +582,16 @@ export default function Home() {
         </div>
         
         <style>{`
-          .marquee-container {
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-          }
-          .marquee-track {
-            display: flex;
-            gap: 1rem;
-            padding-right: 1rem;
-            animation: scroll 25s linear infinite;
-          }
-          .marquee-container:hover .marquee-track {
-            animation-play-state: paused;
-          }
-          @keyframes scroll {
+          @keyframes marquee-scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee-scroll {
+            animation: marquee-scroll 20s linear infinite;
+            will-change: transform;
           }
           @media (prefers-reduced-motion: reduce) {
-            .marquee-track {
+            .animate-marquee-scroll {
               animation: none;
             }
           }
