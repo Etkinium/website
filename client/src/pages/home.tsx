@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Users, TrendingUp, Play, Utensils } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Utensils, Smartphone } from "lucide-react";
 import etkineumLogo from "@assets/logo-final.png";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
@@ -78,21 +78,21 @@ const billboardAds = [
     logo: tamamliyoLogo,
     brand: "Tamamliyo",
     slogan: "Sigortayı Dijitale Kolayca Entegre Edin!",
-    bgColor: "#0a0a0a"
+    accentColor: "#3B82F6"
   },
   {
     id: 2,
     logo: faturaportLogo,
     brand: "Faturaport",
     slogan: "e-fatura'nın Mobili!",
-    bgColor: "#0a0a0a"
+    accentColor: "#10B981"
   },
   {
     id: 3,
     logo: rezervemLogo,
     brand: "Rezervem",
     slogan: "Misafirperverliğin Geleceği!",
-    bgColor: "#0a0a0a"
+    accentColor: "#8B5CF6"
   }
 ];
 
@@ -102,16 +102,15 @@ const BillboardAdSlider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % billboardAds.length);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div 
-      className="relative h-[100px] sm:h-[120px] rounded-2xl overflow-hidden"
+      className="relative h-[140px] sm:h-[160px] rounded-2xl overflow-hidden"
       style={{
-        background: "#0a0a0a",
-        boxShadow: "0 4px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03)"
+        boxShadow: "0 8px 40px rgba(0,0,0,0.3)"
       }}
       data-testid="billboard-ad-slider"
     >
@@ -124,25 +123,31 @@ const BillboardAdSlider = () => {
           return (
             <div
               key={ad.id}
-              className="absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out"
+              className="absolute inset-0 flex transition-all duration-1000 ease-in-out"
               style={{
                 transform: isActive 
                   ? "translateX(0)" 
                   : isPrev 
                     ? "translateX(-100%)" 
                     : "translateX(100%)",
-                opacity: isActive ? 1 : 0,
-                backgroundColor: ad.bgColor
+                opacity: isActive ? 1 : 0
               }}
             >
-              <div className="flex items-center justify-center gap-6 sm:gap-10 px-6">
+              {/* Left Half - White */}
+              <div className="w-1/2 h-full bg-white flex items-center justify-center px-6 sm:px-10">
                 <img 
                   src={ad.logo} 
                   alt={ad.brand}
-                  className="h-10 sm:h-14 w-auto object-contain max-w-[120px] sm:max-w-[180px]"
+                  className="h-12 sm:h-16 w-auto object-contain max-w-[160px] sm:max-w-[220px]"
                 />
-                <div className="h-8 w-px bg-white/10 hidden sm:block" />
-                <p className="text-white/70 text-sm sm:text-base font-medium hidden sm:block">
+              </div>
+              
+              {/* Right Half - Colored */}
+              <div 
+                className="w-1/2 h-full flex items-center px-6 sm:px-10"
+                style={{ backgroundColor: ad.accentColor }}
+              >
+                <p className="text-white text-lg sm:text-2xl md:text-3xl font-black leading-tight">
                   {ad.slogan}
                 </p>
               </div>
@@ -152,23 +157,20 @@ const BillboardAdSlider = () => {
       </div>
       
       {/* Indicators */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
         {billboardAds.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`transition-all duration-300 rounded-full ${
               index === currentIndex 
-                ? "w-6 h-1.5 bg-accent-amber" 
-                : "w-1.5 h-1.5 bg-white/20 hover:bg-white/40"
+                ? "w-8 h-2 bg-black" 
+                : "w-2 h-2 bg-black/30 hover:bg-black/50"
             }`}
             data-testid={`billboard-indicator-${index}`}
           />
         ))}
       </div>
-      
-      {/* Subtle border glow */}
-      <div className="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none" />
     </div>
   );
 };
@@ -322,98 +324,79 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Live Stats */}
-              <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
-                <div className="text-center">
-                  <div className="flex items-center gap-1 text-accent-amber">
-                    <Users className="w-4 h-4" />
-                    <span className="text-2xl font-bold">2.4K+</span>
-                  </div>
-                  <p className="text-[10px] text-white/40">Aktif Kullanıcı</p>
-                </div>
-                <div className="w-px h-8 bg-white/10" />
-                <div className="text-center">
-                  <div className="flex items-center gap-1 text-accent-amber">
-                    <Ticket className="w-4 h-4" />
-                    <span className="text-2xl font-bold">15K+</span>
-                  </div>
-                  <p className="text-[10px] text-white/40">Satılan Bilet</p>
-                </div>
-                <div className="w-px h-8 bg-white/10" />
-                <div className="text-center">
-                  <div className="flex items-center gap-1 text-accent-amber">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-2xl font-bold">98%</span>
-                  </div>
-                  <p className="text-[10px] text-white/40">Memnuniyet</p>
-                </div>
-              </div>
             </div>
 
-            {/* Right - Creative Visual */}
+            {/* Right - iPhone Mockup */}
             <div className="relative hidden md:block">
-              <div className="relative w-full max-w-lg mx-auto">
-                {/* Main Visual Container */}
+              <div className="relative w-full max-w-sm mx-auto flex flex-col items-center">
+                {/* iPhone Frame */}
                 <div 
-                  className="relative rounded-[40px] overflow-hidden aspect-square"
+                  className="relative w-[280px] h-[560px] rounded-[50px] p-3"
                   style={{
-                    boxShadow: "0 40px 100px -20px rgba(245,158,11,0.3), 0 0 60px rgba(139,92,246,0.15)"
+                    background: "linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%)",
+                    boxShadow: "0 50px 100px -20px rgba(0,0,0,0.8), 0 0 60px rgba(245,158,11,0.15), inset 0 1px 0 rgba(255,255,255,0.1)"
                   }}
                 >
-                  {/* Background Image */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80"
-                    alt="Concert Experience"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  {/* Dynamic Island */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-8 bg-black rounded-full z-10" />
                   
-                  {/* Gradient Overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-amber-900/30" />
-                  
-                  {/* Floating Elements */}
-                  <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
-                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-white text-xs font-medium">CANLI</span>
-                  </div>
-                  
-                  {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-accent-amber flex items-center justify-center">
-                          <Sparkles className="w-6 h-6 text-black" />
-                        </div>
-                        <div>
-                          <p className="text-white/60 text-xs uppercase tracking-wider">Deneyimin Adresi</p>
-                          <p className="text-white text-xl font-bold">ETKİNİUM</p>
-                        </div>
-                      </div>
+                  {/* Screen */}
+                  <div 
+                    className="relative w-full h-full rounded-[40px] overflow-hidden"
+                    style={{
+                      background: "linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)"
+                    }}
+                  >
+                    {/* App Content Preview */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+                      {/* Logo */}
+                      <img 
+                        src={etkineumLogo} 
+                        alt="ETKİNİUM" 
+                        className="w-20 h-20 object-contain mb-4"
+                      />
+                      <p className="text-white text-xl font-bold mb-1">ETKİNİUM</p>
+                      <p className="text-accent-amber text-sm font-medium mb-8">Tek Platform, Sonsuz Sanat.</p>
                       
-                      {/* Quick Stats */}
-                      <div className="flex gap-4">
-                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
-                          <p className="text-accent-amber text-lg font-bold">🎵</p>
-                          <p className="text-white/70 text-xs">Konserler</p>
-                        </div>
-                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
-                          <p className="text-accent-amber text-lg font-bold">🍽️</p>
-                          <p className="text-white/70 text-xs">Restoranlar</p>
-                        </div>
-                        <div className="flex-1 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
-                          <p className="text-accent-amber text-lg font-bold">🎭</p>
-                          <p className="text-white/70 text-xs">Tiyatrolar</p>
-                        </div>
+                      {/* Fake UI Elements */}
+                      <div className="w-full space-y-3">
+                        <div className="h-12 rounded-xl bg-white/5 border border-white/10" />
+                        <div className="h-12 rounded-xl bg-white/5 border border-white/10" />
+                        <div className="h-10 rounded-xl bg-accent-amber/80" />
                       </div>
                     </div>
+                    
+                    {/* Screen Glare */}
+                    <div 
+                      className="absolute inset-0 opacity-10"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%)"
+                      }}
+                    />
                   </div>
+                  
+                  {/* Side Buttons */}
+                  <div className="absolute -left-1 top-28 w-1 h-8 bg-neutral-800 rounded-l-sm" />
+                  <div className="absolute -left-1 top-44 w-1 h-14 bg-neutral-800 rounded-l-sm" />
+                  <div className="absolute -left-1 top-60 w-1 h-14 bg-neutral-800 rounded-l-sm" />
+                  <div className="absolute -right-1 top-40 w-1 h-20 bg-neutral-800 rounded-r-sm" />
                 </div>
                 
-                {/* Decorative Ring */}
-                <div 
-                  className="absolute -inset-4 rounded-[50px] border-2 border-dashed border-accent-amber/20 animate-spin"
-                  style={{ animationDuration: "30s" }}
-                />
+                {/* Coming Soon Badge */}
+                <div className="mt-8 text-center">
+                  <div className="flex items-center justify-center gap-3 mb-3">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black border border-white/10">
+                      <Smartphone className="w-5 h-5 text-white" />
+                      <span className="text-white text-sm font-medium">App Store</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black border border-white/10">
+                      <Smartphone className="w-5 h-5 text-white" />
+                      <span className="text-white text-sm font-medium">Google Play</span>
+                    </div>
+                  </div>
+                  <p className="text-accent-amber text-lg font-bold tracking-wide">ÇOK YAKINDA</p>
+                  <p className="text-white/40 text-xs mt-1">Mobil uygulamamız yolda!</p>
+                </div>
               </div>
             </div>
           </div>
