@@ -587,8 +587,11 @@ export default function Home() {
             100% { transform: translateX(-50%); }
           }
           .animate-marquee-scroll {
-            animation: marquee-scroll 20s linear infinite;
+            animation: marquee-scroll 40s linear infinite;
             will-change: transform;
+          }
+          .animate-marquee-scroll:hover {
+            animation-play-state: paused;
           }
           @media (prefers-reduced-motion: reduce) {
             .animate-marquee-scroll {

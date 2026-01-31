@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import logoImage from "@assets/logo-final.png";
 import { SiX, SiInstagram } from "react-icons/si";
@@ -20,7 +20,7 @@ export default function Footer() {
             </div>
             
             <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
-              <Mail className="text-accent-amber w-3.5 h-3.5" />
+              <Mail className="text-accent-amber w-3.5 h-3.5 flex-shrink-0" />
               <a 
                 href="mailto:iletisim@etkinium.com" 
                 className="text-white/60 hover:text-accent-amber transition-all text-xs sm:text-sm"
@@ -29,7 +29,24 @@ export default function Footer() {
               </a>
             </div>
             
-            <p className="text-white/40 text-[10px] sm:text-xs italic">
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
+              <Phone className="text-accent-amber w-3.5 h-3.5 flex-shrink-0" />
+              <a 
+                href="tel:08503077019" 
+                className="text-white/60 hover:text-accent-amber transition-all text-xs sm:text-sm"
+              >
+                0850 307 7019
+              </a>
+            </div>
+            
+            <div className="flex items-start justify-center lg:justify-start gap-2 mb-2">
+              <MapPin className="text-accent-amber w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+              <p className="text-white/60 text-[10px] sm:text-xs leading-relaxed text-left">
+                Dikilitaş Mah. Ayazmaderesi Cad. No:6/1 İç Kapı No:9 Beşiktaş/ İstanbul
+              </p>
+            </div>
+            
+            <p className="text-white/40 text-[10px] sm:text-xs italic mt-2">
               Tek Platform, Sonsuz Sanat.
             </p>
           </div>
