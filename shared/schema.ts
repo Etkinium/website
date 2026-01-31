@@ -22,6 +22,7 @@ export const users = pgTable("users", {
   firstName: varchar("first_name").notNull(),
   lastName: varchar("last_name").notNull(),
   phone: varchar("phone"),
+  points: integer("points").notNull().default(0),
   smsNotifications: boolean("sms_notifications").notNull().default(false),
   emailNotifications: boolean("email_notifications").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
