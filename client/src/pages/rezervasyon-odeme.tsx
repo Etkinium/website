@@ -55,7 +55,7 @@ export default function RezervasyonOdeme() {
               </div>
             </div>
             <p className="text-white/50 text-sm mb-4">
-              Rezervasyon ücreti (14,99 ₺) restoranda hesabınızdan düşülecektir.
+              Rezervasyonunuz ücretsiz olarak oluşturuldu!
             </p>
             <Link href="/">
               <button className="px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black shadow-lg shadow-accent-amber/20 transition-all hover:scale-[1.02]">
@@ -223,15 +223,15 @@ export default function RezervasyonOdeme() {
 
                 <div className="border-t border-white/10 pt-4 mb-4 space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-white/50">Rezervasyon Ücreti</span>
-                    <span className="text-white">14,99 ₺</span>
+                    <span className="text-white/50">İşlem Ücreti</span>
+                    <span className="text-green-400 font-semibold">Ücretsiz</span>
                   </div>
                   <p className="text-white/40 text-xs">
-                    * Bu ücret restoranda hesabınızdan düşülecektir.
+                    * Rezervasyon ücretsizdir, restoranda sadece yemek bedelini ödersiniz.
                   </p>
                   <div className="flex justify-between text-lg font-bold pt-2 border-t border-white/10">
                     <span className="text-white">Toplam</span>
-                    <span className="text-accent-amber">14,99 ₺</span>
+                    <span className="text-green-400">Ücretsiz</span>
                   </div>
                 </div>
 

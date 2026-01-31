@@ -14,12 +14,13 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { 
   User, Settings, Bell, Ticket, Gift, Star, Mail, Phone, Trash2, 
-  LogOut, ChevronRight, Calendar, Clock, MapPin, CreditCard, Shield
+  LogOut, ChevronRight, Crown, Zap, Shield, ArrowRight, Check, X
 } from "lucide-react";
 
 const profileUpdateSchema = z.object({
@@ -31,6 +32,36 @@ const profileUpdateSchema = z.object({
 
 type ProfileUpdateData = z.infer<typeof profileUpdateSchema>;
 
+const membershipTiers = [
+  {
+    name: "Etkinium Classic",
+    points: 25000,
+    price: 4999,
+    icon: Star,
+    color: "from-gray-400 to-gray-600",
+    borderColor: "border-gray-500/50",
+    benefits: ["Öncelikli bilet erişimi", "Ücretsiz iptal hakkı", "Özel indirimler"]
+  },
+  {
+    name: "Etkinium Premium",
+    points: 40000,
+    price: 8999,
+    icon: Crown,
+    color: "from-accent-amber to-yellow-500",
+    borderColor: "border-accent-amber/50",
+    benefits: ["Tüm Classic avantajları", "VIP müşteri hizmetleri", "2x puan kazanımı", "Özel etkinlik davetiyeleri"]
+  },
+  {
+    name: "Etkinium Business",
+    points: 65000,
+    price: 12999,
+    icon: Zap,
+    color: "from-purple-500 to-indigo-600",
+    borderColor: "border-purple-500/50",
+    benefits: ["Tüm Premium avantajları", "Kurumsal fatura", "Sınırsız iptal", "Özel hesap yöneticisi", "3x puan kazanımı"]
+  }
+];
+
 export default function Profile() {
   const [, setLocation] = useLocation();
   const { user, isLoading } = useAuth();
@@ -40,6 +71,8 @@ export default function Profile() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [canSpinWheel, setCanSpinWheel] = useState(true);
   const [lastSpinDate, setLastSpinDate] = useState<string | null>(null);
+  const [showPointsModal, setShowPointsModal] = useState(false);
+  const [showPriceInTL, setShowPriceInTL] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -176,28 +209,59 @@ export default function Profile() {
             </div>
           </div>
 
-          {/* Points Card */}
-          <Card className="bg-gradient-to-r from-accent-amber/20 to-yellow-500/10 border-accent-amber/30 mb-6">
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-accent-amber/20 flex items-center justify-center">
-                    <Star className="w-6 h-6 text-accent-amber" />
+          {/* Points Card - Black background with yellow interior */}
+          <div 
+            className="mb-6 rounded-xl overflow-hidden"
+            style={{
+              background: "linear-gradient(145deg, #000000 0%, #1a1a1a 100%)",
+              border: "2px solid rgba(245,158,11,0.4)"
+            }}
+          >
+            <div className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div 
+                    className="w-14 h-14 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)"
+                    }}
+                  >
+                    <Star className="w-7 h-7 text-black" />
                   </div>
                   <div>
-                    <p className="text-white/60 text-sm">Etkinium Puanlarınız</p>
-                    <p className="text-2xl sm:text-3xl font-bold text-accent-amber">{user.points || 0}</p>
+                    <p className="text-accent-amber text-sm font-medium">Etkinium Puanlarınız</p>
+                    <p className="text-3xl sm:text-4xl font-black text-accent-amber">{user.points || 0}</p>
                   </div>
                 </div>
-                <Link href="/puan-satin-al">
-                  <Button className="bg-accent-amber hover:bg-yellow-500 text-black font-semibold">
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    Puan Satın Al
+                <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                  <Button 
+                    onClick={() => setShowPointsModal(true)}
+                    className="bg-accent-amber hover:bg-yellow-500 text-black font-bold px-6"
+                  >
+                    <Crown className="w-4 h-4 mr-2" />
+                    Puanlarımı Gör
                   </Button>
-                </Link>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+              
+              {/* Earned Points Section */}
+              <div 
+                className="mt-4 p-3 rounded-lg"
+                style={{
+                  background: "rgba(245,158,11,0.1)",
+                  border: "1px solid rgba(245,158,11,0.2)"
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Gift className="w-4 h-4 text-accent-amber" />
+                    <span className="text-white/70 text-sm">Kazanılan Puanlar (Bu Ay)</span>
+                  </div>
+                  <span className="text-accent-amber font-bold">+{Math.floor((user.points || 0) * 0.1)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Tabs */}
           <Tabs defaultValue="account" className="w-full">
@@ -497,6 +561,160 @@ export default function Profile() {
           </Tabs>
         </div>
       </main>
+
+      {/* Points & Membership Modal */}
+      <Dialog open={showPointsModal} onOpenChange={setShowPointsModal}>
+        <DialogContent className="bg-black border border-neutral-800 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold flex items-center gap-3">
+              <Crown className="w-7 h-7 text-accent-amber" />
+              Puanlarım & Üyelik Seviyeleri
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* Current Points Display */}
+          <div 
+            className="p-4 rounded-xl mb-6"
+            style={{
+              background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(0,0,0,0.8) 100%)",
+              border: "1px solid rgba(245,158,11,0.3)"
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white/60 text-sm">Mevcut Puanınız</p>
+                <p className="text-3xl font-black text-accent-amber">{user.points || 0}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-white/60 text-sm">Hediye Çark Hakları</p>
+                <p className="text-xl font-bold text-white">3</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Toggle Button */}
+          <div className="flex justify-center mb-6">
+            <div 
+              className="flex items-center p-1 rounded-full"
+              style={{ background: "rgba(255,255,255,0.1)" }}
+            >
+              <button
+                onClick={() => setShowPriceInTL(false)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  !showPriceInTL 
+                    ? "bg-accent-amber text-black" 
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                Puan ile
+              </button>
+              <button
+                onClick={() => setShowPriceInTL(true)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  showPriceInTL 
+                    ? "bg-accent-amber text-black" 
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                TL ile
+              </button>
+            </div>
+          </div>
+
+          {/* Membership Tiers */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {membershipTiers.map((tier, index) => {
+              const IconComponent = tier.icon;
+              const canAfford = showPriceInTL ? true : (user.points || 0) >= tier.points;
+              
+              return (
+                <div 
+                  key={index}
+                  className={`relative p-5 rounded-xl transition-all hover:scale-[1.02] ${tier.borderColor}`}
+                  style={{
+                    background: "linear-gradient(145deg, rgba(30,30,30,0.9) 0%, rgba(0,0,0,0.95) 100%)",
+                    border: `2px solid`,
+                    borderColor: index === 1 ? "rgba(245,158,11,0.5)" : "rgba(255,255,255,0.1)"
+                  }}
+                >
+                  {index === 1 && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-accent-amber text-black text-xs font-bold rounded-full">
+                      EN POPÜLER
+                    </div>
+                  )}
+                  
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tier.color} flex items-center justify-center mb-4`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <h3 className="text-lg font-bold text-white mb-2">{tier.name}</h3>
+                  
+                  <div className="mb-4">
+                    {showPriceInTL ? (
+                      <div>
+                        <span className="text-2xl font-black text-accent-amber">{tier.price.toLocaleString()}</span>
+                        <span className="text-white/50 ml-1">TL</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-2xl font-black text-accent-amber">{tier.points.toLocaleString()}</span>
+                        <span className="text-white/50 ml-1">Puan</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <ul className="space-y-2 mb-4">
+                    {tier.benefits.map((benefit, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-white/70">
+                        <Check className="w-4 h-4 text-accent-amber flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button 
+                    className={`w-full ${
+                      canAfford 
+                        ? "bg-accent-amber hover:bg-yellow-500 text-black" 
+                        : "bg-neutral-800 text-white/50 cursor-not-allowed"
+                    }`}
+                    disabled={!canAfford}
+                  >
+                    {showPriceInTL ? "Satın Al" : (canAfford ? "Puanla Al" : "Yetersiz Puan")}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* How to Earn Points */}
+          <div className="mt-6 p-4 rounded-xl bg-neutral-900/50 border border-neutral-800">
+            <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+              <Gift className="w-5 h-5 text-accent-amber" />
+              Puan Nasıl Kazanılır?
+            </h4>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm">
+              <div className="flex items-center gap-2 text-white/70">
+                <Check className="w-4 h-4 text-green-500" />
+                <span>Her bilet alımında puan kazanın</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/70">
+                <Check className="w-4 h-4 text-green-500" />
+                <span>Haftalık çark çevirin</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/70">
+                <Check className="w-4 h-4 text-green-500" />
+                <span>Arkadaşlarınızı davet edin</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/70">
+                <Check className="w-4 h-4 text-green-500" />
+                <span>Değerlendirme yapın</span>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
       <MobileTabBar />

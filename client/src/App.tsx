@@ -10,6 +10,7 @@ import Etkinlikler from "@/pages/etkinlikler";
 import Restoranlar from "@/pages/restoranlar";
 import BiletAl from "@/pages/bilet-al";
 import BiletDetay from "@/pages/bilet-detay";
+import BiletSecenekleri from "@/pages/bilet-secenekleri";
 import RestoranDetay from "@/pages/restoran-detay";
 import Odeme from "@/pages/odeme";
 import RezervasyonOdeme from "@/pages/rezervasyon-odeme";
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/restoranlar" component={Restoranlar} />
       <Route path="/bilet-al" component={BiletAl} />
       <Route path="/bilet-detay" component={BiletDetay} />
+      <Route path="/bilet-secenekleri" component={BiletSecenekleri} />
       <Route path="/restoran-detay" component={RestoranDetay} />
       <Route path="/odeme" component={Odeme} />
       <Route path="/rezervasyon-odeme" component={RezervasyonOdeme} />

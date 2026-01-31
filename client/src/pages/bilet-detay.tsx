@@ -247,7 +247,7 @@ export default function BiletDetay() {
                   </div>
                 </div>
 
-                <Link href="/odeme">
+                <Link href="/bilet-secenekleri">
                   <button 
                     className="w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] bg-gradient-to-r from-accent-amber to-yellow-500 hover:bg-white hover:from-white hover:to-white text-black shadow-lg shadow-accent-amber/20"
                     data-testid="button-buy-ticket"
