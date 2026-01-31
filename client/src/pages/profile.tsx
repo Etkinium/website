@@ -69,8 +69,6 @@ export default function Profile() {
   const [smsNotifications, setSmsNotifications] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [canSpinWheel, setCanSpinWheel] = useState(true);
-  const [lastSpinDate, setLastSpinDate] = useState<string | null>(null);
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [showPriceInTL, setShowPriceInTL] = useState(false);
 
@@ -84,15 +82,6 @@ export default function Profile() {
     if (user) {
       setSmsNotifications(user.smsNotifications || false);
       setEmailNotifications(user.emailNotifications !== false);
-      
-      const storedSpinDate = localStorage.getItem(`lastSpin_${user.id}`);
-      if (storedSpinDate) {
-        setLastSpinDate(storedSpinDate);
-        const lastSpin = new Date(storedSpinDate);
-        const now = new Date();
-        const daysSinceLastSpin = Math.floor((now.getTime() - lastSpin.getTime()) / (1000 * 60 * 60 * 24));
-        setCanSpinWheel(daysSinceLastSpin >= 7);
-      }
     }
   }, [user]);
 
@@ -158,15 +147,7 @@ export default function Profile() {
   };
 
   const handleSpinComplete = (result: string) => {
-    const now = new Date().toISOString();
-    if (user) {
-      localStorage.setItem(`lastSpin_${user.id}`, now);
-    }
-    setLastSpinDate(now);
-    
-    if (result !== "retry") {
-      setCanSpinWheel(false);
-    }
+    // Unlimited spins - no restriction
   };
 
   const handleDeleteAccount = () => {
@@ -390,18 +371,14 @@ export default function Profile() {
                 <CardHeader className="text-center">
                   <CardTitle className="text-white flex items-center justify-center gap-2">
                     <Gift className="w-5 h-5 text-accent-amber" />
-                    Haftalık Şans Çarkı
+                    Şans Çarkı
                   </CardTitle>
                   <CardDescription className="text-gray-400">
-                    Haftada 1 kez çarkı çevirerek ödüller kazanın!
+                    Sınırsız çarkı çevirerek ödüller kazanın!
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col items-center py-8">
-                  <SpinWheel 
-                    canSpin={canSpinWheel} 
-                    onSpinComplete={handleSpinComplete}
-                    lastSpinDate={lastSpinDate}
-                  />
+                  <SpinWheel onSpinComplete={handleSpinComplete} />
                 </CardContent>
               </Card>
             </TabsContent>

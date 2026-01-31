@@ -255,15 +255,15 @@ export default function RestoranDetay() {
 
                 <div className="border-t border-white/10 pt-4 mb-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-white/50 text-sm">Rezervasyon Ücreti</span>
-                    <span className="text-white font-medium">14,99 ₺</span>
+                    <span className="text-white/50 text-sm">İşlem Ücreti</span>
+                    <span className="text-green-400 font-semibold">Ücretsiz</span>
                   </div>
                   <p className="text-white/40 text-xs mb-3">
-                    * Rezervasyon ücreti, restoranda hesabınızdan düşülecektir.
+                    * Rezervasyon tamamen ücretsizdir!
                   </p>
                   <div className="flex items-center justify-between text-lg font-bold">
                     <span className="text-white">Toplam</span>
-                    <span className="text-accent-amber">14,99 ₺</span>
+                    <span className="text-green-400">Ücretsiz</span>
                   </div>
                 </div>
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Gift, RotateCcw, Star, Ticket, Ban } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -11,12 +11,12 @@ const segments = [
 ];
 
 interface SpinWheelProps {
-  canSpin: boolean;
-  onSpinComplete: (result: string) => void;
+  canSpin?: boolean;
+  onSpinComplete?: (result: string) => void;
   lastSpinDate?: string | null;
 }
 
-export default function SpinWheel({ canSpin, onSpinComplete, lastSpinDate }: SpinWheelProps) {
+export default function SpinWheel({ onSpinComplete }: SpinWheelProps) {
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export default function SpinWheel({ canSpin, onSpinComplete, lastSpinDate }: Spi
   const { toast } = useToast();
 
   const spinWheel = () => {
-    if (isSpinning || !canSpin) return;
+    if (isSpinning) return;
 
     setIsSpinning(true);
     setResult(null);
@@ -40,32 +40,18 @@ export default function SpinWheel({ canSpin, onSpinComplete, lastSpinDate }: Spi
       setIsSpinning(false);
       const winningSegment = segments[randomSegment];
       setResult(winningSegment.label);
-      onSpinComplete(winningSegment.value);
+      if (onSpinComplete) {
+        onSpinComplete(winningSegment.value);
+      }
       
       toast({
         title: "Çark Sonucu",
         description: winningSegment.value === "empty" 
-          ? "Maalesef bu sefer boş çıktı. Haftaya tekrar deneyin!" 
+          ? "Maalesef bu sefer boş çıktı. Tekrar deneyin!" 
           : `Tebrikler! ${winningSegment.label} kazandınız!`,
         variant: winningSegment.value === "empty" ? "destructive" : "default",
       });
     }, 5000);
-  };
-
-  const getNextSpinDate = () => {
-    if (!lastSpinDate) return null;
-    const lastSpin = new Date(lastSpinDate);
-    const nextSpin = new Date(lastSpin);
-    nextSpin.setDate(nextSpin.getDate() + 7);
-    return nextSpin;
-  };
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('tr-TR', { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    });
   };
 
   return (
@@ -166,21 +152,18 @@ export default function SpinWheel({ canSpin, onSpinComplete, lastSpinDate }: Spi
       {/* Spin Button */}
       <Button
         onClick={spinWheel}
-        disabled={isSpinning || !canSpin}
+        disabled={isSpinning}
         className="mt-6 px-8 py-4 text-lg font-bold bg-gradient-to-r from-accent-amber to-yellow-500 hover:from-yellow-500 hover:to-accent-amber text-black rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         style={{
-          boxShadow: canSpin && !isSpinning ? "0 0 30px rgba(245,158,11,0.4)" : "none"
+          boxShadow: !isSpinning ? "0 0 30px rgba(245,158,11,0.4)" : "none"
         }}
       >
-        {isSpinning ? "Çevriliyor..." : canSpin ? "Çarkı Çevir" : "Haftaya Tekrar Gel"}
+        {isSpinning ? "Çevriliyor..." : "Çarkı Çevir"}
       </Button>
 
-      {/* Next Spin Info */}
-      {!canSpin && lastSpinDate && (
-        <p className="mt-3 text-white/50 text-sm text-center">
-          Sonraki çevirme: {formatDate(getNextSpinDate()!)}
-        </p>
-      )}
+      <p className="mt-3 text-white/50 text-sm text-center">
+        Sınırsız çevirme hakkınız var!
+      </p>
     </div>
   );
 }
