@@ -340,22 +340,33 @@ export default function Restoranlar() {
             </div>
           </div>
 
-          {/* CTA Banner */}
+          {/* Premium Features Banner */}
           <div 
-            className="mt-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-accent-amber/20 via-black/60 to-orange-900/20 border border-accent-amber/20 text-center"
-            style={{ boxShadow: "0 8px 40px rgba(245,158,11,0.1)" }}
+            className="mt-8 rounded-2xl overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              boxShadow: "0 8px 40px rgba(0,0,0,0.5)"
+            }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Özel Masa Fırsatlarını Kaçırmayın!</h3>
-            <p className="text-white/60 text-sm mb-4">Bültene abone olun, en iyi restoranlardan özel teklifler ve indirimler alın.</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="E-posta adresiniz"
-                className="flex-1 px-4 py-2.5 rounded-full bg-black/60 border border-white/10 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-accent-amber/50"
-              />
-              <button className="px-6 py-2.5 rounded-full font-semibold text-sm bg-gradient-to-r from-accent-amber to-yellow-500 text-black hover:from-white hover:to-white transition-all">
-                Abone Ol
-              </button>
+            <div className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-bold text-white text-center mb-6">
+                Restoran <span className="text-accent-amber">Deneyimi</span>
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { icon: "🍽️", title: "Ücretsiz Rezervasyon", desc: "Hiçbir ek ücret yok" },
+                  { icon: "⭐", title: "Özel Menüler", desc: "Şef'in özel seçimleri" },
+                  { icon: "🎁", title: "Puan Kazan", desc: "Her rezervasyonda puan" },
+                  { icon: "📱", title: "Anlık Onay", desc: "Hızlı rezervasyon onayı" },
+                ].map((feature, i) => (
+                  <div key={i} className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-accent-amber/20 transition-all">
+                    <div className="text-2xl mb-2">{feature.icon}</div>
+                    <h4 className="text-sm font-semibold text-white mb-1">{feature.title}</h4>
+                    <p className="text-[10px] sm:text-xs text-white/40">{feature.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

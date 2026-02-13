@@ -4,11 +4,260 @@ import Header from "@/components/header";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, ArrowRight, Ticket, Utensils } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, ArrowRight, Ticket, Utensils, Gift, Trophy, Megaphone, Eye } from "lucide-react";
 import etkineumLogo from "@assets/logo-final.png";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
 import faturaportLogo from "@assets/download_1765541159072.png";
+
+const promoSlides = [
+  {
+    icon: Gift,
+    badge: "Haftalık Çark",
+    title: "Üye Ol, Haftalık Çark Çevir!",
+    description: "Her hafta çarkı çevir, sürpriz ödüller kazan",
+    cta: "Hemen Üye Ol",
+    ctaLink: "/signup",
+    gradient: "from-purple-900/30 via-black to-accent-amber/10",
+    accentColor: "purple-400",
+  },
+  {
+    icon: Trophy,
+    badge: "Hoş Geldin Bonusu",
+    title: "Üye Ol, 100 Etkinium Puan Kazan!",
+    description: "Hemen kaydol, anında 100 puan hesabına yüklensin",
+    cta: "Üye Ol & Kazan",
+    ctaLink: "/signup",
+    gradient: "from-accent-amber/20 via-black to-emerald-900/20",
+    accentColor: "accent-amber",
+  },
+  {
+    icon: Megaphone,
+    badge: "Reklam Alanı",
+    title: "Markanızı Burada Tanıtın!",
+    description: "Premium reklam alanı ile hedef kitlenize ulaşın",
+    cta: "İletişime Geçin",
+    ctaLink: "mailto:iletisim@etkinium.com",
+    gradient: "from-blue-900/20 via-black to-cyan-900/10",
+    accentColor: "blue-400",
+  },
+];
+
+const PromoSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % promoSlides.length);
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = promoSlides[currentSlide];
+  const SlideIcon = slide.icon;
+
+  return (
+    <section className="py-4 sm:py-6">
+      <div className="container mx-auto px-3">
+        <div 
+          className="relative rounded-2xl overflow-hidden cursor-pointer"
+          style={{
+            background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 50%, #080808 100%)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02)",
+            border: "1px solid rgba(255,255,255,0.06)"
+          }}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-r ${slide.gradient} transition-all duration-1000`} />
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 60%)" }}
+          />
+          
+          <div className="relative p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/[0.07] backdrop-blur-sm flex items-center justify-center border border-white/10 flex-shrink-0">
+              <SlideIcon className="w-8 h-8 sm:w-10 sm:h-10 text-accent-amber" />
+            </div>
+            
+            <div className="flex-1 text-center sm:text-left">
+              <span className="inline-block bg-accent-amber/20 text-accent-amber text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2 tracking-wide uppercase">
+                {slide.badge}
+              </span>
+              <h3 
+                className="text-lg sm:text-2xl md:text-3xl font-bold text-white tracking-tight mb-1.5"
+                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+              >
+                {slide.title}
+              </h3>
+              <p className="text-white/40 text-xs sm:text-sm max-w-lg">
+                {slide.description}
+              </p>
+            </div>
+
+            <div className="flex-shrink-0">
+              {slide.ctaLink.startsWith("mailto") ? (
+                <a 
+                  href={slide.ctaLink}
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold bg-accent-amber hover:bg-yellow-400 text-black transition-all hover:scale-105 shadow-lg shadow-accent-amber/20"
+                >
+                  {slide.cta}
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              ) : (
+                <Link href={slide.ctaLink}>
+                  <span className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold bg-accent-amber hover:bg-yellow-400 text-black transition-all hover:scale-105 shadow-lg shadow-accent-amber/20">
+                    {slide.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
+              )}
+            </div>
+          </div>
+
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            {promoSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentSlide(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === currentSlide 
+                    ? "w-6 bg-accent-amber" 
+                    : "w-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const VENUE_DATA = [
+  { name: "Zorlu PSM", location: "Beşiktaş, İstanbul", capacity: "2.993", type: "Konser & Tiyatro", slug: "zorlu-psm" },
+  { name: "Volkswagen Arena", location: "Maslak, İstanbul", capacity: "5.000", type: "Konser & Etkinlik", slug: "volkswagen-arena" },
+  { name: "Küçükçiftlik Park", location: "Maçka, İstanbul", capacity: "12.000", type: "Açık Hava", slug: "kucukciftlik-park" },
+  { name: "IF Performance Hall", location: "Beşiktaş, İstanbul", capacity: "1.200", type: "Konser", slug: "if-performance-hall" },
+  { name: "Bostancı Gösteri Merkezi", location: "Kadıköy, İstanbul", capacity: "2.500", type: "Konser & Tiyatro", slug: "bostanci-gosteri" },
+  { name: "Congresium", location: "Söğütözü, Ankara", capacity: "6.000", type: "Kongre & Konser", slug: "congresium" },
+  { name: "Jolly Joker", location: "Beyoğlu, İstanbul", capacity: "1.500", type: "Konser", slug: "jolly-joker" },
+  { name: "MEB Şura Salonu", location: "Çankaya, Ankara", capacity: "3.200", type: "Konser & Tiyatro", slug: "meb-sura-salonu" },
+  { name: "Harbiye Açıkhava", location: "Harbiye, İstanbul", capacity: "4.234", type: "Açık Hava", slug: "harbiye-acikhava" },
+  { name: "Ülker Sports Arena", location: "Kadıköy, İstanbul", capacity: "13.800", type: "Spor & Konser", slug: "ulker-sports-arena" },
+  { name: "Beşiktaş Kültür Merkezi", location: "Beşiktaş, İstanbul", capacity: "800", type: "Tiyatro", slug: "besiktas-kultur" },
+  { name: "Uniq Hall", location: "Maslak, İstanbul", capacity: "3.000", type: "Konser", slug: "uniq-hall" },
+  { name: "Babylon", location: "Beyoğlu, İstanbul", capacity: "900", type: "Konser", slug: "babylon" },
+  { name: "MODA Sahnesi", location: "Kadıköy, İstanbul", capacity: "650", type: "Konser & Tiyatro", slug: "moda-sahnesi" },
+];
+
+const VenueSection = () => {
+  const [venuePage, setVenuePage] = useState(0);
+  const itemsPerPage = 7;
+  const totalPages = Math.ceil(VENUE_DATA.length / itemsPerPage);
+  const currentVenues = VENUE_DATA.slice(venuePage * itemsPerPage, (venuePage + 1) * itemsPerPage);
+
+  return (
+    <section className="py-8 sm:py-12">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <div 
+              className="w-1 h-6 rounded-full"
+              style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+            />
+            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+              Öne Çıkan <span className="text-amber-400">Mekanlar</span>
+            </h2>
+            <p className="text-xs text-neutral-500 ml-2 hidden sm:block">Türkiye'nin en popüler etkinlik mekanları</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setVenuePage((p) => Math.max(0, p - 1))}
+              disabled={venuePage === 0}
+              className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="w-4 h-4 text-white" />
+            </button>
+            <button
+              onClick={() => setVenuePage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={venuePage >= totalPages - 1}
+              className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 sm:gap-4">
+          {currentVenues.map((venue, index) => (
+            <div 
+              key={`${venuePage}-${index}`}
+              className="group relative bg-black/60 backdrop-blur-xl rounded-[16px] sm:rounded-[20px] overflow-hidden border border-white/10 hover:border-accent-amber/40 transition-all duration-500"
+              style={{
+                boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative h-20 sm:h-24 bg-gradient-to-br from-neutral-900 to-neutral-950">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/20 group-hover:bg-accent-amber/20 transition-all">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent-amber" />
+                  </div>
+                </div>
+                <div className="absolute top-2 left-2">
+                  <span className="bg-accent-amber/90 backdrop-blur-sm text-black text-[8px] sm:text-[9px] font-semibold px-1.5 py-0.5 rounded-full">
+                    {venue.type}
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative p-3 sm:p-4 space-y-1.5">
+                <h3 className="font-semibold text-white/90 group-hover:text-white transition-colors text-xs sm:text-sm line-clamp-1">
+                  {venue.name}
+                </h3>
+                <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-white/50">
+                  <MapPin className="w-2.5 h-2.5 text-accent-amber/70 flex-shrink-0" />
+                  <span className="line-clamp-1">{venue.location}</span>
+                </div>
+                <div className="pt-2 border-t border-white/5 flex items-center justify-between">
+                  <div>
+                    <p className="text-[8px] sm:text-[9px] text-white/30">Kapasite</p>
+                    <p className="text-xs font-semibold text-white/70">{venue.capacity}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[8px] sm:text-[9px] text-white/30">Puan</p>
+                    <div className="flex items-center gap-0.5">
+                      <Star className="w-2.5 h-2.5 fill-accent-amber text-accent-amber" />
+                      <span className="text-xs font-semibold text-accent-amber">—</span>
+                    </div>
+                  </div>
+                </div>
+                <Link href={`/mekan/${venue.slug}`}>
+                  <button className="w-full mt-2 py-1.5 rounded-lg bg-accent-amber/10 hover:bg-accent-amber text-accent-amber hover:text-black text-[10px] sm:text-xs font-semibold transition-all border border-accent-amber/20 hover:border-accent-amber flex items-center justify-center gap-1">
+                    <Eye className="w-3 h-3" />
+                    İncele
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-center gap-2 mt-4">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setVenuePage(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === venuePage ? "w-5 bg-accent-amber" : "w-1.5 bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const FeaturedEventCard = ({ index }: { index: number }) => (
   <div 
@@ -650,123 +899,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Matte Black Apple-Style Ad Banner */}
-      <section className="py-4 sm:py-6">
-        <div className="container mx-auto px-3">
-          <div 
-            className="relative rounded-2xl overflow-hidden"
-            style={{
-              background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 50%, #080808 100%)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.04)"
-            }}
-          >
-            <div 
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 60%)"
-              }}
-            />
-            <div className="relative p-6 sm:p-8 flex flex-col items-center justify-center text-center">
-              <p className="text-white/30 text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase mb-3">Reklam Alanı</p>
-              <h3 
-                className="text-lg sm:text-2xl md:text-3xl font-bold text-white/90 tracking-tight mb-2"
-                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
-              >
-                Markanız Burada
-              </h3>
-              <p className="text-white/30 text-xs sm:text-sm max-w-md">
-                Premium reklam alanı ile hedef kitlenize ulaşın
-              </p>
-              <div className="mt-4 flex items-center gap-4">
-                <a 
-                  href="mailto:iletisim@etkinium.com"
-                  className="px-5 py-2 rounded-full text-xs font-medium bg-white/[0.07] hover:bg-white/[0.12] text-white/70 hover:text-white border border-white/[0.08] hover:border-white/[0.15] transition-all"
-                >
-                  İletişime Geçin
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Promotional Slider - 3 slides, auto-rotate 10s */}
+      <PromoSlider />
 
-      {/* Öne Çıkan Mekanlar */}
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 mb-6">
-            <div 
-              className="w-1 h-6 rounded-full"
-              style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
-            />
-            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
-              Öne Çıkan <span className="text-amber-400">Mekanlar</span>
-            </h2>
-            <p className="text-xs text-neutral-500 ml-2 hidden sm:block">Türkiye'nin en popüler etkinlik mekanları</p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
-            {[
-              { name: "Zorlu PSM", location: "Beşiktaş, İstanbul", capacity: "2.993", type: "Konser & Tiyatro" },
-              { name: "Volkswagen Arena", location: "Maslak, İstanbul", capacity: "5.000", type: "Konser & Etkinlik" },
-              { name: "Küçükçiftlik Park", location: "Maçka, İstanbul", capacity: "12.000", type: "Açık Hava" },
-              { name: "IF Performance Hall", location: "Beşiktaş, İstanbul", capacity: "1.200", type: "Konser" },
-              { name: "Bostancı Gösteri Merkezi", location: "Kadıköy, İstanbul", capacity: "2.500", type: "Konser & Tiyatro" },
-              { name: "Congresium", location: "Söğütözü, Ankara", capacity: "6.000", type: "Kongre & Konser" },
-              { name: "Jolly Joker", location: "Beyoğlu, İstanbul", capacity: "1.500", type: "Konser" },
-              { name: "MEB Şura Salonu", location: "Çankaya, Ankara", capacity: "3.200", type: "Konser & Tiyatro" },
-              { name: "Harbiye Açıkhava", location: "Harbiye, İstanbul", capacity: "4.234", type: "Açık Hava" },
-              { name: "Ülker Sports Arena", location: "Kadıköy, İstanbul", capacity: "13.800", type: "Spor & Konser" },
-            ].map((venue, index) => (
-              <div 
-                key={index}
-                className="group relative bg-black/60 backdrop-blur-xl rounded-[16px] sm:rounded-[20px] overflow-hidden border border-white/10 hover:border-accent-amber/40 transition-all duration-500 cursor-pointer"
-                style={{
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative h-20 sm:h-24 bg-gradient-to-br from-neutral-900 to-neutral-950">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/20 group-hover:bg-accent-amber/20 transition-all">
-                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent-amber" />
-                    </div>
-                  </div>
-                  <div className="absolute top-2 left-2">
-                    <span className="bg-accent-amber/90 backdrop-blur-sm text-black text-[8px] sm:text-[9px] font-semibold px-1.5 py-0.5 rounded-full">
-                      {venue.type}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="relative p-3 sm:p-4 space-y-1.5">
-                  <h3 className="font-semibold text-white/90 group-hover:text-white transition-colors text-xs sm:text-sm line-clamp-1">
-                    {venue.name}
-                  </h3>
-                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-white/50">
-                    <MapPin className="w-2.5 h-2.5 text-accent-amber/70 flex-shrink-0" />
-                    <span className="line-clamp-1">{venue.location}</span>
-                  </div>
-                  <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                    <div>
-                      <p className="text-[8px] sm:text-[9px] text-white/30">Kapasite</p>
-                      <p className="text-xs font-semibold text-white/70">{venue.capacity}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-[8px] sm:text-[9px] text-white/30">Puan</p>
-                      <div className="flex items-center gap-0.5">
-                        <Star className="w-2.5 h-2.5 fill-accent-amber text-accent-amber" />
-                        <span className="text-xs font-semibold text-accent-amber">—</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Öne Çıkan Mekanlar - Paginated */}
+      <VenueSection />
 
       <DateDrawer 
         isOpen={isDateDrawerOpen} 
