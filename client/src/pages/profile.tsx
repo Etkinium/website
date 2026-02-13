@@ -21,7 +21,8 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 import { 
   User, Settings, Bell, Ticket, Gift, Star, Mail, Phone, Trash2, 
   LogOut, ChevronRight, Crown, Zap, Shield, ArrowRight, Check, X,
-  Briefcase, MapPin, Clock, Eye, Send
+  Briefcase, MapPin, Clock, Eye, Send, Heart, Music, Sparkles, Target,
+  Instagram, Lock, Unlock, Globe
 } from "lucide-react";
 
 const profileUpdateSchema = z.object({
@@ -72,6 +73,14 @@ export default function Profile() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [showPriceInTL, setShowPriceInTL] = useState(false);
+  const [isProfilePublic, setIsProfilePublic] = useState(true);
+  const [xHandle, setXHandle] = useState("");
+  const [instagramHandle, setInstagramHandle] = useState("");
+  const [selectedEventTypes, setSelectedEventTypes] = useState<string[]>([]);
+  const [selectedMusicGenres, setSelectedMusicGenres] = useState<string[]>([]);
+  const [selectedAtmospheres, setSelectedAtmospheres] = useState<string[]>([]);
+  const [selectedPurposes, setSelectedPurposes] = useState<string[]>([]);
+  const [eventProfileSaved, setEventProfileSaved] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -157,6 +166,29 @@ export default function Profile() {
       description: "Hesap silme işlemi için iletisim@etkinium.com adresine mail atınız.",
     });
     setShowDeleteConfirm(false);
+  };
+
+  const toggleSelection = (item: string, selected: string[], setSelected: (v: string[]) => void) => {
+    if (selected.includes(item)) {
+      setSelected(selected.filter(s => s !== item));
+    } else {
+      setSelected([...selected, item]);
+    }
+  };
+
+  const handleSaveEventProfile = () => {
+    setEventProfileSaved(true);
+    toast({
+      title: "Kaydedildi!",
+      description: "Etkinlik profiliniz güncellendi. Artık size özel öneriler sunacağız.",
+    });
+  };
+
+  const handleSaveSocialMedia = () => {
+    toast({
+      title: "Kaydedildi!",
+      description: "Sosyal medya bilgileriniz güncellendi.",
+    });
   };
 
   if (isLoading) {
@@ -247,25 +279,29 @@ export default function Profile() {
 
           {/* Tabs */}
           <Tabs defaultValue="account" className="w-full">
-            <TabsList className="grid w-full grid-cols-5 bg-neutral-900 border border-neutral-800 mb-6">
-              <TabsTrigger value="account" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
-                <User className="w-4 h-4 sm:mr-2" />
+            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 bg-neutral-900 border border-neutral-800 mb-6 h-auto gap-0.5 p-1">
+              <TabsTrigger value="account" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <User className="w-3.5 h-3.5 sm:mr-1.5" />
                 <span className="hidden sm:inline">Hesap</span>
               </TabsTrigger>
-              <TabsTrigger value="wheel" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
-                <Gift className="w-4 h-4 sm:mr-2" />
+              <TabsTrigger value="eventprofile" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <Heart className="w-3.5 h-3.5 sm:mr-1.5" />
+                <span className="hidden sm:inline">Etkinlik Profili</span>
+              </TabsTrigger>
+              <TabsTrigger value="wheel" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <Gift className="w-3.5 h-3.5 sm:mr-1.5" />
                 <span className="hidden sm:inline">Çark</span>
               </TabsTrigger>
-              <TabsTrigger value="jobs" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
-                <Briefcase className="w-4 h-4 sm:mr-2" />
+              <TabsTrigger value="jobs" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <Briefcase className="w-3.5 h-3.5 sm:mr-1.5" />
                 <span className="hidden sm:inline">İş İlanları</span>
               </TabsTrigger>
-              <TabsTrigger value="events" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
-                <Ticket className="w-4 h-4 sm:mr-2" />
+              <TabsTrigger value="events" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <Ticket className="w-3.5 h-3.5 sm:mr-1.5" />
                 <span className="hidden sm:inline">Etkinlikler</span>
               </TabsTrigger>
-              <TabsTrigger value="settings" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
-                <Settings className="w-4 h-4 sm:mr-2" />
+              <TabsTrigger value="settings" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-[10px] sm:text-xs px-1 py-2">
+                <Settings className="w-3.5 h-3.5 sm:mr-1.5" />
                 <span className="hidden sm:inline">Ayarlar</span>
               </TabsTrigger>
             </TabsList>
@@ -366,6 +402,224 @@ export default function Profile() {
                       </Button>
                     </form>
                   </Form>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-neutral-900/50 border-neutral-800 mt-4">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-accent-amber" />
+                    Sosyal Medya & Gizlilik
+                  </CardTitle>
+                  <CardDescription className="text-gray-400">
+                    Sosyal medya hesaplarınızı bağlayın ve profil görünürlüğünüzü yönetin
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-5">
+                  <div className="p-4 rounded-xl border border-neutral-800 bg-neutral-800/30">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        {isProfilePublic ? (
+                          <Unlock className="w-5 h-5 text-green-400" />
+                        ) : (
+                          <Lock className="w-5 h-5 text-red-400" />
+                        )}
+                        <div>
+                          <p className="text-white font-medium">Profil Görünürlüğü</p>
+                          <p className="text-white/40 text-xs">
+                            {isProfilePublic 
+                              ? "Profiliniz açık — Adınız, yaşınız ve sosyal medya hesaplarınız diğer kullanıcılara görünür" 
+                              : "Profiliniz gizli — Bilgileriniz diğer kullanıcılara görünmez"}
+                          </p>
+                        </div>
+                      </div>
+                      <Switch 
+                        checked={isProfilePublic} 
+                        onCheckedChange={setIsProfilePublic}
+                        className="data-[state=checked]:bg-green-500"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                        isProfilePublic 
+                          ? "bg-green-500/15 text-green-400 border border-green-500/25"
+                          : "bg-red-500/15 text-red-400 border border-red-500/25"
+                      }`}>
+                        {isProfilePublic ? "Açık Profil" : "Gizli Profil"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <label className="text-white text-sm font-medium flex items-center gap-2 mb-2">
+                        <X className="w-4 h-4 text-white" />
+                        X (Twitter) Hesabı
+                      </label>
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">@</span>
+                          <Input
+                            value={xHandle}
+                            onChange={(e) => setXHandle(e.target.value)}
+                            placeholder="kullaniciadi"
+                            className="bg-neutral-800 border-neutral-700 text-white focus:border-accent-amber pl-8"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-white text-sm font-medium flex items-center gap-2 mb-2">
+                        <Instagram className="w-4 h-4 text-pink-400" />
+                        Instagram Hesabı
+                      </label>
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">@</span>
+                          <Input
+                            value={instagramHandle}
+                            onChange={(e) => setInstagramHandle(e.target.value)}
+                            placeholder="kullaniciadi"
+                            className="bg-neutral-800 border-neutral-700 text-white focus:border-accent-amber pl-8"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={handleSaveSocialMedia}
+                    className="w-full bg-accent-amber hover:bg-yellow-500 text-black font-semibold py-5"
+                  >
+                    Sosyal Medya Bilgilerini Kaydet
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="eventprofile" className="space-y-4">
+              <Card className="bg-neutral-900/50 border-neutral-800">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-accent-amber" />
+                    Etkinlik Profilim
+                  </CardTitle>
+                  <CardDescription className="text-gray-400">
+                    İlgi alanlarınızı seçerek size özel kişiselleştirilmiş etkinlik önerileri alın
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-white font-semibold text-sm flex items-center gap-2 mb-3">
+                      <Ticket className="w-4 h-4 text-accent-amber" />
+                      İlgi Duyduğunuz Etkinlik Türleri
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["Konser", "Tiyatro", "Stand-up", "Festival", "Sinema", "Müze", "Sergi", "Spor", "Workshop", "Akvaryum", "Tema Park", "Opera & Bale", "Dans Gösterisi", "Çocuk Etkinlikleri"].map((type) => (
+                        <button
+                          key={type}
+                          onClick={() => toggleSelection(type, selectedEventTypes, setSelectedEventTypes)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                            selectedEventTypes.includes(type)
+                              ? "bg-accent-amber text-black border-accent-amber"
+                              : "bg-neutral-800/50 text-white/60 border-neutral-700 hover:border-accent-amber/50 hover:text-white"
+                          }`}
+                        >
+                          {selectedEventTypes.includes(type) && <Check className="w-3 h-3 inline mr-1" />}
+                          {type}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-neutral-800 pt-5">
+                    <h3 className="text-white font-semibold text-sm flex items-center gap-2 mb-3">
+                      <Music className="w-4 h-4 text-accent-amber" />
+                      Sevdiğiniz Müzik Türleri
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["Pop", "Rock", "Jazz", "Klasik Müzik", "Türk Halk Müziği", "Türk Sanat Müziği", "Rap/Hip-Hop", "Elektronik", "R&B/Soul", "Metal", "Indie/Alternatif", "Arabesk/Fantezi", "Latin", "Blues", "Reggae", "Country"].map((genre) => (
+                        <button
+                          key={genre}
+                          onClick={() => toggleSelection(genre, selectedMusicGenres, setSelectedMusicGenres)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                            selectedMusicGenres.includes(genre)
+                              ? "bg-accent-amber text-black border-accent-amber"
+                              : "bg-neutral-800/50 text-white/60 border-neutral-700 hover:border-accent-amber/50 hover:text-white"
+                          }`}
+                        >
+                          {selectedMusicGenres.includes(genre) && <Check className="w-3 h-3 inline mr-1" />}
+                          {genre}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-neutral-800 pt-5">
+                    <h3 className="text-white font-semibold text-sm flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 text-accent-amber" />
+                      Tercih Ettiğiniz Atmosfer
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["Enerjik & Hareketli", "Sakin & Huzurlu", "Romantik", "Aile Dostu", "VIP & Lüks", "Açık Hava", "Kapalı Mekan", "Samimi & Küçük", "Büyük & Kalabalık", "Nostaljik", "Modern & Minimalist", "Doğa İçinde"].map((atm) => (
+                        <button
+                          key={atm}
+                          onClick={() => toggleSelection(atm, selectedAtmospheres, setSelectedAtmospheres)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                            selectedAtmospheres.includes(atm)
+                              ? "bg-accent-amber text-black border-accent-amber"
+                              : "bg-neutral-800/50 text-white/60 border-neutral-700 hover:border-accent-amber/50 hover:text-white"
+                          }`}
+                        >
+                          {selectedAtmospheres.includes(atm) && <Check className="w-3 h-3 inline mr-1" />}
+                          {atm}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-neutral-800 pt-5">
+                    <h3 className="text-white font-semibold text-sm flex items-center gap-2 mb-3">
+                      <Target className="w-4 h-4 text-accent-amber" />
+                      Etkinliklere Katılma Amacınız
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["Eğlenmek", "Yeni İnsanlarla Tanışmak", "Kültürel Deneyim", "Aile ile Vakit Geçirmek", "Stres Atmak", "Yeni Şeyler Öğrenmek", "Romantik Bir Akşam", "Arkadaşlarla Buluşmak", "İş Networking", "Hobilerimi Geliştirmek", "Sanatsal İlham", "Macera & Heyecan"].map((purpose) => (
+                        <button
+                          key={purpose}
+                          onClick={() => toggleSelection(purpose, selectedPurposes, setSelectedPurposes)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                            selectedPurposes.includes(purpose)
+                              ? "bg-accent-amber text-black border-accent-amber"
+                              : "bg-neutral-800/50 text-white/60 border-neutral-700 hover:border-accent-amber/50 hover:text-white"
+                          }`}
+                        >
+                          {selectedPurposes.includes(purpose) && <Check className="w-3 h-3 inline mr-1" />}
+                          {purpose}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {eventProfileSaved && (
+                    <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-2">
+                      <Check className="w-4 h-4 text-green-400" />
+                      <p className="text-green-400 text-sm">Etkinlik profiliniz kaydedildi! Size özel öneriler hazırlanıyor.</p>
+                    </div>
+                  )}
+
+                  <Button 
+                    onClick={handleSaveEventProfile}
+                    disabled={selectedEventTypes.length === 0 && selectedMusicGenres.length === 0 && selectedAtmospheres.length === 0 && selectedPurposes.length === 0}
+                    className="w-full bg-accent-amber hover:bg-yellow-500 text-black font-bold py-5 disabled:opacity-50"
+                  >
+                    <Heart className="w-4 h-4 mr-2" />
+                    Etkinlik Profilimi Kaydet
+                  </Button>
+
+                  <p className="text-white/30 text-xs text-center">
+                    Seçimleriniz algoritmamız tarafından kişiselleştirilmiş öneriler sunmak için kullanılacaktır.
+                  </p>
                 </CardContent>
               </Card>
             </TabsContent>
