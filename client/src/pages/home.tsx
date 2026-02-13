@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, Mail, ArrowRight, Ticket, Utensils } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, ArrowRight, Ticket, Utensils } from "lucide-react";
 import etkineumLogo from "@assets/logo-final.png";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
@@ -650,96 +650,120 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Matte Black Apple-Style Ad Banner */}
       <section className="py-4 sm:py-6">
         <div className="container mx-auto px-3">
           <div 
             className="relative rounded-2xl overflow-hidden"
             style={{
-              background: "linear-gradient(180deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.98) 100%)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)"
+              background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 50%, #080808 100%)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.04)"
             }}
           >
-            <div className="p-4 sm:p-6">
-              <div className="text-center mb-4">
-                <h3 className="text-sm sm:text-base font-semibold text-white mb-2">Basında Biz</h3>
-                <p className="text-white/40 text-[10px] max-w-md mx-auto">
-                  ETKİNİUM hakkında medyada çıkan haberler ve röportajlar
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-3">
-                {["Webrazzi", "Shiftdelete", "Courline"].map((media, index) => (
-                  <div 
-                    key={index}
-                    className="bg-white/5 rounded-xl p-3 text-center border border-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
-                  >
-                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-white/10 group-hover:bg-black/20 flex items-center justify-center transition-all">
-                      <span className="text-[10px] font-bold text-white/60 group-hover:text-black">{media[0]}</span>
-                    </div>
-                    <p className="text-[10px] text-white/50 font-medium group-hover:text-black transition-all">{media}</p>
-                    <p className="text-[8px] text-white/30 mt-0.5 group-hover:text-black/60 transition-all">Yakında</p>
-                  </div>
-                ))}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 60%)"
+              }}
+            />
+            <div className="relative p-6 sm:p-8 flex flex-col items-center justify-center text-center">
+              <p className="text-white/30 text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase mb-3">Reklam Alanı</p>
+              <h3 
+                className="text-lg sm:text-2xl md:text-3xl font-bold text-white/90 tracking-tight mb-2"
+                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+              >
+                Markanız Burada
+              </h3>
+              <p className="text-white/30 text-xs sm:text-sm max-w-md">
+                Premium reklam alanı ile hedef kitlenize ulaşın
+              </p>
+              <div className="mt-4 flex items-center gap-4">
+                <a 
+                  href="mailto:iletisim@etkinium.com"
+                  className="px-5 py-2 rounded-full text-xs font-medium bg-white/[0.07] hover:bg-white/[0.12] text-white/70 hover:text-white border border-white/[0.08] hover:border-white/[0.15] transition-all"
+                >
+                  İletişime Geçin
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Subscription */}
+      {/* Öne Çıkan Mekanlar */}
       <section className="py-8 sm:py-12">
         <div className="container mx-auto px-4">
-          <div 
-            className="relative rounded-3xl overflow-hidden p-6 sm:p-10"
-            style={{
-              background: "linear-gradient(135deg, rgba(13,13,13,0.98) 0%, rgba(20,20,20,0.95) 100%)",
-              border: "1px solid rgba(245,158,11,0.2)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(245,158,11,0.05)"
-            }}
-          >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
-            
-            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-              <div className="flex-1 text-center sm:text-left">
-                <div className="flex items-center justify-center sm:justify-start gap-3 mb-3">
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-                      boxShadow: "0 4px 20px rgba(245,158,11,0.4)"
-                    }}
-                  >
-                    <Mail className="w-5 h-5 text-black" />
+          <div className="flex items-center gap-2 mb-6">
+            <div 
+              className="w-1 h-6 rounded-full"
+              style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }}
+            />
+            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+              Öne Çıkan <span className="text-amber-400">Mekanlar</span>
+            </h2>
+            <p className="text-xs text-neutral-500 ml-2 hidden sm:block">Türkiye'nin en popüler etkinlik mekanları</p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+            {[
+              { name: "Zorlu PSM", location: "Beşiktaş, İstanbul", capacity: "2.993", type: "Konser & Tiyatro" },
+              { name: "Volkswagen Arena", location: "Maslak, İstanbul", capacity: "5.000", type: "Konser & Etkinlik" },
+              { name: "Küçükçiftlik Park", location: "Maçka, İstanbul", capacity: "12.000", type: "Açık Hava" },
+              { name: "IF Performance Hall", location: "Beşiktaş, İstanbul", capacity: "1.200", type: "Konser" },
+              { name: "Bostancı Gösteri Merkezi", location: "Kadıköy, İstanbul", capacity: "2.500", type: "Konser & Tiyatro" },
+              { name: "Congresium", location: "Söğütözü, Ankara", capacity: "6.000", type: "Kongre & Konser" },
+              { name: "Jolly Joker", location: "Beyoğlu, İstanbul", capacity: "1.500", type: "Konser" },
+              { name: "MEB Şura Salonu", location: "Çankaya, Ankara", capacity: "3.200", type: "Konser & Tiyatro" },
+              { name: "Harbiye Açıkhava", location: "Harbiye, İstanbul", capacity: "4.234", type: "Açık Hava" },
+              { name: "Ülker Sports Arena", location: "Kadıköy, İstanbul", capacity: "13.800", type: "Spor & Konser" },
+            ].map((venue, index) => (
+              <div 
+                key={index}
+                className="group relative bg-black/60 backdrop-blur-xl rounded-[16px] sm:rounded-[20px] overflow-hidden border border-white/10 hover:border-accent-amber/40 transition-all duration-500 cursor-pointer"
+                style={{
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-amber/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative h-20 sm:h-24 bg-gradient-to-br from-neutral-900 to-neutral-950">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent-amber/10 backdrop-blur-sm flex items-center justify-center border border-accent-amber/20 group-hover:bg-accent-amber/20 transition-all">
+                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent-amber" />
+                    </div>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white">
-                    Fırsatları <span className="text-amber-400">Kaçırmayın</span>
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-accent-amber/90 backdrop-blur-sm text-black text-[8px] sm:text-[9px] font-semibold px-1.5 py-0.5 rounded-full">
+                      {venue.type}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="relative p-3 sm:p-4 space-y-1.5">
+                  <h3 className="font-semibold text-white/90 group-hover:text-white transition-colors text-xs sm:text-sm line-clamp-1">
+                    {venue.name}
                   </h3>
-                </div>
-                <p className="text-neutral-400 text-sm max-w-md">
-                  En yeni etkinlikler, özel indirimler ve kampanyalardan ilk siz haberdar olun
-                </p>
-              </div>
-              
-              <div className="w-full sm:w-auto">
-                <div className="flex gap-2">
-                  <input 
-                    type="email"
-                    placeholder="E-posta adresiniz"
-                    className="flex-1 sm:w-64 px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-500 text-sm focus:outline-none focus:border-amber-500/50 transition-colors"
-                    data-testid="input-newsletter-email"
-                  />
-                  <button 
-                    className="px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all hover:scale-105 bg-gradient-to-r from-accent-amber/90 to-yellow-500 hover:from-accent-amber hover:to-yellow-400 text-black shadow-lg shadow-accent-amber/20"
-                    data-testid="button-newsletter-subscribe"
-                  >
-                    Abone Ol
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-white/50">
+                    <MapPin className="w-2.5 h-2.5 text-accent-amber/70 flex-shrink-0" />
+                    <span className="line-clamp-1">{venue.location}</span>
+                  </div>
+                  <div className="pt-2 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                      <p className="text-[8px] sm:text-[9px] text-white/30">Kapasite</p>
+                      <p className="text-xs font-semibold text-white/70">{venue.capacity}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[8px] sm:text-[9px] text-white/30">Puan</p>
+                      <div className="flex items-center gap-0.5">
+                        <Star className="w-2.5 h-2.5 fill-accent-amber text-accent-amber" />
+                        <span className="text-xs font-semibold text-accent-amber">—</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

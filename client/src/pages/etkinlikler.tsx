@@ -278,12 +278,15 @@ export default function Etkinlikler() {
           </div>
 
           {/* Main Grid Section Title */}
-          <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="w-5 h-5 text-accent-amber" />
-            <h3 className="text-lg font-bold text-white">Tüm <span className="text-accent-amber">Etkinlikler</span></h3>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-accent-amber" />
+              <h3 className="text-lg font-bold text-white">Tüm <span className="text-accent-amber">Etkinlikler</span></h3>
+            </div>
+            <span className="text-white/40 text-xs">12 etkinlik</span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
             {[...Array(10)].map((_, index) => (
               <EventCard key={index} index={index} onBuyTicket={handleBuyTicket} />
             ))}
@@ -291,7 +294,7 @@ export default function Etkinlikler() {
 
           <div className="mt-8 flex justify-center">
             <button 
-              className="bg-black hover:bg-accent-amber text-white hover:text-black px-5 py-2 rounded-full font-medium text-xs transition-all border border-white/10 hover:border-accent-amber flex items-center gap-2"
+              className="bg-black hover:bg-accent-amber text-white hover:text-black px-6 py-2.5 rounded-full font-medium text-xs transition-all border border-white/10 hover:border-accent-amber flex items-center gap-2 hover:scale-105"
               data-testid="button-load-more"
             >
               <ChevronDown className="w-4 h-4" />
