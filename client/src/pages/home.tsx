@@ -803,7 +803,7 @@ export default function Home() {
               style={{ gap: "1rem" }}
             >
               {/* First Set */}
-              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
+              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🐠 Akvaryum", "🏛️ Müze", "🎢 Tema Park", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye", "🎠 Lunapark", "🏟️ Arena", "🎪 Sirk"].map((category, i) => (
                 <div
                   key={`first-${i}`}
                   className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
@@ -815,7 +815,7 @@ export default function Home() {
                 </div>
               ))}
               {/* Duplicate Set for seamless loop */}
-              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye"].map((category, i) => (
+              {["🎵 Konser", "🎭 Tiyatro", "🎪 Festival", "😂 Stand-up", "⚽ Spor", "🐠 Akvaryum", "🏛️ Müze", "🎢 Tema Park", "🖼️ Sergi", "🎤 Söyleşi", "🎬 Sinema", "💃 Dans", "🎸 Canlı Müzik", "🍷 Tadım", "🎨 Atölye", "🎠 Lunapark", "🏟️ Arena", "🎪 Sirk"].map((category, i) => (
                 <div
                   key={`second-${i}`}
                   className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-accent-amber hover:border-accent-amber transition-all duration-300 cursor-pointer group"
@@ -904,6 +904,126 @@ export default function Home() {
 
       {/* Öne Çıkan Mekanlar - Paginated */}
       <VenueSection />
+
+      {/* Live Platform Stats - Animated Counter */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div 
+            className="relative rounded-2xl overflow-hidden p-6 sm:p-10"
+            style={{
+              background: "linear-gradient(135deg, #0a0a0a 0%, rgba(245,158,11,0.03) 50%, #0a0a0a 100%)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.5)"
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-amber/20 to-transparent" />
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-2xl font-bold text-white tracking-tight">
+                Türkiye'nin <span className="text-accent-amber">En Kapsamlı</span> Etkinlik Platformu
+              </h2>
+              <p className="text-white/30 text-xs sm:text-sm mt-1">Konserden akvaryuma, tiyatrodan tema parka - her şey tek yerde</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              {[
+                { value: "50K+", label: "Aktif Kullanıcı", icon: "👥" },
+                { value: "1.200+", label: "Etkinlik", icon: "🎫" },
+                { value: "350+", label: "Mekan & Restoran", icon: "📍" },
+                { value: "₺0", label: "Rezervasyon Ücreti", icon: "🆓" },
+              ].map((stat, i) => (
+                <div 
+                  key={i} 
+                  className="text-center p-4 sm:p-6 rounded-xl bg-white/[0.03] border border-white/5 hover:border-accent-amber/20 transition-all group"
+                >
+                  <div className="text-2xl sm:text-3xl mb-2">{stat.icon}</div>
+                  <div className="text-xl sm:text-3xl font-bold text-accent-amber mb-1 group-hover:scale-110 transition-transform">{stat.value}</div>
+                  <div className="text-[10px] sm:text-xs text-white/40">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Keşfet - Broad Category Showcase */}
+      <section className="py-6 sm:py-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }} />
+            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+              Keşfet <span className="text-amber-400">& Deneyimle</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {[
+              { emoji: "🐠", title: "Akvaryumlar", desc: "Deniz altı dünyası", color: "from-cyan-900/30 to-blue-900/20" },
+              { emoji: "🏛️", title: "Müzeler", desc: "Tarih & sanat", color: "from-amber-900/30 to-orange-900/20" },
+              { emoji: "🎢", title: "Tema Parklar", desc: "Adrenalin & eğlence", color: "from-red-900/30 to-pink-900/20" },
+              { emoji: "🎭", title: "Tiyatro & Sahne", desc: "Canlı performans", color: "from-purple-900/30 to-violet-900/20" },
+              { emoji: "🎵", title: "Konserler", desc: "Canlı müzik", color: "from-emerald-900/30 to-teal-900/20" },
+              { emoji: "🍽️", title: "Restoranlar", desc: "Gurme deneyim", color: "from-yellow-900/30 to-amber-900/20" },
+            ].map((cat, i) => (
+              <div
+                key={i}
+                className={`group relative rounded-2xl overflow-hidden p-5 sm:p-6 bg-gradient-to-br ${cat.color} border border-white/5 hover:border-accent-amber/30 transition-all cursor-pointer hover:scale-[1.03] hover:shadow-lg hover:shadow-accent-amber/5`}
+              >
+                <div className="text-3xl sm:text-4xl mb-3 group-hover:scale-110 transition-transform">{cat.emoji}</div>
+                <h3 className="font-semibold text-white text-sm sm:text-base mb-0.5">{cat.title}</h3>
+                <p className="text-[10px] sm:text-xs text-white/40">{cat.desc}</p>
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ChevronRight className="w-4 h-4 text-accent-amber" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Yakında Gelenler - Upcoming Highlights */}
+      <section className="py-6 sm:py-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(180deg, #F59E0B 0%, #D97706 100%)" }} />
+            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
+              Yakında <span className="text-amber-400">Gelecekler</span>
+            </h2>
+            <span className="bg-red-500/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-full animate-pulse ml-1">CANLI</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { title: "İstanbul Akvaryum - Gece Turu", date: "20 Mart 2026", price: "₺320", badge: "Yeni", category: "🐠 Akvaryum" },
+              { title: "Tarkan - Harbiye Açıkhava", date: "15 Nisan 2026", price: "₺1.500", badge: "Çok Satan", category: "🎵 Konser" },
+              { title: "Miniaturk Gece Müzesi", date: "8 Mart 2026", price: "₺180", badge: "Sınırlı", category: "🏛️ Müze" },
+              { title: "Vialand Tema Park - Sezon Açılış", date: "1 Nisan 2026", price: "₺450", badge: "Erken Kuş", category: "🎢 Tema Park" },
+              { title: "Cem Yılmaz - Yeni Show", date: "25 Mart 2026", price: "₺950", badge: "Tükeniyor", category: "😂 Stand-up" },
+              { title: "Nusret - Özel Gala Yemeği", date: "14 Mart 2026", price: "Ücretsiz Rez.", badge: "Premium", category: "🍽️ Restoran" },
+            ].map((event, i) => (
+              <Link key={i} href="/bilet-secenekleri">
+                <div className="group relative bg-black/40 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/10 hover:border-accent-amber/30 transition-all cursor-pointer hover:bg-black/60">
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="text-xs text-white/50 bg-white/5 px-2 py-0.5 rounded-full">{event.category}</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      event.badge === "Tükeniyor" ? "bg-red-500/20 text-red-400" :
+                      event.badge === "Çok Satan" ? "bg-accent-amber/20 text-accent-amber" :
+                      event.badge === "Premium" ? "bg-purple-500/20 text-purple-400" :
+                      "bg-white/10 text-white/60"
+                    }`}>
+                      {event.badge}
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-white text-sm sm:text-base mb-2 group-hover:text-accent-amber transition-colors line-clamp-1">{event.title}</h3>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-white/40 text-xs">
+                      <CalendarDays className="w-3.5 h-3.5" />
+                      <span>{event.date}</span>
+                    </div>
+                    <span className="text-accent-amber font-bold text-sm">{event.price}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <DateDrawer 
         isOpen={isDateDrawerOpen} 

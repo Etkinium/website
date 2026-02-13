@@ -335,35 +335,6 @@ export default function Etkinlikler() {
             </div>
           </div>
 
-          {/* Premium Features Banner */}
-          <div 
-            className="mt-8 rounded-2xl overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.5)"
-            }}
-          >
-            <div className="p-6 sm:p-8">
-              <h3 className="text-lg sm:text-xl font-bold text-white text-center mb-6">
-                Neden <span className="text-accent-amber">ETKİNİUM</span>?
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { icon: "🔒", title: "Güvenli Ödeme", desc: "256-bit SSL şifreleme" },
-                  { icon: "⚡", title: "Anında Bilet", desc: "QR kod ile hızlı giriş" },
-                  { icon: "🛡️", title: "İptal Güvencesi", desc: "Bilet koruma seçenekleri" },
-                  { icon: "🎯", title: "Puan Kazan", desc: "Her alışverişte puan" },
-                ].map((feature, i) => (
-                  <div key={i} className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-accent-amber/20 transition-all">
-                    <div className="text-2xl mb-2">{feature.icon}</div>
-                    <h4 className="text-sm font-semibold text-white mb-1">{feature.title}</h4>
-                    <p className="text-[10px] sm:text-xs text-white/40">{feature.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </main>
 

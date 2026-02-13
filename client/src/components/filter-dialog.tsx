@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { turkeyProvinces, getDistrictsByProvince } from "@/data/turkey-locations";
-import { MapPin, TrendingUp, TrendingDown, Filter, X, Check, Calendar, Star, Clock, Users, Music, Theater, Mic2, Trophy, Palette, UtensilsCrossed, Flame, Wine, Fish, Beef, Coffee } from "lucide-react";
+import { MapPin, TrendingUp, TrendingDown, Filter, X, Check, Calendar, Star, Clock, Users, Music, Theater, Mic2, Trophy, Palette, UtensilsCrossed, Flame, Wine, Fish, Beef, Coffee, Waves, Landmark, FerrisWheel } from "lucide-react";
 
 interface FilterDialogProps {
   isOpen: boolean;
@@ -31,6 +31,9 @@ const eventCategories = [
   { id: "spor", label: "Spor", icon: Trophy },
   { id: "festival", label: "Festival", icon: Flame },
   { id: "sanat", label: "Sanat", icon: Palette },
+  { id: "akvaryum", label: "Akvaryum", icon: Waves },
+  { id: "muze", label: "Müze", icon: Landmark },
+  { id: "tema-park", label: "Tema Park", icon: FerrisWheel },
 ];
 
 const restaurantCategories = [
