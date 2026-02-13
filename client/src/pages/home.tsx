@@ -561,16 +561,19 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left - Hero Text */}
             <div className="text-center md:text-left space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight">
-                Tek Platform,<br />
-                <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                  Sonsuz Sanat.
-                </span>
-              </h1>
-              
-              <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-lg mx-auto md:mx-0 px-2 sm:px-0">
-                Konserlerden tiyatrolara, lüks restoranlardan özel etkinliklere — hayalinizdeki anlar bir tık uzağınızda.
-              </p>
+              <div className="flex flex-col items-center md:items-start gap-4">
+                <img 
+                  src={etkineumLogo} 
+                  alt="ETKİNİUM" 
+                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]" 
+                />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
+                  Türkiye'nin En Kapsamlı{" "}
+                  <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                    Etkinlik Platformu!
+                  </span>
+                </h1>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start px-4 sm:px-0">
                 <Link href="/etkinlikler">

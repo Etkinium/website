@@ -4,7 +4,7 @@ import { X, Trophy, Gift, Star, Zap, ChevronLeft, ChevronRight } from "lucide-re
 const storiesData = [
   {
     id: 1,
-    title: "Puan Hizmeti",
+    title: "Üye Ol Puan Kazan",
     emoji: "🏆",
     ringColor: "from-amber-400 to-orange-500",
     slides: [
@@ -26,7 +26,7 @@ const storiesData = [
   },
   {
     id: 2,
-    title: "Haftalık Çark",
+    title: "Üye Ol Çark Kazan",
     emoji: "🎡",
     ringColor: "from-purple-400 to-pink-500",
     slides: [
@@ -124,7 +124,7 @@ export default function Stories() {
 
   return (
     <>
-      <div className="flex items-center gap-4 sm:gap-5 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="flex items-center justify-center gap-5 sm:gap-7">
         {storiesData.map((story) => (
           <button
             key={story.id}
@@ -136,7 +136,7 @@ export default function Stories() {
                 <span className="text-2xl sm:text-3xl">{story.emoji}</span>
               </div>
             </div>
-            <span className="text-[10px] sm:text-xs text-white/60 group-hover:text-white transition-colors font-medium max-w-[72px] text-center leading-tight">
+            <span className="text-[10px] sm:text-xs text-white/60 group-hover:text-white transition-colors font-medium max-w-[80px] text-center leading-tight">
               {story.title}
             </span>
           </button>
