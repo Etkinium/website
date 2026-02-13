@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/logo-final.png";
-import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed } from "lucide-react";
+import { User, LogOut, Search, Settings, Mail, Calendar, UtensilsCrossed, Crown, MessageCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -133,6 +133,31 @@ export default function Header() {
               </Button>
             </Link>
             
+            {user && (
+              <>
+                <Link href="/premium">
+                  <Button 
+                    variant="ghost"
+                    className="text-accent-amber bg-accent-amber/10 border border-accent-amber/30 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-1.5 text-xs font-bold"
+                    data-testid="button-premium"
+                  >
+                    <Crown className="w-3.5 h-3.5" />
+                    Premium
+                  </Button>
+                </Link>
+                <Link href="/topluluk">
+                  <Button 
+                    variant="ghost"
+                    className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all flex items-center gap-1.5"
+                    data-testid="button-community"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Topluluk
+                  </Button>
+                </Link>
+              </>
+            )}
+
             {!user && (
               <>
                 <Link href="/signup">
@@ -299,6 +324,28 @@ export default function Header() {
               
               {user && (
                 <>
+                  <Link href="/premium">
+                    <Button 
+                      variant="ghost"
+                      className="text-accent-amber bg-accent-amber/10 border border-accent-amber/30 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2 font-bold"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-premium"
+                    >
+                      <Crown className="w-4 h-4" />
+                      ETKİNİUM Premium
+                    </Button>
+                  </Link>
+                  <Link href="/topluluk">
+                    <Button 
+                      variant="ghost"
+                      className="text-white bg-black border border-gray-600 hover:bg-accent-amber hover:text-black transition-all w-full flex items-center gap-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid="button-mobile-community"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      Topluluk
+                    </Button>
+                  </Link>
                   <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-10 h-10 rounded-full bg-accent-amber text-black flex items-center justify-center font-bold text-lg">

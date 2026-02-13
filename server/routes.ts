@@ -44,6 +44,24 @@ async function initializeBusinessUser() {
   } catch (error) {
     console.log("Business user initialization skipped (may already exist)");
   }
+
+  try {
+    const testEmail = "berkay.gulcin@etkinium.com";
+    const existingTestUser = await storage.getUserByEmail(testEmail);
+    
+    if (!existingTestUser) {
+      const hashedPassword = await bcrypt.hash("Etkinium2026", 10);
+      await storage.createUser({
+        email: testEmail,
+        password: hashedPassword,
+        firstName: "Berkay",
+        lastName: "Gülçin",
+      });
+      console.log("Test user (etkinium.com) initialized successfully");
+    }
+  } catch (error) {
+    console.log("Test user initialization skipped (may already exist)");
+  }
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {

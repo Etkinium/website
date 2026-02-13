@@ -4,7 +4,8 @@ import Header from "@/components/header";
 import DateDrawer from "@/components/date-drawer";
 import MobileTabBar from "@/components/mobile-tab-bar";
 import Footer from "@/components/footer";
-import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, ArrowRight, Ticket, Utensils, Gift, Trophy, Megaphone, Eye } from "lucide-react";
+import { MapPin, Clock, Star, Heart, ChevronRight, ChevronLeft, CalendarDays, Sparkles, ArrowRight, Ticket, Utensils, Gift, Trophy, Megaphone, Eye, ExternalLink } from "lucide-react";
+import Stories from "@/components/stories";
 import etkineumLogo from "@assets/logo-final.png";
 import rezervemLogo from "@assets/{09392C43-F854-4BFE-B0DA-97F11129A06F}_1765451772211.png";
 import tamamliyoLogo from "@assets/{A79D2DB2-9549-46FF-9111-672F0B5566FC}_1765452914094.png";
@@ -710,6 +711,13 @@ export default function Home() {
 
         {/* Bottom Gradient Fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+      </section>
+
+      {/* Instagram-style Stories */}
+      <section className="py-4 sm:py-6">
+        <div className="container mx-auto px-4">
+          <Stories />
+        </div>
       </section>
 
       {/* Billboard Ad Slider */}

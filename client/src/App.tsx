@@ -25,6 +25,8 @@ import GizlilikPolitikasi from "@/pages/gizlilik-politikasi";
 import CerezPolitikasi from "@/pages/cerez-politikasi";
 import SSS from "@/pages/sss";
 import MekanDetay from "@/pages/mekan-detay";
+import Premium from "@/pages/premium";
+import Community from "@/pages/community";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -52,6 +54,8 @@ function Router() {
       <Route path="/cerez-politikasi" component={CerezPolitikasi} />
       <Route path="/sss" component={SSS} />
       <Route path="/mekan/:slug" component={MekanDetay} />
+      <Route path="/premium" component={Premium} />
+      <Route path="/topluluk" component={Community} />
       <Route component={NotFound} />
     </Switch>
   );
