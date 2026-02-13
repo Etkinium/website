@@ -18,7 +18,12 @@ import {
   BarChart3,
   ArrowUpRight,
   RefreshCw,
-  ChevronRight
+  ChevronRight,
+  Briefcase,
+  Clock,
+  CheckCircle2,
+  X,
+  Eye
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -29,6 +34,8 @@ import {
   DialogTitle, 
   DialogTrigger 
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -76,7 +83,62 @@ export default function BusinessDashboard() {
   const [activeTab, setActiveTab] = useState("sales");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  const [isJobFormOpen, setIsJobFormOpen] = useState(false);
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [jobRequirements, setJobRequirements] = useState("");
+  const [jobWorkHours, setJobWorkHours] = useState("");
+  const [jobLocation, setJobLocation] = useState("");
+  const [jobSalary, setJobSalary] = useState("");
+  const [publishedJobs, setPublishedJobs] = useState<Array<{
+    id: number;
+    title: string;
+    description: string;
+    requirements: string;
+    workHours: string;
+    location: string;
+    salary: string;
+    date: string;
+    applicants: number;
+    status: string;
+  }>>([]);
+
   const businessName = user?.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : "İşletme Adı";
+
+  const handlePublishJob = () => {
+    if (!jobTitle || !jobDescription || !jobRequirements || !jobWorkHours) {
+      toast({
+        title: "Eksik Bilgi",
+        description: "Lütfen tüm zorunlu alanları doldurun.",
+        variant: "destructive",
+      });
+      return;
+    }
+    const newJob = {
+      id: Date.now(),
+      title: jobTitle,
+      description: jobDescription,
+      requirements: jobRequirements,
+      workHours: jobWorkHours,
+      location: jobLocation || "İstanbul",
+      salary: jobSalary || "Görüşmeye bağlı",
+      date: new Date().toLocaleDateString("tr-TR"),
+      applicants: 0,
+      status: "Aktif",
+    };
+    setPublishedJobs(prev => [newJob, ...prev]);
+    setJobTitle("");
+    setJobDescription("");
+    setJobRequirements("");
+    setJobWorkHours("");
+    setJobLocation("");
+    setJobSalary("");
+    setIsJobFormOpen(false);
+    toast({
+      title: "İlan Yayınlandı!",
+      description: `"${newJob.title}" iş ilanınız başarıyla yayınlandı.`,
+    });
+  };
 
   const handleLogout = async () => {
     try {
@@ -265,9 +327,10 @@ export default function BusinessDashboard() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="w-full grid grid-cols-3 bg-neutral-900/50 border border-neutral-800/50 mb-8 p-1.5 rounded-2xl h-auto">
+          <TabsList className="w-full grid grid-cols-4 bg-neutral-900/50 border border-neutral-800/50 mb-8 p-1.5 rounded-2xl h-auto">
             {[
               { value: "sales", icon: TrendingUp, label: "Satış Analizi", shortLabel: "Satış" },
+              { value: "jobs", icon: Briefcase, label: "İş İlanları", shortLabel: "İlanlar" },
               { value: "customers", icon: Users, label: "Müşteri Analizi", shortLabel: "Müşteri" },
               { value: "financial", icon: FileText, label: "Mali Raporlar", shortLabel: "Mali" },
             ].map((tab) => (
@@ -368,6 +431,150 @@ export default function BusinessDashboard() {
                 </div>
               </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value="jobs" className="space-y-6">
+            <div className="bg-neutral-900/50 rounded-3xl p-6 border border-neutral-800/50" style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.2)" }}>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-white flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-amber-500" />
+                  </div>
+                  İş İlanları Yönetimi
+                </h2>
+                <Button 
+                  onClick={() => setIsJobFormOpen(true)}
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold gap-2 shadow-lg shadow-amber-500/20"
+                >
+                  <Plus className="w-4 h-4" />
+                  İş İlanı Yayınla
+                </Button>
+              </div>
+
+              {publishedJobs.length === 0 ? (
+                <div className="text-center py-16">
+                  <Briefcase className="w-16 h-16 text-neutral-700 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-neutral-400 mb-2">Henüz İş İlanı Yok</h3>
+                  <p className="text-neutral-600 text-sm max-w-sm mx-auto mb-6">
+                    Personel ihtiyacınız için hemen bir iş ilanı yayınlayın. ETKİNİUM üyeleri ilanlarınıza başvurabilir.
+                  </p>
+                  <Button 
+                    onClick={() => setIsJobFormOpen(true)}
+                    variant="outline"
+                    className="border-amber-500/30 text-amber-500 hover:bg-amber-500/10 gap-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    İlk İlanını Oluştur
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {publishedJobs.map((job) => (
+                    <div key={job.id} className="bg-neutral-800/40 rounded-2xl p-5 border border-neutral-700/30 hover:border-amber-500/20 transition-all">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="text-lg font-bold text-white">{job.title}</h3>
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-green-500/20 text-green-400 border border-green-500/30">
+                              {job.status}
+                            </span>
+                          </div>
+                          <p className="text-neutral-400 text-sm mb-3 line-clamp-2">{job.description}</p>
+                          <div className="flex flex-wrap gap-3 text-xs text-neutral-500">
+                            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{job.location}</span>
+                            <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{job.workHours}</span>
+                            <span className="flex items-center gap-1"><DollarSign className="w-3 h-3" />{job.salary}</span>
+                            <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{job.date}</span>
+                          </div>
+                        </div>
+                        <div className="text-center flex-shrink-0">
+                          <p className="text-2xl font-bold text-amber-500">{job.applicants}</p>
+                          <p className="text-[10px] text-neutral-500">Başvuru</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Dialog open={isJobFormOpen} onOpenChange={setIsJobFormOpen}>
+              <DialogContent className="bg-neutral-900 border-neutral-800 text-white max-w-lg max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-white flex items-center gap-2 text-lg">
+                    <Briefcase className="w-5 h-5 text-amber-500" />
+                    Yeni İş İlanı Oluştur
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 mt-4">
+                  <div>
+                    <Label className="text-neutral-300 text-sm mb-1.5 block">Aranan Pozisyon *</Label>
+                    <Input 
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
+                      placeholder="örn: Sahne Reji Asistanı, Bilet Sorumlusu..."
+                      className="bg-neutral-800 border-neutral-700 text-white focus:border-amber-500 placeholder:text-neutral-600"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-neutral-300 text-sm mb-1.5 block">İş Açıklaması *</Label>
+                    <textarea 
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                      placeholder="Pozisyonun genel tanımı, sorumluluklar ve görevler..."
+                      rows={4}
+                      className="w-full bg-neutral-800 border border-neutral-700 text-white rounded-md px-3 py-2 text-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 placeholder:text-neutral-600 resize-none"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-neutral-300 text-sm mb-1.5 block">Aranan Şartlar *</Label>
+                    <textarea 
+                      value={jobRequirements}
+                      onChange={(e) => setJobRequirements(e.target.value)}
+                      placeholder="Eğitim durumu, deneyim, yetkinlikler, sertifikalar..."
+                      rows={3}
+                      className="w-full bg-neutral-800 border border-neutral-700 text-white rounded-md px-3 py-2 text-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 placeholder:text-neutral-600 resize-none"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-neutral-300 text-sm mb-1.5 block">Çalışma Saatleri *</Label>
+                      <Input 
+                        value={jobWorkHours}
+                        onChange={(e) => setJobWorkHours(e.target.value)}
+                        placeholder="örn: 09:00 - 18:00"
+                        className="bg-neutral-800 border-neutral-700 text-white focus:border-amber-500 placeholder:text-neutral-600"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-neutral-300 text-sm mb-1.5 block">Konum</Label>
+                      <Input 
+                        value={jobLocation}
+                        onChange={(e) => setJobLocation(e.target.value)}
+                        placeholder="örn: İstanbul, Kadıköy"
+                        className="bg-neutral-800 border-neutral-700 text-white focus:border-amber-500 placeholder:text-neutral-600"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-neutral-300 text-sm mb-1.5 block">Maaş / Ücret Bilgisi</Label>
+                    <Input 
+                      value={jobSalary}
+                      onChange={(e) => setJobSalary(e.target.value)}
+                      placeholder="örn: 25.000₺ - 35.000₺ / Görüşmeye bağlı"
+                      className="bg-neutral-800 border-neutral-700 text-white focus:border-amber-500 placeholder:text-neutral-600"
+                    />
+                  </div>
+                  <Button
+                    onClick={handlePublishJob}
+                    className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold h-12 text-base gap-2 shadow-lg shadow-amber-500/20"
+                  >
+                    <CheckCircle2 className="w-5 h-5" />
+                    İlanı Yayınla
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </TabsContent>
 
           <TabsContent value="customers" className="space-y-6">

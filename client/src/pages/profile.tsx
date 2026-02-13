@@ -14,13 +14,14 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { 
   User, Settings, Bell, Ticket, Gift, Star, Mail, Phone, Trash2, 
-  LogOut, ChevronRight, Crown, Zap, Shield, ArrowRight, Check, X
+  LogOut, ChevronRight, Crown, Zap, Shield, ArrowRight, Check, X,
+  Briefcase, MapPin, Clock, Eye, Send
 } from "lucide-react";
 
 const profileUpdateSchema = z.object({
@@ -246,7 +247,7 @@ export default function Profile() {
 
           {/* Tabs */}
           <Tabs defaultValue="account" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 bg-neutral-900 border border-neutral-800 mb-6">
+            <TabsList className="grid w-full grid-cols-5 bg-neutral-900 border border-neutral-800 mb-6">
               <TabsTrigger value="account" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
                 <User className="w-4 h-4 sm:mr-2" />
                 <span className="hidden sm:inline">Hesap</span>
@@ -254,6 +255,10 @@ export default function Profile() {
               <TabsTrigger value="wheel" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
                 <Gift className="w-4 h-4 sm:mr-2" />
                 <span className="hidden sm:inline">Çark</span>
+              </TabsTrigger>
+              <TabsTrigger value="jobs" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
+                <Briefcase className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">İş İlanları</span>
               </TabsTrigger>
               <TabsTrigger value="events" className="data-[state=active]:bg-accent-amber data-[state=active]:text-black text-xs sm:text-sm">
                 <Ticket className="w-4 h-4 sm:mr-2" />
@@ -410,7 +415,150 @@ export default function Profile() {
               </Card>
             </TabsContent>
 
-            {/* Settings Tab */}
+            {/* İş İlanları Tab */}
+            <TabsContent value="jobs" className="space-y-4">
+              <Card className="bg-neutral-900/50 border-neutral-800">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-accent-amber" />
+                    Aktif İş İlanları
+                  </CardTitle>
+                  <CardDescription className="text-gray-400">
+                    ETKİNİUM platformundaki güncel kariyer fırsatları
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    {
+                      id: 1,
+                      title: "Sahne Reji Asistanı",
+                      company: "ETKİNİUM Entertainment",
+                      location: "İstanbul, Kadıköy",
+                      workHours: "Tam Zamanlı • 10:00 - 19:00",
+                      salary: "28.000₺ - 35.000₺",
+                      posted: "2 gün önce",
+                      description: "Canlı etkinliklerde sahne arkası koordinasyon, ışık ve ses ekipleri ile iletişim, sanatçı geçiş planlaması.",
+                      requirements: "İletişim veya sahne sanatları bölümü mezunu, en az 1 yıl deneyim, esnek çalışma saatlerine uyumlu.",
+                      tags: ["Sahne", "Canlı Etkinlik", "Koordinasyon"],
+                    },
+                    {
+                      id: 2,
+                      title: "Bilet Satış Sorumlusu",
+                      company: "ETKİNİUM Bilet",
+                      location: "İstanbul, Beşiktaş",
+                      workHours: "Tam Zamanlı • 09:00 - 18:00",
+                      salary: "22.000₺ - 28.000₺",
+                      posted: "3 gün önce",
+                      description: "Online ve fiziksel bilet satış süreçlerinin yönetimi, müşteri ilişkileri, satış raporlaması.",
+                      requirements: "Üniversite mezunu, müşteri ilişkileri deneyimi, MS Office bilgisi, ikna kabiliyeti yüksek.",
+                      tags: ["Satış", "Müşteri İlişkileri", "Bilet"],
+                    },
+                    {
+                      id: 3,
+                      title: "Kapı & Bilet Kontrol Görevlisi",
+                      company: "ETKİNİUM Events",
+                      location: "İstanbul (Çeşitli Mekanlar)",
+                      workHours: "Part-Time • Etkinlik Saatleri",
+                      salary: "15.000₺ - 20.000₺",
+                      posted: "1 hafta önce",
+                      description: "Etkinlik girişlerinde bilet ve kimlik kontrolü, güvenlik koordinasyonu, katılımcı yönlendirmesi.",
+                      requirements: "Lise mezunu, iletişim becerileri güçlü, hafta sonu çalışmaya uygun, fiziksel dayanıklılık.",
+                      tags: ["Güvenlik", "Etkinlik", "Part-Time"],
+                    },
+                    {
+                      id: 4,
+                      title: "Sosyal Medya & İçerik Uzmanı",
+                      company: "ETKİNİUM Digital",
+                      location: "İstanbul, Şişli (Hibrit)",
+                      workHours: "Tam Zamanlı • 09:00 - 18:00",
+                      salary: "30.000₺ - 40.000₺",
+                      posted: "5 gün önce",
+                      description: "ETKİNİUM markası için sosyal medya stratejisi oluşturma, içerik üretimi, influencer iş birlikleri yönetimi.",
+                      requirements: "İletişim/Pazarlama mezunu, 2+ yıl sosyal medya deneyimi, Adobe Creative Suite, video düzenleme bilgisi.",
+                      tags: ["Dijital", "Sosyal Medya", "İçerik"],
+                    },
+                  ].map((job) => (
+                    <div 
+                      key={job.id} 
+                      className="p-4 sm:p-5 rounded-xl border border-neutral-800 hover:border-accent-amber/30 transition-all bg-neutral-800/30"
+                    >
+                      <div className="flex items-start justify-between gap-3 mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-base sm:text-lg font-bold text-white mb-1">{job.title}</h3>
+                          <p className="text-accent-amber text-sm font-medium">{job.company}</p>
+                        </div>
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-green-500/15 text-green-400 border border-green-500/25 flex-shrink-0">
+                          Aktif
+                        </span>
+                      </div>
+                      <p className="text-white/50 text-sm mb-3 leading-relaxed">{job.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {job.tags.map((tag) => (
+                          <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/5 text-white/60 border border-white/10">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/40 mb-4">
+                        <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{job.location}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{job.workHours}</span>
+                        <span className="flex items-center gap-1"><Star className="w-3 h-3" />{job.salary}</span>
+                        <span className="text-white/30">{job.posted}</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="border-neutral-700 text-white hover:bg-neutral-800 gap-1.5 text-xs"
+                            >
+                              <Eye className="w-3.5 h-3.5" />
+                              İncele
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="bg-neutral-900 border-neutral-800 text-white max-w-lg">
+                            <DialogHeader>
+                              <DialogTitle className="text-white text-lg">{job.title}</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4 mt-2">
+                              <div>
+                                <p className="text-accent-amber font-medium text-sm mb-1">{job.company}</p>
+                                <div className="flex flex-wrap gap-3 text-xs text-white/50">
+                                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{job.location}</span>
+                                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{job.workHours}</span>
+                                  <span className="flex items-center gap-1"><Star className="w-3 h-3" />{job.salary}</span>
+                                </div>
+                              </div>
+                              <div>
+                                <h4 className="text-white font-semibold text-sm mb-1.5">İş Açıklaması</h4>
+                                <p className="text-white/50 text-sm leading-relaxed">{job.description}</p>
+                              </div>
+                              <div>
+                                <h4 className="text-white font-semibold text-sm mb-1.5">Aranan Şartlar</h4>
+                                <p className="text-white/50 text-sm leading-relaxed">{job.requirements}</p>
+                              </div>
+                              <Button className="w-full bg-accent-amber hover:bg-yellow-500 text-black font-bold gap-2">
+                                <Send className="w-4 h-4" />
+                                Başvuru Yap
+                              </Button>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        <Button 
+                          size="sm" 
+                          className="bg-accent-amber hover:bg-yellow-500 text-black font-bold gap-1.5 text-xs"
+                        >
+                          <Send className="w-3.5 h-3.5" />
+                          Başvuru Yap
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
             <TabsContent value="settings" className="space-y-4">
               {/* Notification Preferences */}
               <Card className="bg-neutral-900/50 border-neutral-800">
