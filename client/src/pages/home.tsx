@@ -561,19 +561,16 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left - Hero Text */}
             <div className="text-center md:text-left space-y-6">
-              <div className="flex flex-col items-center md:items-start gap-4">
-                <img 
-                  src={etkineumLogo} 
-                  alt="ETKİNİUM" 
-                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]" 
-                />
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
-                  Türkiye'nin En Kapsamlı{" "}
-                  <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                    Etkinlik Platformu!
-                  </span>
-                </h1>
-              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight">
+                Tek Platform,<br />
+                <span className="bg-gradient-to-r from-accent-amber via-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                  Sonsuz Sanat.
+                </span>
+              </h1>
+              
+              <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-lg mx-auto md:mx-0 px-2 sm:px-0">
+                Konserlerden tiyatrolara, lüks restoranlardan özel etkinliklere — hayalinizdeki anlar bir tık uzağınızda.
+              </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start px-4 sm:px-0">
                 <Link href="/etkinlikler">
@@ -917,43 +914,6 @@ export default function Home() {
       <VenueSection />
 
       {/* Live Platform Stats - Animated Counter */}
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div 
-            className="relative rounded-2xl overflow-hidden p-6 sm:p-10"
-            style={{
-              background: "linear-gradient(135deg, #0a0a0a 0%, rgba(245,158,11,0.03) 50%, #0a0a0a 100%)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              boxShadow: "0 12px 40px rgba(0,0,0,0.5)"
-            }}
-          >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-amber/20 to-transparent" />
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-lg sm:text-2xl font-bold text-white tracking-tight">
-                Türkiye'nin <span className="text-accent-amber">En Kapsamlı</span> Etkinlik Platformu
-              </h2>
-              <p className="text-white/30 text-xs sm:text-sm mt-1">Konserden akvaryuma, tiyatrodan tema parka - her şey tek yerde</p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                { value: "50K+", label: "Aktif Kullanıcı", icon: "👥" },
-                { value: "1.200+", label: "Etkinlik", icon: "🎫" },
-                { value: "350+", label: "Mekan & Restoran", icon: "📍" },
-                { value: "₺0", label: "Rezervasyon Ücreti", icon: "🆓" },
-              ].map((stat, i) => (
-                <div 
-                  key={i} 
-                  className="text-center p-4 sm:p-6 rounded-xl bg-white/[0.03] border border-white/5 hover:border-accent-amber/20 transition-all group"
-                >
-                  <div className="text-2xl sm:text-3xl mb-2">{stat.icon}</div>
-                  <div className="text-xl sm:text-3xl font-bold text-accent-amber mb-1 group-hover:scale-110 transition-transform">{stat.value}</div>
-                  <div className="text-[10px] sm:text-xs text-white/40">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Keşfet - Broad Category Showcase */}
       <section className="py-6 sm:py-10">

@@ -124,19 +124,19 @@ export default function Stories() {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-5 sm:gap-7">
+      <div className="flex items-center justify-center gap-6 sm:gap-8">
         {storiesData.map((story) => (
           <button
             key={story.id}
             onClick={() => openStory(story.id)}
-            className="flex flex-col items-center gap-1.5 flex-shrink-0 group"
+            className="flex flex-col items-center gap-2 flex-shrink-0 group"
           >
-            <div className={`w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-full p-[2.5px] bg-gradient-to-br ${story.ringColor} group-hover:scale-110 transition-transform`}>
+            <div className={`w-[68px] h-[68px] rounded-full p-[2.5px] bg-gradient-to-br ${story.ringColor} group-hover:scale-110 transition-transform`}>
               <div className="w-full h-full rounded-full bg-black flex items-center justify-center border-2 border-black">
-                <span className="text-2xl sm:text-3xl">{story.emoji}</span>
+                <span className="text-[26px]">{story.emoji}</span>
               </div>
             </div>
-            <span className="text-[10px] sm:text-xs text-white/60 group-hover:text-white transition-colors font-medium max-w-[80px] text-center leading-tight">
+            <span className="text-[11px] text-white/60 group-hover:text-white transition-colors font-medium max-w-[80px] text-center leading-tight">
               {story.title}
             </span>
           </button>
